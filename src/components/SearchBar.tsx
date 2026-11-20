@@ -216,7 +216,7 @@ export default function SearchBar({
       className={isHero ? 'relative w-full max-w-2xl mx-auto' : 'relative w-full'}
     >
       <label htmlFor={inputId} className="sr-only">
-        Search BulSU guides
+        Search BulSU articles
       </label>
 
       <div className="relative flex items-center">
@@ -325,7 +325,7 @@ export default function SearchBar({
         >
           {isLoading && !cachedIndex ? (
             <div className="px-4 py-5 text-sm text-ink-secondary">
-              Loading guide index...
+              Loading article index...
             </div>
           ) : fetchError ? (
             <div className="p-4 text-left space-y-3">
@@ -391,7 +391,7 @@ export default function SearchBar({
           ) : (
             <div className="p-4 text-left">
               <p className="text-sm text-ink-primary">
-                No guides matched <span className="font-semibold">&ldquo;{trimmedQuery}&rdquo;</span>.
+                No articles matched <span className="font-semibold">&ldquo;{trimmedQuery}&rdquo;</span>.
               </p>
             </div>
           )}

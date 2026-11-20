@@ -159,7 +159,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
     expect(listboxId).toBeTruthy();
     const searchPanel = page.locator(`[id="${listboxId}"]`);
     await expect(searchPanel).toBeVisible();
-    await expect(searchPanel).toContainText('No guides matched');
+    await expect(searchPanel).toContainText('No articles matched');
     for (const slug of CATEGORY_SLUGS) {
       await expect(searchPanel.locator(`a[href="/categories/${slug}"]`)).toHaveCount(0);
     }
@@ -292,7 +292,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
     page,
   }) => {
     await page.goto('/this-route-does-not-exist');
-    await expect(page.locator('h1')).toContainText("couldn't find that guide");
+    await expect(page.locator('h1')).toContainText("couldn't find that article");
     await expect(page.locator('main input[role="combobox"]')).toBeVisible();
     for (const slug of CATEGORY_SLUGS) {
       await expect(page.locator(`main a[href="/categories/${slug}"]`)).toBeVisible();
@@ -480,7 +480,7 @@ Test body.
     );
     await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
       'content',
-      /Can I Graduate With Honors\?.*Geary BulSU Student Guide/,
+      /Can I Graduate With Honors\?.*Geary BulSU Student Article/,
     );
     const articleLd = await page
       .locator('script[type="application/ld+json"]')

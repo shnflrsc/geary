@@ -85,13 +85,11 @@ Every product requirement in this PRD carries a strict release priority:
 | **REQ-CAT-02** | **P0** | The Home page shall present a Category Directory showing all five categories with each category's summary description, live guide count, and direct preview links to top guides. |
 | **REQ-CAT-03** | **P0** | Each category page shall group its guides visually under `subcategory` headings rather than presenting a chronological blog timeline. |
 | **REQ-CAT-04** | **P1** | Category and article pages shall display clickable breadcrumb navigation (`Home › [Category Name]` and `Home › [Category Name] › [Article Title]`) for spatial orientation. |
-| **REQ-CAT-05** | **P1** | The Home page shall surface daily rotating guides inside a **Featured** section alongside a **Recently Updated** section sorted by `updatedDate`. |
+| **REQ-CAT-05** | **P1** | The Home page shall surface daily randomized guides inside a **Featured** section displaying 6 cards at a time and cycling through 3 daily groups (18 guides refreshed each calendar day). |
 
 #### Product Behavior
 - **Intent-Based Discovery:** Unlike a blog sorted by date, Geary organizes information around what a student needs to accomplish.
-- **Home Discovery Hub:** Below the hero search area, students see two scannable sections without extra clicks:
-  1. **Featured:** Deterministically rotates 3 guides daily across the handbook seeded by the visitor's local calendar date (`YYYY-MM-DD`) so interesting guides surface periodically without a backend.
-  2. **Recently Updated:** Up to 6 most recently updated guides sorted by `updatedDate` descending with visible updated dates.
+- **Home Featured Rotation:** Below the hero search area, the **Featured** section deterministically randomizes 3 non-overlapping groups of 6 guides seeded by the visitor's local calendar date (`YYYY-MM-DD`), automatically cycling through the 3 groups (pausing on hover/focus and under `prefers-reduced-motion`) with subtle indicator controls to jump between groups.
 - **Category Index Views:** Opening any category displays breadcrumbs, category summary, and guides neatly grouped under their sub-topic headings (e.g., *Shifting & Transferring*, *Document Requests*, *Food & Dining*). If a category has zero guides yet, the page displays a helpful empty-state message with a link back to Home.
 
 #### Acceptance Criteria

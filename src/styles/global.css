@@ -127,6 +127,37 @@
   margin-bottom: 0.375em;
 }
 
+.geary-prose .heading-anchor {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.45rem;
+  color: #636C74;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.45;
+  transition: opacity 150ms ease, color 150ms ease;
+}
+
+@media (hover: hover) {
+  .geary-prose .heading-anchor {
+    opacity: 0;
+  }
+
+  .geary-prose h2:hover .heading-anchor,
+  .geary-prose h3:hover .heading-anchor,
+  .geary-prose h2:focus-within .heading-anchor,
+  .geary-prose h3:focus-within .heading-anchor,
+  .geary-prose .heading-anchor:focus-visible {
+    opacity: 1;
+  }
+}
+
+.geary-prose .heading-anchor:hover,
+.geary-prose .heading-anchor:focus-visible {
+  color: #8B1538;
+  opacity: 1;
+}
+
 .geary-prose p {
   margin-bottom: 1.25rem;
 }
@@ -158,21 +189,23 @@
   appearance: none;
   -webkit-appearance: none;
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: 1.05rem;
+  height: 1.05rem;
   margin-right: 0.5rem;
-  vertical-align: -0.15em;
+  vertical-align: -0.18em;
   border: 1.5px solid #CED4DA;
-  border-radius: 0.25rem;
+  border-radius: 9999px;
   background-color: #FFFFFF;
   opacity: 1;
+  pointer-events: none;
+  cursor: default;
 }
 
 .geary-prose .task-list-item input[type="checkbox"]:checked {
-  border-color: #8B1538;
-  background-color: #8B1538;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23FFFFFF' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-6.5'/%3E%3C/svg%3E");
-  background-size: 0.875rem 0.875rem;
+  border-color: rgba(139, 21, 56, 0.25);
+  background-color: #FDF2F4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238B1538' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-6.5'/%3E%3C/svg%3E");
+  background-size: 0.75rem 0.75rem;
   background-position: center;
   background-repeat: no-repeat;
 }

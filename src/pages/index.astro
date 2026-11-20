@@ -4,16 +4,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SearchBar from '../components/SearchBar';
 import ExploreSpotlight, { type ExploreItem } from '../components/ExploreSpotlight';
 import {
-  formatArticleDate,
   formatLocalDateKey,
   getArticlePreview,
   getArticleSlug,
-  getRecentlyUpdatedArticles,
 } from '../lib/articles';
 import { buildWebsiteJsonLd } from '../lib/seo';
 
 const allArticles = await getCollection('articles');
-const recentlyUpdatedArticles = getRecentlyUpdatedArticles(allArticles, 6);
 
 const featuredPool: ExploreItem[] = [...allArticles]
   .sort((a, b) => a.data.title.localeCompare(b.data.title))
@@ -120,62 +117,7 @@ const HERO_GEARS = [
     client:load
     items={featuredPool}
     initialDateKey={initialDateKey}
-    count={3}
+    groupSize={6}
+    groupCount={3}
   />
-
-  {
-    recentlyUpdatedArticles.length > 0 && (
-      <section aria-labelledby="recently-updated-heading" class="border-t border-border-subtle py-10 sm:py-12">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div class="mb-6">
-            <h2
-              id="recently-updated-heading"
-              class="font-heading text-xl sm:text-2xl font-bold text-ink-primary"
-            >
-              Recently Updated
-            </h2>
-          </div>
-
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
-            {recentlyUpdatedArticles.map((article) => {
-              const slug = getArticleSlug(article);
-              const preview = getArticlePreview(article);
-
-              return (
-                <a
-                  href={`/articles/${slug}`}
-                  class="group flex flex-col justify-between rounded-xl border border-border-subtle bg-white p-5 transition-colors duration-150 hover:border-brand-crimson"
-                >
-                  <div>
-                    <time
-                      datetime={article.data.updatedDate.toISOString().slice(0, 10)}
-                      class="mb-1.5 block text-xs font-medium text-ink-muted"
-                    >
-                      {formatArticleDate(article.data.updatedDate)}
-                    </time>
-
-                    <h3 class="font-heading text-base font-semibold leading-snug text-ink-primary transition-colors duration-150 group-hover:text-brand-crimson">
-                      {article.data.title}
-                    </h3>
-                  </div>
-
-                  <div class="mt-1.5 flex items-end justify-between gap-3">
-                    <p class="line-clamp-2 flex-1 text-sm leading-relaxed text-ink-secondary">
-                      {preview}
-                    </p>
-                    <span
-                      aria-hidden="true"
-                      class="shrink-0 text-base font-semibold leading-none text-brand-crimson transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-brand-crimson-hover"
-                    >
-                      →
-                    </span>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-    )
-  }
 </BaseLayout>

@@ -104,16 +104,18 @@ Geary's design philosophy—**low cognitive load, intuitive navigation, and a di
 
 | **Breakpoint** | **Viewport Width** | **Navigation Header** | **Home Discovery Grids** | **Subcategory / Related Grid** | **Article Reading Layout** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Mobile (Default)** | `< 768px` | Brand mark + Search trigger + Hamburger drawer toggle (`>= 44×44px`) | `1` column (`grid-cols-1`) for Featured and Recently Updated | `1` column (`grid-cols-1`) | Single stack: Header → Collapsed `<details>` TOC → Prose (`100%` up to `65ch`) → Related |
-| **Tablet (`md`)** | `768px – 1023px` | Brand mark + Inline category links + Compact SearchBar | `2` columns (`md:grid-cols-2`) for Featured and Recently Updated | `2` columns (`md:grid-cols-2`) | Single stack (`max-w-prose mx-auto`) with collapsed `<details>` TOC |
-| **Desktop (`lg`)** | `>= 1024px` | Full single-row top nav (`h-16` / `64px`) | `3` columns (`lg:grid-cols-3`) for Featured and Recently Updated | `2`–`3` columns (`lg:grid-cols-2` / `3`) | Two-column CSS grid: `[minmax(0, 65ch)_260px]` with sticky `"On this page"` `<aside>` TOC (`top-24`) |
+| **Mobile (Default)** | `< 768px` | Brand mark + Search trigger + Hamburger drawer toggle (`>= 44×44px`) | `1` column (`grid-cols-1`) for Featured (6 cards per group) | `1` column (`grid-cols-1`) | Single stack: Header → Collapsed `<details>` TOC → Prose (`100%` up to `65ch`) → Related |
+| **Tablet (`md`)** | `768px – 1023px` | Brand mark + Inline category links + Compact SearchBar | `2` columns (`md:grid-cols-2`) for Featured (6 cards per group) | `2` columns (`md:grid-cols-2`) | Single stack (`max-w-prose mx-auto`) with collapsed `<details>` TOC |
+| **Desktop (`lg`)** | `>= 1024px` | Full single-row top nav (`h-16` / `64px`) | `3` columns (`lg:grid-cols-3`) for Featured (6 cards per group) | `2`–`3` columns (`lg:grid-cols-2` / `3`) | Two-column CSS grid: `[minmax(0, 65ch)_260px]` with sticky `"On this page"` `<aside>` TOC (`top-24`) |
 
 ---
 
 ## 5. Component Specifications & Interactive States
 
 ### 5.1 Global Header & Geary Brand Mark (`Header.astro`)
-- **Anatomy:** Sticky/top `64px` (`h-16`) bar on `bg-[#F8F9FA]/95` with `border-b border-[#DEE2E6]`. Left: **Geary** wordmark + minimalist 8-tooth geometric gear SVG (`#8B1538` outer gear, `#D4A017` inner ring). Center/Right: `Home` (`/`), `Articles` (`/articles`), `Campus Map` (`/map`), and `Contribute` (`/contribute`) links (`>= 768px`) + Header `<SearchBar variant="header" />` + accessible mobile drawer toggle (`< 768px`).
+- **Anatomy:** Sticky/top `64px` (`h-16`) bar on `bg-[#F8F9FA]/95` with `border-b border-[#DEE2E6]`.
+  - *Desktop (`>= 768px`):* **Geary** wordmark + minimalist 8-tooth geometric gear SVG (`#8B1538` outer gear, `#D4A017` inner ring) on the left, `Home` (`/`), `Articles` (`/articles`), `Campus Map` (`/map`), and `Contribute` (`/contribute`) links, and `<SearchBar variant="header" />` (`md:w-48 lg:w-60`) on the right.
+  - *Mobile (`< 768px`):* On Home (`/`), `<SearchBar variant="header" />` is hidden and the gear mark + **Geary** wordmark are centered beside the right-aligned drawer toggle. On all interior pages, only the gear mark shows on the left (`sr-only md:not-sr-only` wordmark) and `<SearchBar variant="header" />` stretches across the full available space (`flex-1`) between the gear mark and the drawer toggle.
 - **Interactive States:**
   - *Default:* `text-[#495057]` navigation links, `min-h-[44px]` mobile tap target.
   - *Hover:* `text-[#8B1538]` with `150ms` transition; gear SVG rotates `90deg` smoothly (`300ms ease-out`) and returns to `0deg` when unhovered.
@@ -128,7 +130,7 @@ Geary's design philosophy—**low cognitive load, intuitive navigation, and a di
 - **Interactive States:**
   - *Hover / Keyboard Active (`activeIndex`):* Row shifts to `bg-[#FDF2F4]` with `3px` left accent border (`border-l-[3px] border-[#8B1538]`).
   - *Focus-Visible:* `border-[#8B1538] ring-2 ring-[#8B1538]/20`.
-  - *Empty / Zero-Match:* Displays `"No guides matched '<query>'."` (JSX-escaped).
+  - *Empty / Zero-Match:* Displays `"No articles matched '<query>'."` (JSX-escaped).
   - *Offline / Fetch Error:* Non-alarming inline message (`"Search index couldn't load right now."`) + direct links to all 5 categories.
 
 ### 5.3 Category Directory Card (`CategoryCard.astro`)

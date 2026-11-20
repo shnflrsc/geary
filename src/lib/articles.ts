@@ -178,27 +178,6 @@ export function getRelatedArticles<T extends ArticleLike>(
     .slice(0, limit);
 }
 
-/**
- * Return the most recently updated articles. When dates tie, non-featured guides
- * appear first so the Home page's Recently Updated section surfaces fresh guides
- * beyond Featured, then ties break alphabetically by title.
- */
-export function getRecentlyUpdatedArticles<T extends ArticleLike>(
-  articles: readonly T[],
-  limit = 6,
-): T[] {
-  return [...articles]
-    .sort((a, b) => {
-      const dateDiff = b.data.updatedDate.getTime() - a.data.updatedDate.getTime();
-      if (dateDiff !== 0) return dateDiff;
-      if (a.data.featured !== b.data.featured) {
-        return a.data.featured ? 1 : -1;
-      }
-      return a.data.title.localeCompare(b.data.title);
-    })
-    .slice(0, limit);
-}
-
 /** Format a local calendar date key (`YYYY-MM-DD`) for deterministic daily rotation. */
 export function formatLocalDateKey(date: Date): string {
   const y = date.getFullYear();
@@ -209,7 +188,7 @@ export function formatLocalDateKey(date: Date): string {
 
 /**
  * Deterministically pick `count` items seeded by `dateKey` (`YYYY-MM-DD`).
- * Incrementing `offset` steps cleanly through non-overlapping batches for manual shuffle.
+ * Incrementing `offset` steps cleanly through non-overlapping batches.
  */
 export function pickDailyItems<T>(
   items: readonly T[],
@@ -248,4 +227,23 @@ export function pickDailyItems<T>(
     result.push(shuffled[(start + i) % shuffled.length]);
   }
   return result;
+}
+
+/**
+ * Partition deterministically randomized daily items into up to `groupCount`
+ * non-overlapping groups of `groupSize`, refreshed whenever `dateKey` changes.
+ */
+export function getDailyItemGroups<T>(
+  items: readonly T[],
+  dateKey: string,
+  groupSize = 6,
+  groupCount = 3,
+): T[][] {
+  if (items.length === 0 || groupSize <= 0 || groupCount <= 0) return [];
+  const selected = pickDailyItems(items, dateKey, groupSize * groupCount, 0);
+  const groups: T[][] = [];
+  for (let start = 0; start < selected.length && groups.length < groupCount; start += groupSize) {
+    groups.push(selected.slice(start, start + groupSize));
+  }
+  return groups;
 }

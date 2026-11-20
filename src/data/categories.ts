@@ -38,7 +38,7 @@ export const CATEGORIES: readonly CategoryMeta[] = [
     slug: 'academics',
     title: 'Academics',
     description:
-      'Grades, INC completion, GWA & Latin honors, retention/probation rules, and thesis/OJT guides.',
+      'Grades, INC completion, GWA & Latin honors, retention/probation rules, and thesis/OJT articles.',
     icon: 'academics',
     order: 2,
   },

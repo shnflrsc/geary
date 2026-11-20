@@ -1,8 +1,10 @@
-# Geary Article & Guide Writing Framework
+# Geary Article Writing Framework
 
 **Document type:** Editorial and Writing Standard
 
-**Applies to:** All articles, student guides, tutorials, and informational content published on Geary.
+**Applies to:** All articles, tutorials, and informational content published on Geary.
+
+**Terminology rule:** Always refer to Geary's published entries as **articles** (never "guides") in UI copy, metadata, labels, and site prose.
 
 ## 1. Editorial Philosophy
 

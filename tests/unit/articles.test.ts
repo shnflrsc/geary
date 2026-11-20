@@ -5,8 +5,8 @@ import {
   getArticlePreview,
   getArticleSlug,
   getCategoryPreviewArticles,
+  getDailyItemGroups,
   getFeaturedArticles,
-  getRecentlyUpdatedArticles,
   getRelatedArticles,
   groupArticlesBySubcategory,
   pickDailyItems,
@@ -122,8 +122,8 @@ describe('Article taxonomy and grouping helpers (TC-UNIT-04)', () => {
     expect(getArticlePreview({ data: { title: 'Fallback Title' } })).toBe('Fallback Title');
   });
 
-  test('picks deterministic daily explore items, shuffles cleanly, and sorts recently updated guides', () => {
-    const pool = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+  test('picks deterministic daily items and partitions 3 non-overlapping groups of 6 refreshed daily', () => {
+    const pool = Array.from({ length: 24 }, (_, idx) => `guide-${idx + 1}`);
     const day1First = pickDailyItems(pool, '2026-11-19', 3, 0);
     const day1Again = pickDailyItems(pool, '2026-11-19', 3, 0);
     const day1Shuffled = pickDailyItems(pool, '2026-11-19', 3, 1);
@@ -137,11 +137,15 @@ describe('Article taxonomy and grouping helpers (TC-UNIT-04)', () => {
     expect(pickDailyItems([], '2026-11-19', 3)).toEqual([]);
     expect(formatLocalDateKey(new Date(2026, 10, 19))).toBe('2026-11-19');
 
-    const recent = getRecentlyUpdatedArticles(MOCK_ARTICLES, 3);
-    expect(recent.map((a) => a.data.title)).toEqual([
-      'Campus Map',
-      'Beta Academic Record',
-      'Alpha Form Guide',
-    ]);
+    const day1Groups = getDailyItemGroups(pool, '2026-11-19', 6, 3);
+    const day1GroupsAgain = getDailyItemGroups(pool, '2026-11-19', 6, 3);
+    const day2Groups = getDailyItemGroups(pool, '2026-11-20', 6, 3);
+
+    expect(day1Groups).toHaveLength(3);
+    expect(day1Groups.map((g) => g.length)).toEqual([6, 6, 6]);
+    expect(new Set(day1Groups.flat()).size).toBe(18);
+    expect(day1Groups).toEqual(day1GroupsAgain);
+    expect(day2Groups).not.toEqual(day1Groups);
+    expect(getDailyItemGroups([], '2026-11-19', 6, 3)).toEqual([]);
   });
 });

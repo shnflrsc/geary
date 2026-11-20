@@ -31,7 +31,7 @@ export function buildWebsiteJsonLd(siteUrl: string): JsonLdObject {
     name: 'Geary',
     alternateName: 'The Better BulSU Student Handbook',
     url: new URL('/', siteUrl).href,
-    description: 'Student-managed guides for BulSUans, by BulSUans.',
+    description: 'Student-managed articles for BulSUans, by BulSUans.',
     inLanguage: 'en',
   };
 }

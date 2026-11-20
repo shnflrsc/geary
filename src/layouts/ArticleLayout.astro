@@ -55,7 +55,7 @@ const jsonLd = [
   description={articlePreview}
   activeCategory={categoryMeta.slug}
   ogType="article"
-  ogImageAlt={`${article.data.title} - Geary BulSU Student Guide`}
+  ogImageAlt={`${article.data.title} - Geary BulSU Student Article`}
   articleMeta={{
     modifiedTime: article.data.updatedDate.toISOString(),
     section: categoryMeta.title,
@@ -138,5 +138,22 @@ const jsonLd = [
 <script>
   for (const table of document.querySelectorAll('.geary-prose table')) {
     table.setAttribute('tabindex', '0');
+  }
+
+  for (const heading of document.querySelectorAll('.geary-prose h2[id], .geary-prose h3[id]')) {
+    const id = heading.getAttribute('id');
+    const title = heading.textContent?.trim();
+    if (!id || !title || heading.querySelector('.heading-anchor')) continue;
+
+    const anchor = document.createElement('a');
+    anchor.className = 'heading-anchor';
+    anchor.href = `#${id}`;
+    anchor.setAttribute('aria-label', `Link to ${title}`);
+    anchor.textContent = '#';
+    anchor.addEventListener('click', () => {
+      const url = `${window.location.origin}${window.location.pathname}#${id}`;
+      navigator.clipboard?.writeText(url).catch(() => {});
+    });
+    heading.appendChild(anchor);
   }
 </script>

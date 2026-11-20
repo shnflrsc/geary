@@ -82,7 +82,7 @@ flowchart TB
 
 ### 3.2 Astro Islands Hydration Boundary
 - **Zero-JS Static Components:** `BaseLayout.astro`, `ArticleLayout.astro`, `Header.astro`, `Footer.astro`, `Breadcrumbs.astro`, `CategoryCard.astro`, `ArticleCard.astro`, `TableOfContents.astro`, and `VerificationBanner.astro` compile strictly to static HTML and CSS.
-- **Selective React Hydration (`client:load` / `client:idle`):** `SearchBar.tsx` (`client:load`) registers global keyboard shortcuts (`/`, `Ctrl+K` / `Cmd+K`) immediately on load, `CampusMap.tsx` (`client:load` on `/map`) drives interactive SVG pan/zoom/search, and `ExploreSpotlight.tsx` (`client:load` on `/`) rotates 3 daily guides by local calendar date.
+- **Selective React Hydration (`client:load` / `client:idle`):** `SearchBar.tsx` (`client:load`) registers global keyboard shortcuts (`/`, `Ctrl+K` / `Cmd+K`) immediately on load, `CampusMap.tsx` (`client:load` on `/map`) drives interactive SVG pan/zoom/search, and `ExploreSpotlight.tsx` (`client:load` on `/`) renders 6 Featured guides cycling through 3 daily randomized groups seeded by local calendar date.
 - **Minimal Progressive Enhancement (`< 1 KB`):** Mobile navigation drawer state inside `Header.astro` uses a tiny inline vanilla script, and mobile Table of Contents disclosure uses native HTML `<details>`/`<summary>`.
 
 ### 3.3 Content-to-Build Propagation

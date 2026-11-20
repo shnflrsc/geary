@@ -139,7 +139,7 @@ List everything readers must have ready before starting:
 * Fees and accepted payment methods.
 * Required accounts, portals, or credentials.
 
-Use checklists for items readers must gather or verify. Clearly separate mandatory, conditional, and optional items—never frame optional documents as mandatory.
+Use bullet lists for items readers must gather or verify. Clearly separate mandatory, conditional, and optional items—never frame optional documents as mandatory.
 
 ### 4.3 Step-by-Step Instructions
 
@@ -181,9 +181,9 @@ Use bullet lists (`-` or `*`) for unordered related items, options, or facts. Ea
 
 Use numbered lists (`1.`) strictly for sequential steps, chronological actions, or ranked items. Never number unrelated points.
 
-### 5.4 Checklists
+### 5.4 No Checkbox Lists
 
-Use checked Markdown checkboxes (`- [x]`) when readers need to track preparation or completion (e.g., document lists, pre-submission checks). Never use unchecked checkboxes (`- [ ]`). Do not use checkboxes for general informational lists.
+Never use Markdown checkbox/task lists (`- [ ]` or `- [x]`) in articles. Always use regular bullet lists (`-`) instead for required documents, pre-submission items, or verification lists.
 
 ### 5.5 Tables
 
@@ -332,7 +332,7 @@ When genuinely relevant published Geary articles exist, list them briefly at the
 
 ### Formatting and Resources
 
-* [ ] Markdown is clean, consistent, and mobile-friendly.
+* [ ] Markdown is clean, consistent, and mobile-friendly (no checkbox/task lists `- [ ]` or `- [x]`).
 * [ ] Bold, italic, and especially inline code are used sparingly and only where necessary.
 * [ ] Inline source references are brief and used only when helpful for context or action—full citations live in the Sources card.
 * [ ] External sources mentioned in the text (such as Facebook posts or portals) use descriptive inline links when verified URLs exist.

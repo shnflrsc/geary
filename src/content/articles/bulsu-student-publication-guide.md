@@ -34,11 +34,11 @@ OSPI safeguards editorial independence and handles formal complaints involving c
 
 Check that you meet all five requirements before filing an editorial board application:
 
-- [x] Officially enrolled in **at least 15 academic units** (certified by your unit head or the University Registrar)
-- [x] Completed **at least 1 year of residence** at BulSU (prior campus publication experience is preferred)
-- [x] In **good academic standing** with no failing (`5.00`), incomplete (`INC`), or conditional (`4.00`) mark in any subject
-- [x] **Certificate of Good Moral Character** from the Dean of Student Affairs and Services, with zero record of disciplinary action
-- [x] **No major position** in any student organization and **no affiliation** with any student political party
+- Officially enrolled in **at least 15 academic units** (certified by your unit head or the University Registrar)
+- Completed **at least 1 year of residence** at BulSU (prior campus publication experience is preferred)
+- In **good academic standing** with no failing (`5.00`), incomplete (`INC`), or conditional (`4.00`) mark in any subject
+- **Certificate of Good Moral Character** from the Dean of Student Affairs and Services, with zero record of disciplinary action
+- **No major position** in any student organization and **no affiliation** with any student political party
 
 ## Selection process, term, and removal rules
 

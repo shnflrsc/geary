@@ -54,15 +54,15 @@ Every bona fide enrolled BulSU student is covered **24 hours a day, 7 days a wee
 
 ### What to prepare for an accident claim
 
-- [x] Accomplished Accident Insurance Claim Form (from OSW)
-- [x] One original Incident Report signed by you
-- [x] One original Medical Certificate from your attending physician
-- [x] Original official receipts for hospitalization, medicines, laboratory tests, radiology, and accident-related procedures
-- [x] Original Hospital Statement of Account (showing admission and discharge dates if confined) and original medicine prescriptions
-- [x] Original and photocopy of your BulSU ID, plus one original Certificate of Registration (COR)
-- [x] Photo of the accident or injury
-- [x] **If animal or insect bite:** Vaccination Certificate and copy of your anti-rabies vaccination record
-- [x] **If vehicular accident:** Original Police Report plus original and photocopy of an updated Driver's License (if you were driving)
+- Accomplished Accident Insurance Claim Form (from OSW)
+- One original Incident Report signed by you
+- One original Medical Certificate from your attending physician
+- Original official receipts for hospitalization, medicines, laboratory tests, radiology, and accident-related procedures
+- Original Hospital Statement of Account (showing admission and discharge dates if confined) and original medicine prescriptions
+- Original and photocopy of your BulSU ID, plus one original Certificate of Registration (COR)
+- Photo of the accident or injury
+- **If animal or insect bite:** Vaccination Certificate and copy of your anti-rabies vaccination record
+- **If vehicular accident:** Original Police Report plus original and photocopy of an updated Driver's License (if you were driving)
 
 ### Additional requirements for accidental death claims
 

@@ -53,16 +53,16 @@ On-site document submission for shifters, transferees, and second-degree courser
 
 Gather both scanned copies (for online filing) and physical copies (for your Malolos Campus appointment):
 
-- [x] Certified copy of your Official Transcript of Records (TOR) (with Special Order for graduates of private higher education institutions) or Certificate of Grades
-- [x] Certificate of Good Moral Character from your previous school
-- [x] Original and photocopy of your current Certificate of Registration (COR) and class cards for initial evaluation
-- [x] Honorable Dismissal from your previous school (required for Registrar enrollment and for second-degree applicants)
-- [x] Two 2" x 2" color ID photos on a white background (computer-generated photos are rejected)
-- [x] Notarized Affidavit of Discrepancy if the name on your records differs from your birth certificate
+- Certified copy of your Official Transcript of Records (TOR) (with Special Order for graduates of private higher education institutions) or Certificate of Grades
+- Certificate of Good Moral Character from your previous school
+- Original and photocopy of your current Certificate of Registration (COR) and class cards for initial evaluation
+- Honorable Dismissal from your previous school (required for Registrar enrollment and for second-degree applicants)
+- Two 2" x 2" color ID photos on a white background (computer-generated photos are rejected)
+- Notarized Affidavit of Discrepancy if the name on your records differs from your birth certificate
 
 If you are applying as a **second-degree courser**, also prepare:
 
-- [x] Letter of intent addressed to the College Dean
+- Letter of intent addressed to the College Dean
 
 Submitting altered or incomplete credentials disqualifies your application.
 

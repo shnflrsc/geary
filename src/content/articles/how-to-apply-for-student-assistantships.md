@@ -34,15 +34,15 @@ Requirements differ depending on whether you are applying for the first time or 
 
 **For new ISA applicants:**
 
-- [x] Accomplished ISA Application Form (picked up at the Placement Office during the announced distribution window)
-- [x] Certificate of Registration (COR) for the current semester
-- [x] Certificate of Grades (COG) from the previous semester
-- [x] Updated Class Schedule showing your daily vacant hours
-- [x] Signed parental consent form, if requested during office screening
+- Accomplished ISA Application Form (picked up at the Placement Office during the announced distribution window)
+- Certificate of Registration (COR) for the current semester
+- Certificate of Grades (COG) from the previous semester
+- Updated Class Schedule showing your daily vacant hours
+- Signed parental consent form, if requested during office screening
 
 **For returning ISAs:**
 
-- [x] Recommendation Letter for reappointment from your assigned office
+- Recommendation Letter for reappointment from your assigned office
 
 ## Step-by-step application process
 

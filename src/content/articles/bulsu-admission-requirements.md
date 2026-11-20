@@ -54,11 +54,11 @@ Check the [A.Y. 2027-2028 Programs Offered post](https://www.facebook.com/BulSUA
 
 Upload scanned copies during online application on the [BulSU Online Application Portal](https://admissions.bulsu.edu.ph/), then bring matching physical copies on your scheduled appointment date. On-site document submission for new college students has **no fee** and takes about 8 minutes.
 
-- [x] Certified True Copy of your Grade 11 Report Card (SF9 / Form 138, 1st and 2nd semester) with school seal
-- [x] Two originally signed copies of the Application Form (Declaration Form), emailed after online application, each with a 2" x 2" ID photo with name tag on a white background
-- [x] Certified True Copy or photocopy of Proof of Residency (Barangay Certificate)
-- [x] Photocopy of a recent utility bill (electric, water, or internet), or a Barangay Certification if you cannot present a utility bill
-- [x] Photocopy of a recent Income Tax Return (ITR), Certificate of Tax Exemption, or notarized Barangay Certification of low or no income
+- Certified True Copy of your Grade 11 Report Card (SF9 / Form 138, 1st and 2nd semester) with school seal
+- Two originally signed copies of the Application Form (Declaration Form), emailed after online application, each with a 2" x 2" ID photo with name tag on a white background
+- Certified True Copy or photocopy of Proof of Residency (Barangay Certificate)
+- Photocopy of a recent utility bill (electric, water, or internet), or a Barangay Certification if you cannot present a utility bill
+- Photocopy of a recent Income Tax Return (ITR), Certificate of Tax Exemption, or notarized Barangay Certification of low or no income
 
 ## Optional documents for Affirmative Action (up to 20 points)
 
@@ -66,28 +66,28 @@ Affirmative Action makes up 20% of your final selection score. Submit only the d
 
 Residency (up to 3 points):
 
-- [x] Barangay Certification showing permanent residence in Bulacan (3 points) or another province in Region 3 (2 points)
+- Barangay Certification showing permanent residence in Bulacan (3 points) or another province in Region 3 (2 points)
 
 Group A (3 points, submit at most one document):
 
-- [x] Member of an Indigenous Cultural Community or Indigenous People (ICC/IP): National Commission on Indigenous Peoples (NCIP) or tribal/barangay certificate
-- [x] Pantawid Pamilya Pilipino Program (4Ps) beneficiary: 4Ps ID or barangay certification
-- [x] Student with Special Needs (SSN) or disability under RA 7277: PWD ID or membership certificate
-- [x] Alternative Learning System (ALS) graduate: Accreditation and Equivalency (A&E) Assessment and Certification
+- Member of an Indigenous Cultural Community or Indigenous People (ICC/IP): National Commission on Indigenous Peoples (NCIP) or tribal/barangay certificate
+- Pantawid Pamilya Pilipino Program (4Ps) beneficiary: 4Ps ID or barangay certification
+- Student with Special Needs (SSN) or disability under RA 7277: PWD ID or membership certificate
+- Alternative Learning System (ALS) graduate: Accreditation and Equivalency (A&E) Assessment and Certification
 
 Group B (3 points, submit at most one document):
 
-- [x] Child of a solo parent: Solo Parent ID from the City or Municipal Social Welfare and Development Office (CSWDO / MSWDO)
-- [x] Solo parent under RA 8972: birth certificate of your child
-- [x] Single or double orphan living with relatives: death certificate of one or both parents
-- [x] Orphaned or abandoned student living in an orphanage: certification from a Department of Social Welfare and Development (DSWD)-recognized institution
-- [x] First-generation college student (no parent or legal guardian completed college): MSWDO/CSWDO certification, Affidavit of Non-Graduation, or barangay/school certification (confirm with UAO which format it requires)
+- Child of a solo parent: Solo Parent ID from the City or Municipal Social Welfare and Development Office (CSWDO / MSWDO)
+- Solo parent under RA 8972: birth certificate of your child
+- Single or double orphan living with relatives: death certificate of one or both parents
+- Orphaned or abandoned student living in an orphanage: certification from a Department of Social Welfare and Development (DSWD)-recognized institution
+- First-generation college student (no parent or legal guardian completed college): MSWDO/CSWDO certification, Affidavit of Non-Graduation, or barangay/school certification (confirm with UAO which format it requires)
 
 Additional categories:
 
-- [x] Geographically Isolated and Disadvantaged Area (GIDA) resident (3 points): Barangay or local government unit (LGU) certification
-- [x] Exemplary artistic or athletic ability (3 points): certification from your school head or community, civic, or religious organization head stating your title and award
-- [x] BulSU Adopted Community member or child of a BulSU employee with at least one year of service (5 points): certificate from the University Extension Office or your parent's latest BulSU Employee ID
+- Geographically Isolated and Disadvantaged Area (GIDA) resident (3 points): Barangay or local government unit (LGU) certification
+- Exemplary artistic or athletic ability (3 points): certification from your school head or community, civic, or religious organization head stating your title and award
+- BulSU Adopted Community member or child of a BulSU employee with at least one year of service (5 points): certificate from the University Extension Office or your parent's latest BulSU Employee ID
 
 Working students (with a Certificate of Employment) appeared as an optional category in the 2026 cycle, though it is not listed in the current Affirmative Action points table.
 

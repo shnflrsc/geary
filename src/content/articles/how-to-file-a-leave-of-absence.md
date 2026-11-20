@@ -47,11 +47,11 @@ The Office of the University Registrar announces each semester's filing cutoff o
 
 Check your College Dean or campus admissions page before your return semester for local requirements. For reference, Sarmiento Campus returning students submitted:
 
-- [x] Re-admission Letter addressed to the Campus Dean
-- [x] Completed Clearance Form
-- [x] Medical Certificate, if your absence was due to physical illness
-- [x] Psychological Evaluation, if your absence was due to a mental health condition
-- [x] Report of Grades (requested in some semesters; confirm whether your campus needs it)
+- Re-admission Letter addressed to the Campus Dean
+- Completed Clearance Form
+- Medical Certificate, if your absence was due to physical illness
+- Psychological Evaluation, if your absence was due to a mental health condition
+- Report of Grades (requested in some semesters; confirm whether your campus needs it)
 
 ## Curriculum rules when you return
 

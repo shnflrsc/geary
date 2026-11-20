@@ -17,10 +17,10 @@ BulSU enforces a strict **No ID, No Entry** policy at every campus gate. If you 
 
 You must be a currently enrolled student to request a duplicate ID. Gather these requirements before lining up at the Registrar:
 
-- [x] One original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or another accepted ID)
-- [x] Original notarized Affidavit of Loss from a notary public
-- [x] Official Receipt for PHP 150 from the Cashier's Office
-- [x] If someone else is filing or claiming for you: a signed authorization letter or Special Power of Attorney, plus one photocopy of your ID and one photocopy of your representative's ID
+- One original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or another accepted ID)
+- Original notarized Affidavit of Loss from a notary public
+- Official Receipt for PHP 150 from the Cashier's Office
+- If someone else is filing or claiming for you: a signed authorization letter or Special Power of Attorney, plus one photocopy of your ID and one photocopy of your representative's ID
 
 ## Step-by-step replacement process
 

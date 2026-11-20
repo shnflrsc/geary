@@ -44,9 +44,9 @@ All library-registered Laboratory High School, undergraduate, and graduate stude
 
 Prepare your file before submitting through the [Main Campus Plagiarism Check Form](https://bit.ly/bulsuplagscan) (external campuses may use a separate campus link):
 
-- [x] One PDF copy containing your Title Page, author names, college/department, and Chapters 1 to 5 (or 1 to 9), **excluding** preliminary pages and appendices
-- [x] For group papers, only one member per group should submit
-- [x] For Graduate School students, an endorsement letter from the Graduate School Office
+- One PDF copy containing your Title Page, author names, college/department, and Chapters 1 to 5 (or 1 to 9), **excluding** preliminary pages and appendices
+- For group papers, only one member per group should submit
+- For Graduate School students, an endorsement letter from the Graduate School Office
 
 **Passing limits:** BulSU requires **10% or lower** plagiarism similarity and **35% or lower** AI score. Papers within both limits receive an emailed **Plagiarism Certificate** and **AI Use Declaration Form** (plus Confidentiality Agreement and Open Access Permission forms for theses and capstones). Papers above either limit receive the similarity report for revision before resubmission. For in-person plagiarism or AI checking questions, visit the **4th or 5th floor of the BulSU e-Library**.
 

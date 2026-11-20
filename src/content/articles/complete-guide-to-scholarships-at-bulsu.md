@@ -42,19 +42,19 @@ TDP calls open separately for Main Campus and External Campuses, often with **24
 
 Prepare these documents ahead of time so you can upload within the 24-hour window:
 
-- [x] Signed Student Application Form (Annex 2), with 2x2 photo when required by the call
-- [x] Signed Certified True Copy of your current Certificate of Registration (COR)
-- [x] Signed Barangay Certificate of Indigency
-- [x] School ID or valid government ID (check if the specific call also asks for your latest Certificate of Grades)
-- [x] All pages merged into a **single PDF file** following the exact upload instructions in the OSFAS post
+- Signed Student Application Form (Annex 2), with 2x2 photo when required by the call
+- Signed Certified True Copy of your current Certificate of Registration (COR)
+- Signed Barangay Certificate of Indigency
+- School ID or valid government ID (check if the specific call also asks for your latest Certificate of Grades)
+- All pages merged into a **single PDF file** following the exact upload instructions in the OSFAS post
 
 ### Landbank validation rules for grantees
 
 When OSFAS announces Landbank validation for TES or TDP batches, follow these format rules closely or your submission will be rejected:
 
-- [x] Printed front-and-back copy of your student ID or valid ID with **three original wet signatures** and your active contact number (e-signatures are not accepted)
-- [x] Clear screenshot of your virtual or physical Landbank Visa Debit card showing all card numbers
-- [x] Screenshot of your Landbank banking app clearly showing your account number
+- Printed front-and-back copy of your student ID or valid ID with **three original wet signatures** and your active contact number (e-signatures are not accepted)
+- Clear screenshot of your virtual or physical Landbank Visa Debit card showing all card numbers
+- Screenshot of your Landbank banking app clearly showing your account number
 
 Check the latest OSFAS post and office instructions before submitting, since recent validation rounds have shifted between Google Form upload and hard-copy drop-off.
 
@@ -64,11 +64,11 @@ BulSU's **Gender and Development Center** runs a separate financial assistance p
 
 Prepare these for initial application (renewals only need the Renewal Form, Interview Form, signed ID photocopy, COR, and COG):
 
-- [x] Application Form and Interview Form (get from your college or campus Associate Dean / GAD Coordinator)
-- [x] Valid ID photocopy with three specimen signatures
-- [x] Photocopy of your current COR and latest COG
-- [x] Recent original Meralco bill and recent original water bill
-- [x] PWD ID or Barangay/MSWDO Certificate of Indigency, if applicable
+- Application Form and Interview Form (get from your college or campus Associate Dean / GAD Coordinator)
+- Valid ID photocopy with three specimen signatures
+- Photocopy of your current COR and latest COG
+- Recent original Meralco bill and recent original water bill
+- PWD ID or Barangay/MSWDO Certificate of Indigency, if applicable
 
 After submitting to your Associate Dean, complete a face-to-face interview with your GAD Coordinator and wait for qualification notice through your college.
 

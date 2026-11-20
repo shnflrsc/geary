@@ -22,7 +22,7 @@ export default function ExploreSpotlight({
   initialDateKey,
   groupSize = 6,
   groupCount = 3,
-  cycleMs = 10000,
+  cycleMs = 6000,
 }: ExploreSpotlightProps) {
   const [dateKey, setDateKey] = useState(initialDateKey);
   const [activeGroup, setActiveGroup] = useState(0);
@@ -131,30 +131,47 @@ export default function ExploreSpotlight({
             <div
               role="group"
               aria-label="Featured article groups"
-              className="flex items-center"
+              className="flex items-center gap-2"
             >
-              {groups.map((_, index) => {
-                const isActive = index === safeGroupIndex;
-                return (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => transitionToGroup(index)}
-                    aria-label={`Show featured group ${index + 1} of ${groups.length}`}
-                    aria-pressed={isActive}
-                    className="group inline-flex h-10 min-w-[28px] cursor-pointer items-center justify-center rounded-full px-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={
-                        isActive
-                          ? 'h-2 w-6 rounded-full bg-brand-crimson transition-all duration-200'
-                          : 'h-2 w-2 rounded-full bg-ink-muted transition-all duration-200 group-hover:bg-ink-secondary'
-                      }
-                    />
-                  </button>
-                );
-              })}
+              <button
+                type="button"
+                onClick={() => transitionToGroup(safeGroupIndex - 1)}
+                aria-label="Previous featured group"
+                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-white text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  className="h-4 w-4"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12.5 5 7.5 10l5 5" />
+                </svg>
+              </button>
+
+              <span className="min-w-[2.25rem] text-center text-xs font-medium tabular-nums text-ink-secondary">
+                {safeGroupIndex + 1} / {groups.length}
+              </span>
+
+              <button
+                type="button"
+                onClick={() => transitionToGroup(safeGroupIndex + 1)}
+                aria-label="Next featured group"
+                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-white text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  className="h-4 w-4"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 5 12.5 10l-5 5" />
+                </svg>
+              </button>
             </div>
           )}
         </div>

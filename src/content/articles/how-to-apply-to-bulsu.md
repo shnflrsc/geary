@@ -86,11 +86,11 @@ Upload scanned copies during your online application, then submit physical copie
 
 ### Mandatory documents
 
-- [x] Certified True Copy of your Grade 11 School Form 9 (SF9) with school seal
-- [x] Application Form (Declaration Form) with a 2" x 2" ID photo, emailed to you after completing the online application
-- [x] Certified True Copy of Proof of Residency (Barangay Certificate)
-- [x] Photocopy of a recent utility bill (electric, water, or internet)
-- [x] Photocopy of a recent Income Tax Return (ITR), Certificate of Tax Exemption, or notarized Barangay Certification of low or no income
+- Certified True Copy of your Grade 11 School Form 9 (SF9) with school seal
+- Application Form (Declaration Form) with a 2" x 2" ID photo, emailed to you after completing the online application
+- Certified True Copy of Proof of Residency (Barangay Certificate)
+- Photocopy of a recent utility bill (electric, water, or internet)
+- Photocopy of a recent Income Tax Return (ITR), Certificate of Tax Exemption, or notarized Barangay Certification of low or no income
 
 ### Optional documents for Affirmative Action points
 
@@ -98,24 +98,24 @@ Submit these only if they apply to you. They count toward the 20-point Affirmati
 
 Submit at most one document from Group A (socio-economic and special groups):
 
-- [x] Indigenous Cultural Community or Indigenous People (ICC/IP) membership or barangay certificate
-- [x] Pantawid Pamilya Pilipino Program (4Ps) membership or barangay certificate
-- [x] Students with Special Needs (SSN) or Persons with Disabilities (PWD) ID or membership certificate
-- [x] Alternative Learning System (ALS) Accreditation and Equivalency Assessment and Certification
+- Indigenous Cultural Community or Indigenous People (ICC/IP) membership or barangay certificate
+- Pantawid Pamilya Pilipino Program (4Ps) membership or barangay certificate
+- Students with Special Needs (SSN) or Persons with Disabilities (PWD) ID or membership certificate
+- Alternative Learning System (ALS) Accreditation and Equivalency Assessment and Certification
 
 Submit at most one document from Group B (solo parent, orphan, or first-generation status):
 
-- [x] Solo Parent ID (if you are the child of a solo parent)
-- [x] Child's Birth Certificate (if you are a solo parent)
-- [x] Death certificate of one or both parents (single or double orphan living with relatives)
-- [x] Certification from a Department of Social Welfare and Development (DSWD)-recognized orphanage or shelter (orphaned or abandoned)
-- [x] First-generation college student proof (MSWDO certification, Affidavit of Non-Graduation from an immediate family member, or barangay/school certification; confirm with UAO which format it requires)
+- Solo Parent ID (if you are the child of a solo parent)
+- Child's Birth Certificate (if you are a solo parent)
+- Death certificate of one or both parents (single or double orphan living with relatives)
+- Certification from a Department of Social Welfare and Development (DSWD)-recognized orphanage or shelter (orphaned or abandoned)
+- First-generation college student proof (MSWDO certification, Affidavit of Non-Graduation from an immediate family member, or barangay/school certification; confirm with UAO which format it requires)
 
 You may also submit any of these if they apply:
 
-- [x] Barangay or local government unit (LGU) certification if you live in a Geographically Isolated and Disadvantaged Area (GIDA)
-- [x] Certification from your school head or community/civic/religious organization head naming your title and award for exemplary artistic or athletic ability
-- [x] Certificate from the University Extension Office (BulSU Adopted Community member) or your parent's latest BulSU Employee ID (regular or non-regular employee with at least one year of service)
+- Barangay or local government unit (LGU) certification if you live in a Geographically Isolated and Disadvantaged Area (GIDA)
+- Certification from your school head or community/civic/religious organization head naming your title and award for exemplary artistic or athletic ability
+- Certificate from the University Extension Office (BulSU Adopted Community member) or your parent's latest BulSU Employee ID (regular or non-regular employee with at least one year of service)
 
 ## Application steps
 

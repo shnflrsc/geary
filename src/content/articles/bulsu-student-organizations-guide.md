@@ -31,19 +31,19 @@ Every recognized organization must keep at least **8 regular enrolled members in
 
 **For new organizations (minimum 15 founding members):**
 
-- [x] Letter of intent and College Dean endorsement
-- [x] Recognition application form, Constitution and By-Laws, and organizational chart
-- [x] Adviser profile, adviser invitation, and signed acceptance letter
-- [x] Officer and member lists with signatures (signed voluntary membership forms; lists suffice for 50+ members)
-- [x] Annual activity proposal and budget proposal
+- Letter of intent and College Dean endorsement
+- Recognition application form, Constitution and By-Laws, and organizational chart
+- Adviser profile, adviser invitation, and signed acceptance letter
+- Officer and member lists with signatures (signed voluntary membership forms; lists suffice for 50+ members)
+- Annual activity proposal and budget proposal
 
 **For annual renewal (opens around June to September):**
 
-- [x] Renewal application form, updated Constitution and By-Laws, and organizational chart
-- [x] Updated officer and membership lists plus adviser profile
-- [x] Activity proposal and budget proposal for the incoming year
-- [x] Financial report (audited with official receipts/invoices and photocopies of thermal receipts)
-- [x] Accomplishment report with photos and narrative documentation, plus Certificate of Completion
+- Renewal application form, updated Constitution and By-Laws, and organizational chart
+- Updated officer and membership lists plus adviser profile
+- Activity proposal and budget proposal for the incoming year
+- Financial report (audited with official receipts/invoices and photocopies of thermal receipts)
+- Accomplishment report with photos and narrative documentation, plus Certificate of Completion
 
 OSOA notifies applicants within **2 weeks**. If recognition is denied, you have **10 days** to appeal in writing to the **Dean of OSAS**, who decides within **10 working days**. Recognized organizations receive their certificates and compete for annual excellence honors (**Outstanding Student Organization**, **Leader**, and **Adviser**) during **Balangayan sa Unibersidad**.
 

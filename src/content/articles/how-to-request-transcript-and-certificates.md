@@ -48,11 +48,11 @@ Actual release dates can run faster than the maximum turnaround listed above. Un
 
 Bring complete requirements on your first visit so you do not lose your place in line:
 
-- [x] One original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID)
-- [x] Accomplished Clearance Form if your document requires one (get it at the Registrar window or download and print it from the BulSU website)
-- [x] Documentary stamp (1 piece per TOR, CAV, RLE, or English Proficiency certificate; available at the BulSU Cashier's Office, Treasury Office, or BIR)
-- [x] Supporting attachments specific to your request (such as photocopies of your TOR/COR for CTC, a passport-size photo with name tag on a white background for board-exam TORs, or a notarized Affidavit of Loss for a duplicate diploma)
-- [x] If someone else is filing or claiming for you: a signed authorization letter or Special Power of Attorney, plus one photocopy of your ID and one photocopy of your representative's ID
+- One original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID)
+- Accomplished Clearance Form if your document requires one (get it at the Registrar window or download and print it from the BulSU website)
+- Documentary stamp (1 piece per TOR, CAV, RLE, or English Proficiency certificate; available at the BulSU Cashier's Office, Treasury Office, or BIR)
+- Supporting attachments specific to your request (such as photocopies of your TOR/COR for CTC, a passport-size photo with name tag on a white background for board-exam TORs, or a notarized Affidavit of Loss for a duplicate diploma)
+- If someone else is filing or claiming for you: a signed authorization letter or Special Power of Attorney, plus one photocopy of your ID and one photocopy of your representative's ID
 
 ## Step-by-step walk-in request process
 

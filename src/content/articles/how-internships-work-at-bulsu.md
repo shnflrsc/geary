@@ -39,13 +39,13 @@ Because pre-deployment checklists (medical clearance, insurance, and MOA deadlin
 
 Once deployed, interns are expected to:
 
-- [x] Contact your site supervisor a few days before your start date
-- [x] Notify your SIP Coordinator on the day you start logging hours
-- [x] Attend any host-site orientation required by the company
-- [x] Maintain an analytical field learning journal
-- [x] Stay in regular contact with your SIP Coordinator and attend required campus seminars
-- [x] Arrange for your SIP Coordinator to visit your host site
-- [x] Complete formal wrap-up, thank-you, and clearance checks with your SIP Coordinator
+- Contact your site supervisor a few days before your start date
+- Notify your SIP Coordinator on the day you start logging hours
+- Attend any host-site orientation required by the company
+- Maintain an analytical field learning journal
+- Stay in regular contact with your SIP Coordinator and attend required campus seminars
+- Arrange for your SIP Coordinator to visit your host site
+- Complete formal wrap-up, thank-you, and clearance checks with your SIP Coordinator
 
 Misconduct or violating campus or company rules can lead CarDSI to pull you from your placement and file disciplinary sanctions.
 

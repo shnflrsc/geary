@@ -33,10 +33,10 @@ Whether your issue involves unexplained grades, lack of academic consideration d
 
 Pull your documentation together before submitting any grievance so the receiving office can act right away:
 
-- [x] Written narrative stating your full name, student details, course or office involved, exact dates, and a clear factual account of what happened
-- [x] Supporting screenshots, emails, grade sheets, class messages, or documents
-- [x] Sworn witness statements or affidavits (if filing a formal disciplinary complaint)
-- [x] Active email address and mobile number for follow-ups
+- Written narrative stating your full name, student details, course or office involved, exact dates, and a clear factual account of what happened
+- Supporting screenshots, emails, grade sheets, class messages, or documents
+- Sworn witness statements or affidavits (if filing a formal disciplinary complaint)
+- Active email address and mobile number for follow-ups
 
 ## Grade consultation and weather-related grievances
 

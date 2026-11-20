@@ -53,10 +53,10 @@ For reference, Sarmiento Campus held its A.Y. 2026-2027 Shifters, Transferees, a
 
 Prepare scanned copies for online filing and matching physical copies for your Malolos Campus appointment:
 
-- [x] Letter of intent
-- [x] Certified copy of grades (Certificate of Grades or Transcript of Records)
-- [x] Clearance
-- [x] Original and photocopy of your current Certificate of Registration (COR) and class cards
+- Letter of intent
+- Certified copy of grades (Certificate of Grades or Transcript of Records)
+- Clearance
+- Original and photocopy of your current Certificate of Registration (COR) and class cards
 
 ## Application steps
 

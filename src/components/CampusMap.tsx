@@ -78,6 +78,14 @@ export default function CampusMap() {
     return map;
   }, []);
 
+  const locationListRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (!highlightedLocationId || !locationListRef.current) return;
+    const matchEl = locationListRef.current.querySelector<HTMLElement>('[data-search-match="true"]');
+    matchEl?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, [highlightedLocationId, selectedBuildingId]);
+
   const selectedBuilding = selectedBuildingId
     ? buildingById.get(selectedBuildingId) ?? null
     : null;
@@ -430,6 +438,7 @@ export default function CampusMap() {
                                 <span className="font-semibold text-brand-crimson">
                                   {match.buildingName}
                                 </span>
+                                {match.floor ? ` · ${match.floor}` : ''}
                               </>
                             ) : (
                               <>Building</>
@@ -769,7 +778,10 @@ export default function CampusMap() {
               </h2>
 
               {selectedBuilding.locations.length > 0 ? (
-                <ul className="mt-3 space-y-2.5">
+                <ul
+                  ref={locationListRef}
+                  className="mt-3 max-h-[32rem] space-y-2.5 overflow-y-auto pr-1"
+                >
                   {selectedBuilding.locations.map((loc) => {
                     const isHighlightedLoc = highlightedLocationId === loc.id;
 
@@ -786,6 +798,11 @@ export default function CampusMap() {
                         <p className="text-sm font-semibold text-ink-primary">
                           {loc.name}
                         </p>
+                        {loc.floor && (
+                          <p className="mt-0.5 text-xs font-medium text-ink-secondary">
+                            {loc.floor}
+                          </p>
+                        )}
                       </li>
                     );
                   })}

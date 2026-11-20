@@ -155,6 +155,521 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Fine Arts",
           "Federizo Hall"
         ]
+      },
+      {
+        "id": "cafa-dean",
+        "name": "CAFA Dean's Office",
+        "category": "administration",
+        "keywords": [
+          "CAFA",
+          "Dean",
+          "Architecture",
+          "Fine Arts",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-mt-lab-a",
+        "name": "MT Lab A",
+        "category": "academic",
+        "keywords": [
+          "MT Lab A",
+          "Medical Technology",
+          "Lab",
+          "CS",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-mt-lab-b",
+        "name": "MT Lab B",
+        "category": "academic",
+        "keywords": [
+          "MT Lab B",
+          "Medical Technology",
+          "Lab",
+          "CS",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-comp-lab",
+        "name": "FH Comp Lab",
+        "category": "academic",
+        "keywords": [
+          "FH Comp Lab",
+          "Computer Lab",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-speech-lab",
+        "name": "Speech Laboratory",
+        "category": "academic",
+        "keywords": [
+          "Speech Lab",
+          "Speech Library",
+          "CAL",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-avr-a",
+        "name": "AVR A",
+        "category": "academic",
+        "keywords": [
+          "AVR A",
+          "Audio Visual Room",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-avr-b",
+        "name": "AVR B",
+        "category": "academic",
+        "keywords": [
+          "AVR B",
+          "Audio Visual Room",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-avr",
+        "name": "FH AVR",
+        "category": "academic",
+        "keywords": [
+          "FH AVR",
+          "Audio Visual Room",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-cal-library-a",
+        "name": "CAL Library A",
+        "category": "library",
+        "keywords": [
+          "CAL Library A",
+          "Library",
+          "CAL",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-cal-library-b",
+        "name": "CAL Library B",
+        "category": "library",
+        "keywords": [
+          "CAL Library B",
+          "Library",
+          "CAL",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-cal-theater-a",
+        "name": "CAL Theater A",
+        "category": "sports-events",
+        "keywords": [
+          "CAL Theater A",
+          "Theater",
+          "CAL",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-theater-b",
+        "name": "Theater B",
+        "category": "sports-events",
+        "keywords": [
+          "Theater B",
+          "Theater",
+          "CAL",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-cal-theater-c",
+        "name": "CAL Theater C",
+        "category": "sports-events",
+        "keywords": [
+          "CAL Theater C",
+          "Theater",
+          "CAL",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-studio-room",
+        "name": "Studio Room",
+        "category": "academic",
+        "keywords": [
+          "Studio Room",
+          "CAL",
+          "DCPA",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-multimedia-room",
+        "name": "Multimedia Room",
+        "category": "academic",
+        "keywords": [
+          "Multimedia Room",
+          "CAL",
+          "DCPA",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-r-and-e",
+        "name": "R & E",
+        "category": "administration",
+        "keywords": [
+          "R & E",
+          "Research and Extension",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-accre",
+        "name": "FH ACCRE",
+        "category": "administration",
+        "keywords": [
+          "FH ACCRE",
+          "Accreditation",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-tl",
+        "name": "FH TL",
+        "category": "academic",
+        "keywords": [
+          "FH TL",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-106",
+        "name": "FH 106",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "FH106",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-107",
+        "name": "FH 107",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "FH107",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-108",
+        "name": "FH 108",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "FH108",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-110",
+        "name": "FH 110",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "FH110",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-113",
+        "name": "FH 113",
+        "category": "academic",
+        "keywords": [
+          "FH113",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-201a",
+        "name": "FH 201 A",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH201A",
+          "FH 201A",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-201b",
+        "name": "FH 201 B",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH201B",
+          "FH 201B",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-205",
+        "name": "FH 205",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH205",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-206",
+        "name": "FH 206",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH206",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-207",
+        "name": "FH 207",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH207",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-208",
+        "name": "FH 208",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH208",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-209",
+        "name": "FH 209",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH209",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-210",
+        "name": "FH 210",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH210",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-n202",
+        "name": "N202",
+        "category": "academic",
+        "keywords": [
+          "N202",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-301a",
+        "name": "FH 301A",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH301A",
+          "FH 301 A",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-302",
+        "name": "FH 302",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH302",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-303",
+        "name": "FH 303",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH303",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-304",
+        "name": "FH 304",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH304",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-305",
+        "name": "FH 305",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH305",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-306",
+        "name": "FH 306",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH306",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-307",
+        "name": "FH 307",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH307",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-308",
+        "name": "FH 308",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH308",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-309",
+        "name": "FH 309",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH309",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-311a",
+        "name": "FH 311 A",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH311A",
+          "FH 311A",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-311b",
+        "name": "FH 311 B",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH311B",
+          "FH 311B",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-314",
+        "name": "FH 314",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH314",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-315",
+        "name": "FH 315",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH315",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-316",
+        "name": "FH 316",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH316",
+          "Classroom",
+          "Federizo Hall"
+        ]
+      },
+      {
+        "id": "fh-317",
+        "name": "FH 317",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "FH317",
+          "Classroom",
+          "Federizo Hall"
+        ]
       }
     ]
   },
@@ -194,7 +709,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "svgPath": "M67.9,514.8 L179.4,414.4 L244.9,487.2 L133.5,587.6 Z",
     "center": {
       "x": 156.4,
-      "y": 501.0
+      "y": 501
     },
     "summary": "Academic building on the MacArthur Highway (west) side housing the College of Industrial Technology.",
     "locations": [
@@ -210,6 +725,17 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "NC II",
           "CIT"
         ]
+      },
+      {
+        "id": "alvarado-lactation-room",
+        "name": "Lactation Room",
+        "floor": "4th Floor",
+        "category": "student-services",
+        "keywords": [
+          "Lactation",
+          "GAD",
+          "Alvarado Hall"
+        ]
       }
     ]
   },
@@ -217,7 +743,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "id": "college-of-law",
     "name": "Marcelo H. del Pilar Hall",
     "shortLabel": "Marcelo H. del Pilar Hall",
-    "floors": 2,
+    "floors": 3,
     "svgPath": "M293.9,499.7 L320.6,475.6 L403.6,567.8 L376.8,591.9 L346.1,557.7 L342.3,561.0 L327.6,544.7 L331.3,541.3 Z",
     "center": {
       "x": 348.7,
@@ -234,6 +760,46 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "College of Law",
           "Law",
           "Juris Doctor",
+          "Marcelo H. del Pilar Hall"
+        ]
+      },
+      {
+        "id": "pacesetter-office",
+        "name": "Pacesetter Office",
+        "floor": "3rd Floor",
+        "category": "student-services",
+        "keywords": [
+          "The Pacesetter",
+          "Student Publication",
+          "Newspaper",
+          "COL",
+          "Marcelo H. del Pilar Hall"
+        ],
+        "articleSlug": "bulsu-student-publication-guide"
+      },
+      {
+        "id": "law-202",
+        "name": "LAW 202",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "LAW202",
+          "Classroom",
+          "COL",
+          "College of Law",
+          "Marcelo H. del Pilar Hall"
+        ]
+      },
+      {
+        "id": "law-301",
+        "name": "LAW 301",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "LAW301",
+          "Classroom",
+          "COL",
+          "College of Law",
           "Marcelo H. del Pilar Hall"
         ]
       }
@@ -272,6 +838,17 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "LHS",
           "Laboratory High School",
           "High School",
+          "Carpio Hall"
+        ]
+      },
+      {
+        "id": "ch-210",
+        "name": "CH 210",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "CH210",
+          "Classroom",
           "Carpio Hall"
         ]
       }
@@ -314,7 +891,19 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 298.4
     },
     "summary": "BulSU University Hostel on Main Campus.",
-    "locations": []
+    "locations": [
+      {
+        "id": "hostel-function-hall",
+        "name": "Hostel Function Hall",
+        "category": "sports-events",
+        "keywords": [
+          "Function Hall",
+          "Hostel",
+          "Events",
+          "BulSU Hostel"
+        ]
+      }
+    ]
   },
   {
     "id": "e-library",
@@ -327,7 +916,108 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 349.1
     },
     "summary": "Seven-storey University Library building.",
-    "locations": []
+    "locations": [
+      {
+        "id": "admissions-office",
+        "name": "University Admissions Office",
+        "floor": "2nd Floor",
+        "category": "administration",
+        "keywords": [
+          "Admissions",
+          "Freshmen",
+          "Enrollment",
+          "Application",
+          "E-Library"
+        ],
+        "articleSlug": "how-to-apply-to-bulsu"
+      },
+      {
+        "id": "elib-lactation-room",
+        "name": "Lactation Room",
+        "floor": "Ground Floor",
+        "category": "student-services",
+        "keywords": [
+          "Lactation",
+          "GAD",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-teleconferencing-room",
+        "name": "Teleconferencing Room",
+        "floor": "5th Floor",
+        "category": "library",
+        "keywords": [
+          "Teleconference Room",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-multipurpose-hall-1",
+        "name": "Multipurpose Hall 1",
+        "category": "library",
+        "keywords": [
+          "Multipurpose Hall",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-multipurpose-hall-2",
+        "name": "Multipurpose Hall 2",
+        "category": "library",
+        "keywords": [
+          "Multipurpose Hall",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-smart-learning-1",
+        "name": "Smart Learning Room 1",
+        "category": "library",
+        "keywords": [
+          "Smart Learning",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-smart-learning-2",
+        "name": "Smart Learning Room 2",
+        "category": "library",
+        "keywords": [
+          "Smart Learning",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-amphitheater",
+        "name": "Amphitheater",
+        "category": "library",
+        "keywords": [
+          "Amphitheater",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-book-gallery",
+        "name": "Book Gallery & Exhibit",
+        "category": "library",
+        "keywords": [
+          "Book Gallery",
+          "Exhibit",
+          "E-Library"
+        ]
+      },
+      {
+        "id": "elib-cafeteria",
+        "name": "Library Cafeteria",
+        "category": "food-housing",
+        "keywords": [
+          "Cafeteria",
+          "Food",
+          "E-Library"
+        ]
+      }
+    ]
   },
   {
     "id": "flores-hall",
@@ -375,6 +1065,17 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "First Aid"
         ],
         "articleSlug": "bulsu-medical-and-health-services-guide"
+      },
+      {
+        "id": "flores-lactation-room",
+        "name": "Lactation Room",
+        "floor": "Ground Floor",
+        "category": "student-services",
+        "keywords": [
+          "Lactation",
+          "GAD",
+          "Flores Hall"
+        ]
       }
     ]
   },
@@ -401,6 +1102,18 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Social Sciences",
           "Philosophy"
         ]
+      },
+      {
+        "id": "procurement-office",
+        "name": "Procurement Office",
+        "category": "administration",
+        "keywords": [
+          "Procurement",
+          "BAC",
+          "Mendoza Hall",
+          "APP",
+          "CSSP"
+        ]
       }
     ]
   },
@@ -415,7 +1128,69 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 433.5
     },
     "summary": "Multi-purpose university auditorium on Main Campus.",
-    "locations": []
+    "locations": [
+      {
+        "id": "valencia-registrar",
+        "name": "University Registrar Office (Enrollment Station)",
+        "category": "administration",
+        "keywords": [
+          "Registrar",
+          "Enrollment",
+          "Valencia Hall"
+        ],
+        "articleSlug": "how-to-request-transcript-and-certificates"
+      },
+      {
+        "id": "valencia-health-services",
+        "name": "University Health Services (Enrollment Station)",
+        "category": "student-services",
+        "keywords": [
+          "Health Services",
+          "Medical",
+          "Clinic",
+          "Enrollment",
+          "Valencia Hall"
+        ],
+        "articleSlug": "bulsu-medical-and-health-services-guide"
+      },
+      {
+        "id": "sg-office",
+        "name": "Student Government Office",
+        "floor": "In front of Valencia Hall",
+        "category": "student-services",
+        "keywords": [
+          "SG",
+          "BulSU SG",
+          "Student Government",
+          "SSC",
+          "Supreme Student Council",
+          "Valencia Hall"
+        ]
+      },
+      {
+        "id": "cser-lsc-office",
+        "name": "CSER LSC Office",
+        "floor": "Beside Valencia Hall",
+        "category": "student-services",
+        "keywords": [
+          "CSER LSC",
+          "CSER",
+          "Local Student Council",
+          "Valencia Hall"
+        ]
+      },
+      {
+        "id": "valencia-lactation-room",
+        "name": "Lactation Room",
+        "floor": "Back",
+        "category": "student-services",
+        "keywords": [
+          "Lactation",
+          "GAD",
+          "Valencia Hall"
+        ]
+      }
+    ]
   },
   {
     "id": "pimentel-hall",
@@ -430,18 +1205,16 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "summary": "Academic Building housing the College of Information and Communications Technology (CICT) and the College of Nursing (CON).",
     "locations": [
       {
-        "id": "cict-dean",
+        "id": "cict",
         "name": "College of Information & Communications Technology (CICT)",
-        "floor": "3rd Floor (Dean's Office)",
         "category": "academic",
         "keywords": [
+          "CICT",
           "IT",
           "BSIT",
           "BLIS",
-          "Computer",
-          "CICT Dean"
-        ],
-        "notes": "VoIP (044) 919-7800 local 1102 | officeofthedean.CICT@bulsu.edu.ph"
+          "Computer"
+        ]
       },
       {
         "id": "con",
@@ -451,6 +1224,371 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "CON",
           "Nursing",
           "BSN",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "cict-deans-office",
+        "name": "CICT Dean's Office",
+        "floor": "3rd Floor",
+        "category": "administration",
+        "keywords": [
+          "CICT",
+          "Dean",
+          "Dean's Office",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "cict-ojt-dept-heads",
+        "name": "OJT Office / Office of Department Heads",
+        "floor": "3rd Floor",
+        "category": "administration",
+        "keywords": [
+          "CICT",
+          "OJT",
+          "Department Heads",
+          "Program Chairs",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "cict-faculty-room",
+        "name": "CICT Faculty Room",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "CICT",
+          "Faculty",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pdo-office",
+        "name": "Planning and Development Office (PDO)",
+        "floor": "2nd Floor",
+        "category": "administration",
+        "keywords": [
+          "PDO",
+          "Planning and Development",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-a1",
+        "name": "A1",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "A1",
+          "CICT",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-a2",
+        "name": "A2",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "A2",
+          "CICT",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-a3",
+        "name": "A3",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "A3",
+          "CICT",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-a4",
+        "name": "A4",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "A4",
+          "CICT",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-it-13",
+        "name": "IT 13",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "IT13",
+          "CICT",
+          "Lab",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-it-14",
+        "name": "IT 14",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "IT14",
+          "CICT",
+          "Lab",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-parking-lot",
+        "name": "Pimentel Hall Parking Lot",
+        "floor": "1st Floor",
+        "category": "student-services",
+        "keywords": [
+          "Parking",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-it-1",
+        "name": "IT 1",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "IT1",
+          "CICT",
+          "Lab",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-it-2",
+        "name": "IT 2",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "IT2",
+          "CICT",
+          "Lab",
+          "Classroom",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-sdl-1",
+        "name": "SDL 1",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "SDL1",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-sdl-2",
+        "name": "SDL 2",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "SDL2",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-sdl-3",
+        "name": "SDL 3",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "SDL3",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-sdl-4",
+        "name": "SDL 4",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "SDL4",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-prog-lab-1",
+        "name": "Prog Lab 1",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "PROG LAB 1",
+          "Programming Lab 1",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-prog-lab-2",
+        "name": "Prog Lab 2",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "PROG LAB 2",
+          "Programming Lab 2",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-prog-lab-3",
+        "name": "Prog Lab 3",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "PROG LAB 3",
+          "Programming Lab 3",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-cict-avr",
+        "name": "CICT AVR",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "CICT AVR",
+          "Audio Visual Room",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-conference-room",
+        "name": "Conference Room",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "Conference Room",
+          "CICT",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-ideation-room",
+        "name": "Ideation Room",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "Ideation Room",
+          "CICT",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-net-lab-1",
+        "name": "Networking Lab 1",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NET LAB 1",
+          "Networking Lab",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-net-lab-2",
+        "name": "Networking Lab 2",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NET LAB 2",
+          "Networking Lab",
+          "CICT",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-server-room",
+        "name": "Server Room",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "Server Room",
+          "CICT",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-ct-6",
+        "name": "CT 6",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "CT6",
+          "CICT",
+          "Classroom",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-ct-7",
+        "name": "CT 7",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "CT7",
+          "CICT",
+          "Classroom",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-ct-8",
+        "name": "CT 8",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "CT8",
+          "CICT",
+          "Classroom",
+          "Lab",
+          "Pimentel Hall"
+        ]
+      },
+      {
+        "id": "pimentel-acad-1",
+        "name": "ACAD 1",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "ACAD1",
+          "CICT",
+          "Classroom",
           "Pimentel Hall"
         ]
       }
@@ -467,7 +1605,114 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 725.6
     },
     "summary": "National Service Training Program (NSTP) Building.",
-    "locations": []
+    "locations": [
+      {
+        "id": "nstp-faculty-lounge",
+        "name": "Faculty Lounge",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "Faculty Lounge",
+          "GAD",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-lsc-student-center",
+        "name": "LSC / Student Center Office",
+        "category": "student-services",
+        "keywords": [
+          "LSC",
+          "CICT LSC",
+          "Student Center",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-acad-2",
+        "name": "ACAD 2",
+        "category": "academic",
+        "keywords": [
+          "ACAD2",
+          "CICT ACAD 2",
+          "CICT",
+          "Classroom",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-acad-3",
+        "name": "ACAD 3",
+        "category": "academic",
+        "keywords": [
+          "ACAD3",
+          "CICT ACAD 3",
+          "CICT",
+          "Classroom",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-acad-4",
+        "name": "ACAD 4",
+        "category": "academic",
+        "keywords": [
+          "ACAD4",
+          "CICT ACAD 4",
+          "CICT",
+          "Classroom",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-acad-5",
+        "name": "ACAD 5",
+        "category": "academic",
+        "keywords": [
+          "ACAD5",
+          "CICT ACAD 5",
+          "CICT",
+          "Classroom",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-acad-6",
+        "name": "ACAD 6",
+        "category": "academic",
+        "keywords": [
+          "ACAD6",
+          "CICT ACAD 6",
+          "CICT",
+          "Classroom",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-acad-7",
+        "name": "ACAD 7",
+        "category": "academic",
+        "keywords": [
+          "ACAD7",
+          "CICT ACAD 7",
+          "CICT",
+          "Classroom",
+          "NSTP Building"
+        ]
+      },
+      {
+        "id": "nstp-acad-8",
+        "name": "ACAD 8",
+        "category": "academic",
+        "keywords": [
+          "ACAD8",
+          "CICT ACAD 8",
+          "CICT",
+          "Classroom",
+          "NSTP Building"
+        ]
+      }
+    ]
   },
   {
     "id": "con-canteen",
@@ -517,7 +1762,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "svgPath": "M777.6,376.4 L793.9,361.7 L846.1,419.6 L829.8,434.3 Z",
     "center": {
       "x": 811.8,
-      "y": 398.0
+      "y": 398
     },
     "summary": "Main University Canteen building.",
     "locations": []
@@ -530,7 +1775,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "svgPath": "M808.8,348.3 L825.1,333.5 L906.5,423.8 L890.1,438.5 Z",
     "center": {
       "x": 857.6,
-      "y": 386.0
+      "y": 386
     },
     "summary": "Academic building across from the Main Canteen near Gate 3 housing the College of Criminal Justice Education (CCJE).",
     "locations": [
@@ -564,7 +1809,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "id": "cbea-building",
     "name": "CBEA Building",
     "shortLabel": "CBEA Building",
-    "floors": null,
+    "floors": 4,
     "svgPath": "M429.6,450.2 L487.5,398.0 L506.3,418.8 L448.3,471.0 Z",
     "center": {
       "x": 467.9,
@@ -582,6 +1827,126 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Business Administration",
           "CBEA",
           "CBA"
+        ]
+      },
+      {
+        "id": "cba-103",
+        "name": "CBA 103",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA103",
+          "CBEA 103",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-201",
+        "name": "CBA 201",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA201",
+          "CBEA 201",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-202",
+        "name": "CBA 202",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA202",
+          "CBEA 202",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-203",
+        "name": "CBA 203",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA203",
+          "CBEA 203",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-301",
+        "name": "CBA 301",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA301",
+          "CBEA 301",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-302",
+        "name": "CBA 302",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA302",
+          "CBEA 302",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-303",
+        "name": "CBA 303",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA303",
+          "CBEA 303",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-401",
+        "name": "CBA 401",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA401",
+          "CBEA 401",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-402",
+        "name": "CBA 402",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA402",
+          "CBEA 402",
+          "Classroom",
+          "CBEA Building"
+        ]
+      },
+      {
+        "id": "cba-403",
+        "name": "CBA 403",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "CBA403",
+          "CBEA 403",
+          "Classroom",
+          "CBEA Building"
         ]
       }
     ]
@@ -611,6 +1976,240 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "CpE",
           "IE"
         ]
+      },
+      {
+        "id": "nh-107",
+        "name": "NH 107",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "NH107",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-201-avr",
+        "name": "NH 201 AVR",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "NH201",
+          "NH 201",
+          "AVR",
+          "Audio Visual Room",
+          "COE",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-307",
+        "name": "NH 307",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "NH307",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-308",
+        "name": "NH 308",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "NH308",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-309",
+        "name": "NH 309",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "NH309",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-402",
+        "name": "NH 402",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH402",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-403",
+        "name": "NH 403",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH403",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-404",
+        "name": "NH 404",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH404",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-405",
+        "name": "NH 405",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH405",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-406",
+        "name": "NH 406",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH406",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-407",
+        "name": "NH 407",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH407",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-408",
+        "name": "NH 408",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH408",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-409",
+        "name": "NH 409",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH409",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-501",
+        "name": "NH 501",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH501",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-502",
+        "name": "NH 502",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH502",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-503",
+        "name": "NH 503",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH503",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-504",
+        "name": "NH 504",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH504",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-505",
+        "name": "NH 505",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH505",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-507",
+        "name": "NH 507",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH507",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-508",
+        "name": "NH 508",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH508",
+          "Classroom",
+          "Natividad Hall"
+        ]
+      },
+      {
+        "id": "nh-509",
+        "name": "NH 509",
+        "floor": "5th Floor",
+        "category": "academic",
+        "keywords": [
+          "NH509",
+          "Classroom",
+          "Natividad Hall"
+        ]
       }
     ]
   },
@@ -618,13 +2217,13 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "id": "roxas-hall",
     "name": "Roxas Hall",
     "shortLabel": "Roxas Hall",
-    "floors": 3,
+    "floors": 4,
     "svgPath": "M425.4,583.1 L471.5,541.6 L533.1,610.0 L487.0,651.5 Z M457.9,586.2 L471.2,574.2 L500.7,606.9 L487.3,618.9 Z",
     "center": {
       "x": 479.3,
       "y": 596.5
     },
-    "summary": "Three-storey academic building near Gate 2 housing the College of Professional Teacher Education (CPTEd).",
+    "summary": "Four-storey academic building near Gate 2 housing the College of Professional Teacher Education (CPTEd), PPESO Office, and classrooms.",
     "locations": [
       {
         "id": "cpted",
@@ -636,6 +2235,209 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "COED",
           "Education",
           "Teacher Education",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "ppeso-office",
+        "name": "PPESO Office",
+        "floor": "Ground Floor",
+        "category": "student-services",
+        "keywords": [
+          "PPESO",
+          "Placement",
+          "ISA",
+          "Student Assistantship",
+          "Rojas Hall",
+          "Roxas Hall"
+        ],
+        "articleSlug": "how-to-apply-for-student-assistantships"
+      },
+      {
+        "id": "roxas-lactation-room",
+        "name": "Lactation Room",
+        "floor": "Ground Floor",
+        "category": "student-services",
+        "keywords": [
+          "Lactation",
+          "GAD",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "roxas-child-minding",
+        "name": "Child-Minding Center",
+        "floor": "Ground Floor",
+        "category": "student-services",
+        "keywords": [
+          "Child-Minding",
+          "GAD",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-101",
+        "name": "RH 101",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "RH101",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-102",
+        "name": "RH 102",
+        "floor": "1st Floor",
+        "category": "academic",
+        "keywords": [
+          "RH102",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-202",
+        "name": "RH 202",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "RH202",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-203",
+        "name": "RH 203",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "RH203",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-204",
+        "name": "RH 204",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "RH204",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-207",
+        "name": "RH 207",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "RH207",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-209",
+        "name": "RH 209",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "RH209",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-303",
+        "name": "RH 303",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "RH303",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-304",
+        "name": "RH 304",
+        "floor": "3rd Floor",
+        "category": "academic",
+        "keywords": [
+          "RH304",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-402",
+        "name": "RH 402",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "RH402",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-404",
+        "name": "RH 404",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "RH404",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-405",
+        "name": "RH 405",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "RH405",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-406",
+        "name": "RH 406",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "RH406",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-406a",
+        "name": "RH 406A",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "RH406A",
+          "RH 406 A",
+          "Classroom",
+          "Roxas Hall"
+        ]
+      },
+      {
+        "id": "rh-407",
+        "name": "RH 407",
+        "floor": "4th Floor",
+        "category": "academic",
+        "keywords": [
+          "RH407",
+          "Classroom",
           "Roxas Hall"
         ]
       }

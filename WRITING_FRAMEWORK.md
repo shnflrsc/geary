@@ -6,6 +6,8 @@
 
 **Terminology rule:** Always refer to Geary's published entries as **articles** (never "guides") in UI copy, metadata, labels, and site prose.
 
+**Last-updated rule:** Any and all updates to an article (content, links, sources, formatting, or frontmatter) MUST update its `updatedDate` frontmatter field to the current date (`YYYY-MM-DD`).
+
 ## 1. Editorial Philosophy
 
 Geary prioritizes clarity, directness, and usefulness. Every article should get readers to the exact answer or action they need with minimal reading effort.
@@ -338,6 +340,7 @@ When genuinely relevant published Geary articles exist, list them briefly at the
 * [ ] External sources mentioned in the text (such as Facebook posts or portals) use descriptive inline links when verified URLs exist.
 * [ ] All hyperlinks have been checked.
 * [ ] Sources and References cite the actual official PDFs, webpages, or Facebook announcements consulted.
+* [ ] `updatedDate` frontmatter is updated to the current date (`YYYY-MM-DD`) whenever any part of the article is modified.
 * [ ] Related articles are linked only when genuinely relevant and published.
 
 ## 13. The Geary Editorial Standard

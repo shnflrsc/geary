@@ -140,6 +140,19 @@ const jsonLd = [
     table.setAttribute('tabindex', '0');
   }
 
+  for (const link of document.querySelectorAll<HTMLAnchorElement>(
+    '.geary-prose a[href^="http://"], .geary-prose a[href^="https://"]',
+  )) {
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    if (!link.querySelector('.sr-only')) {
+      const note = document.createElement('span');
+      note.className = 'sr-only';
+      note.textContent = ' (opens in new tab)';
+      link.appendChild(note);
+    }
+  }
+
   for (const heading of document.querySelectorAll('.geary-prose h2[id], .geary-prose h3[id]')) {
     const id = heading.getAttribute('id');
     const title = heading.textContent?.trim();

@@ -4,9 +4,7 @@ import {
   formatLocalDateKey,
   getArticlePreview,
   getArticleSlug,
-  getCategoryPreviewArticles,
   getDailyItemGroups,
-  getFeaturedArticles,
   getRelatedArticles,
   groupArticlesBySubcategory,
   pickDailyItems,
@@ -22,7 +20,6 @@ const MOCK_ARTICLES: ArticleLike[] = [
       category: 'documents',
       subcategory: 'Forms',
       updatedDate: new Date('2026-11-10'),
-      featured: false,
     },
   },
   {
@@ -33,7 +30,6 @@ const MOCK_ARTICLES: ArticleLike[] = [
       category: 'documents',
       subcategory: 'Forms',
       updatedDate: new Date('2026-11-12'),
-      featured: true,
     },
   },
   {
@@ -44,7 +40,6 @@ const MOCK_ARTICLES: ArticleLike[] = [
       category: 'documents',
       subcategory: 'Academic Records',
       updatedDate: new Date('2026-11-15'),
-      featured: false,
     },
   },
   {
@@ -55,7 +50,6 @@ const MOCK_ARTICLES: ArticleLike[] = [
       category: 'campus',
       subcategory: 'Navigation',
       updatedDate: new Date('2026-11-16'),
-      featured: true,
     },
   },
 ];
@@ -78,26 +72,10 @@ describe('Article taxonomy and grouping helpers (TC-UNIT-04)', () => {
     expect(groupArticlesBySubcategory([])).toEqual([]);
   });
 
-  test('resolves slugs, featured guides, previews, and sibling related guides', () => {
+  test('resolves slugs, previews, and sibling related articles', () => {
     expect(getArticleSlug({ id: 'freshman-enrollment-guide.md' })).toBe(
       'freshman-enrollment-guide',
     );
-
-    const featured = getFeaturedArticles(MOCK_ARTICLES);
-    expect(featured.map((a) => a.data.title)).toEqual([
-      'Campus Map',
-      'Alpha Form Guide',
-    ]);
-
-    const previews = getCategoryPreviewArticles(
-      MOCK_ARTICLES,
-      'documents',
-      2,
-    );
-    expect(previews.map((a) => a.data.title)).toEqual([
-      'Alpha Form Guide',
-      'Beta Academic Record',
-    ]);
 
     const related = getRelatedArticles(
       MOCK_ARTICLES,

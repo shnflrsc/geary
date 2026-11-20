@@ -14,7 +14,6 @@ export interface ArticleLike {
     category: CategorySlug;
     subcategory: string;
     updatedDate: Date;
-    featured: boolean;
     source?: string;
     sourceUrl?: string;
     sources?: readonly ArticleSource[];
@@ -130,36 +129,6 @@ export function groupArticlesBySubcategory<T extends ArticleLike>(
       subcategory,
       articles: [...items].sort((a, b) => a.data.title.localeCompare(b.data.title)),
     }));
-}
-
-/** Return featured articles sorted newest first, then alphabetically by title. */
-export function getFeaturedArticles<T extends ArticleLike>(
-  articles: readonly T[],
-): T[] {
-  return articles
-    .filter((entry) => entry.data.featured)
-    .sort((a, b) => {
-      const dateDiff = b.data.updatedDate.getTime() - a.data.updatedDate.getTime();
-      return dateDiff !== 0 ? dateDiff : a.data.title.localeCompare(b.data.title);
-    });
-}
-
-/** Return top preview articles for a Home category card (featured first, then newest). */
-export function getCategoryPreviewArticles<T extends ArticleLike>(
-  articles: readonly T[],
-  category: CategorySlug,
-  limit = 3,
-): T[] {
-  return articles
-    .filter((entry) => entry.data.category === category)
-    .sort((a, b) => {
-      if (a.data.featured !== b.data.featured) {
-        return a.data.featured ? -1 : 1;
-      }
-      const dateDiff = b.data.updatedDate.getTime() - a.data.updatedDate.getTime();
-      return dateDiff !== 0 ? dateDiff : a.data.title.localeCompare(b.data.title);
-    })
-    .slice(0, limit);
 }
 
 /** Return up to `limit` sibling articles in the same category, excluding the current slug. */

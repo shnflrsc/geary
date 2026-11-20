@@ -3,14 +3,11 @@ title: "BulSU Student Publication Guide"
 category: "organizations"
 subcategory: "Sports, Culture & Media"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "BulSU Student Publications Office - Pacesetter Editorial Board Application & Selection (Mar-Apr 2026)"
     url: "https://www.facebook.com/permalink.php?story_fbid=pfbid028j622rEojbDgvjJNr8eXxKe9yEYvw2R8yYzmMVpbTsHwLzetpbsRBF9Rxty6kA4zl&id=100076097386289"
   - label: "The Pacesetter - Editorial Board Calls & Roster A.Y. 2026-2027 (Apr-Jun 2026)"
     url: "https://www.facebook.com/BulSUPacesetter/posts/pfbid02zWpCdGLz6NESDEssitzZwqB7H2uEhdmtaekGoW6GtqfgpjFQxXmo5F8eFwiR3JMtl"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---
 
 Campus journalism at BulSU operates under the **Office of Student Publications and Information (OSPI)** in line with the **Campus Journalism Act of 1991 (Republic Act 7079)**. Whether you want to join BulSU's flagship paper or a local college publication, editorial board slots are filled through competitive written exams and panel interviews.

@@ -3,7 +3,6 @@ title: "Understanding the BulSU Grading System"
 category: "academics"
 subcategory: "Grades & Academic Standing"
 updatedDate: 2026-11-19
-featured: true
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"

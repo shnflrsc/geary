@@ -3,7 +3,6 @@ title: "Complete Guide to Scholarships at BulSU"
 category: "scholarships"
 subcategory: "Scholarships & Grants"
 updatedDate: 2026-11-19
-featured: true
 sources:
   - label: "BulSU OSFAS - Relocation of Scholarships Office to Natividad Hall (Sep 21, 2026)"
     url: "https://www.facebook.com/BulSUStudentFinancialAssistanceandScholarships/posts/pfbid02sQh8mrdJU7QYSSYaWTguh65R8uzGdHZjSeUKWXb81PCBjvTpyR6zuGMAJsf2BAZil"

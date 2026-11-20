@@ -113,7 +113,6 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 | `category` | `enum` matching `SW-INT-01` `slug` values | Yes | — |
 | `subcategory` | `string` (`min >= 1`) | Yes | — |
 | `updatedDate` | Coercible ISO date (`Date`) | Yes | — |
-| `featured` | `boolean` | No | `false` |
 | `source` | `string` (`min >= 1`) | No | `—` |
 | `sourceUrl` | Valid URL `string` | No | `—` |
 | `sources` | `Array<{ label: string; url?: string }>` (`min >= 1`) | No | `—` |
@@ -148,7 +147,7 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 
 #### `SRS-FUNC-CNT-02`: Strict Zod Frontmatter Validation
 - **Inputs:** Raw YAML frontmatter dictionary per Markdown file.
-- **Processing Logic:** Validate all fields against `SW-INT-02` (`title`, `category` enum, `subcategory`, coerced `updatedDate`, boolean `featured`).
+- **Processing Logic:** Validate all fields against `SW-INT-02` (`title`, `category` enum, `subcategory`, coerced `updatedDate`).
 - **Outputs:** Strongly typed metadata object attached to each collection entry.
 - **Error Handling:** Missing fields, invalid dates, or unrecognized `category` values abort `astro build` / `astro check` with descriptive Zod diagnostics.
 
@@ -169,12 +168,11 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 ### 4.2 Static Route & Page Generation Subsystem
 
 #### `SRS-FUNC-RND-01`: Home Page Directory & Featured Aggregation (`/`)
-- **Inputs:** Validated article collection and ordered `SW-INT-01` category registry.
+- **Inputs:** Validated article collection.
 - **Processing Logic:**
-  1. Filter articles where `featured === true` for the **Featured / Essential Guides** section.
-  2. For each of the 5 categories, filter matching articles, compute `totalCount`, and select up to 3 preview links (prioritizing featured items, then most recent `updatedDate`).
-- **Outputs:** Static `index.html` containing hero search island, featured guides, and 5 category cards.
-- **Error Handling:** If zero articles are marked `featured: true`, omit the Featured section cleanly; if a category has `0` articles, display `0 guides` with no broken preview links.
+  1. Sort all published articles deterministically by title and pass the pool into `ExploreSpotlight` (`client:load`), which deterministically shuffles and partitions 3 non-overlapping groups of 6 articles seeded by local calendar date (`YYYY-MM-DD`).
+- **Outputs:** Static `index.html` containing hero search island and daily rotating 3×6 Featured section.
+- **Error Handling:** If the article collection is empty, omit the Featured section cleanly.
 
 #### `SRS-FUNC-RND-02`: Category Static Path Generation (`/categories/[slug]`)
 - **Inputs:** Canonical 5-category registry (`SW-INT-01`).

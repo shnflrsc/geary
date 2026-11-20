@@ -3,10 +3,7 @@ title: "How to File a Student Complaint"
 category: "policies"
 subcategory: "Rights, Discipline & Grievances"
 updatedDate: 2026-11-19
-featured: false
 sources:
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
   - label: "BulSU SG Academic Affairs Committee - TAMBAD 2026 Grade Consultation Grievance (Nov 11, 2026)"
     url: "https://www.facebook.com/permalink.php?story_fbid=pfbid02khKjQ4YVz8jJZLNsrwj5SidqMsURn1YX7Y8Ci6k9rAouyXNiSzvqRwXpwggb7T3xl&id=61573139957540"
   - label: "BulSU SG Office of the Vice President - BulSU Student Grievance Desk (Sep 9, 2026)"

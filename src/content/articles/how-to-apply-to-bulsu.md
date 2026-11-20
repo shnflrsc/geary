@@ -3,7 +3,6 @@ title: "How to Apply to BulSU"
 category: "enrollment"
 subcategory: "Admission & Enrollment"
 updatedDate: 2026-11-19
-featured: true
 sources:
   - label: "BulSU Freshman Undergraduate Admissions Policy (Updated Guidelines BulSU Freshmen 2027-2028, Student Policy Development Office / UAO - PDF)"
     url: "https://drive.google.com/file/d/16mFYH2WBi2gbmhCntvnljXbUiRUiwJZr/view"

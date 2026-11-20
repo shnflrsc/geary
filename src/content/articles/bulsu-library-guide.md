@@ -3,7 +3,6 @@ title: "BulSU Library Guide"
 category: "campus"
 subcategory: "Campus Facilities"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Office of the University Library"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
@@ -11,8 +10,6 @@ sources:
     url: "https://www.facebook.com/BulSUeLibrary/posts/pfbid0227Xz6Z1oi4wj8wy5io3kEcYAiu1gG2YdokLmWKmERiZACskCS9MjynKg73LAfUhXl"
   - label: "BulSU e-Library - Automated Library Transaction System Training (Oct 6, 2026)"
     url: "https://www.facebook.com/BulSUeLibrary/posts/pfbid02ons4RYQghqDZtGNeYLz5awmwsYPksQxP2nz7WxTX9NQKN3Zw1MWjWgbfJwPzUsqFl"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---
 
 The BulSU e-Library on the Main Campus gives registered students free study spaces, iPads, computer stations, print and digital collections, online research help, and official Turnitin plagiarism checking.

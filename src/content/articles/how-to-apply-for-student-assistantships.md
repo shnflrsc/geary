@@ -3,7 +3,6 @@ title: "How to Apply for Student Assistantships"
 category: "scholarships"
 subcategory: "Work & Financial Support"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "BulSU PPESO - Institutional Student Assistant (ISA) Program A.Y. 2026-2027 (Jul 2, 2026)"
     url: "https://www.facebook.com/bulsu.ppeso/posts/pfbid0jbDVz9DTGPQJinuN1hzsV4BVHQ4KnRGTsyhcxaGH7bRdtSqNmQDzqbw52dWvS7nJl"
@@ -11,8 +10,6 @@ sources:
     url: "https://www.facebook.com/bulsu.ppeso/posts/pfbid0378ND8KvtHBFA4ZSkWFDFFf6ZCb4ScNdm4groTodTWsLkMpkij83WFm5NKFs8XSVul"
   - label: "BulSU PPESO - Institutional Student Assistants Orientation / Work Ethics (Aug 11, 2026)"
     url: "https://www.facebook.com/bulsu.ppeso/posts/pfbid02vtUanAN9tfNWnjFgYsU1ohLLWNreUZVxeUTBcs52aFYzEHU9kTGkCNHeqdi4KUXil"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---
 
 If you want paid on-campus work that fits around your classes, apply for BulSU's **Institutional Student Assistant (ISA)** program. Applications are managed by the **BulSU Placement and Public Employment Service Office (PPESO)** at the **Placement Office, Ground Floor, Roxas Hall**.

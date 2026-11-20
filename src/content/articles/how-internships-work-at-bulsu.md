@@ -3,10 +3,7 @@ title: "How Internships and Job Placement Work at BulSU"
 category: "academics"
 subcategory: "Internships & Graduation"
 updatedDate: 2026-11-19
-featured: false
 sources:
-  - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
   - label: "BulSU CarDSI - General Internship Orientation 2026 (Nov 10, 2026)"
     url: "https://www.facebook.com/cardsis/posts/pfbid0yh6KYrz3BdMNmbDfAUAxFFpfspFZkQfMddt2XV5gFmfSwwyVruoWtqR8foausVBul"
   - label: "BulSU College of Industrial Technology - CIT SIP OJT Orientation & MOA Guidelines (Sep 11 & Sep 22, 2026)"

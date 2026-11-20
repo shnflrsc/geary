@@ -3,12 +3,9 @@ title: "How to Request Your TOR and Certificates"
 category: "documents"
 subcategory: "Academic Records & Clearances"
 updatedDate: 2026-11-19
-featured: true
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Office of the University Registrar & OSAS"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
   - label: "BulSU Office of the University Registrar - Admission Documents & SF-10 Advisory (Sep 22, 2025)"
     url: "https://www.facebook.com/permalink.php?story_fbid=pfbid02isc7fhmA8JZAhKJLhiVvExnDTzsAiiJXobLRV4CsGnBSn9N5Rusv4xWZ3cESUaxal&id=100084548907241"
   - label: "BulSU Joint Memorandum No. 14, Series of 2025 - Registrar Processing Turnarounds (Jul 22, 2025)"

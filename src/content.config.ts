@@ -13,7 +13,6 @@ export const articleSchema = z.object({
   category: z.enum(CATEGORY_SLUGS),
   subcategory: z.string().min(1),
   updatedDate: z.coerce.date(),
-  featured: z.boolean().default(false),
   source: z.string().min(1).optional(),
   sourceUrl: z.url().optional(),
   sources: z.array(articleSourceSchema).min(1).optional(),

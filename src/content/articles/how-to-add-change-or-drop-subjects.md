@@ -3,10 +3,7 @@ title: "How to Add, Change, or Drop Subjects"
 category: "academics"
 subcategory: "Enrollment & Load Changes"
 updatedDate: 2026-11-19
-featured: false
 sources:
-  - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
   - label: "BulSU ICTO - Regular and Irregular Student Enrollment Guides in ALAB SMS (Nov 14, 2026)"
     url: "https://www.facebook.com/bulsu.icto/posts/pfbid0EbpbEz5CeD5FbZgMWbxnE42PfWLDo8B1xPJewtTGzeCu9ErTecwdYEQKd1px7Shnl"
   - label: "BulSU ICTO - Add/Drop/Change Tutorial in ALAB SMS (Nov 16, 2026)"

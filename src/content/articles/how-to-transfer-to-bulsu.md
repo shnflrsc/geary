@@ -3,7 +3,6 @@ title: "How to Transfer to BulSU"
 category: "enrollment"
 subcategory: "Shifting & Transferring"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"

@@ -3,7 +3,6 @@ title: "BulSU Canteen, Dormitories, and Safety Guide"
 category: "campus"
 subcategory: "Health, Safety & Housing"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "BulSU Office of Safety, Security, and Disaster Risk Management - Nationwide Simultaneous Earthquake Drill Advisories (Sep-Nov 2026)"
     url: "https://www.facebook.com/ossdrrm/posts/pfbid0vsG5NgwAtSH4dmd2o47q8tzUjVoh3uronxUriENfmEqEBTKNsL7ayPeqXihJDqL4l"

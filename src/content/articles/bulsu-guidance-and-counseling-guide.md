@@ -3,14 +3,11 @@ title: "BulSU Guidance and Counseling Services Guide"
 category: "campus"
 subcategory: "Student Support & Welfare"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "BulSU Guidance and Counseling Services Center Main Campus - Six Core Services & Contact Guide (Aug 12, 2025)"
     url: "https://www.facebook.com/BulSUGCSCMain/videos/4208534679418109/"
   - label: "BulSU Guidance and Counseling Services Center Main Campus - Counseling Appointments & Crisis Hotlines (Sep 3, 2026)"
     url: "https://www.facebook.com/BulSUGCSCMain/posts/pfbid02NK3Ay6ejvRRqUycxGNc3HVE8rBkZHSxHenbbmATeDRWWumkoeApGCjn3U58cPK6wl"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---
 
 College brings academic, personal, and family pressure, and BulSU's **Guidance and Counseling Services Center (GCSC)** provides free, confidential support so you do not have to work through it alone.

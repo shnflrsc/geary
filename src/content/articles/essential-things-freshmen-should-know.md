@@ -3,10 +3,7 @@ title: "What Every BulSU Freshman Should Know"
 category: "enrollment"
 subcategory: "Orientation & First Year"
 updatedDate: 2026-11-19
-featured: true
 sources:
-  - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
   - label: "BulSU Student Affairs - Main Campus - HANDOG Freshmen Students Orientation Schedule (Jun 22-26, 2026)"
     url: "https://www.facebook.com/BulsuOSAMain/posts/pfbid0ho1pZZowDUmk5wuDDbQjTM2v2Pg4a9SbCvVLPQHjRkQTM2H3eXcjX6m4DcXDmEtl"
   - label: "Bulacan State University - Freshmen Orientation Recap (Jun 2026)"

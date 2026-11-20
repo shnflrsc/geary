@@ -234,13 +234,13 @@ Because many BulSU offices and colleges publish their latest schedules, memos, a
 
 Prioritize sources by authority and recency:
 
-1. Latest official announcements on verified Facebook pages (University Admissions Office, Office of the Registrar, colleges, student councils, and official university pages), including updates retrieved via Meta AI from those posts.
-2. Official PDF documents (admission guidelines, student handbooks, memos, downloadable forms, and policy releases).
-3. Official BulSU websites and portals.
+1. Recent official BulSU PDFs and Board of Regents (BOR) resolutions (e.g., Citizen's Charter 2026, updated admission guidelines, official policy memos).
+2. Latest official announcements on verified Facebook pages (University Admissions Office, Office of the University Registrar, OSAS, colleges, BulSU SG, and LSCs), including updates verified from those posts.
+3. Official BulSU websites and portals (`bulsu.edu.ph`).
 4. Direct statements from authorized university personnel.
-5. Other credible sources, only when official sources are unavailable.
+5. **2016 Undergraduate Student Manual (BOR Res. No. 85, S. 2016) — fallback only:** Use only for standing statutory rules (e.g., grading scale, residency/graduation rules, student rights, disciplinary classifications) that have not been superseded by (1)–(3). Do not rely on it for current procedures, fees, deadlines, or schedules, and omit it from an article's `sources` when newer official sources already cover the topic completely.
 
-When an official Facebook post updates or supersedes an older PDF or website page, treat the newer official announcement as current and note the effective date or academic year.
+When a newer official PDF or Facebook announcement updates or supersedes an older document (especially the 2016 Student Manual), treat the newer official announcement as current and note the effective date or academic year.
 
 ### 7.2 Verification
 

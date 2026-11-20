@@ -3,7 +3,6 @@ title: "BulSU Medical Services and Student Insurance Guide"
 category: "campus"
 subcategory: "Health, Safety & Housing"
 updatedDate: 2026-11-19
-featured: true
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Health Services & Office of Student Welfare"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
@@ -13,8 +12,6 @@ sources:
     url: "https://www.facebook.com/BulSUAdmissionsOffice/posts/pfbid0DjUHRCk6GfUFZr8QQRFaXS86r65MwRQjMfzJxumCJVbnAYK9rTUtyfkYRVS3QQDYl"
   - label: "BulSU Office of the Student Welfare Main Campus - Enhanced Student Insurance Guide (Jun-Jul 2026)"
     url: "https://www.facebook.com/reel/879433951291298/"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---
 
 Enrolled BulSU students receive two built-in health protections: free walk-in care and medical certificates at **University Health Services**, and 24/7 **Enhanced Student Accident Insurance** processed through the **Office of Student Welfare (OSW)**.

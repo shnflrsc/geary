@@ -3,7 +3,6 @@ title: "Understanding University Attendance Policies"
 category: "policies"
 subcategory: "Academic & Attendance Rules"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"

@@ -3,7 +3,6 @@ title: "What Happens When You Fail a Subject?"
 category: "academics"
 subcategory: "Grades & Academic Standing"
 updatedDate: 2026-11-19
-featured: false
 source: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
 sourceUrl: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---

@@ -89,7 +89,7 @@ flowchart TB
 Adding or editing one `.md` file in `src/content/articles/` updates four build outputs simultaneously:
 1. **Article View (`/articles/[slug]`):** Renders compiled Markdown prose, extracts `h2`/`h3` headings for TOC navigation, builds breadcrumbs, and resolves up to 3 sibling guides in the same category.
 2. **Category Directory (`/categories/[slug]`):** Updates guide counts and places the article card under its `subcategory` heading.
-3. **Home Directory (`/`):** Refreshes the matching Category card's count/preview links and adds the article to **Featured / Essential Guides** when `featured: true`.
+3. **Home Directory (`/`):** Includes the article in the daily randomized 3×6 **Featured** pool.
 4. **Search Payload (`/search-index.json`):** Serializes the article's `slug`, `title`, `preview` (derived from Markdown body), `category`, `categoryLabel`, `subcategory`, and `headings` array.
 
 ---
@@ -227,7 +227,6 @@ export const articleSchema = z.object({
   category: z.enum(CATEGORY_SLUGS),
   subcategory: z.string().min(1),
   updatedDate: z.coerce.date(),
-  featured: z.boolean().default(false),
   source: z.string().min(1).optional(),
   sourceUrl: z.url().optional(),
 });

@@ -46,7 +46,7 @@ Every product requirement in this PRD carries a strict release priority:
 
 | Req ID | Priority | Requirement Statement |
 | :--- | :--- | :--- |
-| **REQ-ART-01** | **P0** | The system shall publish student guides authored in Markdown and validate required metadata fields—`title`, `category`, `subcategory`, `updatedDate`, and `featured`—during site compilation. |
+| **REQ-ART-01** | **P0** | The system shall publish student articles authored in Markdown and validate required metadata fields—`title`, `category`, `subcategory`, and `updatedDate`—during site compilation. |
 | **REQ-ART-02** | **P0** | The system shall render standard and tabular Markdown elements—including headings, numbered procedures, bulleted lists, tables, callout blockquotes, and links—into clear, readable HTML pages. |
 | **REQ-ART-03** | **P0** | Every article view shall display an informative header containing breadcrumbs, article title, and formatted *Last Updated* date. |
 | **REQ-ART-04** | **P1** | The system shall automatically generate an "On this page" Table of Contents from an article's major and minor section headings—displayed as a sticky sidebar on desktop and a collapsible disclosure panel above the article on mobile—and hide it completely when fewer than 2 headings exist. |
@@ -102,7 +102,7 @@ Every product requirement in this PRD carries a strict release priority:
 - **AC-CAT-04 (`REQ-CAT-04`):**
   - *Given* any category or article page, *When* clicking `Home` or `[Category Name]` in the breadcrumb trail, *Then* the browser navigates cleanly to the corresponding parent page.
 - **AC-CAT-05 (`REQ-CAT-05`):**
-  - *Given* guides marked as `featured`, *When* visiting the Home page, *Then* those guides appear in the Featured / Essential Guides section while non-featured guides are excluded from it.
+  - *Given* the Home page, *When* loaded, *Then* the Featured section displays 6 articles from the active group and cycles through 3 daily randomized non-overlapping groups seeded by local calendar date.
 
 ---
 

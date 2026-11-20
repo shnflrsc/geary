@@ -3,7 +3,6 @@ title: "BulSU Sports, Cultural Arts, and Competitions"
 category: "organizations"
 subcategory: "Sports, Culture & Media"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "BulSU Sports Development Office - Tryouts & SCUAA III Regional Meet Advisories (2025-2026)"
     url: "https://www.facebook.com/bulsusdo/posts/pfbid02GBZ2QtPpV7KQAEaLDVpDubMwNQp574ZsoBohptkLdFndHPPUL1rfduBoFJK922L2l"
@@ -11,8 +10,6 @@ sources:
     url: "https://www.facebook.com/BulSUOCA/posts/pfbid0Er1neyntwCxV3X13jay9sNSNLP9Zf82rSYDEvBv9sBziXPt8a3cZWW8vakZSpNN9l"
   - label: "The Pacesetter - SCUAA III Regional Meet 2026 Official Medal Tally (Feb 27, 2026)"
     url: "https://www.facebook.com/BulSUPacesetter/posts/pfbid02afzjZ5tf5KcbRYi9EzP8bi9G91gsAojvpSpgXrKja3o8jVxp4j3iGvbq2KE3Hznfl"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---
 
 If you want to represent BulSU in regional athletics, music, dance, literary arts, or academic contests, two university offices coordinate varsity and cultural teams: the **Sports Development Office (SDO)** and the **Office of Culture and Arts (OCA)**.

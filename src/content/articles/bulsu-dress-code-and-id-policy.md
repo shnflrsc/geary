@@ -3,7 +3,6 @@ title: "BulSU Dress Code, Grooming, and ID Policy"
 category: "policies"
 subcategory: "Campus Rules & Dress Code"
 updatedDate: 2026-11-19
-featured: false
 sources:
   - label: "BulSU Office of the Chancellors - Uniform Policy & Mandatory Wearing Advisories A.Y. 2026-2027 (Jun-Jul 2026)"
     url: "https://www.facebook.com/CICTLSCofficialpage/posts/pfbid0diGFB7rNR8T76R7aJYkUFmEgH9j9yrDu3d6hdEDXppnHW881u5kGxc5f4n1BitvKl"
@@ -15,8 +14,6 @@ sources:
     url: "https://www.facebook.com/bulsumc2627/posts/pfbid0sRQWqombyCRTyYCU2xQ1oy7ZWpHzQtUU7M6Qw6FGTwRLs86csyyc1qryj7BfGALMl"
   - label: "BulSU Sarmiento Campus LSC - Uniform Guide A.Y. 2026-2027 (Jun 6, 2026)"
     url: "https://www.facebook.com/SarmientoLSC/posts/pfbid0329cGuBTMv5uSLsSHs7i7UF7ycUnhCeQbZmJn97UcGHFQidKttgN4WQVwC5JQNpwDl"
-  - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
-    url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
 ---
 
 Campus security enforces uniform and ID rules right at every BulSU gate. Knowing your weekly dress schedule and what guards accept when you forget your ID saves you from being turned away before morning classes or exams.

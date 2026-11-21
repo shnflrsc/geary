@@ -706,26 +706,13 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "name": "BulSU Student Government Office",
     "shortLabel": "BulSU SG Office",
     "floors": null,
-    "svgPath": "M700.0,394.0 L722.0,394.0 L722.0,416.0 L700.0,416.0 Z",
+    "svgPath": "M683.3,383.9 L699.7,369.2 L714.4,385.5 L698.0,400.2 Z",
     "center": {
-      "x": 711.0,
-      "y": 405.0
+      "x": 698.9,
+      "y": 384.7
     },
     "summary": "BulSU Student Government office beside CSER Building.",
-    "locations": [
-      {
-        "id": "sg-office",
-        "name": "BulSU Student Government Office",
-        "category": "student-services",
-        "keywords": [
-          "SG",
-          "BulSU SG",
-          "Student Government",
-          "SSC",
-          "Supreme Student Council"
-        ]
-      }
-    ]
+    "locations": []
   },
   {
     "id": "alvarado-hall",

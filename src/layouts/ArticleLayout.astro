@@ -136,8 +136,42 @@ const jsonLd = [
 </BaseLayout>
 
 <script>
-  for (const table of document.querySelectorAll('.geary-prose table')) {
+  for (const table of document.querySelectorAll<HTMLTableElement>('.geary-prose table')) {
     table.setAttribute('tabindex', '0');
+
+    const parent = table.parentElement;
+    if (!parent || parent.classList.contains('table-scroll-wrap')) continue;
+
+    const shell = document.createElement('div');
+    shell.className = 'table-scroll-shell';
+
+    const hint = document.createElement('p');
+    hint.className = 'table-scroll-hint';
+    hint.setAttribute('aria-hidden', 'true');
+    hint.textContent = 'Scroll →';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'table-scroll-wrap';
+
+    parent.insertBefore(shell, table);
+    shell.appendChild(hint);
+    shell.appendChild(wrap);
+    wrap.appendChild(table);
+
+    const updateScrollState = () => {
+      const maxScroll = Math.max(0, table.scrollWidth - table.clientWidth);
+      const overflows = maxScroll > 2;
+      shell.dataset.overflows = String(overflows);
+      wrap.dataset.canScrollLeft = String(overflows && table.scrollLeft > 2);
+      wrap.dataset.canScrollRight = String(overflows && table.scrollLeft < maxScroll - 2);
+    };
+
+    table.addEventListener('scroll', updateScrollState, { passive: true });
+    window.addEventListener('resize', updateScrollState, { passive: true });
+    if (typeof ResizeObserver === 'function') {
+      new ResizeObserver(updateScrollState).observe(table);
+    }
+    updateScrollState();
   }
 
   for (const link of document.querySelectorAll<HTMLAnchorElement>(

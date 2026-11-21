@@ -446,3 +446,62 @@
 .geary-prose tbody tr:last-child td {
   border-bottom: 0;
 }
+
+.geary-prose .table-scroll-shell {
+  margin: 1.5rem 0;
+}
+
+.geary-prose .table-scroll-shell table {
+  margin: 0;
+}
+
+.geary-prose .table-scroll-hint {
+  display: none;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  text-align: right;
+  letter-spacing: 0.01em;
+}
+
+.geary-prose .table-scroll-shell[data-overflows="true"] .table-scroll-hint {
+  display: block;
+}
+
+.geary-prose .table-scroll-wrap {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+.geary-prose .table-scroll-wrap::before,
+.geary-prose .table-scroll-wrap::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  width: 2.25rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  z-index: 1;
+}
+
+.geary-prose .table-scroll-wrap::before {
+  left: 1px;
+  border-radius: 0.45rem 0 0 0.45rem;
+  background: linear-gradient(to right, var(--color-surface-card), transparent);
+}
+
+.geary-prose .table-scroll-wrap::after {
+  right: 1px;
+  border-radius: 0 0.45rem 0.45rem 0;
+  background: linear-gradient(to left, var(--color-surface-card), transparent);
+}
+
+.geary-prose .table-scroll-wrap[data-can-scroll-left="true"]::before,
+.geary-prose .table-scroll-wrap[data-can-scroll-right="true"]::after {
+  opacity: 1;
+}

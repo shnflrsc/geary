@@ -83,5 +83,5 @@ Failing more than 75% of your enrolled subjects in one semester, or 50% or more 
 
 ## Contacts
 
-- Email: `admissions@bulsu.edu.ph`
+- Email: **admissions@bulsu.edu.ph**
 - Facebook: [BulSU Admissions Office](https://www.facebook.com/BulSUAdmissionsOffice)

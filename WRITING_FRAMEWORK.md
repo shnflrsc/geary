@@ -255,7 +255,7 @@ Use Markdown formatting (bold, italic, inline code, blockquotes) sparingly and o
 
 * **Bold:** Reserve for critical deadlines, dealbreaker warnings, or brief scan anchors where plain text would bury a key detail. Never bold entire paragraphs, routine terms, or repeated mentions of the same office or document.
 * *Italic:* Use rarely—only for document titles, brief parenthetical notes, or subtle clarification when plain text is ambiguous.
-* Inline code: Use very sparingly. Restrict it strictly to literal technical values, commands, file paths, or exact text a reader must type verbatim (such as a portal code or email format). Never use inline code for general emphasis, UI labels, or ordinary nouns.
+* Inline code: Use very sparingly. Restrict it strictly to literal technical values, commands, file paths, or exact text a reader must type verbatim (such as a portal code). Never use inline code for email addresses (use **bold** instead), general emphasis, UI labels, or ordinary nouns.
 * Blockquotes: Use only for brief official excerpts or standout rules that need visual separation.
 
 When in doubt, leave it as plain text.

@@ -14,7 +14,7 @@ Campus journalism at BulSU operates under the Office of Student Publications and
 
 ## The Pacesetter and college publications
 
-- ***The Pacesetter*:** BulSU's official university-wide student publication, distributed across the Main Campus and external campuses and funded through the student paper trust fund. Follow [The Pacesetter on Facebook](https://www.facebook.com/BulSUPacesetter) or email `newsroom.pacesetter@gmail.com` for open calls and coverage inquiries.
+- ***The Pacesetter*:** BulSU's official university-wide student publication, distributed across the Main Campus and external campuses and funded through the student paper trust fund. Follow [The Pacesetter on Facebook](https://www.facebook.com/BulSUPacesetter) or email **newsroom.pacesetter@gmail.com** for open calls and coverage inquiries.
 - **College and external campus publications:** OSPI recognizes local student papers across colleges and satellite campuses and coordinates press training workshops.
 
 OSPI safeguards editorial independence and handles formal complaints involving campus publications separately from regular college Student Discipline Committees.

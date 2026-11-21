@@ -14,7 +14,7 @@ sources:
 
 If you want paid on-campus work that fits around your classes, apply for BulSU's Institutional Student Assistant (ISA) program. Applications are managed by the BulSU Placement and Public Employment Service Office (PPESO) at the Placement Office on the **Ground Floor of Roxas Hall**.
 
-For opening dates and slot caps, watch the [BulSU-PPESO Facebook page](https://www.facebook.com/bulsu.ppeso) or email `bulsu.ppeso@bulsu.edu.ph`.
+For opening dates and slot caps, watch the [BulSU-PPESO Facebook page](https://www.facebook.com/bulsu.ppeso) or email **bulsu.ppeso@bulsu.edu.ph**.
 
 ## Who can apply
 

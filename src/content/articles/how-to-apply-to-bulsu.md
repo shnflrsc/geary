@@ -216,5 +216,5 @@ If you are placed under reconsideration, monitor your inbox and spam folder clos
 
 ## Contacts
 
-- Email: `admissions@bulsu.edu.ph`
+- Email: **admissions@bulsu.edu.ph**
 - Facebook: [BulSU Admissions Office](https://www.facebook.com/BulSUAdmissionsOffice)

@@ -89,7 +89,7 @@ You do not need an account to file a ticket at the [ICTO Helpdesk](https://icto-
    - **IT Infrastructure Assistance** for Wi-Fi, LAN, computers, or equipment issues.
 3. Fill out your full name as listed in university records, student number, college, and a valid email address. Birthdate is required only for Google or Microsoft account requests.
 4. Describe the issue, attach an optional screenshot in PNG, JPG, or PDF format up to 10 MB, and submit. Save your request number.
-5. Track updates via email using your request number. If you lose it, email `icto@bulsu.edu.ph`.
+5. Track updates via email using your request number. If you lose it, email **icto@bulsu.edu.ph**.
 
 ## Student ID, gate entry, and weekly uniforms
 

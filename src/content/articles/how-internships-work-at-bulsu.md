@@ -58,5 +58,5 @@ PPESO runs free career readiness and employment programs for students, graduatin
 ## Contacts
 
 - PPESO Office: Ground Floor, Roxas Hall
-- Email: `bulsu.ppeso@bulsu.edu.ph`
+- Email: **bulsu.ppeso@bulsu.edu.ph**
 - Facebook: [BulSU-PPESO](https://www.facebook.com/bulsu.ppeso) and [BulSU CarDSI](https://www.facebook.com/cardsis)

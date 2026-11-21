@@ -78,5 +78,5 @@ Submitting altered or incomplete credentials disqualifies your application.
 
 ## Contacts
 
-- Email: `admissions@bulsu.edu.ph`
+- Email: **admissions@bulsu.edu.ph**
 - Facebook: [BulSU Admissions Office](https://www.facebook.com/BulSUAdmissionsOffice)

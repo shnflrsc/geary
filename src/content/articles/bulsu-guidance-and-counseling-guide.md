@@ -16,7 +16,7 @@ BulSU's Guidance and Counseling Services Center (GCSC) provides free, confidenti
 
 - **Main Campus office:** RH 104-105, Roxas Hall
 - **Phone:** (044) 919-7800, local 1071 or 1072
-- **Email:** `bulsuguidancecenter@bulsu.edu.ph`
+- **Email:** **bulsuguidancecenter@bulsu.edu.ph**
 - **Facebook:** [BulSU GCSC Main Campus](https://www.facebook.com/BulSUGCSCMain)
 - **Online booking:** [GCSC Counseling Appointment Form](https://forms.gle/QZRMGU8yjAyRNnmL8)
 

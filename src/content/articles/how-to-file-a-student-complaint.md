@@ -21,7 +21,7 @@ Filing through the right BulSU office gets your concern addressed faster than se
 | Type of concern | Where to file first |
 | --- | --- |
 | Grade consultation or unannounced grade posting | Narrative report to your Class Mayor, escalated to your Local Student Council, plus active Student Government grievance forms |
-| Lack of academic consideration during flooding or weather disruptions | [BulSU Student Grievance Form](https://tinyurl.com/BulSUStudentGrievanceForm) via the [BulSU SG Office of the Vice President](https://www.facebook.com/bulsusgovp), or email `bulsusg.ovp@gmail.com` |
+| Lack of academic consideration during flooding or weather disruptions | [BulSU Student Grievance Form](https://tinyurl.com/BulSUStudentGrievanceForm) via the [BulSU SG Office of the Vice President](https://www.facebook.com/bulsusgovp), or email **bulsusg.ovp@gmail.com** |
 | Unfair treatment, abuse of authority, or poor service | Director for Student Welfare under Student Grievance Intervention, or the Dean of OSAS if the complaint involves the Director |
 | Bullying, abuse, hazing, or misconduct seeking penalties | College or campus Student Discipline Committee |
 | Gender-based sexual harassment | [BulSU Gender and Development (GAD) Center](https://www.facebook.com/gadcbulsu) and university CODI channels |
@@ -44,7 +44,7 @@ If an instructor refuses to explain how your grade was computed or posts final g
 3. Escalate the report to your Local Student Council if the issue stays unresolved so they can coordinate with your college administration or the Office of Student Affairs and Services (OSAS).
 4. Submit your concern through the current semester's Student Government grade-transparency form. Student councils post these links each term under campaigns like TAMBAD by SG Academic Affairs, SIWALAT by the Office of the Student Regent, or college drives like CCJE's PAGLANTAD.
 
-For academic consideration complaints during typhoons, widespread flooding, or power outages, file directly through the BulSU Student Grievance Desk managed by the SG Office of the Vice President at `bulsusg.ovp@gmail.com`.
+For academic consideration complaints during typhoons, widespread flooding, or power outages, file directly through the BulSU Student Grievance Desk managed by the SG Office of the Vice President at **bulsusg.ovp@gmail.com**.
 
 ## Unfair treatment and Student Grievance Intervention
 

@@ -456,7 +456,7 @@ export default function CampusMap() {
       </div>
 
       {/* Main Split Workspace: Interactive 2D SVG Map + Selected Building Locations */}
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-start">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-stretch">
         {/* Interactive Map Viewport */}
         <div className="overflow-hidden rounded-lg border border-border-subtle bg-surface-card shadow-xs lg:col-span-7 xl:col-span-8">
           <div className="relative bg-surface-subtle touch-none select-none">
@@ -769,18 +769,19 @@ export default function CampusMap() {
         <aside
           aria-live="polite"
           aria-label="Selected building locations"
-          className="rounded-lg border border-border-subtle bg-surface-card p-4 shadow-xs sm:p-5 lg:col-span-5 xl:col-span-4"
+          className="rounded-lg border border-border-subtle bg-surface-card p-4 shadow-xs sm:p-5 lg:relative lg:col-span-5 lg:p-0 xl:col-span-4"
         >
+          <div className="flex flex-col lg:absolute lg:inset-0 lg:p-5">
           {selectedBuilding ? (
-            <div>
-              <h2 className="border-b border-border-subtle pb-3 font-heading text-xl font-bold text-ink-primary">
+            <div className="flex min-h-0 flex-1 flex-col">
+              <h2 className="shrink-0 border-b border-border-subtle pb-3 font-heading text-xl font-bold text-ink-primary">
                 {selectedBuilding.name}
               </h2>
 
               {selectedBuilding.locations.length > 0 ? (
                 <ul
                   ref={locationListRef}
-                  className="mt-3 max-h-[32rem] space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable]"
+                  className="mt-3 max-h-[32rem] min-h-0 flex-1 space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable] lg:max-h-none"
                 >
                   {selectedBuilding.locations.map((loc) => {
                     const isHighlightedLoc = highlightedLocationId === loc.id;
@@ -818,6 +819,7 @@ export default function CampusMap() {
               Select a building on the map or search above to see locations inside.
             </p>
           )}
+          </div>
         </aside>
       </div>
     </section>

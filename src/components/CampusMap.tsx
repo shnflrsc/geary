@@ -769,9 +769,8 @@ export default function CampusMap() {
         <aside
           aria-live="polite"
           aria-label="Selected building locations"
-          className="rounded-lg border border-border-subtle bg-surface-card p-4 shadow-xs sm:p-5 lg:relative lg:col-span-5 lg:p-0 xl:col-span-4"
+          className="flex flex-col overflow-hidden rounded-lg border border-border-subtle bg-surface-card p-4 shadow-xs sm:p-5 lg:col-span-5 lg:h-0 lg:min-h-full xl:col-span-4"
         >
-          <div className="flex flex-col lg:absolute lg:inset-0 lg:p-5">
           {selectedBuilding ? (
             <div className="flex min-h-0 flex-1 flex-col">
               <h2 className="shrink-0 border-b border-border-subtle pb-3 font-heading text-xl font-bold text-ink-primary">
@@ -819,7 +818,6 @@ export default function CampusMap() {
               Select a building on the map or search above to see locations inside.
             </p>
           )}
-          </div>
         </aside>
       </div>
     </section>

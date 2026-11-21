@@ -99,9 +99,3 @@ Affirmative Action accounts for up to **20 points** (20% of your final selection
 | BulSU Adopted Community member or child of a BulSU employee with at least 1 year of service | 5 | Certificate from the University Extension Office or your parent's latest BulSU Employee ID |
 
 Working students with a Certificate of Employment appeared as an optional category in the 2026 cycle, though it is not listed in the current Affirmative Action points table.
-
-## Related articles
-
-- [How to Apply to BulSU](/articles/how-to-apply-to-bulsu)
-- [How to Transfer to BulSU](/articles/how-to-transfer-to-bulsu)
-- [How to Shift Programs in BulSU](/articles/how-to-shift-programs-in-bulsu)

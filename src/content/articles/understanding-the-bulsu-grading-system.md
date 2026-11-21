@@ -75,9 +75,3 @@ Every student has four core grade transparency rights:
 **Fixing a posted grade error:** Contact your instructor right away. Faculty cannot edit posted grades on their own; genuine errors require written approval from your College or Campus Dean with supporting proof, forwarded to the Registrar.
 
 **If an instructor refuses to show or explain your grade:** Write a narrative report with your student details, course, and what happened. Submit it to your Class Mayor first, then escalate to your Local Student Council.
-
-## Related articles
-
-- [What Happens When You Fail a Subject?](/articles/what-happens-when-you-fail-a-subject)
-- [Can I Graduate With Honors?](/articles/can-i-graduate-with-honors)
-- [How to Add, Change, or Drop Subjects](/articles/how-to-add-change-or-drop-subjects)

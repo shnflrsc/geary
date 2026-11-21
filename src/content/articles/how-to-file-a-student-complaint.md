@@ -80,8 +80,3 @@ Submit a formal position paper for dialogue first. To hold a peaceful on-campus 
 ## Accident and medical insurance claims
 
 An accident or medical insurance claim is not a grievance. For animal or insect bites, personal accidents, or road accidents, visit the Office of Student Welfare within **30 days** of the incident to get the Enhanced Medical Insurance claim checklist. Complete claim documents are due within **90 days**.
-
-## Related articles
-
-- [Understanding University Disciplinary Procedures](/articles/understanding-university-disciplinary-procedures)
-- [BulSU Medical and Health Services Guide](/articles/bulsu-medical-and-health-services-guide)

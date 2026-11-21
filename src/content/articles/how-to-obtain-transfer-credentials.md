@@ -47,8 +47,3 @@ Even if you were dismissed or academically disqualified from continuing your pro
 
 - BulSU cannot block a dismissed or academically delinquent student from transferring to another school once all financial and property clearances are settled.
 - The university can hold your credentials only for unpaid financial obligations or a pending disciplinary case awaiting final decision. Once resolved, standard release timelines apply, with an outer legal limit of 30 days from a complete request.
-
-## Related articles
-
-- [How to Transfer to BulSU](/articles/how-to-transfer-to-bulsu)
-- [How to Request Your TOR and Certificates](/articles/how-to-request-transcript-and-certificates)

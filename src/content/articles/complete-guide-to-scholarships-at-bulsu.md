@@ -134,7 +134,3 @@ Visit OSFAS for a **renewal form** every semester as soon as your grades are rel
 - **ESGP-PA:** Failing more than two subjects despite academic intervention terminates the grant.
 - **Cultural groups:** One failing mark triggers a warning that you must clear the next semester. Three failing marks end the scholarship.
 - **Varsity athletes:** Full scholars cannot fail more than 10% of their enrolled units.
-
-## Related articles
-
-- [How to Apply for Student Assistantships](/articles/how-to-apply-for-student-assistantships)

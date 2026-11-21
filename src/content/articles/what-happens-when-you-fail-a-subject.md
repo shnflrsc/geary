@@ -51,10 +51,3 @@ Failing grades do affect awards and financial aid:
 - **Petition for a special class:** If a failed subject is not offered next semester, irregular students may petition for a special class. This requires at least 10 requesting students, Dean approval, and filing within your college's semester petition window.
 
 If you face dismissal from BulSU, the Office of the University Registrar still issues your transfer credentials once your clearance is complete.
-
-## Related articles
-
-- [Understanding the BulSU Grading System](/articles/understanding-the-bulsu-grading-system)
-- [Academic Load, Prerequisites, and Residency](/articles/academic-load-prerequisites-and-residency)
-- [BulSU Guidance and Counseling Services Guide](/articles/bulsu-guidance-and-counseling-guide)
-- [How to Obtain Transfer Credentials](/articles/how-to-obtain-transfer-credentials)

@@ -69,9 +69,3 @@ Where paid tuition applies, such as for students who exceed free-tuition residen
 | Within Week 3 of classes | Charged 70% of total term tuition |
 | After Week 3 of classes | Charged 100% of total term tuition, with no refund |
 | Medical withdrawal advised by BulSU Physician | Full refund of paid tuition regardless of timing |
-
-## Related articles
-
-- [What Happens When You Fail a Subject?](/articles/what-happens-when-you-fail-a-subject)
-- [Academic Load, Prerequisites, and Residency](/articles/academic-load-prerequisites-and-residency)
-- [How to File a Leave of Absence](/articles/how-to-file-a-leave-of-absence)

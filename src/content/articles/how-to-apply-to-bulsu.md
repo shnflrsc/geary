@@ -218,10 +218,3 @@ If you are placed under reconsideration, monitor your inbox and spam folder clos
 
 - Email: `admissions@bulsu.edu.ph`
 - Facebook: [BulSU Admissions Office](https://www.facebook.com/BulSUAdmissionsOffice)
-
-## Related articles
-
-- [BulSU Admission Requirements](/articles/bulsu-admission-requirements)
-- [How to Transfer to BulSU](/articles/how-to-transfer-to-bulsu)
-- [How to Shift Programs in BulSU](/articles/how-to-shift-programs-in-bulsu)
-- [What Every BulSU Freshman Should Know](/articles/essential-things-freshmen-should-know)

@@ -83,9 +83,3 @@ Three rules govern your residency clock:
 - **Approved Leave of Absence:** Official Leave of Absence (LOA) semesters do not count toward your maximum residency.
 - **Working student extension:** Working students may request a residency extension with Dean recommendation and VPAA approval.
 - **Exceeding the limit:** You can still finish your degree, but you forfeit your government tuition subsidy and must pay full tuition rates set by the Finance Office.
-
-## Related articles
-
-- [How to Add, Change, or Drop Subjects](/articles/how-to-add-change-or-drop-subjects)
-- [How to File a Leave of Absence](/articles/how-to-file-a-leave-of-absence)
-- [What Happens When You Fail a Subject?](/articles/what-happens-when-you-fail-a-subject)

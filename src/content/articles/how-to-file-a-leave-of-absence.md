@@ -58,8 +58,3 @@ If your program's curriculum changed while you were away, your year level decide
 
 - Returning 2nd-year students in a 4-year course and returning 3rd-year students in a 5-year course shift to the new curriculum.
 - Penultimate or senior-year returnees on an old curriculum follow subject substitution rules, replacing unoffered old subjects with related subjects of equal or higher credit units.
-
-## Related articles
-
-- [How to Add, Change, or Drop Subjects](/articles/how-to-add-change-or-drop-subjects)
-- [Academic Load, Prerequisites, and Residency](/articles/academic-load-prerequisites-and-residency)

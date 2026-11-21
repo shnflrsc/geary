@@ -131,47 +131,30 @@ export default function ExploreSpotlight({
             <div
               role="group"
               aria-label="Featured article groups"
-              className="flex items-center gap-2"
+              className="flex items-center"
             >
-              <button
-                type="button"
-                onClick={() => transitionToGroup(safeGroupIndex - 1)}
-                aria-label="Previous featured group"
-                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  className="h-4 w-4"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12.5 5 7.5 10l5 5" />
-                </svg>
-              </button>
-
-              <span className="min-w-[2.25rem] text-center text-xs font-medium tabular-nums text-ink-secondary">
-                {safeGroupIndex + 1} / {groups.length}
-              </span>
-
-              <button
-                type="button"
-                onClick={() => transitionToGroup(safeGroupIndex + 1)}
-                aria-label="Next featured group"
-                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  className="h-4 w-4"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 5 12.5 10l-5 5" />
-                </svg>
-              </button>
+              {groups.map((_, index) => {
+                const isActive = index === safeGroupIndex;
+                return (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => transitionToGroup(index)}
+                    aria-label={`Show featured group ${index + 1} of ${groups.length}`}
+                    aria-pressed={isActive}
+                    className="group inline-flex h-8 w-6 cursor-pointer items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`h-2 w-2 rounded-full transition-colors duration-150 ${
+                        isActive
+                          ? 'bg-brand-crimson'
+                          : 'bg-ink-muted group-hover:bg-ink-secondary'
+                      }`}
+                    />
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>

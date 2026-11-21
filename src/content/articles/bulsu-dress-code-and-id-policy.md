@@ -58,7 +58,3 @@ Wear your BulSU ID visibly whenever you enter or walk around campus. Only two te
 - **Lost your ID:** Report it immediately to the Office of Student Affairs and Services (OSAS) and the Office of the University Registrar. A notarized Affidavit of Loss serves as temporary gate entry for **only 3 days** while you process a replacement card.
 
 Never lend, alter, or swap photos on a BulSU ID. Security guards confiscate tampered IDs on the spot and escort you straight to your College Dean for disciplinary action.
-
-## Related articles
-
-- [How to Replace a Lost Student ID](/articles/how-to-replace-a-lost-student-id)

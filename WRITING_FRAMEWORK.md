@@ -344,13 +344,9 @@ Never cut details required for accuracy, completing the process, avoiding common
 
 ## 10. Frequently Asked Questions
 
-Add an FAQ section only for specific, practical questions readers are likely to ask that are not already answered above. Keep answers direct and link to earlier sections or related guides when useful. Never add FAQs just to pad length.
+Add an FAQ section only for specific, practical questions readers are likely to ask that are not already answered above. Keep answers direct and link to earlier sections when useful. Never add FAQs just to pad length.
 
-## 11. Related Articles
-
-When genuinely relevant published Geary articles exist, list them briefly at the end using descriptive link titles. Never add placeholder links or unpublished titles.
-
-## 12. Final Editorial Checklist
+## 11. Final Editorial Checklist
 
 ### Content and Accuracy
 
@@ -387,9 +383,8 @@ When genuinely relevant published Geary articles exist, list them briefly at the
 * [ ] All hyperlinks have been checked.
 * [ ] Sources and References cite the actual official PDFs, webpages, or Facebook announcements consulted.
 * [ ] `updatedDate` frontmatter is updated to the current date (`YYYY-MM-DD`) whenever any part of the article is modified.
-* [ ] Related articles are linked only when genuinely relevant and published.
 
-## 13. The Geary Editorial Standard
+## 12. The Geary Editorial Standard
 
 Every published article must pass one test:
 

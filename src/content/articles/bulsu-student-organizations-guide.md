@@ -79,8 +79,3 @@ Every event requires the organization president's and adviser's signatures befor
 - **Reserving campus rooms:** Submit requests **at least 1 week ahead** after checking availability with the facility head. Regular classes always take priority, and one organization cannot book a room on another group's behalf.
 - **Fundraising:** Limited to **1 major fundraising activity per academic year**, approved by the University President. Off-campus solicitation also requires a DSWD permit. Submit a financial report to OSOA within **2 weeks** after the activity.
 - **Campus posters and flyers:** File a signed letter of intent with the original poster at OSOA, plus College Dean approval for college buildings. Mount posters only on designated bulletin boards using scotch tape, masking tape, or push pins for **at most 2 weeks**, and remove them the day after expiration.
-
-## Related articles
-
-- [BulSU Sports, Cultural Arts, and Competitions](/articles/bulsu-sports-and-athletics-guide)
-- [BulSU Student Publication Guide](/articles/bulsu-student-publication-guide)

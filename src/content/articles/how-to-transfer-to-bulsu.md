@@ -80,9 +80,3 @@ Submitting altered or incomplete credentials disqualifies your application.
 
 - Email: `admissions@bulsu.edu.ph`
 - Facebook: [BulSU Admissions Office](https://www.facebook.com/BulSUAdmissionsOffice)
-
-## Related articles
-
-- [How to Shift Programs in BulSU](/articles/how-to-shift-programs-in-bulsu)
-- [How to Obtain Transfer Credentials](/articles/how-to-obtain-transfer-credentials)
-- [What Every BulSU Freshman Should Know](/articles/essential-things-freshmen-should-know)

@@ -780,7 +780,7 @@ export default function CampusMap() {
               {selectedBuilding.locations.length > 0 ? (
                 <ul
                   ref={locationListRef}
-                  className="mt-3 max-h-[32rem] space-y-2.5 overflow-y-auto pr-1"
+                  className="mt-3 max-h-[32rem] space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable]"
                 >
                   {selectedBuilding.locations.map((loc) => {
                     const isHighlightedLoc = highlightedLocationId === loc.id;

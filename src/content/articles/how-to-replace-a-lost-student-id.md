@@ -43,7 +43,3 @@ If you find your original ID after reporting it missing, visit OSAS to cancel th
 ## Warning against ID tampering
 
 Never alter details on a student ID, swap photos, or lend your card to someone else. BulSU treats ID tampering as a serious offense. If security catches a tampered ID at the gate, the guard will confiscate it on the spot and escort you directly to your College Dean for disciplinary action.
-
-## Related articles
-
-- [BulSU Dress Code, Grooming, and ID Policy](/articles/bulsu-dress-code-and-id-policy)

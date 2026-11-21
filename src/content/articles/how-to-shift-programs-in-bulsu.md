@@ -85,9 +85,3 @@ Failing more than 75% of your enrolled subjects in one semester, or 50% or more 
 
 - Email: `admissions@bulsu.edu.ph`
 - Facebook: [BulSU Admissions Office](https://www.facebook.com/BulSUAdmissionsOffice)
-
-## Related articles
-
-- [What Happens When You Fail a Subject?](/articles/what-happens-when-you-fail-a-subject)
-- [Academic Load, Prerequisites, and Residency](/articles/academic-load-prerequisites-and-residency)
-- [How to Transfer to BulSU](/articles/how-to-transfer-to-bulsu)

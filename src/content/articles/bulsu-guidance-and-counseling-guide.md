@@ -55,7 +55,3 @@ Under Republic Act 7277, BulSU maintains a Committee on Students with Special Ne
 - Meets with students, professors, parents or guardians, and personal assistants to arrange tailored academic accommodations
 - Coordinates counseling, testing referrals, and life-skills workshops
 - Works with campus safety staff to check building accessibility and prioritize PWD assistance during emergency evacuations
-
-## Related articles
-
-- [How Internships and Job Placement Work at BulSU](/articles/how-internships-work-at-bulsu)

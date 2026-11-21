@@ -64,7 +64,3 @@ BulSU joins the quarterly Nationwide Simultaneous Earthquake Drill (NSED), annou
 - Do not pull an interior alarm.
 - Report your name and the exact fire location to security immediately.
 - Keep access roads clear for responders.
-
-## Related articles
-
-- [BulSU Medical Services and Student Insurance](/articles/bulsu-medical-and-health-services-guide)

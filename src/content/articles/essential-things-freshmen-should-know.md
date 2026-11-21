@@ -81,10 +81,3 @@ Your COR and class lists label your enrollment status:
 - **Special student:** Enrolled without academic credit for up to 9 units per semester and at most 2 academic years, graded Satisfactory or Unsatisfactory.
 
 Freshmen may also join recognized student organizations voluntarily starting in their first year.
-
-## Related articles
-
-- [BulSU Dress Code, Grooming, and ID Policy](/articles/bulsu-dress-code-and-id-policy)
-- [How to Add, Change, or Drop Subjects](/articles/how-to-add-change-or-drop-subjects)
-- [BulSU Student Organizations Guide](/articles/bulsu-student-organizations-guide)
-- [Understanding University Attendance Policies](/articles/university-attendance-policies)

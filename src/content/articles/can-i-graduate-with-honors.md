@@ -76,9 +76,3 @@ Even if a single grade rules out Latin Honors, BulSU awards four other distincti
 - **Best in Specialization Award:** One recipient per specialization. Chosen by a faculty committee based on top major performance, no grade below 2.0 in major subjects, and competition wins.
 - **College Leadership Award:** One recipient per college or campus. Requires at least 15 units in the last two semesters with zero dropped, INC, or failing grades, adviser nomination, a strong leadership record, and no disciplinary record.
 - **University Leadership Award:** One recipient university-wide. Open to graduating leaders from Student Government, recognized organizations, cultural groups, or student publications via a leadership folio submitted to the Dean of Student Affairs and Services.
-
-## Related articles
-
-- [BulSU Graduation Requirements](/articles/bulsu-graduation-requirements)
-- [Understanding the BulSU Grading System](/articles/understanding-the-bulsu-grading-system)
-- [What Happens When You Fail a Subject?](/articles/what-happens-when-you-fail-a-subject)

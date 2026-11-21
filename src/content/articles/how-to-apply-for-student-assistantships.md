@@ -60,7 +60,3 @@ PPESO does not publish exact hourly or monthly allowance rates on its Facebook a
 The Special Program for Employment of Students (SPES) places financially deserving students in temporary jobs during summer and Christmas breaks.
 
 BulSU PPESO has not recently posted a campus-hosted SPES call, focusing instead on ISA hiring, campus job fairs, labor education seminars, and DSWD cash-for-work announcements. Monitor your city or municipal PESO office Facebook page before vacation periods if you want to apply for SPES.
-
-## Related articles
-
-- [Complete Guide to Scholarships at BulSU](/articles/complete-guide-to-scholarships-at-bulsu)

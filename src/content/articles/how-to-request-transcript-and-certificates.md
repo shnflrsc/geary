@@ -101,8 +101,3 @@ If your legal name needs a correction or update at the Registrar:
 
 - **Married while enrolled:** File an Affidavit of Change of Status together with an authenticated Marriage Contract at the Office of the University Registrar.
 - **Mismatch between school records and birth certificate:** Submit a notarized Affidavit of Discrepancy alongside your supporting credentials.
-
-## Related articles
-
-- [How to Obtain Transfer Credentials](/articles/how-to-obtain-transfer-credentials)
-- [How to Replace a Lost Student ID](/articles/how-to-replace-a-lost-student-id)

@@ -47,9 +47,3 @@ If your TOR cannot be printed because of record discrepancies, watch your email 
 - **Schedule and attire:** Candidates are expected to attend commencement exercises on dates set by the Academic Council and wear the prescribed academic costume for both baccalaureate and commencement ceremonies. Confirm your college's final commencement venue on [Bulacan State University's Facebook page](https://www.facebook.com/bulsuofficial) before traveling.
 - **Graduation fees:** Confirm current graduation fees directly with your college or Registrar.
 - **Loyalty Award:** Given at graduation to students who started Grade 7 at BulSU Laboratory High School and completed their bachelor's degree continuously at BulSU.
-
-## Related articles
-
-- [Can I Graduate With Honors?](/articles/can-i-graduate-with-honors)
-- [How to Request Your TOR and Certificates](/articles/how-to-request-transcript-and-certificates)
-- [Academic Load, Prerequisites, and Residency](/articles/academic-load-prerequisites-and-residency)

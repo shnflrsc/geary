@@ -1,4 +1,9 @@
-import type { CampusBuilding, LocationCategory } from '../data/campus-map';
+import {
+  SHOW_CAMPUS_2,
+  type CampusBuilding,
+  type CampusLocation,
+  type LocationCategory,
+} from '../data/campus-map';
 
 export interface MapSearchMatch {
   kind: 'location' | 'building';
@@ -20,12 +25,19 @@ export interface ViewBoxRect {
   height: number;
 }
 
-export const DEFAULT_MAP_VIEWBOX: ViewBoxRect = {
-  x: 0,
-  y: 0,
-  width: 1000,
-  height: 850,
-};
+export const DEFAULT_MAP_VIEWBOX: ViewBoxRect = SHOW_CAMPUS_2
+  ? {
+      x: -120,
+      y: -520,
+      width: 1240,
+      height: 1380,
+    }
+  : {
+      x: 0,
+      y: 0,
+      width: 1000,
+      height: 850,
+    };
 
 const MIN_VIEWBOX_WIDTH = 280;
 const MAX_VIEWBOX_WIDTH = DEFAULT_MAP_VIEWBOX.width;
@@ -164,12 +176,14 @@ function scoreLocationMatch(
 export function clampViewBox(vb: ViewBoxRect): ViewBoxRect {
   const width = Math.min(MAX_VIEWBOX_WIDTH, Math.max(MIN_VIEWBOX_WIDTH, vb.width));
   const height = Math.round(width * VIEWBOX_ASPECT * 100) / 100;
-  const maxX = Math.max(0, DEFAULT_MAP_VIEWBOX.width - width);
-  const maxY = Math.max(0, DEFAULT_MAP_VIEWBOX.height - height);
+  const minX = DEFAULT_MAP_VIEWBOX.x;
+  const minY = DEFAULT_MAP_VIEWBOX.y;
+  const maxX = DEFAULT_MAP_VIEWBOX.x + Math.max(0, DEFAULT_MAP_VIEWBOX.width - width);
+  const maxY = DEFAULT_MAP_VIEWBOX.y + Math.max(0, DEFAULT_MAP_VIEWBOX.height - height);
 
   return {
-    x: Math.round(Math.min(maxX, Math.max(0, vb.x)) * 100) / 100,
-    y: Math.round(Math.min(maxY, Math.max(0, vb.y)) * 100) / 100,
+    x: Math.round(Math.min(maxX, Math.max(minX, vb.x)) * 100) / 100,
+    y: Math.round(Math.min(maxY, Math.max(minY, vb.y)) * 100) / 100,
     width: Math.round(width * 100) / 100,
     height,
   };
@@ -289,4 +303,49 @@ export function computePinchViewBox(
     width: nextWidth,
     height: nextHeight,
   });
+}
+
+const COLLEGE_LOCATION_RE = /^(?:College of |Laboratory High School\b)/i;
+const NUMBERED_FLOOR_RE = /^(\d+)(?:st|nd|rd|th)\s+floor$/i;
+
+function getFloorRank(floor?: string): number {
+  if (!floor) return Number.POSITIVE_INFINITY;
+  const trimmed = floor.trim();
+  if (/^ground\s+floor$/i.test(trimmed)) return 0;
+  const match = trimmed.match(NUMBERED_FLOOR_RE);
+  return match ? Number(match[1]) : Number.POSITIVE_INFINITY;
+}
+
+function compareLocationNames(a: CampusLocation, b: CampusLocation): number {
+  return a.name.localeCompare(b.name, 'en', { numeric: true, sensitivity: 'base' });
+}
+
+/**
+ * Splits and sorts a building's locations into umbrella college/school entries first,
+ * followed by floor-ranked locations (Ground, 1st..N, alphabetical within floor) and
+ * locations without numeric/ground floor labels last (alphabetical).
+ */
+export function partitionBuildingLocations(locations: readonly CampusLocation[]): {
+  colleges: CampusLocation[];
+  others: CampusLocation[];
+} {
+  const colleges: CampusLocation[] = [];
+  const others: CampusLocation[] = [];
+
+  for (const loc of locations) {
+    if (COLLEGE_LOCATION_RE.test(loc.name.trim())) {
+      colleges.push(loc);
+    } else {
+      others.push(loc);
+    }
+  }
+
+  colleges.sort(compareLocationNames);
+  others.sort((a, b) => {
+    const rankA = getFloorRank(a.floor);
+    const rankB = getFloorRank(b.floor);
+    return rankA !== rankB ? rankA - rankB : compareLocationNames(a, b);
+  });
+
+  return { colleges, others };
 }

@@ -48,10 +48,11 @@ export interface CampusGate {
   y: number;
 }
 
-export const CAMPUS_MAP_VIEWBOX = "0 0 1000 850";
+export const SHOW_CAMPUS_2 = false;
+export const CAMPUS_MAP_VIEWBOX = SHOW_CAMPUS_2 ? "-120 -520 1240 1380" : "0 0 1000 850";
 export const CAMPUS_PERIMETER_PATH = "M175.1,411.1 L269.0,324.3 L368.0,235.0 L525.2,408.3 L704.6,257.8 L545.3,79.2 L575.1,50.0 L612.5,84.5 L618.5,93.2 L779.9,280.6 L785.9,286.6 L940.9,456.3 L904.2,486.9 L872.6,454.4 L804.5,509.0 L704.9,593.4 L680.1,559.5 L643.0,573.5 L555.7,628.5 L489.8,670.9 L440.6,702.1 L423.7,720.2 L397.3,744.3 L344.6,795.1 L330.3,800.0 L272.1,733.1 L160.9,612.5 L91.6,669.3 L70.1,637.8 L119.9,601.3 L127.0,595.0 L59.1,515.2 L175.1,411.1 Z";
 export const CAMPUS_PATHS: readonly string[] = [
-  "M-18.0,582.0 L58.0,673.6 L196.0,832.0",
+  "M-43.7,551.1 L-18.0,582.0 L58.0,673.6 L196.0,832.0",
   "M58.0,673.6 L80.9,653.6",
   "M80.9,653.6 L145.4,603.8 L207.8,547.6",
   "M207.8,547.6 L271.0,490.7 L363.9,407.1 L371.3,400.4 L313.7,336.5",
@@ -69,7 +70,22 @@ export const CAMPUS_PATHS: readonly string[] = [
   "M388.6,434.6 L473.3,358.3 L526.2,417.0",
   "M441.5,493.3 L533.6,410.3 L595.2,478.7 L617.9,504.0 L794.1,345.4",
   "M503.0,561.7 L595.2,478.7",
-  "M560.2,64.6 L588.0,116.5 L794.1,345.4 L890.4,452.4 L922.6,471.6"
+  "M560.2,64.6 L588.0,116.5 L794.1,345.4 L890.4,452.4 L922.6,471.6",
+  "M-43.7,551.1 L111.4,403.3 L340.5,185.0 L522.4,21.5 L634.0,-85.4 L646.6,-97.4 L686.3,-135.3 L818.3,-259.9 L838.8,-276.8 L861.9,-293.2 L899.4,-316.9",
+  "M522.4,21.5 L541.2,45.8 L560.2,64.6"
+];
+export const CAMPUS_2_PATHS: readonly string[] = [
+  "M538.5,-169.4 L552.6,-157.0 L593.9,-120.5 L634.0,-85.4",
+  "M453.2,-67.3 L538.5,-169.4",
+  "M646.6,-97.4 L604.5,-132.9 L577.0,-156.1 L496.2,-224.2",
+  "M320.9,-334.5 L330.2,-346.3 L338.7,-357.1 L497.3,-559.1",
+  "M577.0,-156.1 L655.7,-255.9",
+  "M433.1,-271.5 L476.8,-326.7 L522.4,-382.5 L533.9,-396.6 L592.2,-346.5 L582.5,-334.2 L537.9,-277.4 L496.2,-224.2 L487.3,-212.8",
+  "M476.8,-326.7 L462.1,-343.5 L457.8,-354.0 L456.8,-365.3 L459.1,-376.3 L464.7,-385.8 L472.9,-393.0 L482.9,-397.1 L493.8,-397.7 L504.5,-394.9 L522.4,-382.5",
+  "M582.5,-334.2 L601.5,-308.8 L603.8,-297.7 L602.7,-286.5 L598.3,-276.3 L591.0,-268.2 L581.5,-262.9 L570.8,-260.9 L559.9,-262.4 L549.9,-267.4 L537.9,-277.4",
+  "M496.2,-224.2 L476.1,-231.3 L487.3,-212.8",
+  "M476.1,-231.3 L433.1,-271.5 L338.7,-357.1",
+  "M487.3,-212.8 L538.5,-169.4"
 ];
 export const CAMPUS_PARKS: readonly CampusPark[] = [
   {
@@ -109,9 +125,60 @@ export const CAMPUS_GATES: readonly CampusGate[] = [
     "name": "Gate 1",
     "x": 80.9,
     "y": 653.6
+  },
+  ...(SHOW_CAMPUS_2
+    ? [
+        {
+          "name": "Campus 2 Entrance",
+          "x": 552.6,
+          "y": -157.0
+        }
+      ]
+    : [])
+];
+export const CAMPUS_2_BUILDINGS: readonly CampusBuilding[] = [
+  {
+    "id": "campus2-building-1",
+    "name": "Building 1",
+    "shortLabel": "Building 1",
+    "floors": null,
+    "svgPath": "M380.4,-263.2 L405.8,-242.2 L390.0,-221.4 L456.7,-166.5 L470.5,-184.7 L493.5,-165.8 L461.5,-123.7 L346.5,-218.6 Z",
+    "center": {
+      "x": 425.6,
+      "y": -198.3
+    },
+    "summary": "BulSU Campus 2 building (name to be confirmed).",
+    "locations": []
+  },
+  {
+    "id": "campus2-building-2",
+    "name": "Building 2",
+    "shortLabel": "Building 2",
+    "floors": null,
+    "svgPath": "M384.0,-356.4 L424.9,-319.7 L443.5,-343.0 L425.0,-360.6 L434.9,-374.8 L442.4,-368.2 L469.8,-401.4 L461.6,-407.1 L477.8,-425.3 L494.3,-411.0 L513.8,-435.1 L472.0,-469.8 Z",
+    "center": {
+      "x": 453.7,
+      "y": -389.4
+    },
+    "summary": "BulSU Campus 2 building (name to be confirmed).",
+    "locations": []
+  },
+  {
+    "id": "campus2-building-3",
+    "name": "Building 3",
+    "shortLabel": "Building 3",
+    "floors": null,
+    "svgPath": "M559.7,-250.0 L578.3,-234.5 L587.8,-247.0 L580.1,-253.4 L605.9,-287.1 L616.5,-278.3 L632.5,-299.2 L613.2,-315.3 L630.4,-337.8 L672.7,-302.7 L583.2,-185.5 L538.7,-222.4 Z",
+    "center": {
+      "x": 599.9,
+      "y": -267.8
+    },
+    "summary": "BulSU Campus 2 building (name to be confirmed).",
+    "locations": []
   }
 ];
 export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
+  ...(SHOW_CAMPUS_2 ? CAMPUS_2_BUILDINGS : []),
   {
     "id": "federizo-hall",
     "name": "Federizo Hall",
@@ -947,7 +1014,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "elib-lactation-room",
         "name": "Lactation Room",
-        "floor": "Ground Floor",
+        "floor": "1st Floor",
         "category": "student-services",
         "keywords": [
           "Lactation",
@@ -1047,7 +1114,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "registrar",
         "name": "Office of the University Registrar",
-        "floor": "Ground Floor",
+        "floor": "1st Floor",
         "category": "administration",
         "keywords": [
           "Registrar",
@@ -1066,7 +1133,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "clinic",
         "name": "BulSU Clinic Main",
-        "floor": "Ground Floor",
+        "floor": "1st Floor",
         "category": "student-services",
         "keywords": [
           "BulSU Clinic Main",
@@ -1083,7 +1150,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "flores-lactation-room",
         "name": "Lactation Room",
-        "floor": "Ground Floor",
+        "floor": "1st Floor",
         "category": "student-services",
         "keywords": [
           "Lactation",
@@ -2231,7 +2298,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "ppeso-office",
         "name": "PPESO Office",
-        "floor": "Ground Floor",
+        "floor": "1st Floor",
         "category": "student-services",
         "keywords": [
           "PPESO",
@@ -2246,7 +2313,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "roxas-lactation-room",
         "name": "Lactation Room",
-        "floor": "Ground Floor",
+        "floor": "1st Floor",
         "category": "student-services",
         "keywords": [
           "Lactation",
@@ -2257,7 +2324,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "roxas-child-minding",
         "name": "Child-Minding Center",
-        "floor": "Ground Floor",
+        "floor": "1st Floor",
         "category": "student-services",
         "keywords": [
           "Child-Minding",

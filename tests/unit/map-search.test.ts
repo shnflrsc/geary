@@ -8,6 +8,7 @@ import {
   computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
   focusBuildingViewBox,
+  partitionBuildingLocations,
   searchCampusLocations,
 } from '../../src/lib/map-search';
 
@@ -61,34 +62,72 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
 
   test('viewBox zoom and building focus stay clamped within campus canvas bounds', () => {
     const zoomedIn = computeZoomViewBox(DEFAULT_MAP_VIEWBOX, 2);
-    expect(zoomedIn.width).toBe(500);
-    expect(zoomedIn.height).toBe(425);
+    expect(zoomedIn.width).toBe(DEFAULT_MAP_VIEWBOX.width / 2);
+    expect(zoomedIn.height).toBe(DEFAULT_MAP_VIEWBOX.height / 2);
 
     const overZoomedOut = computeZoomViewBox(DEFAULT_MAP_VIEWBOX, 0.2);
     expect(overZoomedOut).toEqual(DEFAULT_MAP_VIEWBOX);
 
-    const focused = focusBuildingViewBox({ center: { x: 10, y: 10 } }, 480);
-    expect(focused.x).toBe(0);
-    expect(focused.y).toBe(0);
+    const focused = focusBuildingViewBox({ center: { x: -110, y: -510 } }, 480);
+    expect(focused.x).toBe(DEFAULT_MAP_VIEWBOX.x);
+    expect(focused.y).toBe(DEFAULT_MAP_VIEWBOX.y);
     expect(focused.width).toBe(480);
   });
 
   test('computePinchViewBox and computePanViewBox zoom around focal midpoint and pan within bounds', () => {
-    const svgRect = { left: 0, top: 0, width: 1000, height: 850 };
+    const svgRect = {
+      left: 0,
+      top: 0,
+      width: DEFAULT_MAP_VIEWBOX.width,
+      height: DEFAULT_MAP_VIEWBOX.height,
+    };
+    const midY = svgRect.height / 2;
     const pinchedOut = computePinchViewBox(
       DEFAULT_MAP_VIEWBOX,
       svgRect,
-      { x: 400, y: 425 },
-      { x: 600, y: 425 },
-      { x: 300, y: 425 },
-      { x: 700, y: 425 }
+      { x: svgRect.width * 0.4, y: midY },
+      { x: svgRect.width * 0.6, y: midY },
+      { x: svgRect.width * 0.3, y: midY },
+      { x: svgRect.width * 0.7, y: midY }
     );
-    expect(pinchedOut.width).toBe(500);
-    expect(pinchedOut.x).toBe(250);
-    expect(pinchedOut.y).toBe(212.5);
+    expect(pinchedOut.width).toBe(DEFAULT_MAP_VIEWBOX.width / 2);
+    expect(pinchedOut.x).toBe(DEFAULT_MAP_VIEWBOX.x + DEFAULT_MAP_VIEWBOX.width * 0.25);
+    expect(pinchedOut.y).toBe(DEFAULT_MAP_VIEWBOX.y + DEFAULT_MAP_VIEWBOX.height * 0.25);
 
     const panned = computePanViewBox(pinchedOut, -100, -50, svgRect);
-    expect(panned.x).toBe(300);
-    expect(panned.y).toBe(237.5);
+    expect(panned.x).toBe(pinchedOut.x + 50);
+    expect(panned.y).toBe(pinchedOut.y + 25);
+  });
+
+  test('partitionBuildingLocations puts colleges first, then Ground -> 1st..N floors alphabetically, then floorless/non-numeric last alphabetically', () => {
+    const pimentel = CAMPUS_BUILDINGS.find((b) => b.id === 'pimentel-hall');
+    expect(pimentel).toBeDefined();
+    const { colleges, others } = partitionBuildingLocations(pimentel!.locations);
+    expect(colleges.map((c) => c.name)).toEqual([
+      'College of Information & Communications Technology (CICT)',
+      'College of Nursing (CON)',
+    ]);
+    expect(others.length).toBe(pimentel!.locations.length - 2);
+    expect(others[0]?.floor).toBe('1st Floor');
+    expect(others[0]?.name).toBe('A1');
+
+    const mixed = partitionBuildingLocations([
+      { id: '1', name: 'Zeta Room', category: 'academic' },
+      { id: '2', name: 'Back Room', floor: 'Back', category: 'student-services' },
+      { id: '3', name: 'Second B', floor: '2nd Floor', category: 'academic' },
+      { id: '4', name: 'Ground Office', floor: 'Ground Floor', category: 'administration' },
+      { id: '5', name: 'Laboratory High School', category: 'academic' },
+      { id: '6', name: 'First A', floor: '1st Floor', category: 'academic' },
+      { id: '7', name: 'Second A', floor: '2nd Floor', category: 'academic' },
+    ]);
+    expect(mixed.colleges.map((c) => c.name)).toEqual(['Laboratory High School']);
+    expect(mixed.others.map((o) => o.name)).toEqual([
+      'Ground Office',
+      'First A',
+      'Second A',
+      'Second B',
+      'Back Room',
+      'Zeta Room',
+    ]);
   });
 });

@@ -1,11 +1,14 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
+  CAMPUS_2_PATHS,
   CAMPUS_BUILDINGS,
   CAMPUS_GATES,
   CAMPUS_PARKS,
   CAMPUS_PATHS,
   CAMPUS_PERIMETER_PATH,
+  SHOW_CAMPUS_2,
   type CampusBuilding,
+  type CampusLocation,
 } from '../data/campus-map';
 import {
   computePanViewBox,
@@ -13,6 +16,7 @@ import {
   computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
   focusBuildingViewBox,
+  partitionBuildingLocations,
   searchCampusLocations,
   type MapSearchMatch,
   type ViewBoxRect,
@@ -340,6 +344,37 @@ export default function CampusMap() {
 
   const isZoomed = viewBox.width < DEFAULT_MAP_VIEWBOX.width - 1;
 
+  const partitionedLocations = useMemo(
+    () =>
+      selectedBuilding
+        ? partitionBuildingLocations(selectedBuilding.locations)
+        : { colleges: [], others: [] },
+    [selectedBuilding]
+  );
+
+  const renderLocationItem = (loc: CampusLocation) => {
+    const isHighlightedLoc = highlightedLocationId === loc.id;
+
+    return (
+      <li
+        key={loc.id}
+        data-search-match={isHighlightedLoc ? 'true' : undefined}
+        className={`rounded-md border p-3 transition-colors ${
+          isHighlightedLoc
+            ? 'border-brand-crimson bg-brand-crimson-wash/50 ring-1 ring-brand-crimson'
+            : 'border-border-subtle bg-canvas-paper'
+        }`}
+      >
+        <p className="text-sm font-semibold text-ink-primary">{loc.name}</p>
+        {loc.floor && (
+          <p className="mt-0.5 text-xs font-medium text-ink-secondary">
+            {loc.floor}
+          </p>
+        )}
+      </li>
+    );
+  };
+
   return (
     <section aria-label="Interactive BulSU Malolos Main Campus Map" className="space-y-4">
       {/* Search Bar */}
@@ -484,7 +519,11 @@ export default function CampusMap() {
               <button
                 type="button"
                 aria-label="Reset map view"
-                disabled={!isZoomed && viewBox.x === 0 && viewBox.y === 0}
+                disabled={
+                  !isZoomed &&
+                  viewBox.x === DEFAULT_MAP_VIEWBOX.x &&
+                  viewBox.y === DEFAULT_MAP_VIEWBOX.y
+                }
                 onClick={handleResetMap}
                 className="inline-flex h-8 items-center rounded border border-border-strong bg-surface-card/95 px-2.5 text-xs font-medium text-ink-primary shadow-xs hover:bg-surface-card disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
@@ -547,6 +586,10 @@ export default function CampusMap() {
                 {CAMPUS_PATHS.map((d, index) => (
                   <path key={index} d={d} />
                 ))}
+                {SHOW_CAMPUS_2 &&
+                  CAMPUS_2_PATHS.map((d, index) => (
+                    <path key={`c2-${index}`} d={d} />
+                  ))}
               </g>
               <g
                 fill="none"
@@ -559,6 +602,10 @@ export default function CampusMap() {
                 {CAMPUS_PATHS.map((d, index) => (
                   <path key={index} d={d} />
                 ))}
+                {SHOW_CAMPUS_2 &&
+                  CAMPUS_2_PATHS.map((d, index) => (
+                    <path key={`c2-${index}`} d={d} />
+                  ))}
               </g>
 
               {/* Park Labels Layer (rendered above paths for legibility) */}
@@ -580,6 +627,50 @@ export default function CampusMap() {
                     {park.name}
                   </text>
                 ))}
+                <text
+                  transform="translate(239.4, 519.2) rotate(-42)"
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize={8}
+                  fontWeight={600}
+                  letterSpacing="0.04em"
+                  fill="var(--color-ink-secondary)"
+                  stroke="var(--color-canvas-paper)"
+                  strokeWidth={3}
+                  style={{ paintOrder: 'stroke' }}
+                >
+                  Lover's Lane
+                </text>
+                <text
+                  transform="translate(225.9, 294.1) rotate(-43.6)"
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize={8}
+                  fontWeight={600}
+                  letterSpacing="0.04em"
+                  fill="var(--color-ink-secondary)"
+                  stroke="var(--color-canvas-paper)"
+                  strokeWidth={3}
+                  style={{ paintOrder: 'stroke' }}
+                >
+                  Mojon Diversion Road
+                </text>
+                {SHOW_CAMPUS_2 && (
+                  <text
+                    transform="translate(686.3, -135.3) rotate(-43)"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={8}
+                    fontWeight={600}
+                    letterSpacing="0.04em"
+                    fill="var(--color-ink-secondary)"
+                    stroke="var(--color-canvas-paper)"
+                    strokeWidth={3}
+                    style={{ paintOrder: 'stroke' }}
+                  >
+                    Mojon Diversion Road
+                  </text>
+                )}
               </g>
 
               {/* Clickable Campus Buildings */}
@@ -727,7 +818,10 @@ export default function CampusMap() {
               </g>
 
               {/* Compass Rose */}
-              <g transform="translate(944, 58)" style={{ pointerEvents: 'none' }}>
+              <g
+                transform={SHOW_CAMPUS_2 ? 'translate(1030, -440)' : 'translate(944, 58)'}
+                style={{ pointerEvents: 'none' }}
+              >
                 <circle r={22} fill="var(--color-surface-card)" stroke="var(--color-border-strong)" strokeWidth={1.5} />
                 <polygon points="0,-14 5,4 0,0 -5,4" fill="var(--color-brand-crimson)" />
                 <text
@@ -759,6 +853,10 @@ export default function CampusMap() {
               Building
             </span>
             <span className="inline-flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded-xs border border-[var(--color-map-park-stroke)] bg-[var(--color-map-park-fill)]" />
+              Park
+            </span>
+            <span className="inline-flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-brand-crimson-solid" />
               Campus Gate
             </span>
@@ -782,30 +880,14 @@ export default function CampusMap() {
                   ref={locationListRef}
                   className="mt-3 max-h-[32rem] min-h-0 flex-1 space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable] lg:max-h-none"
                 >
-                  {selectedBuilding.locations.map((loc) => {
-                    const isHighlightedLoc = highlightedLocationId === loc.id;
-
-                    return (
-                      <li
-                        key={loc.id}
-                        data-search-match={isHighlightedLoc ? 'true' : undefined}
-                        className={`rounded-md border p-3 transition-colors ${
-                          isHighlightedLoc
-                            ? 'border-brand-crimson bg-brand-crimson-wash/50 ring-1 ring-brand-crimson'
-                            : 'border-border-subtle bg-canvas-paper'
-                        }`}
-                      >
-                        <p className="text-sm font-semibold text-ink-primary">
-                          {loc.name}
-                        </p>
-                        {loc.floor && (
-                          <p className="mt-0.5 text-xs font-medium text-ink-secondary">
-                            {loc.floor}
-                          </p>
-                        )}
+                  {partitionedLocations.colleges.map(renderLocationItem)}
+                  {partitionedLocations.colleges.length > 0 &&
+                    partitionedLocations.others.length > 0 && (
+                      <li role="separator" aria-hidden="true" className="py-1.5">
+                        <div className="border-t border-border-strong" />
                       </li>
-                    );
-                  })}
+                    )}
+                  {partitionedLocations.others.map(renderLocationItem)}
                 </ul>
               ) : (
                 <p className="mt-3 text-sm text-ink-secondary">

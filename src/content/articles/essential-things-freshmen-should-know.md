@@ -42,62 +42,58 @@ sources:
     url: "https://www.facebook.com/BulSUStudentFinancialAssistanceandScholarships/posts/pfbid024vuQdofXvNYd4fL4MWiR32PJ9m8vatXbFYXs7yzHcg4SekV7wK78ve2qAZKUSreil"
 ---
 
-Incoming freshmen and transfer students must complete orientation, medical clearance, student portal setup, and gate ID compliance during their first term at Bulacan State University. Unless noted otherwise, the procedures below apply to the Main Campus in Malolos.
+Incoming freshmen and transfer students must complete orientation, medical clearance, student portal setup, and gate ID compliance during their first term at Bulacan State University. Unless noted otherwise, these steps apply to the Main Campus in Malolos.
 
 ## Handog ni BulSU kay Bunso orientation
 
 All incoming freshmen and transferees must attend *Handog ni BulSU kay Bunso*, BulSU's annual orientation held before 1st semester classes open. Upperclassmen attend a shorter re-orientation each first semester.
 
-For timing reference, the 2026 Main Campus orientation ran by college at Valencia Hall in late June. Morning sessions ran from 8:00 AM to 12:00 NN, and afternoon sessions ran from 1:00 PM to 5:00 PM. Watch your campus Student Affairs Facebook page for your college's assigned half-day session.
+In 2026, Main Campus orientation ran by college at Valencia Hall in late June, with morning sessions from 8:00 AM to 12:00 NN and afternoon sessions from 1:00 PM to 5:00 PM. Watch your campus Student Affairs Facebook page for your college's assigned half-day slot.
 
 ## Student portal (ALAB SMS), enrollment, and your COR
 
-After submitting hard copies of your admission requirements to the Registrar's Office, wait for an email with your portal login credentials. You will use those credentials to log in, choose your curriculum, and enlist in classes.
-
-BulSU uses the [ALAB SMS Portal](https://alabsms.bulsu.edu.ph/) for enrollment, viewing grades, and submitting add, change, or drop requests.
+After submitting hard copies of your admission requirements to the Registrar's Office, wait for an email with your portal login credentials. You will use those credentials to log in, pick your curriculum, and enlist in classes on the [ALAB SMS Portal](https://alabsms.bulsu.edu.ph/), which also handles grade viewing and add, change, or drop requests.
 
 ### How to enlist in ALAB SMS
 
 1. Log in to the [ALAB SMS Portal](https://alabsms.bulsu.edu.ph/) with your BulSU account.
-2. Open **Enrollment** under the **Academic** menu and pick your section from the dropdown.
-3. Review the auto-assigned subjects, including course codes, units, schedules, rooms, and instructors. Tick any extra subjects if needed.
+2. Open **Enrollment** under **Academic** and pick your section from the dropdown.
+3. Check the auto-assigned subjects, including course codes, units, schedules, rooms, and instructors. Tick any extra subjects if needed.
 4. Click **Check assessment** to save your selections and preview your assessment.
-5. Click **Enlist** to finalize your enrollment. Saving alone does not enlist you.
+5. Click **Enlist** to finish. Saving alone does not enlist you.
 
 ### How to download or print your COR
 
-Your Certificate of Registration (COR) is your proof of official enrollment and your backup pass at campus gates.
+Your Certificate of Registration (COR) proves your official enrollment and serves as your backup pass at campus gates.
 
-1. Log in to the student portal and click the **Student** tab in the top menu.
-2. Select **Class Schedule**, then choose the current academic year and term.
+1. Log in to the student portal and click **Student** in the top menu.
+2. Open **Class Schedule**, then pick the current academic year and term.
 3. Click the print icon in the top-right corner of the page.
-4. Select **Certificate of Registration (COR)** to download a PDF copy or print it directly.
+4. Choose **Certificate of Registration (COR)** to save a PDF copy or print it directly.
 
 ### Common ALAB SMS issues
 
 - **Cannot view grades:** Finish faculty evaluations for every instructor for the current semester. If grades stay locked afterward, submit an ICTO helpdesk ticket.
-- **Enrollment on hold for outstanding balance:** Settle unpaid balances with the Accounting Office and wait for the portal to update. If you think the balance is wrong, file an ICTO ticket or check in person at Accounting.
-- **Login or portal access problems:** Try the Forgot Password link first. If you still cannot sign in, file an ICTO ticket or visit the ICTO office at Carpio Hall Room 103 (Main Campus).
+- **Enrollment on hold for outstanding balance:** Pay any unpaid balance at the Accounting Office and wait for the portal to update. If you think the balance is wrong, file an ICTO ticket or verify it in person at Accounting.
+- **Login or portal access problems:** Try the Forgot Password link first. If you still cannot sign in, file an ICTO ticket or visit the ICTO office at Carpio Hall Room 103 on the Main Campus.
 
 ### How to submit an ICTO Helpdesk ticket
 
 You do not need an account to file a ticket at the [ICTO Helpdesk](https://icto-helpdesk.bulsu.edu.ph/).
 
 1. Open the [ICTO Helpdesk](https://icto-helpdesk.bulsu.edu.ph/) and read the **User Guide** at the top of the page.
-2. Choose the right support category:
-   - **Information System Support** for portal, Google, or Microsoft accounts and passwords.
-   - **IT Infrastructure Assistance** for Wi-Fi, LAN, computers, or equipment issues.
-3. Fill out your full name as listed in university records, student number, college, and a valid email address. Birthdate is required only for Google or Microsoft account requests.
+2. Pick the right support category: **Information System Support** for portal, Google, or Microsoft accounts and passwords, or **IT Infrastructure Assistance** for Wi-Fi, LAN, computers, and equipment.
+3. Enter your full name as listed in university records, student number, college, and a valid email address. Birthdate is required only for Google or Microsoft account requests.
 4. Describe the issue, attach an optional screenshot in PNG, JPG, or PDF format up to 10 MB, and submit. Save your request number.
-5. Track updates via email using your request number. If you lose it, email **icto@bulsu.edu.ph**.
+5. Follow up by email using your request number. If you lose it, email **icto@bulsu.edu.ph**.
 
 ## Student ID, gate entry, and weekly uniforms
 
-Campus guards enforce a strict **No ID, No Entry** policy. Incoming freshmen request their university ID through the Freshmen ID Request Form posted on the BulSU ICTO Facebook page. Watch ICTO or your campus office for your photo capture and claiming schedule.
+Campus guards enforce a strict **No ID, No Entry** policy. Incoming freshmen request their university ID through the Freshmen ID Request Form posted on the BulSU ICTO Facebook page, then watch ICTO or their campus office for photo capture and claiming schedules.
 
-While waiting for your physical ID, or if you forget it at home, present your printed COR at the gate so the guard can write a remark, date it, and sign the back for temporary entry. During freshman enrollment days at Main Campus, bring a reusable tumbler because disposable bottled water is not allowed on campus; students with disabilities may be assisted inside by a parent or guardian.
+While waiting for your physical ID, or if you leave it at home, show your printed COR at the gate so the guard can write a remark, date it, and sign the back for temporary entry. During freshman enrollment days on the Main Campus, bring a reusable tumbler because disposable bottled water is not allowed inside; students with disabilities may bring a parent or guardian to assist them.
 
-Recent college advisories for A.Y. 2026-2027 follow this weekly attire schedule:
+College advisories for A.Y. 2026-2027 follow this weekly attire schedule:
 
 | Day or class | Required attire |
 | --- | --- |
@@ -106,40 +102,43 @@ Recent college advisories for A.Y. 2026-2027 follow this weekly attire schedule:
 | Wednesday, Saturday, and Sunday | Wash Day or Free Day, in decent civilian attire |
 | PATHFIT, PE, NSTP, and lab classes | Activity uniforms or lab outfits, worn only during those class hours |
 
-For PATHFIT classes, college uniform guides specify the white-and-red gradient BulSU PATH-Fit shirt, red athletic shorts with BulSU branding, and rubber shoes. Check your college Local Student Council page for exact ordering instructions and when the uniform becomes required. Read [BulSU Dress Code, Grooming, and ID Policy](/articles/bulsu-dress-code-and-id-policy) for hair and jewelry rules.
+For PATHFIT classes, college uniform guides specify the white-and-red gradient BulSU PATH-Fit shirt, red athletic shorts with BulSU branding, and rubber shoes. Check your college Local Student Council page for ordering details and when the uniform becomes required. Read [BulSU Dress Code, Grooming, and ID Policy](/articles/bulsu-dress-code-and-id-policy) for hair and jewelry rules.
 
 ## Campus services you can use from day one
 
 ### BulSU e-Library
 
-- **Operating hours:** Regular Main Campus hours run Monday to Friday from 7:00 AM to 7:00 PM, and Saturday from 8:00 AM to 5:00 PM, with no noon break. Check the BulSU e-Library Facebook page before visiting, as university flexible work or blended learning memos occasionally pause face-to-face service on specific days while keeping online resources open.
-- **Overnight book loans:** Students registered in the library system can borrow up to 2 books overnight by presenting their BulSU ID card. Overnight loans start at 3:00 PM and are due by 10:00 AM the next day, with fines for late returns.
-- **Exam week extensions:** During major exam weeks such as midterms, the e-Library occasionally opens 24-hour study service with QR reservation.
+Regular Main Campus hours run Monday to Friday from 7:00 AM to 7:00 PM, and Saturday from 8:00 AM to 5:00 PM, with no noon break. Check the BulSU e-Library Facebook page before visiting, since university flexible work or blended learning memos sometimes pause face-to-face service on certain days while keeping online resources open.
+
+Students registered in the library system can borrow up to 2 books overnight with their BulSU ID card, starting at 3:00 PM and due by 10:00 AM the next day (late returns carry fines). During major exam weeks such as midterms, the e-Library also occasionally opens 24-hour study service with QR reservation.
 
 ### University Health Services (Clinic)
 
-Freshmen, transferees, and shifters must complete an annual medical and dental examination at University Health Services. During slot reservation, bring your emailed Medical and Dental Assessment Form, a chest X-ray taken within 6 months, and medical clearance or a PWD ID if applicable. Confirm the Admissions Office's current room or temporary site on its Facebook page before going, since venues can shift between academic years.
+Freshmen, transferees, and shifters must complete an annual medical and dental exam at University Health Services. During slot reservation, bring your emailed Medical and Dental Assessment Form, a chest X-ray taken within 6 months, and medical clearance or a PWD ID if applicable. Confirm the Admissions Office's current room or temporary site on its Facebook page before going, since venues can move between academic years.
 
 Once enrolled, Main Campus students get free medical and dental consultations, free medicines, laboratory requests and referrals, free dental prophylaxis and tooth extractions, and teleconsultations through the campus Clinic Facebook page.
 
 ### Guidance and psychological support
 
-- **Standardized testing:** Freshmen take the Mental Ability Test (MAT) through the Guidance and Counseling Services Center, followed by the College Adjustment Scale (CAS) in 2nd year and the OMNI Personality Inventory in 3rd year. Wait for your college's assigned schedule.
-- **Center for Psychological Wellness (CPW):** Offers free one-on-one counseling, initial psychological screening (not formal diagnosis), and on-call support with Guidance and the University Clinic during stress-related incidents.
+Freshmen take the Mental Ability Test (MAT) through the Guidance and Counseling Services Center, followed by the College Adjustment Scale (CAS) in 2nd year and the OMNI Personality Inventory in 3rd year. Wait for your college's assigned schedule.
+
+The Center for Psychological Wellness (CPW) offers free one-on-one counseling, initial psychological screening (not formal diagnosis), and on-call support with Guidance and the University Clinic during stress-related incidents.
 
 ## How class suspensions work at BulSU
 
-On-site class suspensions are announced through Office of the University President (OUP) or OVPAA memos shared by BulSU Official, BulSU SG, and college LSC pages. Do not assume an on-site suspension means zero classes—check the exact modality stated in the memo:
+On-site class suspensions come from Office of the University President (OUP) or OVPAA memos shared by BulSU Official, BulSU SG, and college LSC pages. Do not assume an on-site suspension means zero classes. Check the exact modality stated in the memo:
 
-- **Typhoons, high heat index (42 to 43°C), or transport strikes:** On-site lectures usually shift to synchronous online classes. Lab activities or exams may continue if venues are safe, or midterms may be moved to later dates.
-- **Heavy monsoon rain or Malacañang circulars:** Classes shift to asynchronous mode with no synchronous meetings, and faculty are directed to give leniency for flooding, power outages, or connectivity issues.
+- **Typhoons, high heat index (42 to 43°C), or transport strikes:** On-site lectures usually shift to synchronous online classes. Lab activities or exams may still run if venues are safe, or midterms may move to later dates.
+- **Heavy monsoon rain or Malacañang circulars:** Classes shift to asynchronous mode with no synchronous meetings, and faculty give leniency for flooding, power outages, or connectivity issues.
 - **Local advisories (such as water interruptions):** Main Campus may suspend on-site classes following Malolos CDRRMC advisories.
 
 ## NSTP, student organizations, and scholarships
 
-- **NSTP (ROTC, CWTS, or LTS):** Freshmen complete one NSTP component during their first year. Follow BulSU ROTC, BulSU CWTS, or your campus NSTP page at the start of 1st semester for pre-registration forms and COR submission steps, as procedures differ between Main and satellite campuses.
-- **Student organizations and publications:** Joining is voluntary starting in first year. Check the BulSU Office of Student Organizations and Activities (OSOA) Recognized Student Organizations list for the current academic year to confirm an organization is accredited. Campus publications like *The Pacesetter* also hold freshman staffer recruitment booths, exams, and interviews early in the 1st semester.
-- **Free Tuition vs. TES scholarships:** Free Higher Education (RA 10931) is separate from the UniFAST Tertiary Education Subsidy (TES). If you plan to apply for TES, monitor the BulSU Student Financial Assistance and Scholarships Facebook page closely—application windows can be as short as 24 hours with strict deadlines.
+Freshmen complete one NSTP component (ROTC, CWTS, or LTS) during their first year. Follow BulSU ROTC, BulSU CWTS, or your campus NSTP page at the start of 1st semester for pre-registration forms and COR submission steps, as procedures differ between Main and satellite campuses.
+
+Joining student organizations and campus publications is voluntary starting in first year. Check the BulSU Office of Student Organizations and Activities (OSOA) Recognized Student Organizations list for the current academic year to confirm an organization is accredited. Publications like *The Pacesetter* also hold freshman staffer recruitment booths, exams, and interviews early in the 1st semester.
+
+Free Higher Education (RA 10931) is separate from the UniFAST Tertiary Education Subsidy (TES). If you plan to apply for TES, watch the BulSU Student Financial Assistance and Scholarships Facebook page closely because application windows can be as short as 24 hours with strict deadlines.
 
 ## Student classifications on your COR
 

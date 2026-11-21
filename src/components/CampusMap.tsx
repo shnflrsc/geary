@@ -380,7 +380,7 @@ export default function CampusMap() {
             }}
             onKeyDown={handleSearchKeyDown}
             placeholder="Search..."
-            className="w-full rounded-lg border border-border-strong bg-white py-3 pr-20 pl-10 text-sm text-ink-primary shadow-xs placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
+            className="w-full rounded-lg border border-border-strong bg-surface-card py-3 pr-20 pl-10 text-sm text-ink-primary shadow-xs placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
           />
           {query && (
             <button
@@ -404,7 +404,7 @@ export default function CampusMap() {
             id={listboxId}
             role="listbox"
             aria-label="Campus location search results"
-            className="absolute z-30 mt-1.5 max-h-80 w-full overflow-y-auto rounded-md border border-border-subtle bg-white shadow-lg"
+            className="absolute z-30 mt-1.5 max-h-80 w-full overflow-y-auto rounded-md border border-border-subtle bg-surface-card shadow-lg"
           >
             {searchMatches.length === 0 ? (
               <div className="px-4 py-3 text-sm text-ink-secondary">
@@ -458,7 +458,7 @@ export default function CampusMap() {
       {/* Main Split Workspace: Interactive 2D SVG Map + Selected Building Locations */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-start">
         {/* Interactive Map Viewport */}
-        <div className="overflow-hidden rounded-lg border border-border-subtle bg-white shadow-xs lg:col-span-7 xl:col-span-8">
+        <div className="overflow-hidden rounded-lg border border-border-subtle bg-surface-card shadow-xs lg:col-span-7 xl:col-span-8">
           <div className="relative bg-surface-subtle touch-none select-none">
             <div
               className="absolute top-3 left-3 z-10 flex items-center gap-1.5"
@@ -469,7 +469,7 @@ export default function CampusMap() {
                 type="button"
                 aria-label="Zoom in map"
                 onClick={() => updateViewBox((prev) => computeZoomViewBox(prev, 1.35))}
-                className="inline-flex h-8 w-8 items-center justify-center rounded border border-border-strong bg-white/95 text-sm font-bold text-ink-primary shadow-xs hover:bg-white focus-visible:outline-2 focus-visible:outline-brand-crimson"
+                className="inline-flex h-8 w-8 items-center justify-center rounded border border-border-strong bg-surface-card/95 text-sm font-bold text-ink-primary shadow-xs hover:bg-surface-card focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 +
               </button>
@@ -477,7 +477,7 @@ export default function CampusMap() {
                 type="button"
                 aria-label="Zoom out map"
                 onClick={() => updateViewBox((prev) => computeZoomViewBox(prev, 1 / 1.35))}
-                className="inline-flex h-8 w-8 items-center justify-center rounded border border-border-strong bg-white/95 text-sm font-bold text-ink-primary shadow-xs hover:bg-white focus-visible:outline-2 focus-visible:outline-brand-crimson"
+                className="inline-flex h-8 w-8 items-center justify-center rounded border border-border-strong bg-surface-card/95 text-sm font-bold text-ink-primary shadow-xs hover:bg-surface-card focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 -
               </button>
@@ -486,7 +486,7 @@ export default function CampusMap() {
                 aria-label="Reset map view"
                 disabled={!isZoomed && viewBox.x === 0 && viewBox.y === 0}
                 onClick={handleResetMap}
-                className="inline-flex h-8 items-center rounded border border-border-strong bg-white/95 px-2.5 text-xs font-medium text-ink-primary shadow-xs hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+                className="inline-flex h-8 items-center rounded border border-border-strong bg-surface-card/95 px-2.5 text-xs font-medium text-ink-primary shadow-xs hover:bg-surface-card disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 Reset
               </button>
@@ -517,8 +517,8 @@ export default function CampusMap() {
               {/* Campus Ground Perimeter */}
               <path
                 d={CAMPUS_PERIMETER_PATH}
-                fill="#F8F9FA"
-                stroke="#CED4DA"
+                fill="var(--color-canvas-paper)"
+                stroke="var(--color-border-strong)"
                 strokeWidth={2.5}
                 style={{ pointerEvents: 'none' }}
               />
@@ -528,8 +528,8 @@ export default function CampusMap() {
                 <path
                   key={`${park.name}-fill`}
                   d={park.svgPath}
-                  fill="#E6F4EA"
-                  stroke="#A8DAB5"
+                  fill="var(--color-map-park-fill)"
+                  stroke="var(--color-map-park-stroke)"
                   strokeWidth={1.5}
                   style={{ pointerEvents: 'none' }}
                 />
@@ -538,7 +538,7 @@ export default function CampusMap() {
               {/* Walkways & Internal Roads */}
               <g
                 fill="none"
-                stroke="#DCE2E8"
+                stroke="var(--color-border-subtle)"
                 strokeWidth={5}
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -550,7 +550,7 @@ export default function CampusMap() {
               </g>
               <g
                 fill="none"
-                stroke="#FFFFFF"
+                stroke="var(--color-surface-card)"
                 strokeWidth={2.5}
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -572,8 +572,8 @@ export default function CampusMap() {
                     dominantBaseline="central"
                     fontSize={9}
                     fontWeight={600}
-                    fill="#1E4620"
-                    stroke="#E6F4EA"
+                    fill="var(--color-map-park-ink)"
+                    stroke="var(--color-map-park-fill)"
                     strokeWidth={3}
                     style={{ paintOrder: 'stroke' }}
                   >
@@ -588,21 +588,21 @@ export default function CampusMap() {
                 const isHovered = hoveredBuildingId === building.id;
                 const isHighlighted = matchingBuildingIds.has(building.id);
 
-                let fill = '#FFFFFF';
-                let stroke = '#64748B';
+                let fill = 'var(--color-surface-card)';
+                let stroke = 'var(--color-border-strong)';
                 let strokeWidth = 1.6;
 
                 if (isSelected) {
-                  fill = '#8B1538';
-                  stroke = '#590B22';
+                  fill = 'var(--color-brand-crimson-solid)';
+                  stroke = 'var(--color-brand-gold)';
                   strokeWidth = 3;
                 } else if (isHighlighted) {
-                  fill = '#FEF9E7';
-                  stroke = '#B47B00';
+                  fill = 'var(--color-brand-gold-wash)';
+                  stroke = 'var(--color-brand-gold)';
                   strokeWidth = 2.6;
                 } else if (isHovered) {
-                  fill = '#FDF2F4';
-                  stroke = '#8B1538';
+                  fill = 'var(--color-brand-crimson-wash)';
+                  stroke = 'var(--color-brand-crimson)';
                   strokeWidth = 2.2;
                 }
 
@@ -653,14 +653,14 @@ export default function CampusMap() {
                   const isSelected = selectedBuildingId === building.id;
                   const isHovered = hoveredBuildingId === building.id;
                   const isHighlighted = matchingBuildingIds.has(building.id);
-                  const textFill = isSelected ? '#FFFFFF' : '#181C20';
+                  const textFill = isSelected ? '#FFFFFF' : 'var(--color-ink-primary)';
                   const textStroke = isSelected
-                    ? '#8B1538'
+                    ? 'var(--color-brand-crimson-solid)'
                     : isHighlighted
-                      ? '#FEF9E7'
+                      ? 'var(--color-brand-gold-wash)'
                       : isHovered
-                        ? '#FDF2F4'
-                        : '#FFFFFF';
+                        ? 'var(--color-brand-crimson-wash)'
+                        : 'var(--color-surface-card)';
 
                   return (
                     <text
@@ -689,14 +689,14 @@ export default function CampusMap() {
                   transform={`translate(${gate.x}, ${gate.y})`}
                   style={{ pointerEvents: 'none' }}
                 >
-                  <circle r={6} fill="#8B1538" stroke="#FFFFFF" strokeWidth={2} />
+                  <circle r={6} fill="var(--color-brand-crimson-solid)" stroke="var(--color-surface-card)" strokeWidth={2} />
                   <rect
                     x={10}
                     y={-10}
                     width={gate.name.length * 5.8 + 10}
                     height={19}
                     rx={4}
-                    fill="#181C20"
+                    fill="var(--color-ink-primary)"
                   />
                   <text
                     x={15}
@@ -704,7 +704,7 @@ export default function CampusMap() {
                     dominantBaseline="central"
                     fontSize={9.5}
                     fontWeight={600}
-                    fill="#FFFFFF"
+                    fill="var(--color-canvas-paper)"
                   >
                     {gate.name}
                   </text>
@@ -720,7 +720,7 @@ export default function CampusMap() {
                   fontSize={10.5}
                   fontWeight={700}
                   letterSpacing="0.08em"
-                  fill="#636C74"
+                  fill="var(--color-ink-muted)"
                 >
                   MACARTHUR HIGHWAY
                 </text>
@@ -728,15 +728,15 @@ export default function CampusMap() {
 
               {/* Compass Rose */}
               <g transform="translate(944, 58)" style={{ pointerEvents: 'none' }}>
-                <circle r={22} fill="#FFFFFF" stroke="#CED4DA" strokeWidth={1.5} />
-                <polygon points="0,-14 5,4 0,0 -5,4" fill="#8B1538" />
+                <circle r={22} fill="var(--color-surface-card)" stroke="var(--color-border-strong)" strokeWidth={1.5} />
+                <polygon points="0,-14 5,4 0,0 -5,4" fill="var(--color-brand-crimson)" />
                 <text
                   x={0}
                   y={14}
                   textAnchor="middle"
                   fontSize={9}
                   fontWeight={700}
-                  fill="#181C20"
+                  fill="var(--color-ink-primary)"
                 >
                   N
                 </text>
@@ -745,21 +745,21 @@ export default function CampusMap() {
           </div>
 
           {/* Map Legend */}
-          <div className="flex flex-wrap items-center gap-4 border-t border-border-subtle bg-white px-3.5 py-2.5 text-xs text-ink-secondary">
+          <div className="flex flex-wrap items-center gap-4 border-t border-border-subtle bg-surface-card px-3.5 py-2.5 text-xs text-ink-secondary">
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-3 w-3 rounded-xs border border-brand-crimson-hover bg-brand-crimson" />
+              <span className="h-3 w-3 rounded-xs border border-brand-gold bg-brand-crimson-solid" />
               Selected
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-3 w-3 rounded-xs border border-brand-gold-ink bg-brand-gold-wash" />
+              <span className="h-3 w-3 rounded-xs border border-brand-gold bg-brand-gold-wash" />
               Search match
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-3 w-3 rounded-xs border border-border-strong bg-white" />
+              <span className="h-3 w-3 rounded-xs border border-border-strong bg-surface-card" />
               Building
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-brand-crimson" />
+              <span className="h-2.5 w-2.5 rounded-full bg-brand-crimson-solid" />
               Campus Gate
             </span>
           </div>
@@ -769,7 +769,7 @@ export default function CampusMap() {
         <aside
           aria-live="polite"
           aria-label="Selected building locations"
-          className="rounded-lg border border-border-subtle bg-white p-4 shadow-xs sm:p-5 lg:col-span-5 xl:col-span-4"
+          className="rounded-lg border border-border-subtle bg-surface-card p-4 shadow-xs sm:p-5 lg:col-span-5 xl:col-span-4"
         >
           {selectedBuilding ? (
             <div>

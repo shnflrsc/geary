@@ -563,4 +563,98 @@ Test body.
 
     expect(pageErrors).toEqual([]);
   });
+
+  test('TC-E2E-08: supports Light, Dark, and System default theme with persistence, keyboard nav, and header placement', async ({
+    page,
+  }) => {
+    // 1. Default follows system preference (emulate dark first)
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/articles');
+
+    await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+    await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
+    const darkBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    expect(darkBg).toBe('rgb(15, 19, 23)');
+
+    // Desktop placement: theme toggle is to the left of the header search bar
+    const trigger = page.locator('#theme-toggle-button');
+    const headerSearch = page.locator('header input[role="combobox"]');
+    const triggerBox = await trigger.boundingBox();
+    const searchBox = await headerSearch.boundingBox();
+    expect(triggerBox && searchBox && triggerBox.x < searchBox.x).toBe(true);
+
+    // Keyboard open & select Light
+    await trigger.focus();
+    await page.keyboard.press('Enter');
+    const menu = page.locator('#theme-toggle-menu');
+    await expect(menu).toBeVisible();
+    await expect(menu.locator('[role="menuitemradio"]')).toHaveCount(3);
+    await expect(menu.locator('[data-theme-option="light"]')).toContainText('Light');
+    await expect(menu.locator('[data-theme-option="dark"]')).toContainText('Dark');
+    await expect(menu.locator('[data-theme-option="system"]')).toContainText('System default');
+
+    await menu.locator('[data-theme-option="light"]').click();
+    await expect(menu).toBeHidden();
+    await expect(page.locator('html')).not.toHaveClass(/\bdark\b/);
+    await expect(page.evaluate(() => window.localStorage.getItem('geary-theme'))).resolves.toBe(
+      'light',
+    );
+
+    // Reload preserves Light even when OS is dark
+    await page.reload();
+    await expect(page.locator('html')).not.toHaveClass(/\bdark\b/);
+    const lightBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    expect(lightBg).toBe('rgb(248, 249, 250)');
+
+    // Switch to Dark and reload while OS is light
+    await page.emulateMedia({ colorScheme: 'light' });
+    await trigger.click();
+    await menu.locator('[data-theme-option="dark"]').click();
+    await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+    await page.reload();
+    await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+
+    // Switch back to System default -> follows emulated light, then dark live
+    await trigger.click();
+    await menu.locator('[data-theme-option="system"]').click();
+    await expect(page.locator('html')).not.toHaveClass(/\bdark\b/);
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+
+    // Mobile placement: theme toggle is to the left of the burger menu with >= 44px target
+    await page.setViewportSize({ width: 375, height: 812 });
+    const mobileTriggerBox = await trigger.boundingBox();
+    const burgerBox = await page.locator('#mobile-menu-toggle').boundingBox();
+    expect(mobileTriggerBox && burgerBox && mobileTriggerBox.x < burgerBox.x).toBe(true);
+    expect(mobileTriggerBox && mobileTriggerBox.width >= 44 && mobileTriggerBox.height >= 44).toBe(
+      true,
+    );
+  });
+
+  test('TC-A11Y-03: passes WCAG 2.1 AA Axe checks in dark mode across key routes', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('geary-theme', 'dark');
+    });
+
+    const routes = [
+      '/',
+      '/articles',
+      '/categories/policies',
+      '/articles/can-i-graduate-with-honors',
+      '/map',
+      '/404.html',
+    ];
+
+    for (const route of routes) {
+      await page.goto(route);
+      await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+      const results = await new AxeBuilder({ page })
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+        .analyze();
+      expect(results.violations, `Dark mode Axe violations on ${route}`).toEqual([]);
+    }
+  });
 });

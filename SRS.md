@@ -44,7 +44,7 @@ This Software Requirements Specification (SRS) defines the formal software-level
 | :--- | :--- |
 | **CON-TECH-01** | The software shall build in Astro static output mode (`output: 'static'`) with zero server-side rendering (SSR) adapters or runtime edge functions. |
 | **CON-TECH-02** | Layout and component presentation shall be styled using **Tailwind CSS** utility classes and design tokens. |
-| **CON-TECH-03** | **React** shall be hydrated strictly via Astro island directives (`client:load` or `client:idle`) and limited exclusively to stateful client interactivity (`<SearchBar />`). |
+| **CON-TECH-03** | **React** shall be hydrated strictly via Astro island directives (`client:load` or `client:idle`) and limited to stateful client interactivity (`<SearchBar />`, `<ExploreSpotlight />`, and `<CampusMap />`). |
 | **CON-TECH-04** | **TypeScript** and **Zod** shall enforce compile-time type checking and build-time frontmatter schema validation across all content and data modules. |
 
 ### 2.2 Financial & Operational Constraints
@@ -65,7 +65,7 @@ This Software Requirements Specification (SRS) defines the formal software-level
 
 | ID | Constraint Statement |
 | :--- | :--- |
-| **CON-GOV-01** | Software capabilities are locked strictly to the four MVP pillars (Articles/Markdown, 5-Category Hierarchy, Client-Side Search Bar, and Low-Cognitive-Load BulSUan UI/UX); AI/RAG chatbots, authentication, user submissions, and BulSU SIS integrations are prohibited. |
+| **CON-GOV-01** | Software capabilities are locked strictly to the five MVP capabilities (Articles/Markdown, 7-Category Hierarchy, Client-Side Search Bar, Low-Cognitive-Load BulSUan UI/UX, and Interactive 2D Campus Map); AI/RAG chatbots, authentication, user submissions, and BulSU SIS integrations are prohibited. The existing embedded contribution form is a documented governance exception pending a dedicated scope decision. |
 | **CON-GOV-02** | The software shall display an explicit unofficial disclaimer across the global footer and article views stating that Geary is student-maintained and unaffiliated with Bulacan State University administration. |
 
 ---
@@ -78,10 +78,10 @@ This Software Requirements Specification (SRS) defines the formal software-level
 
 | Route Pattern | Purpose |
 | :--- | :--- |
-| `/` | Home hub rendering hero search bar, Featured Guides, and the 5-Category Directory. |
+| `/` | Home hub rendering hero search bar, Featured Articles, and the 7-Category Directory. |
 | `/categories/[slug]` | Category directory listing guides grouped by `subcategory` with breadcrumb navigation. |
 | `/articles/[slug]` | Distraction-free reading view with metadata header, responsive TOC, Markdown prose, disclaimer, and related guides. |
-| `/404.html` | Branded recovery page embedding the search bar and links to all five categories. |
+| `/404.html` | Branded recovery page embedding the search bar and links to all seven categories. |
 | `/search-index.json` | Static JSON search payload consumed by `<SearchBar />`. |
 
 #### `UI-INT-02`: Responsive Viewport Breakpoints
@@ -175,9 +175,9 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 - **Error Handling:** If the article collection is empty, omit the Featured section cleanly.
 
 #### `SRS-FUNC-RND-02`: Category Static Path Generation (`/categories/[slug]`)
-- **Inputs:** Canonical 5-category registry (`SW-INT-01`).
-- **Processing Logic:** Emit one static route per canonical category slug via `getStaticPaths()`, ensuring all five category URLs exist even when empty.
-- **Outputs:** Five static HTML category pages.
+- **Inputs:** Canonical 7-category registry (`SW-INT-01`).
+- **Processing Logic:** Emit one static route per canonical category slug via `getStaticPaths()`, ensuring all seven category URLs exist even when empty.
+- **Outputs:** Seven static HTML category pages.
 - **Error Handling:** Unmatched `/categories/*` paths resolve to `/404.html` (`SRS-FUNC-RND-06`).
 
 #### `SRS-FUNC-RND-03`: Deterministic Subcategory Grouping
@@ -202,7 +202,7 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 
 #### `SRS-FUNC-RND-06`: Related Guides Resolution & Custom `404` Page
 - **Inputs:** Active article (`slug`, `category`), article collection, and category registry.
-- **Processing Logic:** Filter articles matching `a.category === current.category && a.slug !== current.slug`, sort deterministically, and cap at `3` entries. Independently generate `/404.html` embedding `<SearchBar />` and links to all 5 categories.
+- **Processing Logic:** Filter articles matching `a.category === current.category && a.slug !== current.slug`, sort deterministically, and cap at `3` entries. Independently generate `/404.html` embedding `<SearchBar />` and links to all 7 categories.
 - **Outputs:** Up to 3 sibling article cards below the verification notice (omitted if `0` siblings exist), plus static `404.html`.
 - **Error Handling:** Never display the active article inside its own Related Guides list.
 
@@ -241,7 +241,7 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 
 #### `SRS-FUNC-SRCH-05`: Dismissal & Zero-Match Fallback UI
 - **Inputs:** Outside pointer clicks and `results.length === 0` with non-empty query.
-- **Processing Logic:** Close results overlay on outside click/tap (`mousedown`). When a non-empty query yields `0` results after index load, render an escaped no-match notice plus 5 clickable category quick-jump pills.
+- **Processing Logic:** Close results overlay on outside click/tap (`mousedown`). When a non-empty query yields `0` results after index load, render an escaped no-match notice plus 7 clickable category quick-jump pills.
 - **Outputs:** Predictable popover lifecycle and dead-end recovery.
 - **Error Handling:** Clean up document event listeners on component unmount.
 
@@ -269,7 +269,7 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 
 #### `SRS-FUNC-UI-03`: Unofficial Disclaimers & Global Footer
 - **Inputs:** Static disclaimer text and `SW-INT-01` category registry.
-- **Processing Logic:** Render a verification notice banner at the bottom of every article referencing official BulSU offices (Registrar, Admissions, OSAS), and render a global `<footer>` with Geary's unofficial disclaimer and 5 category links.
+- **Processing Logic:** Render a verification notice banner at the bottom of every article referencing official BulSU offices (Registrar, Admissions, OSAS), and render a global `<footer>` with Geary's unofficial disclaimer and 7 category links.
 - **Outputs:** Consistent transparency on every entry page.
 - **Error Handling:** None (pure static HTML).
 

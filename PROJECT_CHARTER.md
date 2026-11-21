@@ -64,7 +64,7 @@ To serve as the go-to, **unofficial centralized student information hub** for Bu
 
 ### 6.1 In-Scope (Confirmed MVP Pillars Only)
 1. **Articles & Markdown Authoring:** Publishing simplified, structured procedural how-to's, handbook summaries, and campus life guides authored in Markdown.
-2. **Categories & Purposeful Organization:** Organizing all content under five student-intent categories—*Admissions & Enrollment*, *Registrar & Documents*, *Handbook & Policies*, *Scholarships & Aid*, and *Campus Life & Spots*—with purposeful sub-topic hierarchy and reading orientation aids for fast skimming and exploration.
+2. **Categories & Purposeful Organization:** Organizing all content under seven student-intent categories—*Enrollment*, *Academics*, *Documents*, *Scholarships*, *Policies*, *Organizations*, and *Campus*—with purposeful sub-topic hierarchy and reading orientation aids for fast skimming and exploration.
 3. **Client-Side Search Bar:** Providing instant keyword discovery across published guides entirely within the user's browser with zero backend cost.
 4. **Low-Cognitive-Load UI/UX & BulSUan Visual Identity:** Establishing a calm, mobile-first reading layout and intuitive navigation tailored to BulSU students.
 5. **Interactive 2D Campus Map & Location Finder:** Providing an SVG-based BulSU Malolos Main Campus schematic (`/map`) with clickable buildings, indoor office/service listings, and instant location search with zero backend dependencies.
@@ -74,7 +74,7 @@ To serve as the go-to, **unofficial centralized student information hub** for Bu
 - **User Accounts & Authentication:** No student logins, profiles, or user-generated sessions.
 - **Dynamic Backends & Databases:** No runtime server APIs, comments sections, voting systems, or managed external databases.
 - **Official Portal Integration:** No integration with official BulSU enrollment portals, SIS, or administrative systems.
-- **Unapproved Auxiliary Features:** Any capability beyond the four confirmed MVP pillars is deferred post-MVP to preserve focus and prevent scope creep.
+- **Unapproved Auxiliary Features:** Any capability beyond the five confirmed MVP capabilities is deferred post-MVP to preserve focus and prevent scope creep.
 
 ---
 
@@ -87,7 +87,7 @@ To serve as the go-to, **unofficial centralized student information hub** for Bu
 - **Mandated Tech Stack:** Built strictly with **Astro + Tailwind CSS + React islands** (using React hydration only where client-side interactivity is strictly required).
 
 ### 7.3 Scope & UX Constraints
-- **Strict MVP Boundary:** Development is confined strictly to the four confirmed MVP pillars.
+- **Strict MVP Boundary:** Development is confined strictly to the five confirmed MVP capabilities.
 - **Low Cognitive Load Mandate:** Visual styling and navigation must actively minimize reading friction and distraction.
 
 ### 7.4 Operational & Legal Constraints

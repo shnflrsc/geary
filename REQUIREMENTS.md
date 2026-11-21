@@ -53,6 +53,12 @@ This document serves as the single authoritative traceability ledger across Gear
 | **RTM-20** | `OBJ-03`, `OBJ-04` | `REQ-UI-05` / `AC-UI-05` (`P1`) | `SRS-FUNC-RND-06`, `UI-INT-01` | `UC-04`, `ERR-08` | `src/pages/404.astro`, `SearchBar.tsx` | `BL-14`, `BL-17` | `TC-BLD-03`, `TC-E2E-05`, `TC-A11Y-01` | `[x] Verified` |
 | **RTM-21** | `OBJ-01`, `OBJ-03`, `OBJ-05` | `REQ-MAP-01`–`04` / `AC-MAP-01`–`04` (`P0`) | `SW-INT-04`, `SRS-FUNC-MAP-01`, `SRS-FUNC-MAP-02`, `SRS-FUNC-UI-01` | `UC-06` | `src/data/campus-map.ts`, `src/lib/map-search.ts`, `CampusMap.tsx`, `src/pages/map.astro`, `Header.astro` | `BL-21` | `TC-BLD-03`, `TC-UNIT-06`, `TC-E2E-04`, `TC-E2E-07`, `TC-A11Y-01` | `[x] Verified` |
 
+### 2.1 Planned Post-MVP Enhancement Traceability
+
+| RTM ID | Charter Obj | Requirement & Priority | Target Source & Design Artifacts | Backlog ID | Planned Verification | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **RTM-22** | `OBJ-02`, `OBJ-04` | Dark Mode design contract (`P1`, post-MVP) | `DESIGN_SYSTEM.md` §2.2; `ThemeToggle.astro`, `BaseLayout.astro` bootstrap, tokenized surfaces & `CampusMap.tsx` | `BL-22` | `TC-E2E-08`, `TC-A11Y-03` | `[x] Verified` |
+
 ---
 
 ## 3. Non-Functional Quality Requirements Traceability Matrix (`RTM-NFR-01` to `RTM-NFR-14`) *(ISO 29148 Clause 9.6.3.3 & ISO 25010)*

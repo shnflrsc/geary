@@ -137,7 +137,7 @@ export default function ExploreSpotlight({
                 type="button"
                 onClick={() => transitionToGroup(safeGroupIndex - 1)}
                 aria-label="Previous featured group"
-                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-white text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
+                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
               >
                 <svg
                   aria-hidden="true"
@@ -159,7 +159,7 @@ export default function ExploreSpotlight({
                 type="button"
                 onClick={() => transitionToGroup(safeGroupIndex + 1)}
                 aria-label="Next featured group"
-                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-white text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
+                className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-secondary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
               >
                 <svg
                   aria-hidden="true"
@@ -185,7 +185,7 @@ export default function ExploreSpotlight({
             <a
               key={item.slug}
               href={`/articles/${item.slug}`}
-              className="group flex flex-col justify-between rounded-xl border border-border-subtle bg-white p-5 transition-colors duration-150 hover:border-brand-crimson"
+              className="group flex flex-col justify-between rounded-xl border border-border-subtle bg-surface-card p-5 transition-colors duration-150 hover:border-brand-crimson"
             >
               <h3 className="font-heading text-base font-semibold leading-snug text-ink-primary transition-colors duration-150 group-hover:text-brand-crimson">
                 {item.title}

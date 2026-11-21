@@ -2,7 +2,7 @@
 title: "How to File a Leave of Absence"
 category: "enrollment"
 subcategory: "Leave & Readmission"
-updatedDate: 2026-11-19
+updatedDate: 2026-11-21
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
@@ -16,22 +16,22 @@ sources:
     url: "https://www.facebook.com/permalink.php?story_fbid=pfbid0ooC5AuHyF7xdot8Smp8Vuz3FMJyqzvWzRhyR9ep5htpm2J1s8HnRbDREYNbXXNNPl&id=61576726373776"
 ---
 
-Filing an official Leave of Absence (LOA) lets you pause enrollment for a semester or up to a full year without counting that time against your maximum residency. Stopping class attendance without filing an LOA uses up your residency clock and can result in failing or Unofficially Dropped (`UD`) marks.
+Filing an official Leave of Absence (LOA) lets you pause enrollment for a semester or up to a full year without using up your maximum residency. Stopping class attendance without an approved LOA keeps your residency clock running and can lead to failing or Unofficially Dropped (`UD`) marks.
 
 ## Limits, deadlines, and penalties
 
 - **1-year maximum:** An official LOA cannot exceed one year.
-- **Residency protection:** Semesters covered by an approved LOA do not count toward maximum residency (4 years for 2-year courses, 6 years for 4-year courses, 7.5 years for 5-year courses).
+- **Residency protection:** Semesters covered by an approved LOA do not count toward maximum residency. Standard residency limits are 4 years for 2-year courses, 6 years for 4-year courses, and 7.5 years for 5-year courses.
 - **Penalty for overstaying:** Staying away beyond one year lets your Dean require **3 to 6 additional academic units** when you return.
 
-The Office of the University Registrar announces each semester's filing cutoff on Facebook (for timing reference, the 1st Semester 2025-2026 deadline for dropping and LOA was October 4, 2025).
+The Office of the University Registrar announces each semester's filing deadline on Facebook. For timing reference, the 1st Semester 2025–2026 cutoff for dropping and LOA was October 4, 2025.
 
-**Note for Student Government officers:** Stepping back from SG council duties follows a separate internal SG filing rule and does not replace filing an academic LOA with the Registrar.
+**Note for Student Government officers:** Stepping back from Student Government council duties follows a separate internal filing rule and does not replace filing an academic LOA with the Registrar.
 
 ## How to file an LOA
 
 1. Request the LOA Form from the Office of the University Registrar before the semester's filing deadline.
-2. Fill out the form completely and obtain every required clearance or signature listed on it.
+2. Fill out the form completely and get every required clearance or signature listed on it.
 3. Photocopy your fully signed LOA form before turning it in.
 4. Submit the original form to the Office of the University Registrar and ask the receiving clerk to write their full name and signature on your photocopy as proof of receipt. Keep this copy for readmission.
 
@@ -39,27 +39,27 @@ The Office of the University Registrar announces each semester's filing cutoff o
 
 ### General procedure
 
-1. Appear in person at the Office of the University Registrar and apply for readmission, bringing your signed LOA photocopy to speed up verification.
-2. Take the Readmission Slip issued by the Registrar and hand it personally to your College or Campus Dean (or their authorized representative). The Dean cannot deny a readmitted student from enrolling.
+1. Go in person to the Office of the University Registrar to apply for readmission. Bring your signed LOA photocopy to speed up verification.
+2. Take the Readmission Slip issued by the Registrar and hand it personally to your College or Campus Dean, or their authorized representative. The Dean cannot deny a readmitted student from enrolling.
 
-### External campus checklist (Sarmiento Campus reference)
+### External campus requirements
 
-Check your College Dean or campus admissions page before your return semester for local requirements. For reference, Sarmiento Campus returning students submitted:
+Check your College Dean or campus admissions page before your return semester for local requirements. For reference, returning students at Sarmiento Campus submitted:
 
 - Re-admission Letter addressed to the Campus Dean
 - Completed Clearance Form
 - Medical Certificate, if your absence was due to physical illness
 - Psychological Evaluation, if your absence was due to a mental health condition
-- Report of Grades (requested in some semesters; confirm whether your campus needs it)
+- Report of Grades, if requested by your campus for that semester
 
 ## Curriculum rules when you return
 
 If your program's curriculum changed while you were away, your year level decides which checklist you follow:
 
-- Returning 2nd-year students (4-year course) or 3rd-year students (5-year course) shift to the new curriculum.
+- Returning 2nd-year students in a 4-year course and returning 3rd-year students in a 5-year course shift to the new curriculum.
 - Penultimate or senior-year returnees on an old curriculum follow subject substitution rules, replacing unoffered old subjects with related subjects of equal or higher credit units.
 
-## Related guides
+## Related articles
 
 - [How to Add, Change, or Drop Subjects](/articles/how-to-add-change-or-drop-subjects)
 - [Academic Load, Prerequisites, and Residency](/articles/academic-load-prerequisites-and-residency)

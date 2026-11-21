@@ -104,6 +104,7 @@ flowchart TD
         P_HOME["index.astro"]
         P_CAT["category/[slug].astro"]
         P_ART["articles/[slug].astro"]
+        P_MAP["map.astro"]
         P_404["404.astro"]
     end
 
@@ -134,6 +135,7 @@ flowchart TD
 
     P_HOME --> L_BASE
     P_CAT --> L_BASE
+    P_MAP --> L_BASE
     P_404 --> L_BASE
     P_ART --> L_ART
     L_ART --> L_BASE
@@ -156,6 +158,7 @@ flowchart TD
     L_ART --> C_ACARD
 
     P_404 --> I_SRCH
+    P_MAP --> I_MAP
 ```
 
 ### 4.2 Module & Component Responsibilities
@@ -255,7 +258,7 @@ export interface SearchIndexItem {
 ```
 
 ### 5.3 External Runtime Integrations
-**None.** Geary maintains zero external runtime integrations (no external databases, hosted search SaaS, LLM APIs, authentication services, or third-party tracking scripts), ensuring static resilience and zero runtime credential surfaces.
+Geary has no external runtime dependency for its core information hub: there are no databases, hosted search SaaS, LLM APIs, authentication services, or third-party tracking scripts. The existing `/contribute` page embeds a Google Form as an optional third-party submission surface; it is a documented governance exception that requires a dedicated scope decision before further expansion.
 
 ---
 

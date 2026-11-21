@@ -20,10 +20,10 @@ Geary's design philosophy—**low cognitive load, intuitive navigation, and a di
 
 | ISO 25010 Sub-Characteristic | Geary Design Implementation |
 | :--- | :--- |
-| **Appropriateness Recognizability** | Instantly communicates BulSU identity through Crimson (`#8B1538`) and Gear Gold (`#D4A017`) accents, a geometric gear mark, and a task-oriented 5-category student directory. |
+| **Appropriateness Recognizability** | Instantly communicates BulSU identity through Crimson (`#8B1538`) and Gear Gold (`#D4A017`) accents, a geometric gear mark, and a task-oriented 7-category student directory. |
 | **Learnability** | Uses predictable, repeatable page templates, hierarchical breadcrumbs (`Home › Category › Article`), and consistent card anatomy so first-time freshmen navigate without training. |
 | **Operability** | Mobile-first touch targets (`>= 44×44px`), keyboard shortcuts (`/` or `Ctrl+K` / `Cmd+K`, `Arrow` keys, `Enter`, `Escape`), and responsive Table of Contents placement (`<details>` on mobile, sticky rail on desktop). |
-| **User Error Protection** | Calm recovery paths on zero-match search queries (5 category pills), offline search fallback links, and a branded `/404.html` page with search and directory links. |
+| **User Error Protection** | Calm recovery paths on zero-match search queries (7 category pills), offline search fallback links, and a branded `/404.html` page with search and directory links. |
 | **User Interface Aesthetics** | Crisp Slate-Paper (`#F8F9FA`) surfaces keep reading clean without glare; `1px` cool borders (`#DEE2E6`) replace heavy shadows; article prose (`~65ch`) remains completely free of decorative watermarks or popups. |
 | **Accessibility** | Meets WCAG 2.1 Level AA color contrast (`>= 4.5:1` normal text), semantic HTML5 landmarks, visible `:focus-visible` outlines, and zero horizontal overflow at `375px`, `768px`, and `1280px`. |
 
@@ -49,6 +49,55 @@ Geary's design philosophy—**low cognitive load, intuitive navigation, and a di
 | **Typography Ink** | `ink-muted` | `--color-ink-muted` / `text-[#636C74]` | `#636C74` | `5.07:1` / `5.35:1` (**AA**) | Search input placeholders and subtle `<kbd>` hint labels. |
 | **Borders** | `border-subtle` | `--color-border` / `border-[#DEE2E6]` | `#DEE2E6` | `>= 1.2:1` structural | Default `1px` card borders, header/footer hairlines, Markdown table cell dividers. |
 | **Borders** | `border-strong` | `--color-border-strong` / `border-[#CED4DA]` | `#CED4DA` | Structural | Search input resting border and neutral hover elevation border. |
+
+### 2.2 Dark Mode Design Contract
+
+Dark mode (`BL-22` / `RTM-22`) preserves Geary's low-cognitive-load reading experience, restrained BulSUan identity, and WCAG 2.1 AA baseline; it is not a decorative reskin.
+
+#### 2.2.1 Theme Behavior and Preference Model
+
+- **Default:** On a first visit, use the operating system's `prefers-color-scheme` value. If the browser provides no preference, use light mode.
+- **Choices:** The Header theme menu offers **Light**, **Dark**, and **System default**. Store the selected preference in `localStorage` under the stable key `geary-theme` with the value `light`, `dark`, or `system`.
+- **Priority:** `light` and `dark` force that mode. `system` resolves against `prefers-color-scheme` and updates when the operating-system preference changes. Missing, invalid, or inaccessible storage behaves as `system` without breaking page rendering.
+- **Control semantics:** The trigger is an icon-only menu button with `aria-haspopup="menu"`, `aria-expanded`, and an accessible name such as `Choose color theme`. The popup uses a keyboard-operable radio-menu pattern with the three named options and a visible selected state that does not rely only on color. The trigger and every option preserve the `44 × 44px` minimum mobile target and the standard crimson `:focus-visible` ring.
+- **Icons:** Use a sun for Light, a crescent moon for Dark, and a monitor for System default. The trigger reflects the resolved active mode; labels remain available to assistive technology and inside the menu.
+- **No flash of wrong theme:** A small inline `<head>` bootstrap runs before styles paint. It resolves the preference, applies `class="dark"` to `<html>` when needed, and sets `color-scheme: light dark`. The hydrated control must reconcile with that initial state rather than re-deciding it after paint.
+- **Motion restraint:** Theme changes may use a short color transition only when `prefers-reduced-motion: no-preference`; no crossfade overlays, page reloads, or layout movement are permitted.
+
+#### 2.2.2 Dark Token Set and Contrast Rules
+
+Geary's dark theme is **Obsidian Slate & Luminous Crimson**. It avoids pure black (`#000000`) glare and pure-white (`#FFFFFF`) body text halation. These values are semantic overrides of the existing light tokens; components must not introduce parallel hard-coded palettes.
+
+| Semantic token | Dark value | Required use |
+| :--- | :--- | :--- |
+| `canvas-paper` | `#0F1317` | Default page canvas and hero gear cut-outs. |
+| `surface-card` | `#171C22` | Cards, inputs, dropdowns, mobile menu, TOC, source card, and map inspector. |
+| `surface-subtle` | `#212830` | Table headers, code/kbd chips, and neutral hover surfaces. |
+| `brand-crimson` | `#F26B8A` | Links, active navigation, category accents, and selected interactive states; AA+ on dark surfaces. |
+| `brand-crimson-hover` | `#F78DA7` | Hover and active text accents only. |
+| `brand-crimson-solid` | `#A81C44` | Filled primary controls with white labels; preserves at least 7:1 contrast. |
+| `brand-crimson-wash` | `#2D161E` | Selected rows, badges, and map-match wash. |
+| `brand-gold` | `#E5B32E` | Gear ring, decorative borders, and icon accents; never small body text. |
+| `brand-gold-wash` / `brand-gold-ink` | `#292112` / `#F2C94C` | Notice and tip callouts; use the pair together. |
+| `ink-primary` / `ink-secondary` / `ink-muted` | `#F1F3F5` / `#B0B8C1` / `#88929D` | Headings/body, supporting text, and placeholders respectively. |
+| `border-subtle` / `border-strong` | `#2A323C` / `#3C4652` | Structural borders and resting interactive borders. |
+
+Normal text and meaningful control boundaries must retain at least `4.5:1` contrast; large text and non-text UI indicators must retain at least `3:1`. Gold remains decorative unless paired with its approved dark-gold ink treatment. The light theme remains unchanged.
+
+#### 2.2.3 Implementation Boundaries
+
+- Define light tokens at `:root` and dark overrides at `:root.dark`. Use semantic Tailwind/CSS token utilities such as `bg-canvas-paper`, `bg-surface-card`, `text-ink-primary`, and `border-border-subtle`; do not branch component markup by theme.
+- Audit and replace hard-coded light surfaces in `Header`, `Footer`, `SearchBar`, `ExploreSpotlight`, `CategoryCard`, `ArticleCard`, `ArticleLayout`, `TableOfContents`, `VerificationBanner`, and `CampusMap`.
+- Use `fill="var(--color-canvas-paper)"` for hero gear holes. The campus SVG must use semantic token-backed fills and strokes: canvas ground, subtle building surfaces, structural borders, crimson wash/outline for hover, and crimson-solid with gold outline for selection.
+- Preserve the existing information hierarchy, typography, spacing, card anatomy, and responsive breakpoints. Dark mode changes color only; it must not introduce extra controls, visual noise, or an alternative layout.
+
+#### 2.2.4 Completion and Verification Gate
+
+`BL-22` is complete only when the preference control, bootstrap, and all token migrations are implemented and these gates pass:
+
+1. `TC-E2E-08`: explicit preference persists across reloads; the initial render does not flash the opposite theme; keyboard operation and reduced-motion behavior work.
+2. `TC-A11Y-03`: Axe reports zero WCAG 2.1 AA violations in dark mode on Home, Category, Article, Map, and 404 routes.
+3. Existing responsive overflow, search, TOC, map, and focus tests pass in both themes. The dark theme must not lower any existing verified requirement.
 
 ---
 
@@ -124,14 +173,14 @@ Geary's design philosophy—**low cognitive load, intuitive navigation, and a di
 
 ### 5.2 Search Bar React Island (`SearchBar.tsx`)
 - **Variants:**
-  - **`hero` (Home Page):** Prominent `h-[52px]` (`rounded-xl`), `bg-white border border-[#CED4DA]`, magnifying glass icon (`#636C74`), placeholder (`"Search..."`), right-aligned desktop `<kbd>/</kbd>` hint (`bg-[#EEF1F4] text-[#495057]`).
+  - **`hero` (Home Page):** Prominent `h-[52px]` (`rounded-xl`), `bg-surface-card` inside a rotating dual-beam crimson/gold border frame (`.hero-search-beam`, static under `prefers-reduced-motion: reduce`), magnifying glass icon (`text-ink-muted`), cycling placeholder, right-aligned desktop `<kbd>/</kbd>` hint (`bg-surface-subtle text-ink-secondary`).
   - **`header` (All Sub-Pages / Navbar):** Compact `h-10` input (`w-44 sm:w-56 md:w-64`, `rounded-lg`) expanding or opening a clean overlay dropdown without breaking single-row header layout on `375px` mobile.
 - **Dropdown Results Overlay (`z-50`):** `bg-white border border-[#DEE2E6] rounded-xl shadow-lg max-h-[400px] overflow-y-auto mt-2`.
 - **Interactive States:**
   - *Hover / Keyboard Active (`activeIndex`):* Row shifts to `bg-[#FDF2F4]` with `3px` left accent border (`border-l-[3px] border-[#8B1538]`).
   - *Focus-Visible:* `border-[#8B1538] ring-2 ring-[#8B1538]/20`.
   - *Empty / Zero-Match:* Displays `"No articles matched '<query>'."` (JSX-escaped).
-  - *Offline / Fetch Error:* Non-alarming inline message (`"Search index couldn't load right now."`) + direct links to all 5 categories.
+  - *Offline / Fetch Error:* Non-alarming inline message (`"Search index couldn't load right now."`) + direct links to all 7 categories.
 
 ### 5.3 Category Directory Card (`CategoryCard.astro`)
 - **Anatomy:** Compact clickable `<a href="/categories/...">` card (`group flex flex-col justify-between bg-white border border-[#DEE2E6] rounded-xl p-5 transition-colors`).

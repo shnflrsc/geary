@@ -2,7 +2,7 @@
 title: "How to Replace a Lost Student ID"
 category: "documents"
 subcategory: "ID & Credentials"
-updatedDate: 2026-11-19
+updatedDate: 2026-11-21
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Office of the University Registrar"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
@@ -14,10 +14,11 @@ BulSU enforces a strict **No ID, No Entry** policy at every campus gate. If you 
 
 You must be a currently enrolled student to request a duplicate ID. Gather these requirements before lining up at the Registrar:
 
-- One original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or another accepted ID)
+- One original valid ID, such as a National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or another accepted ID
 - Original notarized Affidavit of Loss from a notary public
 - Official Receipt for PHP 150 from the Cashier's Office
-- If someone else is filing or claiming for you: a signed authorization letter or Special Power of Attorney, plus one photocopy of your ID and one photocopy of your representative's ID
+
+If someone else is filing or claiming for you, also prepare a signed authorization letter or Special Power of Attorney, plus one photocopy of your ID and one photocopy of your representative's ID.
 
 ## Step-by-step replacement process
 
@@ -26,14 +27,14 @@ You must be a currently enrolled student to request a duplicate ID. Gather these
 3. **Verify your enrollment at the Registrar.** Present your valid ID at the Registrar's window so staff can verify your active enrollment in the student portal and issue your payment slip.
 4. **Pay PHP 150 at the Cashier's Office.** Present the payment slip at the Cashier and keep the Official Receipt.
 5. **Submit your documents and receive a claim stub.** Hand your Affidavit of Loss, Official Receipt, and required IDs to the designated Registrar window. Staff will verify your record and print the duplicate card.
-6. **Claim your duplicate ID.** Return on the scheduled release date (about 2 working days) with your claim stub and valid ID.
+6. **Claim your duplicate ID.** Return on the scheduled release date, usually after 2 working days, with your claim stub and valid ID.
 
 ## How to enter campus while waiting
 
-You have two temporary options at the campus gate, depending on whether your ID is lost or simply left at home:
+You have two temporary options at the campus gate, depending on whether your ID is lost or left at home:
 
-- **Lost ID (notarized Affidavit of Loss):** Security accepts your notarized Affidavit of Loss as a temporary gate pass for **only 3 days**. File your duplicate ID request immediately so you are not locked out after day three.
-- **Forgot your ID at home (Certificate of Registration):** Present your current Certificate of Registration (COR) to the gate guard. The guard will write a remark, date it, and sign over their printed name on the back of your COR before letting you in.
+- **Lost ID:** Security accepts your notarized Affidavit of Loss as a temporary gate pass for **only 3 days**. File your duplicate ID request right away so you are not locked out after day three.
+- **ID left at home:** Present your current Certificate of Registration (COR) to the gate guard. The guard will write a remark, date it, and sign over their printed name on the back of your COR before letting you in.
 
 ## If your old ID turns up later
 
@@ -43,4 +44,6 @@ If you find your original ID after reporting it missing, visit OSAS to cancel th
 
 Never alter details on a student ID, swap photos, or lend your card to someone else. BulSU treats ID tampering as a serious offense. If security catches a tampered ID at the gate, the guard will confiscate it on the spot and escort you directly to your College Dean for disciplinary action.
 
-For full rules on wearing your ID and campus attire, read [BulSU Dress Code, Grooming, and ID Policy](/articles/bulsu-dress-code-and-id-policy).
+## Related articles
+
+- [BulSU Dress Code, Grooming, and ID Policy](/articles/bulsu-dress-code-and-id-policy)

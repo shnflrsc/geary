@@ -20,7 +20,7 @@ Verification focuses strictly on the four high-value testing layers applicable t
 
 | Layer | Tooling | Scope & Purpose |
 | :--- | :--- | :--- |
-| **Layer 1: Build & Schema Integrity Gate** | `astro check` + `astro build` + Zod | Enforces TypeScript safety, Markdown frontmatter schema compliance, 5-category static route generation, and `/search-index.json` size/validity. |
+| **Layer 1: Build & Schema Integrity Gate** | `astro check` + `astro build` + Zod | Enforces TypeScript safety, Markdown frontmatter schema compliance, 7-category static route generation, and `/search-index.json` size/validity. |
 | **Layer 2: Focused Unit Tests** | `Bun Test` (`bun test` / Vitest-compatible) | Tests pure TypeScript logic only: search query normalization, weighted scoring, literal special-character handling, subcategory grouping, and `/search-index.json` contract. |
 | **Layer 3: Lean E2E Smoke & Responsive Layout** | `Playwright` | Verifies real-browser behaviors: `<SearchBar />` React island hydration, keyboard shortcuts, zero-match/offline fallbacks, desktop vs. mobile TOC, `375px` overflow checks, and `404` recovery. |
 | **Layer 4: Accessibility & Minimal Static Security** | `@axe-core/playwright` + `bun audit` | Verifies WCAG 2.1 Level AA contrast/landmarks, XSS escaping in search queries, and dependency hygiene. |
@@ -33,7 +33,7 @@ Maps the applicable **ISO/IEC 25010** product quality characteristics and sub-ch
 
 | ISO/IEC 25010 Characteristic | Sub-Characteristics | Application to Geary MVP | Primary Verification Layer & Test IDs |
 | :--- | :--- | :--- | :--- |
-| **Functional Suitability** | Functional Completeness, Functional Correctness | Validated Markdown ingestion, 5-category grouping, weighted search ranking, conditional TOC, and `404` recovery. | Layer 1 (`TC-BLD-02`, `TC-BLD-03`), Layer 2 (`TC-UNIT-01`, `TC-UNIT-04`, `TC-UNIT-05`), Layer 3 (`TC-E2E-01`, `TC-E2E-03`, `TC-E2E-05`) |
+| **Functional Suitability** | Functional Completeness, Functional Correctness | Validated Markdown ingestion, 7-category grouping, weighted search ranking, conditional TOC, campus map, and `404` recovery. | Layer 1 (`TC-BLD-02`, `TC-BLD-03`), Layer 2 (`TC-UNIT-01`, `TC-UNIT-04`–`06`), Layer 3 (`TC-E2E-01`, `TC-E2E-03`, `TC-E2E-05`, `TC-E2E-07`) |
 | **Performance Efficiency** | Time Behaviour, Resource Utilization | 100% static HTML output, `< 100 KB` `/search-index.json` payload, and `< 16 ms` synchronous client filtering. | Layer 1 (`TC-BLD-03`), Layer 2 (`TC-UNIT-01`) |
 | **Usability / Interaction Capability** | Appropriateness Recognizability, Operability, Accessibility | Low-cognitive-load layout, `~65ch` prose, keyboard-only search (`/` / `Ctrl+K`), WCAG 2.1 AA contrast, and zero `375px` horizontal scroll. | Layer 3 (`TC-E2E-01`, `TC-E2E-03`, `TC-E2E-04`), Layer 4 (`TC-A11Y-01`, `TC-A11Y-02`) |
 | **Reliability** | Fault Tolerance, Availability | Non-crashing UI when search yields 0 matches or `/search-index.json` fails over mobile data; zero broken internal links. | Layer 1 (`TC-BLD-04`), Layer 3 (`TC-E2E-02`, `TC-E2E-05`) |
@@ -121,6 +121,13 @@ Maps the applicable **ISO/IEC 25010** product quality characteristics and sub-ch
 - **Verification Procedure:** Validate every array entry using a Zod contract check requiring `slug`, `title`, `preview`, `category` (in `CATEGORY_SLUGS`), `categoryLabel`, `subcategory`, and `headings` (`string[]`).
 - **Pass/Fail Acceptance Criteria:** 100% of serialized entries satisfy the `SearchIndexItem` Zod schema.
 
+#### `TC-UNIT-06`: Campus Map Search and Viewport Math
+- **ISO 25010 Characteristic:** Functional Suitability (*Functional Correctness*) & Usability (*Operability*)
+- **Linked Requirements:** `REQ-MAP-01`–`04`, `SRS-FUNC-MAP-01`, `SRS-FUNC-MAP-02`
+- **Preconditions / Inputs:** The pure campus-map search and viewport helpers with representative building and location data.
+- **Verification Procedure:** Execute `tests/unit/map-search.test.ts` to verify location-first matching, parent-building labels, literal query safety, and bounded pan/zoom/reset viewBox calculations.
+- **Pass/Fail Acceptance Criteria:** Office and building queries resolve to the expected parent building; viewport calculations remain within their supported bounds; empty or unmatched queries return safely without throwing.
+
 ---
 
 ### 3.3 Layer 3: Lean E2E Smoke & Responsive Layout Suite (`Playwright`)
@@ -143,8 +150,8 @@ Maps the applicable **ISO/IEC 25010** product quality characteristics and sub-ch
   1. Type `"zzzznonexistent"` into `<SearchBar />` and inspect dropdown content.
   2. In a fresh page context, intercept `/search-index.json` via `page.route()` to return HTTP `500` / network abort, focus `<SearchBar />`, and type a query.
 - **Pass/Fail Acceptance Criteria:**
-  - Zero-match state displays a clear empty message and 5 clickable links pointing to `/categories/<slug>`.
-  - Fetch failure logs zero uncaught page exceptions and renders fallback navigation links to the 5 categories.
+  - Zero-match state displays a clear empty message and 7 clickable links pointing to `/categories/<slug>`.
+  - Fetch failure logs zero uncaught page exceptions and renders fallback navigation links to the 7 categories.
 
 #### `TC-E2E-03`: Responsive Table of Contents Behavior
 - **ISO 25010 Characteristic:** Usability (*Operability, Appropriateness Recognizability*)
@@ -167,7 +174,7 @@ Maps the applicable **ISO/IEC 25010** product quality characteristics and sub-ch
 - **Linked Requirements:** `REQ-UI-05`, `AC-UI-05`, `SRS-FUNC-RND-06`, `UC-04`, `ERR-08`
 - **Preconditions / Inputs:** Preview server serving `dist/`.
 - **Verification Procedure:** Navigate to `/this-route-does-not-exist` and inspect rendered UI.
-- **Pass/Fail Acceptance Criteria:** Styled BulSUan `404` view renders with a hydrated `<SearchBar />`, links to all 5 categories, and a working `"Back to Home"` link to `/`.
+- **Pass/Fail Acceptance Criteria:** Styled BulSUan `404` view renders with a hydrated `<SearchBar />`, links to all 7 categories, and a working `"Back to Home"` link to `/`.
 
 #### `TC-E2E-06`: SEO Metadata, Sitemap, `robots.txt`, JSON-LD & `404` `noindex`
 - **ISO 25010 Characteristic:** Functional Suitability (*Completeness*) & Compatibility
@@ -213,6 +220,20 @@ Maps the applicable **ISO/IEC 25010** product quality characteristics and sub-ch
 - **Preconditions / Inputs:** `bun.lock` / installed dependencies.
 - **Verification Procedure:** Run `bun audit` (or check audit report before release).
 - **Pass/Fail Acceptance Criteria:** Zero unresolved `high` or `critical` runtime vulnerabilities in client-shipped dependencies (`react`, `react-dom`, island helpers).
+
+### 3.5 Dark Mode Verification
+
+Automated verification gates for `BL-22` (`RTM-22`), executed in `tests/e2e/smoke.spec.ts`:
+
+#### `TC-E2E-08`: Theme Preference, Persistence, and No-Flash Rendering
+- **Linked Requirement:** `RTM-22`, `DESIGN_SYSTEM.md` §2.2.
+- **Verification Procedure:** Select Light, Dark, and System default on representative routes; reload the page; and emulate each system scheme while System default is selected. Verify the selected preference persists and is applied before the first visible render.
+- **Pass/Fail Acceptance Criteria:** The keyboard-operable menu exposes all three choices with correct sun, moon, and monitor semantics; the selected preference persists; System default follows the emulated system scheme; and neither light nor dark mode flashes the opposite canvas during initial render.
+
+#### `TC-A11Y-03`: Dark Mode WCAG 2.1 AA Audit
+- **Linked Requirement:** `RTM-22`, `DESIGN_SYSTEM.md` §2.2.
+- **Verification Procedure:** Run Axe against representative Home, Category, Article, Map, and 404 pages with the dark theme active.
+- **Pass/Fail Acceptance Criteria:** `violations.length === 0`, including contrast, landmark, focus, and control-name checks.
 
 ---
 

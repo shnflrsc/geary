@@ -219,6 +219,7 @@ export default function SearchBar({
         Search BulSU articles
       </label>
 
+      <div className={isHero ? 'hero-search-beam shadow-xs' : undefined}>
       <div className="relative flex items-center">
         <svg
           aria-hidden="true"
@@ -264,10 +265,10 @@ export default function SearchBar({
             void ensureIndexLoaded();
           }}
           onKeyDown={handleInputKeyDown}
-          className={`w-full bg-white text-ink-primary placeholder:text-ink-muted border transition-colors duration-150 focus:outline-none focus:border-brand-crimson focus:ring-2 focus:ring-brand-crimson/20 ${
+          className={`w-full bg-surface-card text-ink-primary placeholder:text-ink-muted transition-colors duration-150 focus:outline-none ${
             isHero
-              ? 'h-[52px] rounded-xl border-border-strong pl-11 pr-14 text-base shadow-xs'
-              : 'h-10 rounded-lg border-border-strong pl-9 pr-9 sm:pr-12 text-base sm:text-sm'
+              ? 'h-[52px] rounded-[calc(0.75rem-1.5px)] border-0 pl-11 pr-14 text-base'
+              : 'h-10 rounded-lg border border-border-strong pl-9 pr-9 sm:pr-12 text-base sm:text-sm focus:border-brand-crimson focus:ring-2 focus:ring-brand-crimson/20'
           }`}
         />
 
@@ -313,11 +314,12 @@ export default function SearchBar({
           )
         )}
       </div>
+      </div>
 
       {showPanel && (
         <div
           id={listboxId}
-          className={`z-50 mt-2 rounded-xl border border-border-subtle bg-white shadow-lg max-h-[400px] overflow-y-auto ${
+          className={`z-50 mt-2 rounded-xl border border-border-subtle bg-surface-card shadow-lg max-h-[400px] overflow-y-auto ${
             isHero
               ? 'absolute inset-x-0 top-full'
               : 'fixed inset-x-4 top-[4.25rem] sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:w-[24rem]'
@@ -336,7 +338,7 @@ export default function SearchBar({
                 <button
                   type="button"
                   onClick={() => void ensureIndexLoaded()}
-                  className="inline-flex min-h-[36px] items-center rounded-lg border border-brand-crimson bg-brand-crimson-wash px-3 py-1.5 text-xs font-semibold text-brand-crimson hover:bg-brand-crimson hover:text-white transition-colors"
+                  className="inline-flex min-h-[36px] items-center rounded-lg border border-brand-crimson bg-brand-crimson-wash px-3 py-1.5 text-xs font-semibold text-brand-crimson hover:bg-brand-crimson-solid hover:text-white transition-colors"
                 >
                   Retry search
                 </button>

@@ -59,6 +59,28 @@ const jsonLdEntries = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      (() => {
+        const KEY = 'geary-theme';
+        let pref = 'system';
+        try {
+          const saved = window.localStorage.getItem(KEY);
+          if (saved === 'light' || saved === 'dark' || saved === 'system') {
+            pref = saved;
+          }
+        } catch {}
+        const systemDark =
+          typeof window.matchMedia === 'function' &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = pref === 'dark' || (pref === 'system' && systemDark);
+        const root = document.documentElement;
+        root.classList.toggle('dark', isDark);
+        root.dataset.themePreference = pref;
+        root.dataset.themeResolved = isDark ? 'dark' : 'light';
+        root.style.colorScheme = isDark ? 'dark' : 'light';
+      })();
+    </script>
     <link rel="preload" href={inter400Url} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={jakarta700Url} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={jakarta800Url} as="font" type="font/woff2" crossorigin />
@@ -108,7 +130,7 @@ const jsonLdEntries = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <body>
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-crimson focus:shadow-md"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-surface-card focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-crimson focus:shadow-md"
     >
       Skip to main content
     </a>

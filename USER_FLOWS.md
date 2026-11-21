@@ -16,7 +16,7 @@
 | **Status** | Approved for Implementation & UX Verification |
 
 ### 1.2 Purpose & Actor Reference
-This document defines Geary's **Operational Modes**, **Master Navigation Flow**, **Operational Scenarios (`UJ-*`)**, **Use Cases (`UC-*`)**, **Alternative Flows (`AF-*`)**, and **Off-Nominal / Error Scenarios (`ERR-*`)**.
+This document defines Geary's **Operational Modes**, **Master Navigation Flow**, **Operational Scenarios (`UJ-*`)**, **Use Cases (`UC-*`)**, **Alternative Flows (`AF-*`)**, and **Off-Nominal / Error Scenarios (`ERR-*`)**, including campus-map discovery.
 
 User classes referenced throughout these flows are defined in [PROJECT_CHARTER.md](./PROJECT_CHARTER.md) Section 5:
 - `ACT-01`: Incoming Freshman
@@ -46,7 +46,7 @@ flowchart TD
 
     HOME --> HERO_SRCH["Hero Search Bar"]
     HOME --> FEAT["Featured / Essential Guides"]
-    HOME --> DIR["5-Category Directory Cards"]
+    HOME --> DIR["7-Category Directory Cards"]
 
     DIR -->|"Click Category or Explore All"| CAT_PAGE["Category Index (/categories/slug)"]
     DIR -->|"Click Preview Guide Link"| ART_PAGE["Article Reading View (/articles/slug)"]
@@ -59,8 +59,8 @@ flowchart TD
 
     HERO_SRCH -->|"Fetch Static Search Index"| MATCH{"Matches Found?"}
     MATCH -->|"Yes (up to 8 ranked)"| ART_PAGE
-    MATCH -->|"No Matches"| NO_MATCH["Empty State + 5 Category Pills"]
-    MATCH -->|"Fetch Failure"| FETCH_ERR["Error Hint + 5 Category Links"]
+    MATCH -->|"No Matches"| NO_MATCH["Empty State + 7 Category Pills"]
+    MATCH -->|"Fetch Failure"| FETCH_ERR["Error Hint + 7 Category Links"]
     NO_MATCH --> CAT_PAGE
     FETCH_ERR --> CAT_PAGE
 
@@ -80,7 +80,7 @@ flowchart TD
 
 ---
 
-## 3. Operational Scenarios / End-to-End User Journeys (`UJ-01` to `UJ-05`) *(ISO 29148 Clause 9.3.5)*
+## 3. Operational Scenarios / End-to-End User Journeys (`UJ-01` to `UJ-06`) *(ISO 29148 Clause 9.3.5)*
 
 ### `UJ-01`: Urgent Search-First Lookup (Checking `INC` or `TOR`)
 - **Actor:** `ACT-03` (Continuing Undergraduate on mobile between classes)
@@ -119,7 +119,7 @@ sequenceDiagram
 - **Trigger:** Student does not know exact university terminology yet and wants to browse enrollment steps or affordable food spots.
 - **Operational Mode:** `MODE-01`
 - **Journey Steps:**
-  1. Student opens `/` and scrolls past search to the **5-Category Directory**.
+  1. Student opens `/` and scrolls past search to the **7-Category Directory**.
   2. Student reviews category descriptions, guide counts, and top preview links.
   3. Student opens *Enrollment* (`/categories/enrollment`).
   4. Guides appear neatly grouped under purposeful `subcategory` headings (e.g., *Freshmen*, *Shifting & Transferring*, *Returning / LOA*).
@@ -167,6 +167,19 @@ sequenceDiagram
 
 ---
 
+### `UJ-06`: Find a Campus Office or Facility
+- **Actor:** `ACT-01`, `ACT-02`, or `ACT-03`
+- **Trigger:** Student needs to find an office or campus facility, such as the Registrar, Clinic, Library, or Canteen.
+- **Operational Mode:** `MODE-02`
+- **Journey Steps:**
+  1. Student opens `/map` from the Header or a direct link.
+  2. Student searches for an office/facility or selects a building footprint.
+  3. The map identifies the parent building, focuses the SVG view, and highlights that building.
+  4. The inspector lists the building name and the locations it contains.
+- **Expected Outcome:** Student identifies the correct building and its relevant office without external map tiles or a backend request.
+
+---
+
 ## 4. Use Cases, Alternative Flows & Exception Scenarios (`UC-01` to `UC-05`) *(ISO 29148 Clauses 6.2.1.3 & 9.5.3)*
 
 ---
@@ -193,8 +206,8 @@ sequenceDiagram
 - **`AF-01C` (Overlay Dismissal):** Tapping outside the search container or clearing the input closes the dropdown cleanly.
 
 #### Exception / Off-Nominal Scenarios
-- **`EF-01A` (Zero Matches):** Non-empty query matches `0` guides → dropdown displays a calm no-results message alongside 5 clickable category quick-jump pills.
-- **`EF-01B` (Index Fetch Failure):** Unstable mobile connection blocks loading the index → search catches the error safely, shows a retry hint, and provides direct links to all 5 categories.
+- **`EF-01A` (Zero Matches):** Non-empty query matches `0` articles → dropdown displays a calm no-results message alongside 7 clickable category quick-jump pills.
+- **`EF-01B` (Index Fetch Failure):** Unstable mobile connection blocks loading the index → search catches the error safely, shows a retry hint, and provides direct links to all 7 categories.
 - **`EF-01C` (Whitespace or Special Punctuation):** Whitespace-only input keeps results closed; special characters (e.g., `"[INC] (2026)*?"`) are evaluated safely as plain text without throwing errors.
 
 ---
@@ -205,11 +218,11 @@ sequenceDiagram
 | :--- | :--- |
 | **Actors** | `ACT-01`, `ACT-02`, `ACT-03` |
 | **Operational Modes** | `MODE-01` (Nominal), `MODE-03` (Empty category fallback) |
-| **Preconditions** | All five canonical category pages are compiled. |
+| **Preconditions** | All seven canonical category pages are compiled. |
 | **Postconditions** | Student navigates to a topic-grouped guide. |
 
 #### Main Success Scenario (Basic Flow)
-1. Student inspects the **5-Category Directory** on `/`.
+1. Student inspects the **7-Category Directory** on `/`.
 2. Student selects a category card (or `"Explore all →"`) to open `/categories/[slug]`.
 3. Page displays breadcrumbs (`Home › [Category Name]`) and guides grouped under `subcategory` headers.
 4. Student skims guide cards (`title`, summary, *Last Updated* date) and opens an article.
@@ -263,7 +276,7 @@ sequenceDiagram
 
 #### Main Success Scenario (Basic Flow)
 1. Static host serves the custom `/404.html` page.
-2. Page displays a clear, helpful message, an interactive Search Bar, links to all 5 categories, and a `"Back to Home"` link.
+2. Page displays a clear, helpful message, an interactive Search Bar, links to all 7 categories, and a `"Back to Home"` link.
 3. Student searches immediately or selects a category link to recover.
 
 ---
@@ -309,12 +322,12 @@ sequenceDiagram
 
 | Error ID | Scenario | Operational Mode | Trigger Condition | Expected System Behavior | User Recovery Path |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **ERR-01** | Search yields zero results | `MODE-03` | Non-empty query matches 0 guides | Show calm empty-state notice + 5 clickable category quick-jump pills | Select a category pill or refine query |
-| **ERR-02** | Search index network failure | `MODE-03` | Search index fails to download on poor cellular data | Catch error safely (zero uncaught exceptions); show retry hint + 5 category links | Retry search or browse category links |
+| **ERR-01** | Search yields zero results | `MODE-03` | Non-empty query matches 0 articles | Show calm empty-state notice + 7 clickable category quick-jump pills | Select a category pill or refine query |
+| **ERR-02** | Search index network failure | `MODE-03` | Search index fails to download on poor cellular data | Catch error safely (zero uncaught exceptions); show retry hint + 7 category links | Retry search or browse category links |
 | **ERR-03** | Special / script characters in query | `MODE-02` | Query contains `[`, `(`, `*`, `<script>`, etc. | Evaluate safely as literal text; escape UI output automatically | Continue typing normally |
 | **ERR-04** | Empty category directory | `MODE-03` | Category holds 0 published guides | Render valid page (`0 guides`) with friendly compilation notice | Click `"Back to Home"` link |
 | **ERR-05** | Short article (`< 2` headings) | `MODE-01` | Article has 0 or 1 section headings | Hide both mobile disclosure TOC and desktop sticky TOC | Read prose directly without blank space |
 | **ERR-06** | Solo article in category | `MODE-01` | No sibling articles exist in same category | Omit *Related Guides in This Category* cleanly | Use Breadcrumbs, Header nav, or Search |
 | **ERR-07** | Wide table / long URL on mobile | `MODE-01` | Multi-column table or long URL on `375px` screen | Scroll table horizontally within its own container; wrap long URLs cleanly | Swipe horizontally inside table only |
-| **ERR-08** | Nonexistent / broken route | `MODE-03` | Mistyped or outdated bookmark URL | Serve branded `/404.html` with Search Bar and 5 category links | Search or navigate to Home / Category |
+| **ERR-08** | Nonexistent / broken route | `MODE-03` | Mistyped or outdated bookmark URL | Serve branded `/404.html` with Search Bar and 7 category links | Search or navigate to Home / Category |
 | **ERR-09** | Invalid Markdown frontmatter | `MODE-04` | Missing/invalid metadata or unrecognized category slug | Abort build immediately with clear validation diagnostic | Correct frontmatter and re-run build |

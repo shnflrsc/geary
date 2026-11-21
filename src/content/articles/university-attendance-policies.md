@@ -2,7 +2,7 @@
 title: "Understanding University Attendance Policies"
 category: "policies"
 subcategory: "Academic & Attendance Rules"
-updatedDate: 2026-11-19
+updatedDate: 2026-11-21
 sources:
   - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
@@ -14,7 +14,7 @@ sources:
     url: "https://www.facebook.com/BulSUBustosLSC/posts/pfbid0s7WebWJPd32PPHfXkTGCCifi9U1DA9uqiD9No1zkGvYMsHiGMcLd1U8pP2DJY3WAl"
 ---
 
-BulSU tracks class attendance closely, and showing up late or missing too many sessions carries fixed numeric cutoffs. Only students officially listed on the Management Information System (MIS) class roster may attend a class (sit-in students need prior permission from the academic unit head). During the first weeks of a semester, faculty are instructed to exercise leniency and log attendance manually while enrollment lists stabilize.
+BulSU tracks class attendance closely, and showing up late or missing too many sessions carries fixed numeric cutoffs. Only students officially listed on the Management Information System (MIS) class roster may attend a class; sit-in students need prior permission from the academic unit head. During the first weeks of a semester, faculty are instructed to exercise leniency and log attendance manually while enrollment lists stabilize.
 
 ## Late and absent cutoffs
 
@@ -37,23 +37,23 @@ Walking out before the required wait time marks the class absent.
 
 Absences are excused only for three reasons:
 
-1. **Official representation** in approved curricular, co-curricular, or extra-curricular activities (such as varsity meets, press conferences, or cultural competitions).
-2. **Illness certified** by an attending physician or the BulSU University Physician.
-3. **Force majeure** (natural disasters or unavoidable emergencies).
+- **Official representation** in approved curricular, co-curricular, or extra-curricular activities, such as varsity meets, press conferences, or cultural competitions.
+- **Illness certified** by an attending physician or the BulSU University Physician.
+- **Force majeure,** such as natural disasters or unavoidable emergencies.
 
 Even when an absence is excused, you still have to complete all required coursework, and total excused absences cannot exceed **30% of required semester attendance**.
 
 ## Unexcused absences and automatic FDA or UD (20% cap)
 
-If you accumulate **more than 20% unexcused absences** in a subject **before midterm examinations**, you are automatically dropped from that class and given **`FDA` (Failure Due to Absences)** or **`UD` (Unofficially Dropped)** on your grade sheet.
+If you accumulate **more than 20% unexcused absences** in a subject **before midterm examinations**, you are automatically dropped from that class and given **FDA (Failure Due to Absences)** or **UD (Unofficially Dropped)** on your grade sheet.
 
-An automatic `FDA` or `UD` counts against your academic standing under [What Happens When You Fail a Subject?](/articles/what-happens-when-you-fail-a-subject) and carries no fee refund under [How to Add, Change, or Drop Subjects](/articles/how-to-add-change-or-drop-subjects). If a serious illness or emergency will keep you out for weeks, notify the campus clinic early and look into [How to File a Leave of Absence](/articles/how-to-file-a-leave-of-absence).
+An automatic FDA or UD counts against your academic standing under [What Happens When You Fail a Subject?](/articles/what-happens-when-you-fail-a-subject) and carries no fee refund under [How to Add, Change, or Drop Subjects](/articles/how-to-add-change-or-drop-subjects). If a serious illness or emergency will keep you out for weeks, notify the campus clinic early and look into [How to File a Leave of Absence](/articles/how-to-file-a-leave-of-absence).
 
 ## Class suspensions, extreme heat, and online shifts
 
 During typhoons, monsoon flooding, extreme heat indexes, or transport strikes, BulSU rarely cancels learning completely right away. Instead, the Office of the University President or the Office of the Chancellors issues campus-wide advisories that shift classes into one of two modes:
 
-- **Synchronous online learning:** Common during extreme heat advisories, transport strikes, or initial storm warnings. Scheduled lectures move online; exams, presentations, or lab activities may either continue in safe venues or be rescheduled depending on the advisory.
-- **Asynchronous online learning:** Common during prolonged Southwest Monsoon rains, widespread flooding, or government work suspensions. Under recent directives, faculty are instructed to avoid holding synchronous sessions, hold off on graded deadlines requiring immediate submission, post review materials only, and extend leniency to students dealing with floods or power outages.
+- **Synchronous online learning:** Common during extreme heat advisories, transport strikes, or initial storm warnings. Scheduled lectures move online; exams, presentations, or lab activities may continue in safe venues or be rescheduled depending on the advisory.
+- **Asynchronous online learning:** Common during prolonged Southwest Monsoon rains, widespread flooding, or government work suspensions. Under recent directives, faculty are instructed to avoid synchronous sessions, hold off on graded deadlines requiring immediate submission, post review materials only, and extend leniency to students dealing with floods or power outages.
 
-Student council petitions and Student Government advocacy posts calling for suspensions are requests, not official cancellations. Always wait for a signed university memorandum reposted on official BulSU or Student Government channels before skipping a scheduled session. If an instructor refuses academic consideration during an official flooding or weather advisory, you can report the issue through [How to File a Student Complaint](/articles/how-to-file-a-student-complaint).
+Student council petitions and Student Government advocacy posts calling for suspensions are requests, not official cancellations. Always wait for a signed university memorandum reposted on official BulSU or Student Government channels before skipping a scheduled session. If an instructor refuses academic consideration during an official flooding or weather advisory, report the issue through [How to File a Student Complaint](/articles/how-to-file-a-student-complaint).

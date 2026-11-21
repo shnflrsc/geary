@@ -16,11 +16,12 @@
 | **Status** | Approved for Implementation |
 
 ### 1.2 Purpose
-This Product Requirements Document (PRD) defines the MVP feature set, product behavior, release priorities, and verifiable acceptance criteria for **Geary**, bounded strictly to its four confirmed product pillars:
+This Product Requirements Document (PRD) defines the MVP feature set, product behavior, release priorities, and verifiable acceptance criteria for **Geary**, bounded strictly to its five confirmed product capabilities:
 1. **Articles & Markdown Content (`F-01`)**
 2. **Categories & Purposeful Organization (`F-02`)**
 3. **Instant Client-Side Search Bar (`F-03`)**
 4. **Low-Cognitive-Load UI/UX & BulSUan Identity (`F-04`)**
+5. **Interactive 2D Campus Map (`F-05`)**
 
 ---
 
@@ -82,7 +83,7 @@ Every product requirement in this PRD carries a strict release priority:
 | Req ID | Priority | Requirement Statement |
 | :--- | :--- | :--- |
 | **REQ-CAT-01** | **P0** | The system shall organize all content under seven student-intent categories: `enrollment` (*Enrollment*), `academics` (*Academics*), `documents` (*Documents*), `scholarships` (*Scholarships*), `policies` (*Policies*), `organizations` (*Organizations*), and `campus` (*Campus*). |
-| **REQ-CAT-02** | **P0** | The Home page shall present a Category Directory showing all five categories with each category's summary description, live guide count, and direct preview links to top guides. |
+| **REQ-CAT-02** | **P0** | The Home page shall present a Category Directory showing all seven categories with each category's summary description, live article count, and direct preview links to top articles. |
 | **REQ-CAT-03** | **P0** | Each category page shall group its guides visually under `subcategory` headings rather than presenting a chronological blog timeline. |
 | **REQ-CAT-04** | **P1** | Category and article pages shall display clickable breadcrumb navigation (`Home › [Category Name]` and `Home › [Category Name] › [Article Title]`) for spatial orientation. |
 | **REQ-CAT-05** | **P1** | The Home page shall surface daily randomized guides inside a **Featured** section displaying 6 cards at a time and cycling through 3 daily groups (18 guides refreshed each calendar day). |
@@ -90,13 +91,13 @@ Every product requirement in this PRD carries a strict release priority:
 #### Product Behavior
 - **Intent-Based Discovery:** Unlike a blog sorted by date, Geary organizes information around what a student needs to accomplish.
 - **Home Featured Rotation:** Below the hero search area, the **Featured** section deterministically randomizes 3 non-overlapping groups of 6 guides seeded by the visitor's local calendar date (`YYYY-MM-DD`), automatically cycling through the 3 groups (pausing on hover/focus and under `prefers-reduced-motion`) with subtle indicator controls to jump between groups.
-- **Category Index Views:** Opening any category displays breadcrumbs, category summary, and guides neatly grouped under their sub-topic headings (e.g., *Shifting & Transferring*, *Document Requests*, *Food & Dining*). If a category has zero guides yet, the page displays a helpful empty-state message with a link back to Home.
+- **Category Index Views:** Opening any category displays breadcrumbs, category summary, and articles neatly grouped under their sub-topic headings (e.g., *Shifting & Transferring*, *Document Requests*, *Food & Dining*). If a category has zero articles yet, the page displays a helpful empty-state message with a link back to Home.
 
 #### Acceptance Criteria
 - **AC-CAT-01 (`REQ-CAT-01`):**
-  - *Given* the five defined categories, *When* the site builds, *Then* dedicated directory pages exist for all five category slugs.
+  - *Given* the seven defined categories, *When* the site builds, *Then* dedicated directory pages exist for all seven category slugs.
 - **AC-CAT-02 (`REQ-CAT-02`):**
-  - *Given* the Home page, *When* loaded, *Then* all five category cards appear with accurate guide counts, descriptions, category links, and up to 3 direct guide preview links each.
+  - *Given* the Home page, *When* loaded, *Then* all seven category cards appear with accurate article counts, descriptions, category links, and up to 3 direct article preview links each.
 - **AC-CAT-03 (`REQ-CAT-03`):**
   - *Given* a category with guides across multiple subcategories, *When* visiting that category page, *Then* guides appear grouped under their respective subcategory headings.
 - **AC-CAT-04 (`REQ-CAT-04`):**
@@ -116,7 +117,7 @@ Every product requirement in this PRD carries a strict release priority:
 | **REQ-SRCH-02** | **P0** | The system shall provide an interactive search bar prominently in the Home hero and accessibly inside the global header across all pages. |
 | **REQ-SRCH-03** | **P0** | The search bar shall match user queries instantaneously in the browser against titles, section headings, subcategories, category labels, and body previews, presenting ranked results. |
 | **REQ-SRCH-04** | **P1** | The search bar shall support complete keyboard operation: `/` or `Ctrl+K` (`Cmd+K`) to focus, `ArrowUp`/`ArrowDown` to move through results, `Enter` to open the selected guide, and `Escape` to close. |
-| **REQ-SRCH-05** | **P1** | When a query produces zero matching articles (or when the search index cannot load), the search overlay shall display a clear fallback message with clickable quick-jump links to all five categories. |
+| **REQ-SRCH-05** | **P1** | When a query produces zero matching articles (or when the search index cannot load), the search overlay shall display a clear fallback message with clickable quick-jump links to all seven categories. |
 
 #### Product Behavior
 - **Zero-Backend Instant Filtering:** Focusing or typing in the search bar loads the static search index once and caches it in browser memory. Multi-word queries (e.g., `"tor request"`, `"latin honors"`) rank title matches highest, followed by heading/subcategory matches, then body preview/category matches, displaying up to 8 top results.
@@ -132,7 +133,7 @@ Every product requirement in this PRD carries a strict release priority:
 - **AC-SRCH-04 (`REQ-SRCH-04`):**
   - *Given* a user pressing `/` or `Ctrl+K` (`Cmd+K`) outside text inputs, *Then* the search input focuses; *When* cycling results with `ArrowDown`/`ArrowUp` and pressing `Enter`, *Then* the browser navigates to the highlighted guide; *When* pressing `Escape`, *Then* the results overlay closes.
 - **AC-SRCH-05 (`REQ-SRCH-05`):**
-  - *Given* a query matching zero guides, *When* typed into the search bar, *Then* a helpful no-results notice appears alongside clickable links to all five categories.
+  - *Given* a query matching zero articles, *When* typed into the search bar, *Then* a helpful no-results notice appears alongside clickable links to all seven categories.
 
 ---
 
@@ -146,7 +147,7 @@ Every product requirement in this PRD carries a strict release priority:
 | **REQ-UI-02** | **P0** | Article views shall maintain a comfortable reading width, generous line spacing, and clear visual distinction between steps, callouts, and tables to keep cognitive load low on mobile and desktop screens. |
 | **REQ-UI-03** | **P0** | Every page shall include a responsive global Header (Geary gear brand mark, category navigation, and search access) and global Footer (unofficial student-hub disclaimer and category directory links). |
 | **REQ-UI-04** | **P1** | Subtle "Geary" geometric gear motifs and BulSU accents shall reinforce brand identity in navigation and hero areas while keeping article reading containers completely distraction-free. |
-| **REQ-UI-05** | **P1** | The system shall provide a custom `404` recovery page styled in the Geary theme containing the search bar and direct links to all five categories and Home. |
+| **REQ-UI-05** | **P1** | The system shall provide a custom `404` recovery page styled in the Geary theme containing the search bar and direct links to all seven categories and Home. |
 
 #### Product Behavior
 - **Calm Reading Experience:** Instead of stark white glare or visual clutter, long university guides appear on warm paper-toned backgrounds inside a focused reading column, with mobile navigation neatly tucked into an accessible menu toggle below tablet width.
@@ -162,7 +163,7 @@ Every product requirement in this PRD carries a strict release priority:
 - **AC-UI-04 (`REQ-UI-04`):**
   - *Given* the main article reading area, *When* scrolling through content, *Then* no background watermarks, animations, or promotional popups interfere with reading comprehension.
 - **AC-UI-05 (`REQ-UI-05`):**
-  - *Given* an invalid URL path, *When* the `404` page displays, *Then* students see a clear recovery message, an interactive search bar, and links to Home and all five categories.
+  - *Given* an invalid URL path, *When* the `404` page displays, *Then* students see a clear recovery message, an interactive search bar, and links to Home and all seven categories.
 
 ---
 

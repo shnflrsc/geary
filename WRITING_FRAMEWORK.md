@@ -15,12 +15,23 @@ Geary prioritizes clarity, directness, and usefulness. Every article should get 
 Follow these principles:
 
 * **Straight to the point.** Lead with the answer, requirement, or action. Skip warm-up text.
-* **Concise, not incomplete.** Use the fewest words necessary without dropping essential details.
+* **Concise, not compressed.** Remove unnecessary words without sacrificing clarity or packing dense details into one cramped sentence.
+* **Avoid Symbol Grouping.** Do not cluster heavy concentrations of numbers, dates, parentheses, slashes, dashes, and abbreviations in a single paragraph or sentence.
 * **Reader-first.** Organize information around what readers need to do, not background trivia.
-* **Easy to scan.** Use clear headings, short paragraphs, and purposeful lists.
+* **Easy to scan.** Use clear headings, short paragraphs, and purposeful lists or tables.
 * **Friendly and plainspoken.** Write naturally, like explaining a process to a fellow student.
 * **Structured, not fragmented.** Group distinct topics cleanly without creating headings for every minor point.
 * **Practical over theoretical.** Prioritize actionable steps over lengthy explanations.
+
+### 1.1 Reading Efficiency Over Compression
+
+Geary does not measure efficiency by fewest words alone. Keep three concepts distinct:
+
+* **Conciseness:** Removing unnecessary words and irrelevant information.
+* **Compression:** Packing as much information as possible into as few words or sentences as possible.
+* **Reading efficiency:** Communicating information with the least cognitive effort required from the reader.
+
+Optimize for **reading efficiency**, not aggressive compression. A short paragraph that forces students to mentally unpack stacked dates, conditions, abbreviations, symbols, and parenthetical notes is harder to read than two clean sentences or a short list. When separating information improves comprehension, readability wins over saving words.
 
 ## 2. Writing Style, Tone, and Tooling
 
@@ -69,6 +80,29 @@ Avoid:
 * Use standard, accessible English as the default language.
 * Preserve official university names, office titles, document labels, and program names as written—do not translate them unnecessarily.
 * Use the same term consistently throughout an article.
+
+### 2.5 Symbol Grouping
+
+**Core principle: Avoid Symbol Grouping.**
+
+**Symbol Grouping** is the excessive concentration of special symbols, numerical references, parentheses, brackets, slashes, dashes, abbreviations, dates, time ranges, and other symbol-heavy elements within a single sentence, paragraph, or block of text. Even when technically accurate and short, dense symbol clusters create visual clutter and force readers to work harder to parse what applies to them.
+
+Guidelines:
+
+* Avoid stacking multiple numerical references, date or time ranges, parentheses, slashes, and abbreviations inside a short span of text.
+* Do not chain parentheses repeatedly to tuck in exceptions, clarifications, and conditions inside prose.
+* When a passage becomes symbol-heavy, break it into separate sentences, paragraphs, lists, or tables rather than compressing everything into one block.
+* Preserve technical precision—never drop accurate figures, codes, or dates just to lower symbol count. Improve how they are organized and presented instead.
+* Use judgment: symbols, parentheses, and abbreviations are not banned. The goal is preventing excessive density that slows reading.
+
+#### Cognitive and UI/UX Foundations
+
+These established principles inform how Geary structures dense information (keep them behind the scenes—do not cite or explain psychology inside student articles):
+
+* **Cognitive Load Theory (John Sweller):** Readers have limited mental bandwidth. Cluttered, symbol-heavy prose adds extraneous load, making students spend effort decoding syntax instead of understanding the rule.
+* **Cognitive Fluency:** Text that is visually and structurally easier to scan feels easier to understand and act on. Excessive symbol density disrupts fluency.
+* **Gestalt Principles of Perceptual Organization:** Readers naturally group related items using spacing, alignment, and hierarchy. Separating dense details into clear visual chunks makes relationships obvious.
+* **Miller's Law (George A. Miller):** Working memory is limited, so meaningful chunking helps readers retain and process details. Treat this as supporting context for grouping related facts cleanly—not as a rigid numeric rule.
 
 ## 3. Article Structure
 
@@ -167,7 +201,18 @@ Do not use this section as a catch-all for critical rules that belong earlier in
 
 ## 5. Markdown Formatting Standards
 
-Use Markdown strictly for clarity and scannability—not decoration.
+Use standard Markdown elements supported by Geary's renderer—headings, paragraphs, bullet lists, numbered lists, tables, and blockquotes—strictly for clarity and scannability, not decoration. Never rely on custom interactive widgets, graphical timelines, or non-standard Markdown extensions.
+
+Do not default to dense paragraphs when another Markdown structure communicates information with less cognitive effort. Match the format to the content:
+
+* **Timelines and chronological events:** Chronological bullet or numbered lists.
+* **Multiple dates, schedules, fees, or comparisons:** Markdown tables.
+* **Procedures and sequential instructions:** Numbered lists.
+* **Requirements and items to gather or complete:** Regular bullet lists (never checkbox lists; see §5.4).
+* **Important exceptions or restrictions:** Clearly separated paragraphs, blockquotes, or bullet points.
+* **Explanations, context, and conceptual discussions:** Prose with clear headings and short paragraphs.
+
+Do not force every detail into a table or list—use structured formats only when they materially improve comprehension.
 
 ### 5.1 Paragraphs
 
@@ -286,7 +331,7 @@ Assume most students read Geary on their phones:
 
 ## 9. Content Length and Editing
 
-Apply the rule of minimum sufficient content. No arbitrary word counts—let the complexity of the topic determine the length.
+Apply the rule of minimum sufficient content while optimizing for **reading efficiency** rather than aggressive compression. No arbitrary word counts—let the complexity of the topic determine the length, and never cram dates, conditions, and parentheticals into one dense paragraph just to save words.
 
 Before publishing, cut:
 
@@ -322,8 +367,9 @@ When genuinely relevant published Geary articles exist, list them briefly at the
 * [ ] There is no unnecessary introduction or closing summary.
 * [ ] Critical information appears before step-by-step instructions.
 * [ ] Headings are specific to the article's topic—no literal framework labels (e.g., "Must-Know Information" or "Additional Useful Information").
-* [ ] Paragraphs are short (1–3 sentences) and lists are used purposefully.
-* [ ] Filler, repetition, and wordy phrasing have been cut.
+* [ ] Paragraphs are short (1–3 sentences) and structured formats (lists, tables, blockquotes) are chosen when they reduce cognitive effort.
+* [ ] No Symbol Grouping—dense numbers, dates, abbreviations, slashes, and parentheticals are distributed cleanly across sentences, lists, or tables rather than compressed into one paragraph.
+* [ ] Filler, repetition, and wordy phrasing have been cut without aggressively compressing dense details.
 
 ### Guides and Procedures
 

@@ -188,6 +188,23 @@ const jsonLd = [
   for (const table of document.querySelectorAll<HTMLTableElement>('.geary-prose table')) {
     table.setAttribute('tabindex', '0');
 
+    const rows = Array.from(table.rows);
+    const colCount = rows[0]?.cells.length ?? 0;
+    if (colCount >= 2) {
+      for (let col = 0; col < colCount; col++) {
+        let maxLen = 0;
+        for (const row of rows) {
+          const text = row.cells[col]?.textContent?.trim() ?? '';
+          if (text.length > maxLen) maxLen = text.length;
+        }
+        const minW = maxLen >= 100 ? '15rem' : maxLen >= 45 ? '11rem' : '';
+        if (minW) {
+          const headerCell = rows[0]?.cells[col];
+          if (headerCell) headerCell.style.minWidth = minW;
+        }
+      }
+    }
+
     const parent = table.parentElement;
     if (!parent || parent.classList.contains('table-scroll-wrap')) continue;
 

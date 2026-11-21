@@ -47,7 +47,7 @@ Online applications for A.Y. 2027-2028 opened on August 25, 2026. Official pages
 | [BulSU Admissions Office](https://www.facebook.com/BulSUAdmissionsOffice/posts/pfbid0g6dcKRpcysGoEGRPepbXRdkFgdgAcQNuw7mMqpQK89UxcYQarqrTPy8ssrm11MSil) (Main) | **November 26, 2026** | **November 27, 2026** |
 | [BulSU Bustos Campus](https://www.facebook.com/reel/1670200784630839/) | **November 27, 2026** | **November 28, 2026** |
 
-Treat the earlier main-office dates as your cutoff. If you are applying to an external campus—Bustos, Hagonoy, Meneses, Sarmiento, San Rafael, or Plaridel Extension—follow that campus's Facebook page for local submission updates.
+Treat the earlier main-office dates as your cutoff. If you are applying to an external campus (Bustos, Hagonoy, Meneses, Sarmiento, San Rafael, or Plaridel Extension), follow that campus's Facebook page for local submission updates.
 
 BulSU has not yet announced the ATBulSU 2027 exam date, result release, or slot reservation schedule. For a rough timeline, the prior ATBulSU 2026 cycle held its exam on March 1, 2026, released results on April 17, 2026, and ran slot reservations and reconsideration in May 2026.
 
@@ -97,14 +97,14 @@ Upload scanned copies during your online application, then submit physical copie
 
 Submit these only if they apply to you. They count toward the 20-point Affirmative Action share of your score.
 
-**Group A — submit at most one document:**
+**Group A (submit at most one document):**
 
 - Indigenous Cultural Community or Indigenous People (ICC/IP) membership or barangay certificate
 - Pantawid Pamilya Pilipino Program (4Ps) membership or barangay certificate
 - Students with Special Needs (SSN) or Persons with Disabilities (PWD) ID or membership certificate
 - Alternative Learning System (ALS) Accreditation and Equivalency Assessment and Certification
 
-**Group B — submit at most one document:**
+**Group B (submit at most one document):**
 
 - Solo Parent ID, if you are the child of a solo parent
 - Child's Birth Certificate, if you are a solo parent
@@ -112,7 +112,7 @@ Submit these only if they apply to you. They count toward the 20-point Affirmati
 - Certification from a Department of Social Welfare and Development (DSWD)-recognized orphanage or shelter, if orphaned or abandoned
 - First-generation college student proof, such as an MSWDO certification, an Affidavit of Non-Graduation from an immediate family member, or a barangay or school certification. Confirm with UAO which format it requires.
 
-**Other optional documents — submit any that apply:**
+**Other optional documents (submit any that apply):**
 
 - Barangay or local government unit (LGU) certification if you live in a Geographically Isolated and Disadvantaged Area (GIDA)
 - Certification from your school head or community, civic, or religious organization head naming your title and award for exemplary artistic or athletic ability
@@ -175,8 +175,8 @@ Affirmative Action accounts for up to 20 points:
 | Category | Points |
 | --- | --- |
 | Residency | 3 points for Bulacan residents, 2 points for other Region 3 provinces |
-| Group A (ICC/IP, 4Ps, SSN or PWD, or ALS — one category only) | 3 points |
-| Group B (solo parent, orphan or abandoned, or first-generation student — one category only) | 3 points |
+| Group A (ICC/IP, 4Ps, SSN or PWD, or ALS; one category only) | 3 points |
+| Group B (solo parent, orphan or abandoned, or first-generation student; one category only) | 3 points |
 | GIDA residence | 3 points |
 | Exemplary artistic or athletic ability | 3 points |
 | BulSU Adopted Community member or child of a BulSU employee | 5 points |

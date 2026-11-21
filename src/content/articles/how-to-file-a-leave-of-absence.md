@@ -24,7 +24,7 @@ Filing an official Leave of Absence (LOA) lets you pause enrollment for a semest
 - **Residency protection:** Semesters covered by an approved LOA do not count toward maximum residency. Standard residency limits are 4 years for 2-year courses, 6 years for 4-year courses, and 7.5 years for 5-year courses.
 - **Penalty for overstaying:** Staying away beyond one year lets your Dean require **3 to 6 additional academic units** when you return.
 
-The Office of the University Registrar announces each semester's filing deadline on Facebook. For timing reference, the 1st Semester 2025–2026 cutoff for dropping and LOA was October 4, 2025.
+The Office of the University Registrar announces each semester's filing deadline on Facebook. For timing reference, the 1st Semester 2025-2026 cutoff for dropping and LOA was October 4, 2025.
 
 **Note for Student Government officers:** Stepping back from Student Government council duties follows a separate internal filing rule and does not replace filing an academic LOA with the Registrar.
 

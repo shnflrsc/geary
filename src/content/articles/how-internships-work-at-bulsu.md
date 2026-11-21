@@ -30,7 +30,7 @@ Follow this sequence with your college's Student Internship Program (SIP) Coordi
 4. **Contact the approved HTEs** to confirm internship slots and schedule interviews.
 5. **Complete and sign all placement documents before deployment.** Placement becomes official only after you, the agency representative, your SIP Coordinator, and your parent sign the agreement documents. Colleges such as CIT also require a notarized Memorandum of Agreement (MOA) before deployment.
 
-Pre-deployment requirements—including medical clearance, insurance, and MOA deadlines—vary by college. Confirm your exact packet with your SIP Coordinator.
+Pre-deployment requirements, including medical clearance, insurance, and MOA deadlines, vary by college. Confirm your exact packet with your SIP Coordinator.
 
 ## Duties during your practicum
 

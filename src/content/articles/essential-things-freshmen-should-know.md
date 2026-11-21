@@ -110,11 +110,11 @@ For PATHFIT classes, college uniform guides specify the white-and-red gradient B
 
 Regular Main Campus hours run Monday to Friday from 7:00 AM to 7:00 PM, and Saturday from 8:00 AM to 5:00 PM, with no noon break. Check the BulSU e-Library Facebook page before visiting, since university flexible work or blended learning memos sometimes pause face-to-face service on certain days while keeping online resources open.
 
-Students registered in the library system can borrow up to 2 books overnight with their BulSU ID card, starting at 3:00 PM and due by 10:00 AM the next day (late returns carry fines). During major exam weeks such as midterms, the e-Library also occasionally opens 24-hour study service with QR reservation.
+Students registered in the library system can borrow up to 2 books overnight with their BulSU ID card, starting at 3:00 PM and due by 10:00 AM the next day; late returns carry fines. During major exam weeks such as midterms, the e-Library also occasionally opens 24-hour study service with QR reservation.
 
 ### University Health Services (Clinic)
 
-Freshmen, transferees, and shifters must complete an annual medical and dental exam at University Health Services. During slot reservation, bring your emailed Medical and Dental Assessment Form, a chest X-ray taken within 6 months, and medical clearance or a PWD ID if applicable. Confirm the Admissions Office's current room or temporary site on its Facebook page before going, since venues can move between academic years.
+Freshmen, transferees, and shifters must complete an annual medical and dental exam at University Health Services. During slot reservation, bring your emailed Medical and Dental Assessment Form, a chest X-ray taken within 6 months, and medical clearance or a PWD ID if applicable. Because the Admissions Office can move between academic years, check its Facebook page for the current venue before going for reservation.
 
 Once enrolled, Main Campus students get free medical and dental consultations, free medicines, laboratory requests and referrals, free dental prophylaxis and tooth extractions, and teleconsultations through the campus Clinic Facebook page.
 

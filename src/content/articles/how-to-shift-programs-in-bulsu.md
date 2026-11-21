@@ -31,14 +31,14 @@ Shifting covers:
 
 Voluntary shifters need satisfactory academic standing and an open slot in the receiving program. Shifting does not reset your maximum residency clock from initial entry. You still have 6 years for a 4-year course and 7.5 years for a 5-year course, so switching late can limit how many semesters you have left.
 
-### Recent application window (A.Y. 2026–2027 reference)
+### Recent application window (A.Y. 2026-2027 reference)
 
 Only limited slots open each year. During the May 2026 cycle, applications ran on this schedule:
 
 | Stage | Initial window | Extended window | Notes |
 | --- | --- | --- | --- |
-| Online application | May 20–29, 2026 | May 27–June 1, 2026 | Submitted through the announced portal link |
-| Hard-copy appointment | May 21–30, 2026 | May 28–June 2, 2026 | Excludes May 25–26, Sundays, and holidays; held at Malolos Campus, BulSU E-Library 2nd Floor |
+| Online application | May 20 to 29, 2026 | May 27 to June 1, 2026 | Submitted through the announced portal link |
+| Hard-copy appointment | May 21 to 30, 2026 | May 28 to June 2, 2026 | Excludes May 25 to 26, Sundays, and holidays; held at Malolos Campus, BulSU E-Library 2nd Floor |
 
 On-site document submission for shifters has **no fee**. Confirm on the current cycle announcement if any college testing fee applies.
 
@@ -53,7 +53,7 @@ Whether you need an exam depends on the kind of move you are making:
 | Continuing from a ladderized program toward a bachelor's degree | Continuing examination required |
 | Changing majors within the same degree program | Exempted from the Shifter's Exam |
 
-For reference, Sarmiento Campus held its A.Y. 2026–2027 Shifters, Transferees, and Second-Degree Admission Test on June 5, 2026.
+For reference, Sarmiento Campus held its A.Y. 2026-2027 Shifters, Transferees, and Second-Degree Admission Test on June 5, 2026.
 
 ## Documents to prepare
 

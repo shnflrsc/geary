@@ -25,7 +25,7 @@ Penalties escalate with repeat offenses. Committing three different violations t
 | Tier | Common examples | Typical progressive sanctions |
 | --- | --- | --- |
 | Light | Littering, unauthorized posters or flyers, vandalism, class disruption, unauthorized selling or solicitation | 1st: verbal reprimand. 2nd: written reprimand plus 4 hours Transformative Experience. 3rd: 10 hours plus Guidance Intervention, with restitution or cleaning. 4th: 2-week suspension. |
-| Less Grave | Smoking, gambling, or alcohol on campus; malicious accusations; fraud or impersonation; disrespecting officials; entering or damaging closed premises | 1st–2nd: written reprimand plus 4 to 8 hours Transformative Experience and parent dialogue with the Dean. 3rd: 10 to 32 hours plus Guidance Intervention and restitution. 4th: 2-week suspension. |
+| Less Grave | Smoking, gambling, or alcohol on campus; malicious accusations; fraud or impersonation; disrespecting officials; entering or damaging closed premises | 1st to 2nd: written reprimand plus 4 to 8 hours Transformative Experience and parent dialogue with the Dean. 3rd: 10 to 32 hours plus Guidance Intervention and restitution. 4th: 2-week suspension. |
 | Grave | Theft, lewd conduct on campus, physical, verbal, or sexual abuse, cyberbullying, hazing, threats, illegal drugs, carrying weapons | Written reprimand or 1-week to 1-semester suspension, escalating to dismissal or immediate expulsion. Drugs, weapons, or serious injury also carry police turnover. |
 
 ### Academic dishonesty

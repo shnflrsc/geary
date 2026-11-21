@@ -64,7 +64,7 @@ Each college or campus runs its own application process:
 
 - **Filing window:** Usually opens from December through early February.
 - **Unit checks:** Colleges may enforce minimum unit loads, such as CIT's minimum 15-unit requirement.
-- **Submission format:** Varies by college—either an online form, a scanned Certificate of Grades submitted in a brown envelope to the Dean's Office, or a Program Chair endorsement.
+- **Submission format:** Varies by college: either an online form, a scanned Certificate of Grades submitted in a brown envelope to the Dean's Office, or a Program Chair endorsement.
 
 **Late entries are not accepted**, and falsifying records carries disciplinary penalties.
 

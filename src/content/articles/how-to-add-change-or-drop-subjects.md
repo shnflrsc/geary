@@ -24,7 +24,6 @@ BulSU handles adding, changing, and dropping subjects through the ALAB SMS Porta
 - **Subject unavailable:** Coordinate with your college first if a subject does not appear in ALAB SMS.
 - **No cross-semester adding:** You cannot add 1st-semester subjects during the 2nd semester.
 - **Dropping risk:** Dropping two subjects in one term blocks you from enrolling in requisite subjects the next semester. Dropping two subjects while on probation drops you from your course.
-- **Portal URL note:** ICTO uses the [ALAB SMS Portal](https://alabsms.bulsu.edu.ph/), while one Student Government post listed `bulsu-sms.bulsutech.com`. Verify the active link from ICTO's Facebook page before signing in.
 
 ## How to add, change, or drop subjects in ALAB SMS
 
@@ -35,7 +34,7 @@ BulSU handles adding, changing, and dropping subjects through the ALAB SMS Porta
 5. Enter a reason between 5 and 255 characters, such as "Schedule adjustment for this term," and click **Send Request**.
 6. Wait for Registrar approval and monitor your status under **Your requests**.
 
-If you miss the online adjustment deadline, request assistance directly from the Office of the University Registrar. For login or account trouble, submit a ticket through the [ICTO Helpdesk](https://icto-helpdesk.bulsu.edu.ph/), also listed as `ict-helpdesk.bulsu.edu.ph` on ICTO's page.
+If you miss the online adjustment deadline, request assistance directly from the Office of the University Registrar. For login or account trouble, submit a ticket through the [ICTO Helpdesk](https://icto-helpdesk.bulsu.edu.ph/).
 
 ## Substituting subjects under an old curriculum
 

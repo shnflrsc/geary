@@ -298,7 +298,7 @@ When a newer official PDF or Facebook announcement updates or supersedes an olde
 * Never fabricate policies, office details, contacts, URLs, or steps.
 * State explicitly when official information is incomplete, unverified, or not yet announced.
 * Preserve original qualifications and exceptions.
-* Resolve conflicting sources instead of quietly picking one.
+* Resolve conflicting sources instead of quietly picking one. When official sources list conflicting URLs, domains, or mutually exclusive details, confirm with the developer which one is canonical rather than displaying two options and leaving the reader to decide.
 
 ### 7.3 Source Attribution
 

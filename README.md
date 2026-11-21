@@ -1,6 +1,6 @@
 # Geary - The Better BulSU Student Handbook
 
-Geary is an unofficial, student-managed static guide hub for Bulacan State University (BulSU) students built with Astro, Tailwind CSS, and React. Always verify time-sensitive fees, schedules, and forms directly with the concerned university office.
+Geary is an unofficial, student-managed static article hub for Bulacan State University (BulSU) students built with Astro, Tailwind CSS, and React. Always verify time-sensitive fees, schedules, and forms directly with the concerned university office.
 
 ## Quickstart
 
@@ -24,17 +24,16 @@ Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical li
 | `bun test` | Run Bun unit tests in `tests/unit/` (`bun run test:unit`) |
 | `bun run test:e2e` | Run Playwright E2E, SEO, and Axe accessibility tests in `tests/e2e/` |
 
-## Adding or editing student guides
+## Adding or editing student articles
 
 1. Review writing guidelines, formatting standards, and source rules in [WRITING_FRAMEWORK.md](./WRITING_FRAMEWORK.md).
 2. Add or edit Markdown files inside `src/content/articles/`.
 3. Include valid frontmatter matching `src/content.config.ts`:
-   - `title`: Guide headline
+   - `title`: Article headline
    - `category`: One of `enrollment`, `academics`, `documents`, `scholarships`, `policies`, `organizations`, or `campus`
    - `subcategory`: Matching subgroup heading inside the category
    - `updatedDate`: ISO date (`YYYY-MM-DD`)
-   - `featured`: Boolean (`true` or `false`)
-   - `source` & `sourceUrl`: Source document label and link for the end-of-article citation card
+   - `sources`: List of `{ label, url? }` source citations for the end-of-article Sources and References card (legacy single `source` and `sourceUrl` fields remain optional)
 
 ## Project documentation
 
@@ -48,8 +47,8 @@ Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical li
 - [TESTING.md](./TESTING.md) - Verification layers and test cases
 - [REQUIREMENTS.md](./REQUIREMENTS.md) - Master Requirements Traceability Matrix
 - [ROADMAP.md](./ROADMAP.md) - Milestones and backlog
-- [WRITING_FRAMEWORK.md](./WRITING_FRAMEWORK.md) - Editorial, tone, and guide writing framework
+- [WRITING_FRAMEWORK.md](./WRITING_FRAMEWORK.md) - Editorial, tone, and article writing framework
 
-## Primary source attribution
+## Sources and attribution
 
-Handbook guides on Geary are adapted from the [Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016](https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf).
+Articles on Geary prioritize recent official BulSU PDFs, Board of Regents (BOR) resolutions, verified university office and student council Facebook announcements, and official `bulsu.edu.ph` portals. Standing statutory rules not superseded by newer issuances fall back to the [Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016](https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf).

@@ -23,8 +23,8 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
 
     const ccjeMatches = searchCampusLocations(CAMPUS_BUILDINGS, 'CCJE');
     expect(ccjeMatches.length).toBeGreaterThan(0);
-    expect(ccjeMatches[0]?.buildingId).toBe('chocolate-building');
-    expect(ccjeMatches[0]?.buildingName).toBe('Chocolate Building');
+    expect(ccjeMatches[0]?.buildingId).toBe('ccje-building');
+    expect(ccjeMatches[0]?.buildingName).toBe('CCJE Building');
 
     const kaEkekMatches = searchCampusLocations(CAMPUS_BUILDINGS, 'Ka Ekek');
     expect(kaEkekMatches.length).toBeGreaterThan(0);

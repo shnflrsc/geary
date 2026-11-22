@@ -1989,9 +1989,9 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "locations": []
   },
   {
-    "id": "chocolate-building",
-    "name": "Chocolate Building",
-    "shortLabel": "Chocolate Building",
+    "id": "ccje-building",
+    "name": "CCJE Building",
+    "shortLabel": "CCJE Building",
     "floors": null,
     "svgPath": "M808.8,348.3 L825.1,333.5 L906.5,423.8 L890.1,438.5 Z",
     "center": {
@@ -2006,6 +2006,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
         "category": "academic",
         "keywords": [
           "CCJE",
+          "CCJE Building",
           "Criminology",
           "Criminal Justice",
           "Chocolate Building"

@@ -349,3 +349,48 @@ export function partitionBuildingLocations(locations: readonly CampusLocation[])
 
   return { colleges, others };
 }
+
+export interface FloorLocationGroup {
+  floor: string;
+  rank: number;
+  locations: CampusLocation[];
+}
+
+/**
+ * Splits `others` (non-college locations) into ordered floor accordion groups
+ * (Ground, 1st..N) followed by remaining locations without a numeric/ground floor.
+ */
+export function groupLocationsByFloor(locations: readonly CampusLocation[]): {
+  floorGroups: FloorLocationGroup[];
+  unfloored: CampusLocation[];
+} {
+  const byRank = new Map<number, FloorLocationGroup>();
+  const unfloored: CampusLocation[] = [];
+
+  for (const loc of locations) {
+    const rank = getFloorRank(loc.floor);
+    if (rank === Number.POSITIVE_INFINITY || !loc.floor) {
+      unfloored.push(loc);
+      continue;
+    }
+
+    const existing = byRank.get(rank);
+    if (existing) {
+      existing.locations.push(loc);
+    } else {
+      byRank.set(rank, {
+        floor: loc.floor.trim(),
+        rank,
+        locations: [loc],
+      });
+    }
+  }
+
+  const floorGroups = Array.from(byRank.values()).sort((a, b) => a.rank - b.rank);
+  for (const group of floorGroups) {
+    group.locations.sort(compareLocationNames);
+  }
+  unfloored.sort(compareLocationNames);
+
+  return { floorGroups, unfloored };
+}

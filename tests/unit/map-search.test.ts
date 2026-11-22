@@ -8,6 +8,7 @@ import {
   computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
   focusBuildingViewBox,
+  groupLocationsByFloor,
   partitionBuildingLocations,
   searchCampusLocations,
 } from '../../src/lib/map-search';
@@ -129,5 +130,27 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
       'Back Room',
       'Zeta Room',
     ]);
+  });
+
+  test('groupLocationsByFloor groups numeric/ground floors in order and keeps anything else unfloored', () => {
+    const grouped = groupLocationsByFloor([
+      { id: '1', name: 'Zeta Room', category: 'academic' },
+      { id: '2', name: 'Back Room', floor: 'Back', category: 'student-services' },
+      { id: '3', name: 'Second B', floor: '2nd Floor', category: 'academic' },
+      { id: '4', name: 'Ground Office', floor: 'Ground Floor', category: 'administration' },
+      { id: '5', name: 'First A', floor: '1st Floor', category: 'academic' },
+      { id: '6', name: 'Second A', floor: '2nd Floor', category: 'academic' },
+    ]);
+
+    expect(grouped.floorGroups.map((g) => g.floor)).toEqual([
+      'Ground Floor',
+      '1st Floor',
+      '2nd Floor',
+    ]);
+    expect(grouped.floorGroups[2]?.locations.map((l) => l.name)).toEqual([
+      'Second A',
+      'Second B',
+    ]);
+    expect(grouped.unfloored.map((l) => l.name)).toEqual(['Back Room', 'Zeta Room']);
   });
 });

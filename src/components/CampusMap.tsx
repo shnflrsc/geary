@@ -16,6 +16,7 @@ import {
   computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
   focusBuildingViewBox,
+  groupLocationsByFloor,
   partitionBuildingLocations,
   searchCampusLocations,
   type MapSearchMatch,
@@ -53,6 +54,7 @@ export default function CampusMap() {
   const [activeMatchIndex, setActiveMatchIndex] = useState(-1);
   const [viewBox, setViewBox] = useState<ViewBoxRect>(DEFAULT_MAP_VIEWBOX);
   const [isDragging, setIsDragging] = useState(false);
+  const [openFloors, setOpenFloors] = useState<Record<string, boolean>>({});
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const searchWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -352,7 +354,26 @@ export default function CampusMap() {
     [selectedBuilding]
   );
 
-  const renderLocationItem = (loc: CampusLocation) => {
+  const groupedOthers = useMemo(
+    () => groupLocationsByFloor(partitionedLocations.others),
+    [partitionedLocations.others]
+  );
+
+  useEffect(() => {
+    if (!selectedBuilding || !highlightedLocationId) return;
+    const matchGroup = groupedOthers.floorGroups.find((g) =>
+      g.locations.some((loc) => loc.id === highlightedLocationId)
+    );
+    if (!matchGroup) return;
+    const key = `${selectedBuilding.id}:${matchGroup.rank}`;
+    setOpenFloors((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
+  }, [selectedBuilding, highlightedLocationId, groupedOthers.floorGroups]);
+
+  const toggleFloor = (key: string) => {
+    setOpenFloors((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const renderLocationItem = (loc: CampusLocation, showFloor = true) => {
     const isHighlightedLoc = highlightedLocationId === loc.id;
 
     return (
@@ -366,7 +387,7 @@ export default function CampusMap() {
         }`}
       >
         <p className="text-sm font-semibold text-ink-primary">{loc.name}</p>
-        {loc.floor && (
+        {showFloor && loc.floor && (
           <p className="mt-0.5 text-xs font-medium text-ink-secondary">
             {loc.floor}
           </p>
@@ -880,14 +901,50 @@ export default function CampusMap() {
                   ref={locationListRef}
                   className="mt-3 max-h-[32rem] min-h-0 flex-1 space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable] lg:max-h-none"
                 >
-                  {partitionedLocations.colleges.map(renderLocationItem)}
+                  {partitionedLocations.colleges.map((loc) => renderLocationItem(loc, true))}
                   {partitionedLocations.colleges.length > 0 &&
                     partitionedLocations.others.length > 0 && (
                       <li role="separator" aria-hidden="true" className="py-1.5">
                         <div className="border-t border-border-strong" />
                       </li>
                     )}
-                  {partitionedLocations.others.map(renderLocationItem)}
+                  {groupedOthers.floorGroups.map((group) => {
+                    const key = `${selectedBuilding.id}:${group.rank}`;
+                    const isOpen = Boolean(openFloors[key]);
+                    return (
+                      <li
+                        key={key}
+                        className="overflow-hidden rounded-md border border-border-subtle bg-canvas-paper"
+                      >
+                        <button
+                          type="button"
+                          aria-expanded={isOpen}
+                          onClick={() => toggleFloor(key)}
+                          className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left text-sm font-semibold text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-crimson"
+                        >
+                          <span>{group.floor}</span>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            aria-hidden="true"
+                            className={`h-4 w-4 shrink-0 text-ink-secondary transition-transform duration-150 ${
+                              isOpen ? 'rotate-180' : ''
+                            }`}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+                          </svg>
+                        </button>
+                        {isOpen && (
+                          <ul className="space-y-2 border-t border-border-subtle bg-surface-card p-2.5">
+                            {group.locations.map((loc) => renderLocationItem(loc, false))}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  })}
+                  {groupedOthers.unfloored.map((loc) => renderLocationItem(loc, true))}
                 </ul>
               ) : (
                 <p className="mt-3 text-sm text-ink-secondary">

@@ -58,14 +58,23 @@ sources:
 
 The Admission Test for Bulacan State University (ATBulSU) is a free, single-day, paper-based entrance exam for incoming college freshmen. BulSU administers it on the same day across the Malolos Main Campus and all satellite campuses: Bustos, Hagonoy, Meneses, San Rafael, and Sarmiento (with external campus updates also covering Plaridel Extension).
 
-## Eligibility, fees, and disqualifications
+## Eligibility, fees, and course rules
 
 - Taking ATBulSU is **free**. BulSU charges no testing or application fee.
 - Only incoming freshmen may apply. You qualify if you are a Senior High School (SHS) candidate for graduation, an SHS graduate from a public or DepEd-recognized private school, a graduate of an accredited secondary school abroad, or an Alternative Learning System (ALS) graduate with Accreditation and Equivalency (A&E) certification.
-- You must never have enrolled in or attended any college or university before the academic year you are applying for. Transferees, shifters, and second-degree applicants follow a separate track. Applying through Freshman Admission when you have prior college units leads to **disqualification and blacklisting across all BulSU programs**.
+- You must never have enrolled in or attended any college or university before the academic year you are applying for. Transferees, shifters, and second-degree applicants follow a separate track.
 - You can pick **two course choices only**: a first-choice program and an allied second-choice program. Choices lock once the Admissions Office stamps your hard copies, and you cannot switch programs after results come out. Admitted freshmen must finish one full academic year before applying to shift.
 - BS Nursing and the College of Nursing are no longer listed under Main Campus in the [A.Y. 2027-2028 Programs Offered post](https://www.facebook.com/BulSUAdmissionsOffice/posts/pfbid0g7pPsC6Wy1jXtAXzy1XtkqMAqZuF92pDP2eXSVGWMi68RT1U5x25VykfcVKTDhJtl). Incoming BSN applicants apply through San Rafael Campus.
-- Any of the following voids your application: misrepresenting information on the portal or any form, **creating multiple applications**, falsifying the Declaration Form, breaking exam rules, or missing your scheduled hard-copy submission date.
+
+### Grounds for disqualification
+
+Any of the following voids your application:
+
+- Applying through Freshman Admission when you have prior college units (**results in blacklisting across all BulSU programs**)
+- Creating multiple applications
+- Misrepresenting information on the portal or falsifying the Declaration Form
+- Breaking exam rules
+- Missing your scheduled hard-copy submission date
 
 ## Application timeline and how to apply
 
@@ -73,13 +82,13 @@ Recent ATBulSU cycles opened earlier in the school year. Check the [BulSU Admiss
 
 | Milestone | A.Y. 2025-2026 | A.Y. 2026-2027 | A.Y. 2027-2028 |
 | --- | --- | --- | --- |
-| Online application | Nov 7, 2024 - Jan 12, 2025 | Sep 22 - Dec 19, 2025 | Aug 25 - Nov 26, 2026 (Bustos: Nov 27) |
-| Hard-copy submission | Within 2 weeks of filing | Sep 29 - Dec 20, 2025 | Through Nov 27, 2026 (Bustos: Nov 28; catch-up Saturdays through Nov 14) |
+| Online application | Nov 7, 2024 - Jan 12, 2025 | Sep 22 - Dec 19, 2025 | Aug 25 - Nov 26, 2026 |
+| Hard-copy submission | Within 2 weeks of filing | Sep 29 - Dec 20, 2025 | Through Nov 27, 2026 |
 | Test permits emailed | Started Feb 6, 2025 | Late Jan - Feb 1, 2026 | TBA |
 | ATBulSU exam day | Sunday, Mar 16, 2025 | Sunday, Mar 1, 2026 | TBA |
 | Results released | May 16, 2025 | Apr 17, 2026 | TBA |
 
-Where main-office and satellite closing dates differ by a day, treat the earlier main-office date as your cutoff.
+For A.Y. 2027-2028, Bustos Campus listed closing dates one day later (November 27 online and November 28 hard-copy), and Saturday catch-up submissions ran through November 14, 2026. Treat the earlier main-office date as your cutoff.
 
 ### Registration steps
 
@@ -91,7 +100,7 @@ Where main-office and satellite closing dates differ by a day, treat the earlier
 6. Wait for your emailed ATBulSU Test Permit, which shows your permit number, exam date, batch time, testing center, building, room assignment, and QR code.
 7. Print the test permit on short bond paper. Some satellite campuses, including Sarmiento, ask examinees to bring two copies: one inside the clear envelope and one to show the proctor.
 
-The same admissions portal hosts separate forms for Graduate School (GSAT), ETEEAP, Night Class (Main Campus BBA Marketing Management and BSIT), CPE, and CPTE.
+The same portal also hosts separate forms for graduate programs, ETEEAP, Night Class, and certificate programs.
 
 ## Admission requirements and documents
 
@@ -111,11 +120,36 @@ Bring physical copies matching your uploaded scans to your on-site validation ap
 
 Check an Affirmative Action category on the portal only if you have the matching proof ready. Unverified claims can flag your application during validation.
 
-- **Priority Demographic Group / Group A (3 points, one counted):** NCIP, tribal, or barangay certification for Indigenous Cultural Communities and Indigenous Peoples (ICC/IP); 4Ps ID or barangay certification; SWD or barangay PWD ID or membership certificate for Students with Special Needs (SSN) or Persons with Disabilities (PWD); or ALS A&E Assessment and Certification.
-- **Family and Social Support Group / Group B (3 points, one counted):** CSWDO or MSWDO Solo Parent ID if you are the child of a solo parent; your child's birth certificate if you are a solo parent; death certificate of one or both parents if you are an orphan living with relatives; certification from a DSWD-recognized orphanage or shelter if orphaned or abandoned; or proof of First-Generation College Student status.
-- **Additional categories:** Barangay or LGU certification for Geographically Isolated and Disadvantaged Areas (GIDA, 3 points); School Head or community, civic, or religious organization head certificate naming your title and award for exemplary artistic or athletic ability (3 points); University Extension Office certificate for BulSU Adopted Community members or your parent's latest BulSU Employee ID if they have at least one year of service (5 points); TVL NC I or NC II certificates (preferred for College of Industrial Technology applicants). Working students with a Certificate of Employment appeared as an optional category in the 2026 cycle, though it is not listed in the 2027-2028 points table.
+**Group A: Priority Demographic Group (3 points, submit at most one)**
+
+| Category | Accepted proof |
+| --- | --- |
+| Indigenous Cultural Communities or Indigenous Peoples (ICC/IP) | NCIP, tribal, or barangay certification |
+| Pantawid Pamilya Pilipino Program (4Ps) beneficiary | 4Ps ID or barangay certification |
+| Student with Special Needs (SSN) or Person with Disability (PWD) | SWD or barangay PWD ID, or membership certificate |
+| Alternative Learning System (ALS) graduate | Accreditation and Equivalency (A&E) Assessment and Certification |
+
+**Group B: Family and Social Support Group (3 points, submit at most one)**
+
+| Category | Accepted proof |
+| --- | --- |
+| Child of a solo parent | CSWDO or MSWDO Solo Parent ID |
+| Solo parent | Child's birth certificate |
+| Orphan living with relatives | Death certificate of one or both parents |
+| Orphaned or abandoned student in a shelter | Certification from a DSWD-recognized orphanage or shelter |
+| First-generation college student | See discrepancy note below |
 
 > **Discrepancy on First-Generation College Student proof:** Official BulSU sources list different accepted documents for this category. Board of Regents Resolution No. 213, s. 2025 requires an *Affidavit of Non-Graduation*, while the BulSU Admissions Office's September 17, 2025 checklist asks for a *CSWDO or MSWDO certification* (and the 2027-2028 guidelines also mention barangay or school certification). Confirm with the University Admissions Office before uploading so your claim is not rejected.
+
+**Additional categories (submit any that apply)**
+
+| Category | Points | Accepted proof |
+| --- | --- | --- |
+| Geographically Isolated and Disadvantaged Area (GIDA) resident | 3 | Barangay or LGU certification |
+| Exemplary artistic or athletic ability | 3 | Certificate from your school head or a community, civic, or religious organization head naming your title and award |
+| BulSU Adopted Community member or child of a BulSU employee (at least 1 year of service) | 5 | University Extension Office certificate or parent's latest BulSU Employee ID |
+
+TVL NC I or NC II certificates are preferred for College of Industrial Technology applicants. Working students with a Certificate of Employment appeared as an optional category in the 2026 cycle, though it is not listed in the 2027-2028 points table.
 
 ### Exam-day packet
 
@@ -129,7 +163,12 @@ Place all exam-day items inside one **short transparent plastic envelope**:
 
 ## Exam schedule, venue, and exam-day rules
 
-All campuses hold ATBulSU on the same Sunday in two batches. According to *The Communiqué*, BulSU's student publication, the morning batch runs **8:15 AM to 10:15 AM** and the afternoon batch runs **1:15 PM to 3:15 PM**. External news coverage of ATBulSU 2026 noted lines and staging starting around 6:00 AM to 7:30 AM.
+All campuses hold ATBulSU on the same Sunday in two batches. Based on reporting by *The Communiqué*, the official student publication of BulSU's College of Arts and Letters, exam hours follow this schedule:
+
+- **Morning batch:** 8:15 AM to 10:15 AM
+- **Afternoon batch:** 1:15 PM to 3:15 PM
+
+Lines and campus staging start much earlier. News coverage of ATBulSU 2026 noted examinees queuing by 6:00 AM.
 
 - **Arrive at least one hour early.** BulSU has not published an exact late-arrival cutoff minute, and traffic approaching Malolos Main Campus Gate 1 can back up by up to two hours on exam day.
 - Testing centers are computer-generated and non-transferable. You cannot switch between morning and afternoon batches, and BulSU does not reschedule for conflicts with other college entrance tests. If your assigned testing center is on a different campus than your chosen program, you will still enroll at your chosen campus if you qualify.
@@ -193,13 +232,24 @@ Verify campus availability on the [A.Y. 2027-2028 Programs Offered post](https:/
 
 Qualifiers are ranked on a 100-point composite score:
 
-| Track | ATBulSU | College Exam | Grade 11 GWA | SHS Strand | Interview | Affirmative Action |
-| --- | --- | --- | --- | --- | --- | --- |
-| Standard (no interview) | 50% | - | 15% | 15% | - | 20% |
-| Programs with interview | 50% | - | 10% | 10% | 10% | 20% |
-| College of Engineering | 40% | 20% (COE Exam) | 10% | 10% | - | 20% |
+| Criterion | Standard | With interview | Engineering |
+| --- | --- | --- | --- |
+| ATBulSU exam | 50% | 50% | 40% |
+| College of Engineering exam | - | - | 20% |
+| Grade 11 GWA | 15% | 10% | 10% |
+| SHS strand alignment | 15% | 10% | 10% |
+| College interview | - | 10% | - |
+| Affirmative Action | 20% | 20% | 20% |
 
-SHS strand points award full weight to Related strands, partial weight to Allied strands (10 points for standard tracks and 7 points for interview tracks), and 5 points for Not Related strands. Engineering awards 10 points for STEM, 5 for GAS, and 2 for other strands. Check with UAO for exact strand-to-program mappings, since the strand appendix is omitted from the published guidelines PDF.
+SHS strand alignment points depend on how closely your strand matches your chosen program:
+
+| Strand match | Standard | With interview | Engineering |
+| --- | --- | --- | --- |
+| Directly related (STEM for Engineering) | 15 pts | 10 pts | 10 pts |
+| Allied (GAS for Engineering) | 10 pts | 7 pts | 5 pts |
+| Not related (Other strands for Engineering) | 5 pts | 5 pts | 2 pts |
+
+Check with UAO for exact strand-to-program mappings, since the strand appendix is omitted from the published guidelines PDF.
 
 Affirmative Action accounts for up to 20 points across six categories under the updated A.Y. 2027-2028 guidelines:
 
@@ -212,13 +262,13 @@ Affirmative Action accounts for up to 20 points across six categories under the 
 | Exemplary artistic or athletic ability | 3 |
 | BulSU Adopted Community or child of a BulSU employee | 5 |
 
-Note on the earlier BOR Resolution No. 213, s. 2025: that document contained an arithmetic bug where it printed *Subtotal: 20 pts* even though Residency was capped at 2 points (summing to 19 points: 2 + 3 + 3 + 3 + 3 + 5). The updated 2027-2028 guidelines raised Residency to 3 points so the six categories sum cleanly to 20.
+Note on the earlier BOR Resolution No. 213, s. 2025: that document contained an arithmetic bug where it printed *Subtotal: 20 pts* even though Residency was capped at 2 points, summing to 19 points instead of 20. The updated 2027-2028 guidelines raised Residency to 3 points so the six categories total 20.
 
 The University Admissions Office notifies shortlisted applicants who need to take college interviews, skill tests, or the College of Engineering specialization exam.
 
 ### Results, reconsideration, and anti-fixer warning
 
-Results come out roughly six to nine weeks after exam day. The 2025 results took 61 days, while the 2026 results took 47 days and produced about 10,600 qualifiers out of 31,000 examinees (a 34.19% passing rate).
+Results come out roughly six to nine weeks after exam day. The 2025 results took 61 days, while the 2026 results took 47 days. In 2026, about 10,600 out of 31,000 examinees qualified, a 34.19% passing rate.
 
 BulSU posts alphabetical PDF Lists of Qualifiers by college and program on the [BulSU official website](https://bulsu.edu.ph/) and shares links on the BulSU Official and BulSU Admissions Office Facebook pages. If your name does not appear on the list, you did not qualify in the initial release.
 
@@ -245,9 +295,9 @@ Pack these documents inside a **long brown envelope** labeled with your pooling 
 
 On your reservation date, complete these three steps in order:
 
-1. **University Admissions Office** (temporarily 2nd Floor, BulSU E-Library): Present your printed admission email for verification against the Master List of Qualifiers and receive your official stamp.
-2. **University Health Services** (temporarily Valencia Hall): Complete your medical and dental examination on reservation day. Submit your emailed Health Assessment Form, external Chest X-ray result, and any medical clearance or PWD ID.
-3. **University Registrar Office** (Valencia Hall): Submit your labeled long brown envelope along with your signed Medical and Dental Clearance Slip.
+1. Present your printed admission email at the University Admissions Office (temporarily at the 2nd Floor of the BulSU E-Library) for verification against the Master List of Qualifiers and an official stamp.
+2. Complete your medical and dental examination on reservation day at University Health Services (temporarily at Valencia Hall). Submit your emailed Health Assessment Form, external Chest X-ray result, and any medical clearance or PWD ID.
+3. Submit your labeled long brown envelope and signed Medical and Dental Clearance Slip to the University Registrar Office at Valencia Hall.
 
 Satellite campuses follow the same three-office sequence across their local buildings. Some, including Sarmiento and Meneses, also require an online Health Information Google Form.
 

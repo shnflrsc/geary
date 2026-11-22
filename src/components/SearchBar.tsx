@@ -248,7 +248,7 @@ export default function SearchBar({
           aria-autocomplete="list"
           aria-activedescendant={activeOptionId}
           data-search-ready={isHydrated ? 'true' : 'false'}
-          placeholder={isHero ? '' : 'Search...'}
+          placeholder={isHero ? '' : 'Search Geary...'}
           onFocus={() => {
             setIsFocused(true);
             setIsOpen(true);
@@ -375,8 +375,8 @@ export default function SearchBar({
                       onClick={() => setIsOpen(false)}
                       className={`block px-4 py-3 text-left transition-colors duration-150 ${
                         isActive
-                          ? 'bg-brand-crimson-wash border-l-[3px] border-brand-crimson'
-                          : 'border-l-[3px] border-transparent hover:bg-brand-crimson-wash hover:border-brand-crimson'
+                          ? 'bg-brand-crimson-wash'
+                          : 'hover:bg-brand-crimson-wash'
                       }`}
                     >
                       <p className="text-sm font-semibold text-ink-primary">

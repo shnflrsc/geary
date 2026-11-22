@@ -414,7 +414,7 @@ export default function CampusMap() {
               if (query.trim()) setDropdownOpen(true);
             }}
             onKeyDown={handleSearchKeyDown}
-            placeholder="Search..."
+            placeholder="Search Map..."
             className="w-full rounded-lg border border-border-strong bg-surface-card py-3 pr-20 pl-10 text-sm text-ink-primary shadow-xs placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
           />
           {query && (

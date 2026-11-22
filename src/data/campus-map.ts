@@ -796,7 +796,6 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "cit",
         "name": "College of Industrial Technology (CIT)",
-        "floor": "2nd Floor",
         "category": "academic",
         "keywords": [
           "BIT",
@@ -805,6 +804,169 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "NC II",
           "CIT"
         ]
+      },
+      {
+        "id": "alvarado-cit-deans-office",
+        "name": "CIT Dean's Office",
+        "floor": "2nd Floor",
+        "category": "administration",
+        "keywords": [
+          "CIT",
+          "Dean",
+          "Dean's Office",
+          "Alvarado Hall"
+        ]
+      },
+      {
+        "id": "alvarado-e-learning-room",
+        "name": "E-Learning Room",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": [
+          "E-Learning",
+          "CIT",
+          "Alvarado Hall"
+        ]
+      },
+      {
+        "id": "alvarado-in-plat-training-office",
+        "name": "In-Plat Training Office",
+        "floor": "2nd Floor",
+        "category": "administration",
+        "keywords": [
+          "In-Plat",
+          "In-Plant",
+          "Training",
+          "OJT",
+          "CIT",
+          "Alvarado Hall"
+        ]
+      },
+      {
+        "id": "alvarado-ft-201",
+        "name": "FT-201",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-201", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-202",
+        "name": "FT-202",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-202", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-203",
+        "name": "FT-203",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-203", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-204",
+        "name": "FT-204",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-204", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-205",
+        "name": "FT-205",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-205", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-206",
+        "name": "FT-206",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-206", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-207",
+        "name": "FT-207",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-207", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-208",
+        "name": "FT-208",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-208", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-ft-209",
+        "name": "FT-209",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["FT-209", "FT", "Food Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-201",
+        "name": "DT-201",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-201", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-202",
+        "name": "DT-202",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-202", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-203",
+        "name": "DT-203",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-203", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-204",
+        "name": "DT-204",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-204", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-205",
+        "name": "DT-205",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-205", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-206",
+        "name": "DT-206",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-206", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-207",
+        "name": "DT-207",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-207", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-208",
+        "name": "DT-208",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-208", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
+      },
+      {
+        "id": "alvarado-dt-209",
+        "name": "DT-209",
+        "floor": "2nd Floor",
+        "category": "academic",
+        "keywords": ["DT-209", "DT", "Drafting Technology", "CIT", "Alvarado Hall"]
       },
       {
         "id": "alvarado-lactation-room",
@@ -1274,6 +1436,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "cict",
         "name": "College of Information & Communications Technology (CICT)",
+        "floor": "3rd - 4th Floor",
         "category": "academic",
         "keywords": [
           "CICT",
@@ -1286,6 +1449,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "con",
         "name": "College of Nursing (CON)",
+        "floor": "1st - 2nd Floor",
         "category": "academic",
         "keywords": [
           "CON",

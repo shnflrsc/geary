@@ -52,7 +52,7 @@ Synthesized reference document for the Admission Test for Bulacan State Universi
 
 ### Exam Dates, Volume & Batches
 - **Format:** Single-day, two-batch (morning and afternoon), paper-based exam administered **simultaneously** across Malolos Main Campus and all 5 satellite campuses (Bustos, Hagonoy, Meneses/Bulakan, San Rafael, Sarmiento/CSJDM).
-- **A.Y. 2025-2026:** **Sunday, March 16, 2025** — officially **29,695** freshmen applicants across 6 campuses. Morning batch: **8:15 AM-10:15 AM**; Afternoon batch: **1:15 PM-3:15 PM** (*The Communiqué*, official student publication).
+- **A.Y. 2025-2026:** **Sunday, March 16, 2025** — officially **29,695** freshmen applicants across 6 campuses. Morning batch: **8:15 AM-10:15 AM**; Afternoon batch: **1:15 PM-3:15 PM** (*The Communiqué*, official student publication of BulSU College of Arts and Letters).
 - **A.Y. 2026-2027:** **Sunday, March 1, 2026** — ~**22,000** at Main Campus and **>9,000** across external campuses (~**31,000** total, Admissions advisory). Use *The Communiqué* batch windows (**8:15 AM-10:15 AM** / **1:15 PM-3:15 PM**) as the reference exam schedule; external press (*Pilipino Star Ngayon*) noted queues and staging starting around 6:00 AM-7:30 AM.
 - **Strict Scheduling Rules:** Arrive at least **1 hour early** (no exact late-arrival minute cutoff published). Testing center assignment is computer-generated and non-transferable; morning takers cannot switch to afternoon and vice versa; no rescheduling for conflicts with other CETs. Passers still enroll at their chosen campus even if assigned to a different testing center.
 

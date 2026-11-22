@@ -26,7 +26,7 @@ Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical li
 
 ## Adding or editing student articles
 
-1. Review writing guidelines, formatting standards, and source rules in [WRITING_FRAMEWORK.md](./WRITING_FRAMEWORK.md).
+1. Review writing guidelines, formatting standards, and source rules in [docs/WRITING_FRAMEWORK.md](./docs/WRITING_FRAMEWORK.md).
 2. Add or edit Markdown files inside `src/content/articles/`.
 3. Include valid frontmatter matching `src/content.config.ts`:
    - `title`: Article headline
@@ -38,16 +38,16 @@ Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical li
 ## Project documentation
 
 - [AGENTS.md](./AGENTS.md) - Documentation-first workflow rules and dev server notes
-- [PROJECT_CHARTER.md](./PROJECT_CHARTER.md) - Scope, target users, and constraints
-- [PRD.md](./PRD.md) - Feature requirements and acceptance criteria
-- [SRS.md](./SRS.md) - System interfaces and quality attributes
-- [USER_FLOWS.md](./USER_FLOWS.md) - User journeys and recovery flows
-- [ARCHITECTURE.md](./ARCHITECTURE.md) - Tech stack, schemas, and directory map
-- [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) - Tokens, typography, and contrast rules
-- [TESTING.md](./TESTING.md) - Verification layers and test cases
-- [REQUIREMENTS.md](./REQUIREMENTS.md) - Master Requirements Traceability Matrix
-- [ROADMAP.md](./ROADMAP.md) - Milestones and backlog
-- [WRITING_FRAMEWORK.md](./WRITING_FRAMEWORK.md) - Editorial, tone, and article writing framework
+- [PROJECT_CHARTER.md](./docs/PROJECT_CHARTER.md) - Scope, target users, and constraints
+- [PRD.md](./docs/PRD.md) - Feature requirements and acceptance criteria
+- [SRS.md](./docs/SRS.md) - System interfaces and quality attributes
+- [USER_FLOWS.md](./docs/USER_FLOWS.md) - User journeys and recovery flows
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) - Tech stack, schemas, and directory map
+- [DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md) - Tokens, typography, and contrast rules
+- [TESTING.md](./docs/TESTING.md) - Verification layers and test cases
+- [REQUIREMENTS.md](./docs/REQUIREMENTS.md) - Master Requirements Traceability Matrix
+- [ROADMAP.md](./docs/ROADMAP.md) - Milestones and backlog
+- [WRITING_FRAMEWORK.md](./docs/WRITING_FRAMEWORK.md) - Editorial, tone, and article writing framework
 
 ## Sources and attribution
 

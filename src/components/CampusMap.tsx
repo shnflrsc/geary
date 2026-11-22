@@ -85,12 +85,24 @@ export default function CampusMap() {
   }, []);
 
   const locationListRef = useRef<HTMLUListElement>(null);
+  const lastScrolledHighlightRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!highlightedLocationId || !locationListRef.current) return;
-    const matchEl = locationListRef.current.querySelector<HTMLElement>('[data-search-match="true"]');
-    matchEl?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }, [highlightedLocationId, selectedBuildingId]);
+    if (!highlightedLocationId) {
+      lastScrolledHighlightRef.current = null;
+      return;
+    }
+    if (lastScrolledHighlightRef.current === highlightedLocationId) return;
+    const listEl = locationListRef.current;
+    if (!listEl) return;
+    const matchEl = listEl.querySelector<HTMLElement>('[data-search-match="true"]');
+    if (!matchEl) return;
+
+    lastScrolledHighlightRef.current = highlightedLocationId;
+    requestAnimationFrame(() => {
+      matchEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+  }, [highlightedLocationId, selectedBuildingId, openFloors]);
 
   const selectedBuilding = selectedBuildingId
     ? buildingById.get(selectedBuildingId) ?? null

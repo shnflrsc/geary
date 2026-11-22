@@ -33,22 +33,30 @@ const NAV_LINKS = [
             : 'group inline-flex shrink-0 items-center gap-2.5 rounded-lg py-1 pr-1 text-ink-primary hover:text-brand-crimson transition-colors duration-150'
         }
       >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 32 32"
-          fill="none"
-          class="h-7 w-7 shrink-0 transition-transform duration-300 ease-out group-hover:rotate-90"
-        >
-          <g fill="var(--color-brand-crimson)">
-            <rect x="13" y="2" width="6" height="28" rx="1.5" />
-            <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(45 16 16)" />
-            <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(90 16 16)" />
-            <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(135 16 16)" />
-            <circle cx="16" cy="16" r="10.5" />
-          </g>
-          <circle cx="16" cy="16" r="6.5" fill="var(--color-brand-gold)" />
-          <circle cx="16" cy="16" r="3.4" fill="var(--color-canvas-paper)" />
-        </svg>
+        <span class="relative inline-flex h-7 w-7 shrink-0 items-center justify-center">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 32 32"
+            fill="none"
+            class="h-7 w-7 shrink-0"
+          >
+            <g fill="var(--color-brand-crimson)">
+              <rect x="13" y="2" width="6" height="28" rx="1.5" />
+              <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(45 16 16)" />
+              <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(90 16 16)" />
+              <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(135 16 16)" />
+              <circle cx="16" cy="16" r="10.5" />
+            </g>
+            <circle cx="16" cy="16" r="6.5" fill="var(--color-brand-gold)" />
+            <circle cx="16" cy="16" r="3.4" fill="var(--color-canvas-paper)" />
+          </svg>
+          <img
+            src="/santa-hat.png"
+            alt=""
+            aria-hidden="true"
+            class="pointer-events-none absolute -top-[21px] -left-[1px] h-[38px] w-[38px] -rotate-[14deg] max-w-none select-none"
+          />
+        </span>
         <span
           class={
             isHome

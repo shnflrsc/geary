@@ -16,6 +16,7 @@ import {
   computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
   focusBuildingViewBox,
+  getLocationType,
   groupLocationsByFloor,
   partitionBuildingLocations,
   searchCampusLocations,
@@ -377,7 +378,7 @@ export default function CampusMap() {
       g.locations.some((loc) => loc.id === highlightedLocationId)
     );
     if (!matchGroup) return;
-    const key = `${selectedBuilding.id}:${matchGroup.rank}`;
+    const key = `${selectedBuilding.id}:${matchGroup.floor}`;
     setOpenFloors((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
   }, [selectedBuilding, highlightedLocationId, groupedOthers.floorGroups]);
 
@@ -385,7 +386,7 @@ export default function CampusMap() {
     setOpenFloors((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const renderLocationItem = (loc: CampusLocation, showFloor = true) => {
+  const renderLocationItem = (loc: CampusLocation) => {
     const isHighlightedLoc = highlightedLocationId === loc.id;
 
     return (
@@ -399,11 +400,9 @@ export default function CampusMap() {
         }`}
       >
         <p className="text-sm font-semibold text-ink-primary">{loc.name}</p>
-        {showFloor && loc.floor && (
-          <p className="mt-0.5 text-xs font-medium text-ink-secondary">
-            {loc.floor}
-          </p>
-        )}
+        <p className="mt-0.5 text-xs font-medium text-ink-secondary">
+          {getLocationType(loc)}
+        </p>
       </li>
     );
   };
@@ -913,7 +912,7 @@ export default function CampusMap() {
                   ref={locationListRef}
                   className="mt-3 max-h-[32rem] min-h-0 flex-1 space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable] lg:max-h-none"
                 >
-                  {partitionedLocations.colleges.map((loc) => renderLocationItem(loc, true))}
+                  {partitionedLocations.colleges.map(renderLocationItem)}
                   {partitionedLocations.colleges.length > 0 &&
                     partitionedLocations.others.length > 0 && (
                       <li role="separator" aria-hidden="true" className="py-1.5">
@@ -921,7 +920,7 @@ export default function CampusMap() {
                       </li>
                     )}
                   {groupedOthers.floorGroups.map((group) => {
-                    const key = `${selectedBuilding.id}:${group.rank}`;
+                    const key = `${selectedBuilding.id}:${group.floor}`;
                     const isOpen = Boolean(openFloors[key]);
                     return (
                       <li
@@ -950,13 +949,12 @@ export default function CampusMap() {
                         </button>
                         {isOpen && (
                           <ul className="space-y-2 border-t border-border-subtle bg-surface-card p-2.5">
-                            {group.locations.map((loc) => renderLocationItem(loc, false))}
+                            {group.locations.map(renderLocationItem)}
                           </ul>
                         )}
                       </li>
                     );
                   })}
-                  {groupedOthers.unfloored.map((loc) => renderLocationItem(loc, true))}
                 </ul>
               ) : (
                 <p className="mt-3 text-sm text-ink-secondary">

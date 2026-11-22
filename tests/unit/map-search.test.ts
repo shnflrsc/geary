@@ -8,6 +8,7 @@ import {
   computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
   focusBuildingViewBox,
+  getLocationType,
   groupLocationsByFloor,
   partitionBuildingLocations,
   searchCampusLocations,
@@ -132,10 +133,10 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
     ]);
   });
 
-  test('groupLocationsByFloor groups numeric/ground floors in order and keeps anything else unfloored', () => {
+  test('groupLocationsByFloor groups numeric/ground floors and named subtitles as accordions, keeping floorless items last', () => {
     const grouped = groupLocationsByFloor([
       { id: '1', name: 'Zeta Room', category: 'academic' },
-      { id: '2', name: 'Back Room', floor: 'Back', category: 'student-services' },
+      { id: '2', name: 'Lactation Room', floor: 'Back', category: 'student-services' },
       { id: '3', name: 'Second B', floor: '2nd Floor', category: 'academic' },
       { id: '4', name: 'Ground Office', floor: 'Ground Floor', category: 'administration' },
       { id: '5', name: 'First A', floor: '1st Floor', category: 'academic' },
@@ -146,11 +147,54 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
       'Ground Floor',
       '1st Floor',
       '2nd Floor',
+      'Back',
+      'Unknown Floor',
     ]);
     expect(grouped.floorGroups[2]?.locations.map((l) => l.name)).toEqual([
       'Second A',
       'Second B',
     ]);
-    expect(grouped.unfloored.map((l) => l.name)).toEqual(['Back Room', 'Zeta Room']);
+    expect(grouped.floorGroups[4]?.locations.map((l) => l.name)).toEqual(['Zeta Room']);
+  });
+
+  test('getLocationType infers expected location type labels', () => {
+    expect(
+      getLocationType({
+        id: 'pimentel-a1',
+        name: 'A1',
+        floor: '1st Floor',
+        category: 'academic',
+      })
+    ).toBe('Classroom');
+    expect(
+      getLocationType({
+        id: 'pimentel-sdl-1',
+        name: 'SDL 1',
+        floor: '3rd Floor',
+        category: 'academic',
+      })
+    ).toBe('Classroom');
+    expect(
+      getLocationType({
+        id: 'cict-deans-office',
+        name: "CICT Dean's Office",
+        floor: '3rd Floor',
+        category: 'administration',
+      })
+    ).toBe('Office');
+    expect(
+      getLocationType({
+        id: 'tindahan-ni-ka-ekek',
+        name: 'Tindahan ni Ka Ekek',
+        category: 'food-housing',
+      })
+    ).toBe('Food Stall');
+    expect(
+      getLocationType({
+        id: 'cict',
+        name: 'College of Information & Communications Technology (CICT)',
+        category: 'academic',
+      })
+    ).toBe('College');
   });
 });

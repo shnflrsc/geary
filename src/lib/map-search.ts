@@ -357,40 +357,84 @@ export interface FloorLocationGroup {
 }
 
 /**
- * Splits `others` (non-college locations) into ordered floor accordion groups
- * (Ground, 1st..N) followed by remaining locations without a numeric/ground floor.
+ * Splits `others` (non-college locations) into ordered floor/sub-location accordion
+ * groups (Ground, 1st..N, named subtitles alphabetically, and "Unknown Floor" last).
  */
 export function groupLocationsByFloor(locations: readonly CampusLocation[]): {
   floorGroups: FloorLocationGroup[];
-  unfloored: CampusLocation[];
 } {
-  const byRank = new Map<number, FloorLocationGroup>();
-  const unfloored: CampusLocation[] = [];
+  const byKey = new Map<string, FloorLocationGroup>();
 
   for (const loc of locations) {
-    const rank = getFloorRank(loc.floor);
-    if (rank === Number.POSITIVE_INFINITY || !loc.floor) {
-      unfloored.push(loc);
-      continue;
-    }
+    const trimmedFloor = loc.floor?.trim();
+    const label = trimmedFloor || 'Unknown Floor';
+    const rank = trimmedFloor
+      ? getFloorRank(trimmedFloor)
+      : Number.POSITIVE_INFINITY;
+    const key =
+      trimmedFloor && rank < Number.POSITIVE_INFINITY
+        ? `rank:${rank}`
+        : trimmedFloor
+          ? `label:${trimmedFloor.toLowerCase()}`
+          : 'unknown-floor';
 
-    const existing = byRank.get(rank);
+    const existing = byKey.get(key);
     if (existing) {
       existing.locations.push(loc);
     } else {
-      byRank.set(rank, {
-        floor: loc.floor.trim(),
+      byKey.set(key, {
+        floor: label,
         rank,
         locations: [loc],
       });
     }
   }
 
-  const floorGroups = Array.from(byRank.values()).sort((a, b) => a.rank - b.rank);
+  const floorGroups = Array.from(byKey.values()).sort((a, b) => {
+    if (a.rank !== b.rank) return a.rank - b.rank;
+    const aUnknown = a.floor === 'Unknown Floor';
+    const bUnknown = b.floor === 'Unknown Floor';
+    if (aUnknown !== bUnknown) return aUnknown ? 1 : -1;
+    return a.floor.localeCompare(b.floor, 'en', { numeric: true, sensitivity: 'base' });
+  });
+
   for (const group of floorGroups) {
     group.locations.sort(compareLocationNames);
   }
-  unfloored.sort(compareLocationNames);
 
-  return { floorGroups, unfloored };
+  return { floorGroups };
+}
+
+/**
+ * Infers a concise human-readable type label for a campus location card subtitle.
+ */
+export function getLocationType(loc: CampusLocation): string {
+  const name = loc.name.trim();
+
+  if (/^College of /i.test(name)) return 'College';
+  if (/^Laboratory High School\b/i.test(name)) return 'High School';
+  if (loc.category === 'food-housing') {
+    return /cafeteria/i.test(name) ? 'Cafeteria' : 'Food Stall';
+  }
+  if (/clinic|health services/i.test(name)) return 'Clinic';
+  if (/\b(?:dean's office|office|admissions|registrar|procurement|pdo|r & e|accre)\b/i.test(name)) {
+    return 'Office';
+  }
+  if (/\bfaculty\b/i.test(name)) return 'Faculty Room';
+  if (/\b(?:lab|laboratory|server room)\b/i.test(name)) return 'Laboratory';
+  if (/\blibrary\b|book gallery/i.test(name)) return 'Library';
+  if (/\bavr\b/i.test(name)) return 'Audio-Visual Room';
+  if (/\btheater\b|\bamphitheater\b/i.test(name)) return 'Theater';
+  if (/function hall|multipurpose hall/i.test(name)) return 'Function Hall';
+  if (/lactation|child-minding/i.test(name)) return 'Student Services';
+  if (/^(?:[A-Z]{1,4}[-\s]?\d+[A-Z]?|N\d+|IT \d+|CT \d+|SDL \d+|ACAD \d+|FT-\d+|DT-\d+|FH TL)$/i.test(name)) {
+    return 'Classroom';
+  }
+  if (/\broom\b/i.test(name)) return 'Facility';
+
+  if (loc.category === 'administration') return 'Office';
+  if (loc.category === 'student-services') return 'Student Services';
+  if (loc.category === 'library') return 'Library';
+  if (loc.category === 'sports-events') return 'Event Venue';
+  return 'Room';
 }

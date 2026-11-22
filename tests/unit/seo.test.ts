@@ -54,7 +54,7 @@ describe('SEO JSON-LD builders and safe serialization', () => {
     const schema = buildArticleJsonLd({
       title: 'How to Apply to BulSU',
       description: 'ATBulSU steps and requirements.',
-      url: 'https://geary.example.com/articles/how-to-apply-to-bulsu',
+      url: 'https://geary.example.com/articles/admission-test-for-bulsu-atbulsu',
       dateModified: new Date('2026-11-18T00:00:00.000Z'),
       section: 'Enrollment',
       sources: [

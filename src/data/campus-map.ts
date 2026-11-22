@@ -1009,7 +1009,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Application",
           "E-Library"
         ],
-        "articleSlug": "how-to-apply-to-bulsu"
+        "articleSlug": "admission-test-for-bulsu-atbulsu"
       },
       {
         "id": "elib-lactation-room",

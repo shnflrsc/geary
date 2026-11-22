@@ -45,7 +45,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
       '/categories/documents',
       '/categories/organizations',
       '/articles/can-i-graduate-with-honors',
-      '/articles/how-to-apply-to-bulsu',
+      '/articles/admission-test-for-bulsu-atbulsu',
       '/articles/how-to-shift-programs-in-bulsu',
       '/articles/academic-load-prerequisites-and-residency',
       '/articles/what-happens-when-you-fail-a-subject',

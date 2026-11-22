@@ -291,7 +291,9 @@ const jsonLd = [
     ta.setSelectionRange(0, text.length);
     let ok = false;
     try {
-      ok = document.execCommand('copy');
+      const legacyCopy = (document as unknown as { execCommand?: (cmd: string) => boolean })
+        .execCommand;
+      ok = typeof legacyCopy === 'function' ? legacyCopy.call(document, 'copy') : false;
     } catch {
       ok = false;
     }

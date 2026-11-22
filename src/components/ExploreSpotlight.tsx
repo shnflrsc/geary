@@ -27,9 +27,11 @@ export default function ExploreSpotlight({
   const [dateKey, setDateKey] = useState(initialDateKey);
   const [activeGroup, setActiveGroup] = useState(0);
   const [isFading, setIsFading] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const fadeTimerRef = useRef<number | null>(null);
+  const isPaused = isHovered || isFocused;
 
   useEffect(() => {
     const todayKey = formatLocalDateKey(new Date());
@@ -109,12 +111,12 @@ export default function ExploreSpotlight({
     <section
       aria-labelledby="featured-articles-heading"
       className="py-10 sm:py-12"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsFocused(true)}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
-          setIsPaused(false);
+          setIsFocused(false);
         }
       }}
     >

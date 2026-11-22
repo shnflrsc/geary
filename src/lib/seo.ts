@@ -61,7 +61,14 @@ function formatCitationEntry(entry: ArticleSource): JsonLdObject | string {
     : entry.label;
 }
 
-/** Build Schema.org Article JSON-LD for handbook student guides. */
+const DEFAULT_SITE_URL = 'https://geary.example.com';
+
+/** Resolve the canonical site origin URL from Astro.site or the current request URL. */
+export function resolveSiteOrigin(site: URL | undefined, fallbackUrl?: URL): URL {
+  return site ?? (fallbackUrl ? new URL(fallbackUrl.origin) : new URL(DEFAULT_SITE_URL));
+}
+
+/** Build Schema.org Article JSON-LD for published articles. */
 export function buildArticleJsonLd(input: ArticleJsonLdInput): JsonLdObject {
   const citations = resolveArticleSources(input).map(formatCitationEntry);
 

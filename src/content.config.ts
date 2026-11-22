@@ -3,9 +3,11 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { CATEGORY_SLUGS } from './data/categories';
 
+const httpUrlSchema = z.url({ protocol: /^https?$/ });
+
 export const articleSourceSchema = z.object({
   label: z.string().min(1),
-  url: z.url().optional(),
+  url: httpUrlSchema.optional(),
 });
 
 export const articleSchema = z.object({
@@ -14,7 +16,7 @@ export const articleSchema = z.object({
   subcategory: z.string().min(1),
   updatedDate: z.coerce.date(),
   source: z.string().min(1).optional(),
-  sourceUrl: z.url().optional(),
+  sourceUrl: httpUrlSchema.optional(),
   sources: z.array(articleSourceSchema).min(1).optional(),
 });
 

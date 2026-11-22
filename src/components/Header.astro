@@ -183,6 +183,7 @@ const NAV_LINKS = [
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
         closeDrawer();
+        toggle.focus();
       }
     });
   })();

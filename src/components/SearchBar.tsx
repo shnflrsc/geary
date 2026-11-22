@@ -101,11 +101,23 @@ export default function SearchBar({
   const trimmedQuery = query.trim();
   const results = trimmedQuery ? filterAndRankArticles(items, trimmedQuery) : [];
   const showPanel = isOpen && (trimmedQuery.length > 0 || fetchError);
+  const isMountedRef = useRef(true);
 
-  const ensureIndexLoaded = async () => {
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
+  const ensureIndexLoaded = async (forceRetry = false) => {
     if (cachedIndex) {
       setItems(cachedIndex);
       setFetchError(false);
+      return;
+    }
+
+    if (fetchError && !forceRetry) {
       return;
     }
 
@@ -113,11 +125,15 @@ export default function SearchBar({
     setFetchError(false);
     try {
       const data = await loadSearchIndex();
+      if (!isMountedRef.current) return;
       setItems(data);
     } catch {
+      if (!isMountedRef.current) return;
       setFetchError(true);
     } finally {
-      setIsLoading(false);
+      if (isMountedRef.current) {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -210,6 +226,11 @@ export default function SearchBar({
       ? `${listboxId}-opt-${activeIndex}`
       : undefined;
 
+  useEffect(() => {
+    if (!activeOptionId) return;
+    document.getElementById(activeOptionId)?.scrollIntoView({ block: 'nearest' });
+  }, [activeOptionId]);
+
   return (
     <div
       ref={containerRef}
@@ -244,7 +265,7 @@ export default function SearchBar({
           role="combobox"
           value={query}
           aria-expanded={showPanel}
-          aria-controls={listboxId}
+          aria-controls={showPanel && results.length > 0 ? listboxId : undefined}
           aria-autocomplete="list"
           aria-activedescendant={activeOptionId}
           data-search-ready={isHydrated ? 'true' : 'false'}
@@ -318,7 +339,6 @@ export default function SearchBar({
 
       {showPanel && (
         <div
-          id={listboxId}
           className={`z-50 mt-2 rounded-xl border border-border-subtle bg-surface-card shadow-lg max-h-[400px] overflow-y-auto ${
             isHero
               ? 'absolute inset-x-0 top-full'
@@ -337,7 +357,7 @@ export default function SearchBar({
               <div className="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => void ensureIndexLoaded()}
+                  onClick={() => void ensureIndexLoaded(true)}
                   className="inline-flex min-h-[36px] items-center rounded-lg border border-brand-crimson bg-brand-crimson-wash px-3 py-1.5 text-xs font-semibold text-brand-crimson hover:bg-brand-crimson-solid hover:text-white transition-colors"
                 >
                   Retry search
@@ -361,7 +381,7 @@ export default function SearchBar({
               </div>
             </div>
           ) : results.length > 0 ? (
-            <ul role="listbox" aria-label="Search results" className="divide-y divide-border-subtle">
+            <ul id={listboxId} role="listbox" aria-label="Search results" className="divide-y divide-border-subtle">
               {results.map((item, index) => {
                 const isActive = index === activeIndex;
                 return (

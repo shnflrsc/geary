@@ -4,6 +4,7 @@ import {
   buildArticleJsonLd,
   buildBreadcrumbJsonLd,
   buildWebsiteJsonLd,
+  resolveSiteOrigin,
   serializeJsonLd,
 } from '../../src/lib/seo';
 
@@ -82,5 +83,15 @@ describe('SEO JSON-LD builders and safe serialization', () => {
     const raw = serializeJsonLd({ headline: '</script><script>alert(1)</script>' });
     expect(raw).not.toContain('</script>');
     expect(raw).toContain('\\u003c/script>');
+  });
+
+  test('resolves canonical site origin from Astro.site, fallback URL, or default', () => {
+    expect(resolveSiteOrigin(new URL('https://geary.bulsutools.org/')).href).toBe(
+      'https://geary.bulsutools.org/',
+    );
+    expect(resolveSiteOrigin(undefined, new URL('http://localhost:4321/articles')).href).toBe(
+      'http://localhost:4321/',
+    );
+    expect(resolveSiteOrigin(undefined).href).toBe('https://geary.example.com/');
   });
 });

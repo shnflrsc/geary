@@ -285,7 +285,8 @@ const { class: className = '' } = Astro.props;
         if (next) next.focus();
       } else if (event.key === 'ArrowUp') {
         event.preventDefault();
-        const prev = options[(idx - 1 + options.length) % options.length];
+        const prevIndex = idx <= 0 ? options.length - 1 : idx - 1;
+        const prev = options[prevIndex];
         if (prev) prev.focus();
       } else if (event.key === 'Home') {
         event.preventDefault();

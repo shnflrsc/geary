@@ -1,5 +1,5 @@
 import {
-  SHOW_CAMPUS_2,
+  CAMPUS_MAP_VIEWBOX,
   type CampusBuilding,
   type CampusLocation,
   type LocationCategory,
@@ -25,19 +25,12 @@ export interface ViewBoxRect {
   height: number;
 }
 
-export const DEFAULT_MAP_VIEWBOX: ViewBoxRect = SHOW_CAMPUS_2
-  ? {
-      x: -120,
-      y: -520,
-      width: 1240,
-      height: 1380,
-    }
-  : {
-      x: 0,
-      y: 0,
-      width: 1000,
-      height: 850,
-    };
+function parseViewBox(raw: string): ViewBoxRect {
+  const [x = 0, y = 0, width = 1000, height = 850] = raw.trim().split(/\s+/).map(Number);
+  return { x, y, width, height };
+}
+
+export const DEFAULT_MAP_VIEWBOX: ViewBoxRect = parseViewBox(CAMPUS_MAP_VIEWBOX);
 
 const MIN_VIEWBOX_WIDTH = 280;
 const MAX_VIEWBOX_WIDTH = DEFAULT_MAP_VIEWBOX.width;
@@ -174,7 +167,10 @@ function scoreLocationMatch(
 
 /** Clamps SVG viewBox dimensions and pan coordinates within the campus canvas. */
 export function clampViewBox(vb: ViewBoxRect): ViewBoxRect {
-  const width = Math.min(MAX_VIEWBOX_WIDTH, Math.max(MIN_VIEWBOX_WIDTH, vb.width));
+  const safeWidth = Number.isFinite(vb.width) && vb.width > 0 ? vb.width : DEFAULT_MAP_VIEWBOX.width;
+  const safeX = Number.isFinite(vb.x) ? vb.x : DEFAULT_MAP_VIEWBOX.x;
+  const safeY = Number.isFinite(vb.y) ? vb.y : DEFAULT_MAP_VIEWBOX.y;
+  const width = Math.min(MAX_VIEWBOX_WIDTH, Math.max(MIN_VIEWBOX_WIDTH, safeWidth));
   const height = Math.round(width * VIEWBOX_ASPECT * 100) / 100;
   const minX = DEFAULT_MAP_VIEWBOX.x;
   const minY = DEFAULT_MAP_VIEWBOX.y;
@@ -182,8 +178,8 @@ export function clampViewBox(vb: ViewBoxRect): ViewBoxRect {
   const maxY = DEFAULT_MAP_VIEWBOX.y + Math.max(0, DEFAULT_MAP_VIEWBOX.height - height);
 
   return {
-    x: Math.round(Math.min(maxX, Math.max(minX, vb.x)) * 100) / 100,
-    y: Math.round(Math.min(maxY, Math.max(minY, vb.y)) * 100) / 100,
+    x: Math.round(Math.min(maxX, Math.max(minX, safeX)) * 100) / 100,
+    y: Math.round(Math.min(maxY, Math.max(minY, safeY)) * 100) / 100,
     width: Math.round(width * 100) / 100,
     height,
   };
@@ -198,16 +194,27 @@ export function computeZoomViewBox(
   zoomMultiplier: number,
   focalPoint?: { x: number; y: number }
 ): ViewBoxRect {
-  const fx = focalPoint?.x ?? current.x + current.width / 2;
-  const fy = focalPoint?.y ?? current.y + current.height / 2;
-  const nextWidth = current.width / zoomMultiplier;
+  const safeCurrent = clampViewBox(current);
+  if (!Number.isFinite(zoomMultiplier) || zoomMultiplier <= 0) {
+    return safeCurrent;
+  }
+
+  const fx =
+    focalPoint && Number.isFinite(focalPoint.x)
+      ? focalPoint.x
+      : safeCurrent.x + safeCurrent.width / 2;
+  const fy =
+    focalPoint && Number.isFinite(focalPoint.y)
+      ? focalPoint.y
+      : safeCurrent.y + safeCurrent.height / 2;
+  const nextWidth = safeCurrent.width / zoomMultiplier;
   const clampedWidth = Math.min(
     MAX_VIEWBOX_WIDTH,
     Math.max(MIN_VIEWBOX_WIDTH, nextWidth)
   );
   const nextHeight = clampedWidth * VIEWBOX_ASPECT;
-  const relX = (fx - current.x) / current.width;
-  const relY = (fy - current.y) / current.height;
+  const relX = (fx - safeCurrent.x) / safeCurrent.width;
+  const relY = (fy - safeCurrent.y) / safeCurrent.height;
 
   return clampViewBox({
     x: fx - relX * clampedWidth,

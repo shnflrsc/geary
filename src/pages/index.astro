@@ -8,7 +8,7 @@ import {
   getArticlePreview,
   getArticleSlug,
 } from '../lib/articles';
-import { buildWebsiteJsonLd } from '../lib/seo';
+import { buildWebsiteJsonLd, resolveSiteOrigin } from '../lib/seo';
 
 const allArticles = await getCollection('articles');
 
@@ -21,7 +21,7 @@ const featuredPool: ExploreItem[] = [...allArticles]
   }));
 
 const initialDateKey = formatLocalDateKey(new Date());
-const baseOrigin = Astro.site ?? new URL(Astro.url.origin);
+const baseOrigin = resolveSiteOrigin(Astro.site, Astro.url);
 const websiteJsonLd = buildWebsiteJsonLd(baseOrigin.href);
 
 const HERO_GEARS = [
@@ -217,8 +217,12 @@ const HERO_GEARS = [
       resize();
       start();
 
-      const ro = new ResizeObserver(resize);
-      ro.observe(canvas);
+      if (typeof ResizeObserver === 'function') {
+        const ro = new ResizeObserver(resize);
+        ro.observe(canvas);
+      } else {
+        window.addEventListener('resize', resize, { passive: true });
+      }
 
       reducedMotion.addEventListener('change', () => {
         if (reducedMotion.matches) stop();

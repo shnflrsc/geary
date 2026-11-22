@@ -1,6 +1,7 @@
 /// <reference types="bun" />
 import { describe, expect, test } from 'bun:test';
 import {
+  formatArticleDate,
   formatLocalDateKey,
   getArticlePreview,
   getArticleSlug,
@@ -125,5 +126,10 @@ describe('Article taxonomy and grouping helpers (TC-UNIT-04)', () => {
     expect(day1Groups).toEqual(day1GroupsAgain);
     expect(day2Groups).not.toEqual(day1Groups);
     expect(getDailyItemGroups([], '2026-11-19', 6, 3)).toEqual([]);
+  });
+
+  test('formats ISO dates consistently in UTC without timezone off-by-one drift', () => {
+    expect(formatArticleDate(new Date('2026-04-01T00:00:00Z'))).toBe('Apr 1, 2026');
+    expect(formatArticleDate(new Date('2026-01-01T00:00:00Z'))).toBe('Jan 1, 2026');
   });
 });

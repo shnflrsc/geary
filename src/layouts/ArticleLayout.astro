@@ -9,7 +9,7 @@ import {
   resolveArticleSources,
   type ArticleLike,
 } from '../lib/articles';
-import { buildArticleJsonLd, buildBreadcrumbJsonLd } from '../lib/seo';
+import { buildArticleJsonLd, buildBreadcrumbJsonLd, resolveSiteOrigin } from '../lib/seo';
 
 interface Heading {
   depth: number;
@@ -28,7 +28,7 @@ const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const hasToc = tocHeadings.length >= 2;
 const resolvedSources = resolveArticleSources(article.data);
 const articlePreview = getArticlePreview(article);
-const baseOrigin = Astro.site ?? new URL(Astro.url.origin);
+const baseOrigin = resolveSiteOrigin(Astro.site, Astro.url);
 const articleUrl = new URL(Astro.url.pathname, baseOrigin).href;
 const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`;
 const jsonLd = [
@@ -222,9 +222,10 @@ const jsonLd = [
     };
 
     table.addEventListener('scroll', updateScrollState, { passive: true });
-    window.addEventListener('resize', updateScrollState, { passive: true });
     if (typeof ResizeObserver === 'function') {
       new ResizeObserver(updateScrollState).observe(table);
+    } else {
+      window.addEventListener('resize', updateScrollState, { passive: true });
     }
     updateScrollState();
   }
@@ -232,6 +233,11 @@ const jsonLd = [
   for (const link of document.querySelectorAll<HTMLAnchorElement>(
     '.geary-prose a[href^="http://"], .geary-prose a[href^="https://"]',
   )) {
+    try {
+      if (new URL(link.href).origin === window.location.origin) continue;
+    } catch {
+      continue;
+    }
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     if (!link.querySelector('.sr-only')) {
@@ -240,34 +246,6 @@ const jsonLd = [
       note.textContent = ' (opens in new tab)';
       link.appendChild(note);
     }
-  }
-
-  for (const heading of document.querySelectorAll('.geary-prose h2[id], .geary-prose h3[id]')) {
-    const id = heading.getAttribute('id');
-    const title = heading.textContent?.trim();
-    if (!id || !title || heading.querySelector('.heading-anchor')) continue;
-
-    const anchor = document.createElement('a');
-    anchor.className = 'heading-anchor';
-    anchor.href = `#${id}`;
-    anchor.setAttribute('aria-label', `Link to ${title}`);
-    anchor.textContent = '#';
-    anchor.addEventListener('click', () => {
-      const url = `${window.location.origin}${window.location.pathname}#${id}`;
-      navigator.clipboard?.writeText(url).catch(() => {});
-    });
-    heading.appendChild(anchor);
-  }
-
-  const shareBtn = document.getElementById('article-native-share');
-  if (shareBtn && typeof navigator.share === 'function') {
-    shareBtn.classList.remove('hidden');
-    shareBtn.classList.add('inline-flex');
-    shareBtn.addEventListener('click', () => {
-      const title = shareBtn.getAttribute('data-share-title') || document.title;
-      const url = window.location.href;
-      navigator.share({ title, url }).catch(() => {});
-    });
   }
 
   const copyText = async (text: string): Promise<boolean> => {
@@ -300,6 +278,34 @@ const jsonLd = [
     document.body.removeChild(ta);
     return ok;
   };
+
+  for (const heading of document.querySelectorAll('.geary-prose h2[id], .geary-prose h3[id]')) {
+    const id = heading.getAttribute('id');
+    const title = heading.textContent?.trim();
+    if (!id || !title || heading.querySelector('.heading-anchor')) continue;
+
+    const anchor = document.createElement('a');
+    anchor.className = 'heading-anchor';
+    anchor.href = `#${id}`;
+    anchor.setAttribute('aria-label', `Link to ${title}`);
+    anchor.textContent = '#';
+    anchor.addEventListener('click', () => {
+      const url = `${window.location.origin}${window.location.pathname}#${id}`;
+      void copyText(url);
+    });
+    heading.appendChild(anchor);
+  }
+
+  const shareBtn = document.getElementById('article-native-share');
+  if (shareBtn && typeof navigator.share === 'function') {
+    shareBtn.classList.remove('hidden');
+    shareBtn.classList.add('inline-flex');
+    shareBtn.addEventListener('click', () => {
+      const title = shareBtn.getAttribute('data-share-title') || document.title;
+      const url = shareBtn.getAttribute('data-share-url') || window.location.href;
+      navigator.share({ title, url }).catch(() => {});
+    });
+  }
 
   const copyBtn = document.getElementById('article-copy-link');
   const copyLabel = document.getElementById('article-copy-label');

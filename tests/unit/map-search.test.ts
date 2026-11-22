@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { CAMPUS_BUILDINGS } from '../../src/data/campus-map';
 import {
+  clampViewBox,
   computePanViewBox,
   computePinchViewBox,
   computeZoomViewBox,
@@ -196,5 +197,28 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
         category: 'academic',
       })
     ).toBe('College');
+  });
+
+  test('guards clampViewBox and computeZoomViewBox against zero, negative, and NaN inputs', () => {
+    const safeZoomZero = computeZoomViewBox(DEFAULT_MAP_VIEWBOX, 0);
+    const safeZoomNeg = computeZoomViewBox(DEFAULT_MAP_VIEWBOX, -2);
+    const safeZoomNaN = computeZoomViewBox(DEFAULT_MAP_VIEWBOX, Number.NaN);
+
+    for (const rect of [safeZoomZero, safeZoomNeg, safeZoomNaN]) {
+      expect(Number.isFinite(rect.x)).toBe(true);
+      expect(Number.isFinite(rect.y)).toBe(true);
+      expect(Number.isFinite(rect.width)).toBe(true);
+      expect(Number.isFinite(rect.height)).toBe(true);
+      expect(rect.width).toBeGreaterThan(0);
+      expect(rect.height).toBeGreaterThan(0);
+    }
+
+    const clampedNaN = clampViewBox({
+      x: Number.NaN,
+      y: Number.NaN,
+      width: Number.NaN,
+      height: Number.NaN,
+    });
+    expect(clampedNaN).toEqual(DEFAULT_MAP_VIEWBOX);
   });
 });

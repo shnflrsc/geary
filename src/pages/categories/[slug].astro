@@ -56,22 +56,29 @@ const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     {
       subcategoryGroups.length > 0 ? (
         <div class="space-y-10">
-          {subcategoryGroups.map((group) => (
-            <section aria-labelledby={`sub-${group.subcategory.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
-              <h2
-                id={`sub-${group.subcategory.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                class="mb-4 font-heading text-lg sm:text-xl font-bold text-ink-primary"
-              >
-                {group.subcategory}
-              </h2>
+          {subcategoryGroups.map((group, idx) => {
+            const slugPart = group.subcategory
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-+|-+$/g, '');
+            const headingId = slugPart ? `sub-${slugPart}` : `sub-group-${idx}`;
+            return (
+              <section aria-labelledby={headingId}>
+                <h2
+                  id={headingId}
+                  class="mb-4 font-heading text-lg sm:text-xl font-bold text-ink-primary"
+                >
+                  {group.subcategory}
+                </h2>
 
-              <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
-                {group.articles.map((article) => (
-                  <ArticleCard article={article} />
-                ))}
-              </div>
-            </section>
-          ))}
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+                  {group.articles.map((article) => (
+                    <ArticleCard article={article} />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       ) : (
         <div class="flex flex-col items-center justify-center py-14 text-center">

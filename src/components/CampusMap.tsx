@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   CAMPUS_2_PATHS,
   CAMPUS_BUILDINGS,
@@ -8,39 +8,16 @@ import {
   CAMPUS_PERIMETER_PATH,
   SHOW_CAMPUS_2,
   type CampusBuilding,
-  type CampusLocation,
 } from '../data/campus-map';
 import {
-  computePanViewBox,
-  computePinchViewBox,
-  computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
-  focusBuildingViewBox,
-  getLocationType,
-  groupLocationsByFloor,
-  partitionBuildingLocations,
   searchCampusLocations,
   type MapSearchMatch,
   type ViewBoxRect,
 } from '../lib/map-search';
-
-type GestureState =
-  | {
-      mode: 'pan';
-      pointerId: number;
-      moved: boolean;
-      startX: number;
-      startY: number;
-      startViewBox: ViewBoxRect;
-    }
-  | {
-      mode: 'pinch';
-      id1: number;
-      id2: number;
-      startP1: { x: number; y: number };
-      startP2: { x: number; y: number };
-      startViewBox: ViewBoxRect;
-    };
+import BuildingInspector from './campus-map/BuildingInspector';
+import CampusMapSearch from './campus-map/CampusMapSearch';
+import { useMapViewport } from './campus-map/useMapViewport';
 
 function formatViewBox(vb: ViewBoxRect): string {
   return `${vb.x} ${vb.y} ${vb.width} ${vb.height}`;
@@ -51,31 +28,22 @@ export default function CampusMap() {
   const [selectedBuildingId, setSelectedBuildingId] = useState<string | null>(null);
   const [highlightedLocationId, setHighlightedLocationId] = useState<string | null>(null);
   const [hoveredBuildingId, setHoveredBuildingId] = useState<string | null>(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [activeMatchIndex, setActiveMatchIndex] = useState(-1);
-  const [viewBox, setViewBox] = useState<ViewBoxRect>(DEFAULT_MAP_VIEWBOX);
-  const [isDragging, setIsDragging] = useState(false);
-  const [openFloors, setOpenFloors] = useState<Record<string, boolean>>({});
 
-  const svgRef = useRef<SVGSVGElement | null>(null);
-  const searchWrapperRef = useRef<HTMLDivElement | null>(null);
-  const viewBoxRef = useRef<ViewBoxRect>(DEFAULT_MAP_VIEWBOX);
-  const activePointersRef = useRef<Map<number, { x: number; y: number }>>(new Map());
-  const gestureRef = useRef<GestureState | null>(null);
-  const didGestureMoveRef = useRef(false);
-
-  function updateViewBox(
-    updater: ViewBoxRect | ((prev: ViewBoxRect) => ViewBoxRect)
-  ) {
-    setViewBox((prev) => {
-      const next = typeof updater === 'function' ? updater(prev) : updater;
-      viewBoxRef.current = next;
-      return next;
-    });
-  }
-
-  const listboxId = useId();
-  const searchInputId = useId();
+  const {
+    svgRef,
+    viewBox,
+    isDragging,
+    isZoomed,
+    zoomIn,
+    zoomOut,
+    resetView,
+    focusBuilding,
+    consumeDragClick,
+    handlePointerDown,
+    handlePointerMove,
+    handlePointerEnd,
+    handlePointerLeave,
+  } = useMapViewport();
 
   const buildingById = useMemo(() => {
     const map = new Map<string, CampusBuilding>();
@@ -84,26 +52,6 @@ export default function CampusMap() {
     }
     return map;
   }, []);
-
-  const locationListRef = useRef<HTMLUListElement>(null);
-  const lastScrolledHighlightRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    if (!highlightedLocationId) {
-      lastScrolledHighlightRef.current = null;
-      return;
-    }
-    if (lastScrolledHighlightRef.current === highlightedLocationId) return;
-    const listEl = locationListRef.current;
-    if (!listEl) return;
-    const matchEl = listEl.querySelector<HTMLElement>('[data-search-match="true"]');
-    if (!matchEl) return;
-
-    lastScrolledHighlightRef.current = highlightedLocationId;
-    requestAnimationFrame(() => {
-      matchEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    });
-  }, [highlightedLocationId, selectedBuildingId, openFloors]);
 
   const selectedBuilding = selectedBuildingId
     ? buildingById.get(selectedBuildingId) ?? null
@@ -122,53 +70,6 @@ export default function CampusMap() {
     return ids;
   }, [query, searchMatches]);
 
-  useEffect(() => {
-    function handleOutsideClick(event: MouseEvent) {
-      if (
-        searchWrapperRef.current &&
-        !searchWrapperRef.current.contains(event.target as Node)
-      ) {
-        setDropdownOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
-  }, []);
-
-  useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
-
-    function handleWheel(event: WheelEvent) {
-      event.preventDefault();
-      if (!svg) return;
-      const rect = svg.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return;
-
-      const relX = (event.clientX - rect.left) / rect.width;
-      const relY = (event.clientY - rect.top) / rect.height;
-      const factor = event.deltaY < 0 ? 1.2 : 1 / 1.2;
-
-      updateViewBox((prev) =>
-        computeZoomViewBox(prev, factor, {
-          x: prev.x + relX * prev.width,
-          y: prev.y + relY * prev.height,
-        })
-      );
-    }
-
-    function preventTouchScroll(event: TouchEvent) {
-      event.preventDefault();
-    }
-
-    svg.addEventListener('wheel', handleWheel, { passive: false });
-    svg.addEventListener('touchmove', preventTouchScroll, { passive: false });
-    return () => {
-      svg.removeEventListener('wheel', handleWheel);
-      svg.removeEventListener('touchmove', preventTouchScroll);
-    };
-  }, []);
-
   function selectBuilding(
     buildingId: string,
     options?: { locationId?: string | null; centerMap?: boolean }
@@ -180,347 +81,49 @@ export default function CampusMap() {
     setHighlightedLocationId(options?.locationId ?? null);
 
     if (options?.centerMap) {
-      updateViewBox(focusBuildingViewBox(building));
+      focusBuilding(building);
     }
   }
 
   function handleSelectMatch(match: MapSearchMatch) {
+    setQuery(match.name);
     selectBuilding(match.buildingId, {
       locationId: match.kind === 'location' ? match.id : null,
       centerMap: true,
     });
-    setDropdownOpen(false);
-    setActiveMatchIndex(-1);
   }
 
-  function handleSearchKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (!dropdownOpen || searchMatches.length === 0) {
-      if (event.key === 'ArrowDown' && searchMatches.length > 0) {
-        setDropdownOpen(true);
-        setActiveMatchIndex(0);
-      }
-      return;
-    }
-
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      setActiveMatchIndex((prev) => (prev + 1) % searchMatches.length);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      setActiveMatchIndex((prev) =>
-        prev <= 0 ? searchMatches.length - 1 : prev - 1
-      );
-    } else if (event.key === 'Enter' && activeMatchIndex >= 0) {
-      event.preventDefault();
-      const match = searchMatches[activeMatchIndex];
-      if (match) handleSelectMatch(match);
-    } else if (event.key === 'Escape') {
-      setDropdownOpen(false);
-      setActiveMatchIndex(-1);
+  function handleQueryChange(nextQuery: string) {
+    setQuery(nextQuery);
+    if (!nextQuery.trim()) {
+      setHighlightedLocationId(null);
     }
   }
 
-  function handlePointerDown(event: React.PointerEvent<SVGSVGElement>) {
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
-
-    const pointers = activePointersRef.current;
-    pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-
-    if (pointers.size === 1) {
-      didGestureMoveRef.current = false;
-      gestureRef.current = {
-        mode: 'pan',
-        pointerId: event.pointerId,
-        moved: false,
-        startX: event.clientX,
-        startY: event.clientY,
-        startViewBox: viewBoxRef.current,
-      };
-      return;
-    }
-
-    if (pointers.size === 2) {
-      const entries = Array.from(pointers.entries());
-      const [first, second] = entries;
-      if (first && second) {
-        didGestureMoveRef.current = true;
-        setIsDragging(true);
-        gestureRef.current = {
-          mode: 'pinch',
-          id1: first[0],
-          id2: second[0],
-          startP1: { ...first[1] },
-          startP2: { ...second[1] },
-          startViewBox: viewBoxRef.current,
-        };
-      }
-    }
-  }
-
-  function handlePointerMove(event: React.PointerEvent<SVGSVGElement>) {
-    const svg = svgRef.current;
-    const pointers = activePointersRef.current;
-    if (!svg || !pointers.has(event.pointerId)) return;
-
-    pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-    const gesture = gestureRef.current;
-    if (!gesture) return;
-
-    const rect = svg.getBoundingClientRect();
-    if (rect.width === 0 || rect.height === 0) return;
-
-    if (gesture.mode === 'pinch') {
-      const p1 = pointers.get(gesture.id1);
-      const p2 = pointers.get(gesture.id2);
-      if (!p1 || !p2) return;
-
-      updateViewBox(
-        computePinchViewBox(
-          gesture.startViewBox,
-          rect,
-          gesture.startP1,
-          gesture.startP2,
-          p1,
-          p2
-        )
-      );
-      return;
-    }
-
-    if (gesture.pointerId !== event.pointerId) return;
-
-    const dxPx = event.clientX - gesture.startX;
-    const dyPx = event.clientY - gesture.startY;
-
-    if (!gesture.moved) {
-      if (Math.hypot(dxPx, dyPx) < 5) {
-        return;
-      }
-      gesture.moved = true;
-      didGestureMoveRef.current = true;
-      setIsDragging(true);
-      try {
-        svg.setPointerCapture(event.pointerId);
-      } catch {
-        // Ignore if capture is unsupported on a synthetic test event
-      }
-    }
-
-    updateViewBox(computePanViewBox(gesture.startViewBox, dxPx, dyPx, rect));
-  }
-
-  function handlePointerEnd(event: React.PointerEvent<SVGSVGElement>) {
-    const svg = svgRef.current;
-    const pointers = activePointersRef.current;
-    pointers.delete(event.pointerId);
-
-    if (svg) {
-      try {
-        if (svg.hasPointerCapture(event.pointerId)) {
-          svg.releasePointerCapture(event.pointerId);
-        }
-      } catch {
-        // Ignore if release fails
-      }
-    }
-
-    if (pointers.size === 1) {
-      const remaining = Array.from(pointers.entries())[0];
-      if (remaining) {
-        gestureRef.current = {
-          mode: 'pan',
-          pointerId: remaining[0],
-          moved: true,
-          startX: remaining[1].x,
-          startY: remaining[1].y,
-          startViewBox: viewBoxRef.current,
-        };
-      }
-      return;
-    }
-
-    if (pointers.size === 0) {
-      gestureRef.current = null;
-      setIsDragging(false);
-    }
+  function handleClearSearch() {
+    setQuery('');
+    setHighlightedLocationId(null);
   }
 
   function handleBuildingClick(buildingId: string) {
-    if (didGestureMoveRef.current) {
-      didGestureMoveRef.current = false;
-      return;
-    }
+    if (consumeDragClick()) return;
     selectBuilding(buildingId, { locationId: null, centerMap: false });
   }
 
-  function handleResetMap() {
-    updateViewBox(DEFAULT_MAP_VIEWBOX);
-  }
-
-  const isZoomed = viewBox.width < DEFAULT_MAP_VIEWBOX.width - 1;
-
-  const partitionedLocations = useMemo(
-    () =>
-      selectedBuilding
-        ? partitionBuildingLocations(selectedBuilding.locations)
-        : { colleges: [], others: [] },
-    [selectedBuilding]
-  );
-
-  const groupedOthers = useMemo(
-    () => groupLocationsByFloor(partitionedLocations.others),
-    [partitionedLocations.others]
-  );
-
-  useEffect(() => {
-    if (!selectedBuilding || !highlightedLocationId) return;
-    const matchGroup = groupedOthers.floorGroups.find((g) =>
-      g.locations.some((loc) => loc.id === highlightedLocationId)
-    );
-    if (!matchGroup) return;
-    const key = `${selectedBuilding.id}:${matchGroup.floor}`;
-    setOpenFloors((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
-  }, [selectedBuilding, highlightedLocationId, groupedOthers.floorGroups]);
-
-  const toggleFloor = (key: string) => {
-    setOpenFloors((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const renderLocationItem = (loc: CampusLocation) => {
-    const isHighlightedLoc = highlightedLocationId === loc.id;
-
-    return (
-      <li
-        key={loc.id}
-        data-search-match={isHighlightedLoc ? 'true' : undefined}
-        className={`rounded-md border p-3 transition-colors ${
-          isHighlightedLoc
-            ? 'border-brand-crimson bg-brand-crimson-wash/50 ring-1 ring-brand-crimson'
-            : 'border-border-subtle bg-canvas-paper'
-        }`}
-      >
-        <p className="text-sm font-semibold text-ink-primary">{loc.name}</p>
-        <p className="mt-0.5 text-xs font-medium text-ink-secondary">
-          {getLocationType(loc)}
-        </p>
-      </li>
-    );
-  };
+  const isAtDefaultView =
+    !isZoomed &&
+    viewBox.x === DEFAULT_MAP_VIEWBOX.x &&
+    viewBox.y === DEFAULT_MAP_VIEWBOX.y;
 
   return (
     <section aria-label="Interactive BulSU Malolos Main Campus Map" className="space-y-4">
-      {/* Search Bar */}
-      <div ref={searchWrapperRef} className="relative">
-        <div className="relative flex items-center">
-          <svg
-            className="pointer-events-none absolute left-3.5 h-4 w-4 text-ink-muted"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <input
-            id={searchInputId}
-            type="search"
-            value={query}
-            role="combobox"
-            aria-label="Search offices, services, or buildings"
-            aria-expanded={dropdownOpen && query.trim().length > 0}
-            aria-controls={listboxId}
-            aria-autocomplete="list"
-            aria-activedescendant={
-              activeMatchIndex >= 0 && searchMatches[activeMatchIndex]
-                ? `map-match-${searchMatches[activeMatchIndex].kind}-${searchMatches[activeMatchIndex].id}`
-                : undefined
-            }
-            onChange={(event) => {
-              setQuery(event.target.value);
-              setDropdownOpen(true);
-              setActiveMatchIndex(-1);
-            }}
-            onFocus={() => {
-              if (query.trim()) setDropdownOpen(true);
-            }}
-            onKeyDown={handleSearchKeyDown}
-            placeholder="Search Map..."
-            className="w-full rounded-lg border border-border-strong bg-surface-card py-3 pr-20 pl-10 text-sm text-ink-primary shadow-xs placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
-          />
-          {query && (
-            <button
-              type="button"
-              onClick={() => {
-                setQuery('');
-                setHighlightedLocationId(null);
-                setDropdownOpen(false);
-                setActiveMatchIndex(-1);
-              }}
-              className="absolute right-2.5 rounded px-2 py-1 text-xs font-medium text-ink-secondary hover:bg-surface-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
-            >
-              Clear
-            </button>
-          )}
-        </div>
-
-        {/* Search Results Dropdown */}
-        {dropdownOpen && query.trim().length > 0 && (
-          <div
-            id={listboxId}
-            role="listbox"
-            aria-label="Campus location search results"
-            className="absolute z-30 mt-1.5 max-h-80 w-full overflow-y-auto rounded-md border border-border-subtle bg-surface-card shadow-lg"
-          >
-            {searchMatches.length === 0 ? (
-              <div className="px-4 py-3 text-sm text-ink-secondary">
-                No campus locations matched{' '}
-                <span className="font-semibold text-ink-primary">"{query}"</span>.
-              </div>
-            ) : (
-              <ul className="divide-y divide-border-subtle">
-                {searchMatches.map((match, idx) => {
-                  const isActive = idx === activeMatchIndex;
-                  return (
-                    <li key={`${match.kind}-${match.id}`}>
-                      <button
-                        id={`map-match-${match.kind}-${match.id}`}
-                        type="button"
-                        role="option"
-                        aria-selected={isActive}
-                        onClick={() => handleSelectMatch(match)}
-                        className={`flex w-full items-start justify-between gap-3 px-4 py-2.5 text-left transition-colors ${
-                          isActive ? 'bg-brand-crimson-wash' : 'hover:bg-surface-subtle'
-                        }`}
-                      >
-                        <div className="min-w-0">
-                          <p className="truncate text-sm font-semibold text-ink-primary">
-                            {match.name}
-                          </p>
-                          <p className="mt-0.5 text-xs text-ink-secondary">
-                            {match.kind === 'location' ? (
-                              <>
-                                Inside{' '}
-                                <span className="font-semibold text-brand-crimson">
-                                  {match.buildingName}
-                                </span>
-                                {match.floor ? ` · ${match.floor}` : ''}
-                              </>
-                            ) : (
-                              <>Building</>
-                            )}
-                          </p>
-                        </div>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
-        )}
-      </div>
+      <CampusMapSearch
+        query={query}
+        matches={searchMatches}
+        onQueryChange={handleQueryChange}
+        onSelectMatch={handleSelectMatch}
+        onClear={handleClearSearch}
+      />
 
       {/* Main Split Workspace: Interactive 2D SVG Map + Selected Building Locations */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-stretch">
@@ -535,7 +138,7 @@ export default function CampusMap() {
               <button
                 type="button"
                 aria-label="Zoom in map"
-                onClick={() => updateViewBox((prev) => computeZoomViewBox(prev, 1.35))}
+                onClick={zoomIn}
                 className="inline-flex h-8 w-8 items-center justify-center rounded border border-border-strong bg-surface-card/95 text-sm font-bold text-ink-primary shadow-xs hover:bg-surface-card focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 +
@@ -543,7 +146,7 @@ export default function CampusMap() {
               <button
                 type="button"
                 aria-label="Zoom out map"
-                onClick={() => updateViewBox((prev) => computeZoomViewBox(prev, 1 / 1.35))}
+                onClick={zoomOut}
                 className="inline-flex h-8 w-8 items-center justify-center rounded border border-border-strong bg-surface-card/95 text-sm font-bold text-ink-primary shadow-xs hover:bg-surface-card focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 -
@@ -551,12 +154,8 @@ export default function CampusMap() {
               <button
                 type="button"
                 aria-label="Reset map view"
-                disabled={
-                  !isZoomed &&
-                  viewBox.x === DEFAULT_MAP_VIEWBOX.x &&
-                  viewBox.y === DEFAULT_MAP_VIEWBOX.y
-                }
-                onClick={handleResetMap}
+                disabled={isAtDefaultView}
+                onClick={resetView}
                 className="inline-flex h-8 items-center rounded border border-border-strong bg-surface-card/95 px-2.5 text-xs font-medium text-ink-primary shadow-xs hover:bg-surface-card disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 Reset
@@ -572,14 +171,7 @@ export default function CampusMap() {
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerEnd}
               onPointerCancel={handlePointerEnd}
-              onPointerLeave={(event) => {
-                if (
-                  !gestureRef.current ||
-                  (gestureRef.current.mode === 'pan' && !gestureRef.current.moved)
-                ) {
-                  handlePointerEnd(event);
-                }
-              }}
+              onPointerLeave={handlePointerLeave}
               style={{ touchAction: 'none' }}
               className={`block h-[360px] w-full select-none touch-none sm:h-[480px] lg:h-[580px] ${
                 isDragging ? 'cursor-grabbing' : 'cursor-grab'
@@ -744,7 +336,7 @@ export default function CampusMap() {
                     onKeyDown={(event) => {
                       if (event.key === ' ') {
                         event.preventDefault();
-                        handleBuildingClick(building.id);
+                        selectBuilding(building.id, { locationId: null, centerMap: false });
                       }
                     }}
                     onMouseEnter={() => setHoveredBuildingId(building.id)}
@@ -896,78 +488,10 @@ export default function CampusMap() {
         </div>
 
         {/* Selected Building Locations Panel */}
-        <aside
-          aria-live="polite"
-          aria-label="Selected building locations"
-          className="flex flex-col overflow-hidden rounded-lg border border-border-subtle bg-surface-card p-4 shadow-xs sm:p-5 lg:col-span-5 lg:h-0 lg:min-h-full xl:col-span-4"
-        >
-          {selectedBuilding ? (
-            <div className="flex min-h-0 flex-1 flex-col">
-              <h2 className="shrink-0 border-b border-border-subtle pb-3 font-heading text-xl font-bold text-ink-primary">
-                {selectedBuilding.name}
-              </h2>
-
-              {selectedBuilding.locations.length > 0 ? (
-                <ul
-                  ref={locationListRef}
-                  className="mt-3 max-h-[32rem] min-h-0 flex-1 space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable] lg:max-h-none"
-                >
-                  {partitionedLocations.colleges.map(renderLocationItem)}
-                  {partitionedLocations.colleges.length > 0 &&
-                    partitionedLocations.others.length > 0 && (
-                      <li role="separator" aria-hidden="true" className="py-1.5">
-                        <div className="border-t border-border-strong" />
-                      </li>
-                    )}
-                  {groupedOthers.floorGroups.map((group) => {
-                    const key = `${selectedBuilding.id}:${group.floor}`;
-                    const isOpen = Boolean(openFloors[key]);
-                    return (
-                      <li
-                        key={key}
-                        className="overflow-hidden rounded-md border border-border-subtle bg-canvas-paper"
-                      >
-                        <button
-                          type="button"
-                          aria-expanded={isOpen}
-                          onClick={() => toggleFloor(key)}
-                          className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left text-sm font-semibold text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-crimson"
-                        >
-                          <span>{group.floor}</span>
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                            aria-hidden="true"
-                            className={`h-4 w-4 shrink-0 text-ink-secondary transition-transform duration-150 ${
-                              isOpen ? 'rotate-180' : ''
-                            }`}
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
-                          </svg>
-                        </button>
-                        {isOpen && (
-                          <ul className="space-y-2 border-t border-border-subtle bg-surface-card p-2.5">
-                            {group.locations.map(renderLocationItem)}
-                          </ul>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : (
-                <p className="mt-3 text-sm text-ink-secondary">
-                  No listed locations for this building yet.
-                </p>
-              )}
-            </div>
-          ) : (
-            <p className="text-sm text-ink-secondary">
-              Select a building on the map or search above to see locations inside.
-            </p>
-          )}
-        </aside>
+        <BuildingInspector
+          selectedBuilding={selectedBuilding}
+          highlightedLocationId={highlightedLocationId}
+        />
       </div>
     </section>
   );

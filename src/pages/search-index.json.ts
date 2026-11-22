@@ -8,7 +8,7 @@ export const GET: APIRoute = async () => {
   const entries = await getCollection('articles');
 
   const items: SearchIndexItem[] = await Promise.all(
-    entries
+    [...entries]
       .sort((a, b) => a.data.title.localeCompare(b.data.title))
       .map(async (entry) => {
         const { headings } = await render(entry);

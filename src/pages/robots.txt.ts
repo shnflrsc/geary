@@ -1,7 +1,8 @@
 import type { APIRoute } from 'astro';
+import { resolveSiteOrigin } from '../lib/seo';
 
 export const GET: APIRoute = ({ site }) => {
-  const baseUrl = site ?? new URL('https://geary.example.com');
+  const baseUrl = resolveSiteOrigin(site);
   const sitemapUrl = new URL('sitemap-index.xml', baseUrl).href;
   const body = `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}\n`;
 

@@ -148,7 +148,7 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
       '1st Floor',
       '2nd Floor',
       'Back',
-      'Unknown Floor',
+      'No Location',
     ]);
     expect(grouped.floorGroups[2]?.locations.map((l) => l.name)).toEqual([
       'Second A',

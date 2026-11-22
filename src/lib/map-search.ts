@@ -358,7 +358,7 @@ export interface FloorLocationGroup {
 
 /**
  * Splits `others` (non-college locations) into ordered floor/sub-location accordion
- * groups (Ground, 1st..N, named subtitles alphabetically, and "Unknown Floor" last).
+ * groups (Ground, 1st..N, named subtitles alphabetically, and "No Location" last).
  */
 export function groupLocationsByFloor(locations: readonly CampusLocation[]): {
   floorGroups: FloorLocationGroup[];
@@ -367,7 +367,7 @@ export function groupLocationsByFloor(locations: readonly CampusLocation[]): {
 
   for (const loc of locations) {
     const trimmedFloor = loc.floor?.trim();
-    const label = trimmedFloor || 'Unknown Floor';
+    const label = trimmedFloor || 'No Location';
     const rank = trimmedFloor
       ? getFloorRank(trimmedFloor)
       : Number.POSITIVE_INFINITY;
@@ -376,7 +376,7 @@ export function groupLocationsByFloor(locations: readonly CampusLocation[]): {
         ? `rank:${rank}`
         : trimmedFloor
           ? `label:${trimmedFloor.toLowerCase()}`
-          : 'unknown-floor';
+          : 'no-location';
 
     const existing = byKey.get(key);
     if (existing) {
@@ -392,9 +392,9 @@ export function groupLocationsByFloor(locations: readonly CampusLocation[]): {
 
   const floorGroups = Array.from(byKey.values()).sort((a, b) => {
     if (a.rank !== b.rank) return a.rank - b.rank;
-    const aUnknown = a.floor === 'Unknown Floor';
-    const bUnknown = b.floor === 'Unknown Floor';
-    if (aUnknown !== bUnknown) return aUnknown ? 1 : -1;
+    const aNoLocation = a.floor === 'No Location';
+    const bNoLocation = b.floor === 'No Location';
+    if (aNoLocation !== bNoLocation) return aNoLocation ? 1 : -1;
     return a.floor.localeCompare(b.floor, 'en', { numeric: true, sensitivity: 'base' });
   });
 

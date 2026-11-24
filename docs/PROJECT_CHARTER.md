@@ -30,7 +30,7 @@ Geary is an unofficial, student-run information portal for Bulacan State Univers
 
 | ID | Objective | Measurable outcome |
 | :--- | :--- | :--- |
-| `OBJ-01` | Information consolidation | Gather scattered BulSU procedures (enrollment, shifting, transferring, document requests), simplified handbook policies, and campus life articles (including food spots) into one static website. |
+| `OBJ-01` | Information consolidation | Gather scattered BulSU procedures (enrollment, shifting, transferring, document requests), simplified handbook policies, and campus life articles (including food spots) into one fast web portal. |
 | `OBJ-02` | Readability and low cognitive load | Turn dense university bureaucracy into clear, scannable prose with predictable hierarchy and straightforward navigation. |
 | `OBJ-03` | Fast discoverability | Let students find answers in seconds through intent-based categories and instant client-side search. |
 | `OBJ-04` | BulSUan visual identity | Deliver a mobile-first interface grounded in BulSU's colors and campus identity. |
@@ -67,7 +67,7 @@ Geary is an unofficial, student-run information portal for Bulacan State Univers
 
 - AI or RAG chatbot: an AI chatbot over the Student Handbook PDF is excluded from the MVP to avoid API costs, rate limits, and policy hallucinations.
 - User accounts and authentication: no student logins, profiles, or user sessions.
-- Dynamic backends and databases: no runtime server APIs, comment sections, voting systems, or managed databases.
+- Managed databases and user-generated backends: no managed databases, comment sections, voting systems, or persistent write APIs.
 - Official portal integration: no connection to official BulSU enrollment portals, SIS, or administrative systems.
 - Unapproved auxiliary features: anything outside the five confirmed MVP pillars is deferred until after the MVP ships.
 
@@ -75,11 +75,11 @@ Geary is an unofficial, student-run information portal for Bulacan State Univers
 
 ### 7.1 Financial constraints
 
-Total recurring costs for hosting, storage, search, and delivery must stay at `$0.00/month`, deploying cleanly to free-tier static web hosting.
+Total recurring costs for hosting, storage, search, and delivery must stay at `$0.00/month`, deploying cleanly to Vercel's free tier with CDN edge caching.
 
 ### 7.2 Technical baseline constraint
 
-The site is built with Astro, Tailwind CSS, and React islands, hydrating React only where client-side interactivity is required.
+The site is built with SvelteKit (Svelte 5 runes), Tailwind CSS, and `@sveltejs/adapter-vercel` (dynamic SSR with CDN `Cache-Control` headers), loading bundled Markdown articles without any external database.
 
 ### 7.3 Scope and UX constraints
 

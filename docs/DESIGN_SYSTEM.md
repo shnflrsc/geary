@@ -154,7 +154,7 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
 
 ## 5. Component specifications and interactive states
 
-### 5.1 Global header and Geary brand mark (`Header.astro`)
+### 5.1 Global header and Geary brand mark (`Header.svelte`)
 
 - Anatomy: Sticky top `64px` (`h-16`) bar on `bg-[#F8F9FA]/95` with `border-b border-[#DEE2E6]`.
   - Desktop (`>= 768px`): Geary wordmark + 8-tooth geometric gear SVG (`#8B1538` outer gear, `#D4A017` inner ring) on the left; `Home` (`/`), `Articles` (`/articles`), `Calendar` (`/calendar`), `Campus Map` (`/map`), and `Contribute` (`/contribute`) links (`md:px-2.5 lg:px-3`); and `<SearchBar variant="header" />` (`md:w-48 lg:w-60`) on the right.
@@ -165,7 +165,7 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
   - Active route: `text-[#8B1538] font-semibold` with pill wash `bg-[#FDF2F4]`.
   - Focus-visible: `2px solid #8B1538` ring (`outline-offset-2`).
 
-### 5.2 Search Bar React island (`SearchBar.tsx`)
+### 5.2 Search Bar component (`SearchBar.svelte`)
 
 - Variants:
   - `hero` (Home page): `h-[52px]` (`rounded-xl`), `bg-surface-card` inside a rotating dual-beam crimson/gold border frame (`.hero-search-beam`, static under `prefers-reduced-motion: reduce`), magnifying glass icon (`text-ink-muted`), cycling placeholder, and right-aligned desktop `<kbd>/</kbd>` hint (`bg-surface-subtle text-ink-secondary`).
@@ -177,40 +177,40 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
   - Empty / zero-match: Displays `"No articles matched '<query>'."` (JSX-escaped).
   - Offline / fetch error: Inline message (`"Search index couldn't load right now."`) plus direct links to all 7 categories.
 
-### 5.3 Category directory card (`CategoryCard.astro`)
+### 5.3 Category directory card (`CategoryCard.svelte`)
 
 - Anatomy: Clickable `<a href="/categories/...">` card (`group flex flex-col justify-between bg-white border border-[#DEE2E6] rounded-xl p-5 transition-colors`).
   - Top row: Category icon inside a `w-10 h-10 rounded-lg bg-[#FDF2F4] text-[#8B1538]` container.
   - Title row: Category title (`text-lg font-bold text-[#181C20]`) on the left and right-aligned arrow indicator (`->`, `text-[#8B1538]`).
 - Interactive states: Hover shifts card border to `#8B1538` and title/arrow to `#8B1538` / `#6E0F2B`; `:focus-visible` shows crimson outline.
 
-### 5.4 Article summary card (`ArticleCard.astro`)
+### 5.4 Article summary card (`ArticleCard.svelte`)
 
 - Anatomy: Clickable `<a href="/articles/...">` card (`flex flex-col justify-between bg-white border border-[#DEE2E6] rounded-xl p-5 transition-colors`). Shows title (`font-semibold text-[#181C20]`) and a bottom-aligned row pairing the 2-line clamped body preview (`line-clamp-2 flex-1 text-sm text-[#495057]`) with `->` (`text-[#8B1538]`) on the right.
 - Interactive states: Hover changes border and title color to `#8B1538` and nudges `->`; `:focus-visible` shows crimson outline.
 
-### 5.5 Breadcrumbs (`Breadcrumbs.astro`)
+### 5.5 Breadcrumbs (`Breadcrumbs.svelte`)
 
 - Anatomy: `<nav aria-label="Breadcrumb">` with `text-sm text-[#495057] flex flex-wrap items-center gap-1.5`. Links (`Home`, `Categories`, `[Category Name]`) hover to `text-[#8B1538] underline`; separator `>` (`aria-hidden="true" text-[#636C74]`); current page uses `text-[#181C20] font-medium` with `aria-current="page"`.
 
-### 5.6 Responsive Table of Contents (`TableOfContents.astro`)
+### 5.6 Responsive Table of Contents (`TableOfContents.svelte`)
 
 - Desktop (`>= 1024px`): `<aside class="hidden lg:block sticky top-24 self-start">` titled `"On this page"` (`text-xs font-semibold uppercase tracking-wider text-[#495057]`). Vertical list with `border-l border-[#DEE2E6]`; subsection links indented (`pl-6` vs `pl-3`).
 - Mobile (`< 1024px`): `<details class="lg:hidden bg-white border border-[#DEE2E6] rounded-xl p-4 mb-6">` with `<summary>` (`min-h-[44px]` touch target) revealing section anchor links.
 - Visual suppression: Rendered only when 2 or more headings exist; omitted on short articles without leaving blank spacing.
 
-### 5.7 Markdown prose and procedural callouts (`ArticleLayout.astro`)
+### 5.7 Markdown prose and procedural callouts (`ArticleLayout.svelte`)
 
 - Ordered procedures (`<ol>`): Step numbering (`marker:font-semibold marker:text-[#8B1538]`) with `space-y-2` vertical spacing.
 - Blockquotes / callouts (`<blockquote>`): `bg-[#FEF9E7]` (or `#FDF2F4`) with `border-l-4 border-[#D4A017]` (or `#8B1538`), `px-4 py-3 rounded-r-lg text-[#181C20]` so student tips and office rules stand out.
 - Tables (`<table>`): `bg-[#EEF1F4]` `<thead>` rows, balanced column padding, wrapping header text, and `min-width` protection on 3-column notes cells with `overflow-x: auto` so wide tables stay readable on `375px` screens.
-- Source card (`ArticleLayout.astro`): When `source` or `sources` frontmatter is present, renders `mt-8 rounded-xl border border-[#DEE2E6] bg-white p-4 sm:p-5` below `<article>`, showing an uppercase `"Source"` (or `"Sources"` for multiple entries) label (`text-xs font-semibold uppercase tracking-wider text-[#495057]`) and a list of plain-text labels (`text-[#181C20]`) or external links (`text-[#8B1538]`).
+- Source card (`ArticleLayout.svelte`): When `source` or `sources` frontmatter is present, renders `mt-8 rounded-xl border border-[#DEE2E6] bg-white p-4 sm:p-5` below `<article>`, showing an uppercase `"Source"` (or `"Sources"` for multiple entries) label (`text-xs font-semibold uppercase tracking-wider text-[#495057]`) and a list of plain-text labels (`text-[#181C20]`) or external links (`text-[#8B1538]`).
 
-### 5.8 Global footer (`Footer.astro`)
+### 5.8 Global footer (`Footer.svelte`)
 
 - Anatomy: `border-t border-[#DEE2E6] bg-[#F8F9FA] py-8` with `© 2026 Geary` on the left and a single row of legal links ([Terms of Service](/terms) and [Privacy Policy](/privacy)) on the right.
 
-### 5.9 Interactive 2D campus map (`CampusMap.tsx`)
+### 5.9 Interactive 2D campus map (`CampusMap.svelte`)
 
 - Layout: Full-bleed locked-viewport canvas (`h-dvh overflow-hidden` on `<body>`, `h-full w-full` inside `<main>`) occupying the full viewport below the global Header with the Footer omitted on `/map` (and an accessible `sr-only` `<h1>`) so the map and floating search bar never scroll out of view.
   - **Desktop (`>= 1024px`):** Floating top-left overlay stack (`~360px` wide) combining a Google Maps-style search bar, floating search-results card, and a floating locations card ("This area" style) displaying the selected building's name, location count, optional housed-college pill chips above the divider, close action, and floor accordions with internal scrolling; click-through outside the cards preserves map panning. Floating zoom (`+` / `-`) and reset controls sit at bottom-right; a compact map legend pill sits at bottom-left.
@@ -218,7 +218,7 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
 - Map surface and building states: Campus grounds on `canvas-paper` (`#F8F9FA`) / `#F1F3F5`, footpaths in `#DEE2E6`, parks in `#E8F3EA`, resting clickable buildings in `white` with `border-strong` (`#CED4DA`) strokes, hovered buildings in `brand-crimson-wash` (`#FDF2F4`) with `#8B1538` stroke, and selected buildings filled `#8B1538` with `#D4A017` highlight outline (`>= 2px`).
 - Viewport ergonomics: Selecting a building via search centers it with a responsive focal offset so the target building remains visible clear of the desktop left overlay or mobile bottom sheet; uniform aspect-aware pan and pinch scaling keeps gestures 1:1 on both portrait mobile and widescreen desktop.
 
-### 5.10 Interactive Academic Calendar (`AcademicCalendar.tsx`)
+### 5.10 Interactive Academic Calendar (`AcademicCalendar.svelte`)
 
 - Layout: Single-column constrained container (`max-w-5xl`) on `/calendar` with a search input, scrollable category filter chips (`All Events`, `Universal`, `Undergraduate`, `Graduate School`, `Laboratory High School`, `College of Law`, `College of Medicine`, `Holiday`), quick month jump pills, and month-grouped event cards.
 - Category color badges: Each OSR category uses a high-contrast accessible dot + subtle tinted pill (dark-mode aware) matching the OSR color legend (blue for Undergraduate, orange for Graduate School, amber/gold for Laboratory High School, purple for College of Law, emerald/green for College of Medicine, crimson/red for Holiday, neutral ink for All/University-Wide).

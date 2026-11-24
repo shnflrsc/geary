@@ -5,89 +5,88 @@
 | Attribute | Details |
 | :--- | :--- |
 | Document title | Software architecture document: Geary - Unofficial BulSU Student Information Portal |
-| Version | `1.0 (MVP Baseline)` |
-| Date | `2026-11-17` |
+| Version | `2.0 (SvelteKit SSR Architecture)` |
+| Date | `2026-11-24` |
 | Standard reference | ISO/IEC/IEEE 42010 (*Architecture description*) and ISO/IEC/IEEE 12207 Clause 6.4.3 (*Architecture Definition Process*) |
 | Related baselines | [PROJECT_CHARTER.md](./PROJECT_CHARTER.md), [PRD.md](./PRD.md), [SRS.md](./SRS.md), [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) |
-| Status | Approved for repository scaffolding and multi-contributor development |
+| Status | Approved for SvelteKit SSR migration |
 
-This document specifies Geary's technology stack, build-time versus runtime pipeline, Astro Islands hydration boundaries, component responsibilities, TypeScript and Zod contracts, and repository layout. Contributors working on content, UI components, or interactive islands share these boundaries so pull requests stay isolated and reviewable.
+This document specifies Geary's technology stack, SSR and edge-caching pipeline, Markdown content ingestion pipeline, Svelte 5 component responsibilities, TypeScript and Zod contracts, and repository layout. Contributors working on content, routes, or UI components share these boundaries so pull requests stay isolated and reviewable.
 
 ## 2. Technology stack
 
 | Layer | Technology | Role in Geary | Architectural rationale |
 | :--- | :--- | :--- | :--- |
-| Runtime, package manager, and test runner | Bun (`bun.lock`, `bun test`) | Manages dependencies, runs `astro` CLI scripts, and executes pure TypeScript unit tests. | Fast single runtime with a built-in test runner and deterministic lockfile across contributor machines and CI. |
-| Static site generator / meta-framework | Astro (`^7.4.12`, `output: 'static'`) | Compiles layouts, Content Collections, static routes, and JSON endpoints at build time. | Ships zero framework JavaScript on static content routes, keeping mobile loads fast and CDN hosting free. |
-| Styling and design system | Tailwind CSS (`@tailwindcss/vite`) | Generates utility classes, semantic tokens, and scoped prose rules through Vite. | Produces small purged CSS bundles tied directly to [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) tokens without runtime styling overhead. |
-| Interactive UI islands | React (`@astrojs/react`) | Hydrates interactive islands (`SearchBar.tsx`, `ExploreSpotlight.tsx`, `CampusMap.tsx`) via `client:load`. | Confines React runtime cost to interactive surfaces while keeping article and category pages static. |
-| Content and schema layer | Astro Content Collections + Markdown (`.md`) + TypeScript + Zod | Parses Git-tracked articles and validates frontmatter types at compile time. | Removes CMS and database dependencies while catching schema errors during local builds and PR CI runs. |
-| Search index and scorer | Static JSON endpoint (`search-index.json.ts`) + TypeScript scorer | Emits a pre-built index at build time and scores queries synchronously in `SearchBar.tsx`. | Requires no external search SaaS and runs client-side matching with zero backend latency. |
-| Deployment artifact | Vendor-neutral static `dist/` | Self-contained HTML, CSS, JS, and JSON output deployable to Cloudflare Pages, Vercel, Netlify, or GitHub Pages. | Avoids server adapters and hosting lock-in. |
+| Runtime, package manager, and test runner | Bun (`bun.lock`, `bun test`) | Manages dependencies, runs SvelteKit/Vite CLI scripts, and executes pure TypeScript unit tests. | Fast single runtime with a built-in test runner and deterministic lockfile across contributor machines and CI. |
+| Meta-framework & SSR engine | SvelteKit + Svelte 5 (runes) | Renders routes, layouts, error pages, and server endpoints (`+page.server.ts`, `+server.ts`) dynamically on demand. | Unified `.svelte` component model across static markup and interactive UI with fine-grained runes reactivity and zero React runtime overhead. |
+| Deployment adapter | `@sveltejs/adapter-vercel` | Targets Vercel serverless SSR with CDN `Cache-Control` (`s-maxage` + `stale-while-revalidate`) edge caching. | Keeps `$0.00/month` free-tier hosting while unlocking dynamic SSR routes and endpoints without vendor lock-in inside app code. |
+| Styling and design system | Tailwind CSS v4 (`@tailwindcss/vite`) | Generates utility classes, semantic tokens, and scoped prose rules through Vite. | Produces small purged CSS bundles tied directly to [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) tokens without runtime styling overhead. |
+| Content and schema layer | Vite `?raw` glob + `gray-matter` + `marked` + `zod` | Bundles `src/content/articles/**/*.md` into the SSR server bundle, validates YAML frontmatter with Zod, extracts `h2`/`h3` headings + plain-text previews, and compiles GFM HTML. | Single-pass Markdown ingestion with zero database dependencies and zero Svelte template syntax collisions in `.md` prose. |
+| Search index and scorer | SSR JSON endpoint (`src/routes/search-index.json/+server.ts`) + TypeScript scorer | Serves an edge-cached JSON index built via pure `buildSearchIndex()` and scores queries synchronously in `SearchBar.svelte`. | Requires no external search SaaS and runs client-side matching with zero backend latency. |
 
-## 3. High-level system and islands architecture
+## 3. High-level system and SSR architecture
 
 ### 3.1 Build-time versus runtime pipeline
 
-Geary separates build-time static compilation from runtime static delivery. Automated CI in `.github/workflows/ci.yml` runs the same build and test pipeline on every pull request so multiple contributors can edit articles and components safely.
+Geary bundles Git-tracked Markdown sources directly into the SvelteKit SSR build via Vite `?raw` glob imports, then serves edge-cached HTML, XML, and JSON responses on Vercel. Automated CI in `.github/workflows/ci.yml` runs typechecks (`svelte-check`), unit tests (`bun test`), and the SvelteKit production build (`vite build`) on every pull request.
 
 ```mermaid
 flowchart TB
     subgraph ContentConfig["1. Source & Configuration Layer (Git)"]
         MD["Markdown Articles (src/content/articles/*.md)"]
         CAT["Canonical Category Registry (src/data/categories.ts)"]
-        SCHEMA["Zod Collection Schema (src/content.config.ts)"]
+        SCHEMA["Zod Article Schema (src/lib/content-schema.ts)"]
     end
 
-    subgraph BuildPipeline["2. Astro SSG Build Pipeline (astro build)"]
-        VALIDATE["Schema Validator & Markdown AST Parser"]
-        ROUTES["Static Route Builders (index, categories, articles, map, 404)"]
-        INDEXER["Static Endpoint (src/pages/search-index.json.ts)"]
-        TAILWIND["Tailwind CSS Compiler & Asset Bundler"]
+    subgraph BuildPipeline["2. SvelteKit Build Pipeline (vite build + adapter-vercel)"]
+        GLOB["Vite ?raw Glob Bundler (src/lib/server/content.ts)"]
+        SVELTE["Svelte 5 Compiler & Route Bundler"]
+        TAILWIND["Tailwind CSS v4 Vite Plugin"]
     end
 
-    subgraph DistOutput["3. Static Output Artifact (dist/)"]
-        HTML["Pre-Rendered HTML Pages + Purged CSS"]
-        JSON["Static Search Index (dist/search-index.json)"]
-        ISLAND_JS["Isolated React Island Bundles"]
+    subgraph ServerRuntime["3. Vercel SSR Runtime + CDN Edge Cache"]
+        LOADER["gray-matter + Zod Validation + marked Compiler"]
+        ROUTES["SSR Route Loaders (+page.server.ts)"]
+        ENDPOINTS["SSR Endpoints (/search-index.json, /sitemap.xml, /robots.txt)"]
+        CACHE["CDN Cache-Control (s-maxage + stale-while-revalidate)"]
     end
 
-    subgraph ClientRuntime["4. Browser Runtime (Static CDN via HTTPS)"]
-        DOM["Zero-JS Static Article / Category DOM"]
-        MENU["Progressive Inline Mobile Menu & Theme Toggle"]
-        REACT["Hydrated React Islands (SearchBar, ExploreSpotlight, CampusMap)"]
+    subgraph ClientRuntime["4. Browser Runtime (HTTPS)"]
+        SSR_HTML["Hydrated Svelte 5 DOM + Persistent Layout Shell"]
+        INTERACTIVE["SearchBar, ExploreSpotlight, AcademicCalendar, CampusMap"]
     end
 
-    MD --> VALIDATE
+    MD --> GLOB
     CAT --> SCHEMA
-    SCHEMA --> VALIDATE
-    VALIDATE --> ROUTES
-    VALIDATE --> INDEXER
-    ROUTES --> TAILWIND
-    TAILWIND --> HTML
-    INDEXER --> JSON
-    ROUTES --> ISLAND_JS
-
-    HTML --> DOM
-    HTML --> MENU
-    ISLAND_JS --> REACT
-    JSON -.->|"Fetched once on focus/input"| REACT
+    SCHEMA --> LOADER
+    GLOB --> LOADER
+    SVELTE --> ROUTES
+    TAILWIND --> SSR_HTML
+    LOADER --> ROUTES
+    LOADER --> ENDPOINTS
+    ROUTES --> CACHE
+    ENDPOINTS --> CACHE
+    CACHE --> SSR_HTML
+    SSR_HTML --> INTERACTIVE
+    ENDPOINTS -.->|"Fetched once on focus/input"| INTERACTIVE
 ```
 
-### 3.2 Astro Islands hydration boundary
+### 3.2 SSR, hydration, and caching boundary
 
-- Zero-JS static components: `BaseLayout.astro`, `ArticleLayout.astro`, `Header.astro`, `Footer.astro`, `Breadcrumbs.astro`, `CategoryCard.astro`, `ArticleCard.astro`, `TableOfContents.astro`, and `VerificationBanner.astro` compile to static HTML and CSS.
-- Selective React hydration (`client:load`): `SearchBar.tsx` registers global keyboard shortcuts (`/`, `Ctrl+K` / `Cmd+K`) on load; `CampusMap.tsx` (on `/map`) handles interactive SVG pan, zoom, and office search; `ExploreSpotlight.tsx` (in the Home `/` hero) renders 3 articles in one row cycling through 3 daily randomized groups seeded by local calendar date without manual controls.
-- Minimal progressive enhancement (`< 1 KB`): Mobile drawer state in `Header.astro` and theme switching in `ThemeToggle.astro` use small inline vanilla scripts, and mobile Table of Contents disclosure uses native HTML `<details>` and `<summary>`.
+- **Dynamic SSR with CDN edge caching:** All page routes (`+page.server.ts`) and data endpoints (`/search-index.json`, `/sitemap.xml`, `/robots.txt`) set `Cache-Control: public, max-age=0, s-maxage=3600, stale-while-revalidate=86400` via `setHeaders()` / `Response` headers so Vercel's CDN serves repeat hits from the edge while keeping SSR dynamic.
+- **Unified Svelte 5 components:** Layouts (`+layout.svelte`), navigation (`Header.svelte`, `Footer.svelte`, `ThemeToggle.svelte`), reading views (`ArticleLayout.svelte`, `TableOfContents.svelte`), and interactive widgets (`SearchBar.svelte`, `ExploreSpotlight.svelte`, `AcademicCalendar.svelte`, `CampusMap.svelte`) are all authored in Svelte 5 runes (`$state`, `$derived`, `$effect`, `$props`).
+- **No-flash theme bootstrap:** `src/app.html` runs a minimal synchronous inline script before first paint to apply the `dark` class from `localStorage` (`geary-theme`) or `prefers-color-scheme`, synchronized with `ThemeToggle.svelte`.
+- **SPA-safe lifecycle cleanup:** Because SvelteKit keeps `+layout.svelte` mounted across client-side route transitions, global keyboard listeners (`/` and `Ctrl/Cmd+K` via `src/lib/search-shortcut.ts`), timers, and `<canvas>` animations clean up deterministically inside `$effect` teardowns.
 
-### 3.3 Content-to-build propagation
+### 3.3 Content-to-route propagation
 
-Adding or editing a single `.md` file in `src/content/articles/` updates four build outputs at once:
+Adding or editing a single `.md` file in `src/content/articles/` automatically propagates through `src/lib/server/content.ts` to five surfaces:
 
-1. Article view (`/articles/[slug]`): Compiles Markdown prose, extracts `h2` and `h3` headings for TOC navigation, builds breadcrumbs, and resolves up to 3 sibling articles in the same category.
-2. Category directory (`/categories/[slug]`): Updates article counts and groups the article card under its `subcategory` heading.
-3. Home hero (`/`): Includes the article in the daily randomized 3x3 hero spotlight pool.
-4. Search payload (`/search-index.json`): Serializes the article's `slug`, `title`, `preview` (derived from the Markdown body), `category`, `categoryLabel`, `subcategory`, and `headings` array.
+1. **Article view (`/articles/[slug]`):** Validates frontmatter with Zod, compiles Markdown prose via `marked` with unique heading `id`s, extracts `h2`/`h3` headings for TOC navigation, builds breadcrumbs, and resolves up to 3 sibling articles in the same category.
+2. **Category directory (`/categories/[slug]`):** Updates article counts and groups article cards under alphabetical `subcategory` headings.
+3. **Articles index (`/articles`):** Updates all 7 category counts and top-3 preview links.
+4. **Home hero (`/`):** Includes the article in the daily randomized 3x3 single-row hero spotlight pool (`ExploreSpotlight.svelte`).
+5. **Search & sitemap endpoints (`/search-index.json`, `/sitemap.xml`):** Serializes the article's `slug`, `title`, body `preview`, `category`, `categoryLabel`, `subcategory`, and `headings` array via pure `buildSearchIndex()`, and lists the canonical URL in `/sitemap.xml`.
 
 ## 4. Component architecture and responsibilities
 
@@ -95,112 +94,102 @@ Adding or editing a single `.md` file in `src/content/articles/` updates four bu
 
 ```mermaid
 flowchart TD
-    subgraph Pages["Astro Route Pages (src/pages/)"]
-        P_HOME["index.astro"]
-        P_CAT["categories/[slug].astro"]
-        P_ART_IDX["articles/index.astro"]
-        P_ART["articles/[slug].astro"]
-        P_MAP["map.astro"]
-        P_404["404.astro"]
+    subgraph Routes["SvelteKit Routes (src/routes/)"]
+        R_LAY["+layout.svelte"]
+        R_ERR["+error.svelte (HTTP 404)"]
+        R_HOME["+page.svelte (/)"]
+        R_CAT["categories/[slug]/+page.svelte"]
+        R_ART_IDX["articles/+page.svelte"]
+        R_ART["articles/[slug]/+page.svelte"]
+        R_CAL["calendar/+page.svelte"]
+        R_MAP["map/+page.svelte"]
     end
 
-    subgraph Layouts["Page Layouts (src/layouts/)"]
-        L_BASE["BaseLayout.astro"]
-        L_ART["ArticleLayout.astro"]
+    subgraph Components["Svelte 5 Components (src/lib/components/)"]
+        C_HDR["Header.svelte"]
+        C_THM["ThemeToggle.svelte"]
+        C_FTR["Footer.svelte"]
+        C_BC["Breadcrumbs.svelte"]
+        C_CCARD["CategoryCard.svelte"]
+        C_ACARD["ArticleCard.svelte"]
+        C_TOC["TableOfContents.svelte"]
+        C_ARTL["ArticleLayout.svelte"]
+        C_SRCH["SearchBar.svelte"]
+        C_EXPL["ExploreSpotlight.svelte"]
+        C_CAL["AcademicCalendar.svelte"]
+        C_MAP["CampusMap.svelte + campus-map/*"]
     end
 
-    subgraph StaticComps["Static Astro Components (0 KB JS / <1 KB inline)"]
-        C_HDR["Header.astro"]
-        C_THM["ThemeToggle.astro"]
-        C_FTR["Footer.astro"]
-        C_BC["Breadcrumbs.astro"]
-        C_CCARD["CategoryCard.astro"]
-        C_ACARD["ArticleCard.astro"]
-        C_TOC["TableOfContents.astro"]
-        C_VER["VerificationBanner.astro"]
+    subgraph ServerAndDomain["Server Loader & Pure Domain Modules"]
+        S_CNT["lib/server/content.ts (Vite ?raw glob + gray-matter + marked + zod)"]
+        D_CORE["lib/articles.ts, search.ts, calendar.ts, map-search.ts, seo.ts"]
+        D_DATA["data/categories.ts, campus-map.ts, academic-calendar.ts"]
     end
 
-    subgraph StaticData["Static Modules & Data"]
-        D_MAP["data/campus-map.ts & lib/map-search.ts"]
-    end
-
-    subgraph Islands["Hydrated React Islands"]
-        I_SRCH["SearchBar.tsx (variant: hero or header)"]
-        I_EXPL["ExploreSpotlight.tsx (Daily Rotating Picks + Shuffle on /)"]
-        I_MAP["CampusMap.tsx (2D Interactive SVG Map on /map)"]
-    end
-
-    P_HOME --> L_BASE
-    P_CAT --> L_BASE
-    P_ART_IDX --> L_BASE
-    P_MAP --> L_BASE
-    P_404 --> L_BASE
-    P_ART --> L_ART
-    L_ART --> L_BASE
-
-    L_BASE --> C_HDR
-    L_BASE --> C_FTR
-    C_HDR --> I_SRCH
+    R_LAY --> C_HDR
+    R_LAY --> C_FTR
+    C_HDR --> C_SRCH
     C_HDR --> C_THM
 
-    P_HOME --> I_SRCH
-    P_HOME --> I_EXPL
-    P_HOME --> C_ACARD
-    P_HOME --> C_CCARD
+    R_HOME --> C_SRCH
+    R_HOME --> C_EXPL
+    R_CAT --> C_BC
+    R_CAT --> C_ACARD
+    R_ART_IDX --> C_BC
+    R_ART_IDX --> C_CCARD
+    R_ART --> C_ARTL
+    C_ARTL --> C_BC
+    C_ARTL --> C_TOC
+    C_ARTL --> C_ACARD
+    R_CAL --> C_CAL
+    R_MAP --> C_MAP
+    R_ERR --> C_SRCH
 
-    P_CAT --> C_BC
-    P_CAT --> C_ACARD
-
-    P_ART_IDX --> C_BC
-    P_ART_IDX --> C_CCARD
-
-    L_ART --> C_BC
-    L_ART --> C_TOC
-    L_ART --> C_VER
-    L_ART --> C_ACARD
-
-    P_404 --> I_SRCH
-    P_MAP --> I_MAP
-    I_MAP --> D_MAP
+    S_CNT --> D_CORE
+    C_MAP --> D_DATA
+    C_CAL --> D_DATA
 ```
 
 ### 4.2 Module and component responsibilities
 
-| Component / module | Type and hydration | Props / inputs | Responsibilities |
+| Component / module | Layer | Props / inputs | Responsibilities |
 | :--- | :--- | :--- | :--- |
-| `src/layouts/BaseLayout.astro` | Astro layout (`0 KB` JS) | `title`, `description?`, `activeCategory?`, `activeNav?`, `headerSearchShortcut?`, `ogType?`, `ogImageAlt?`, `articleMeta?`, `noindex?`, `jsonLd?` | Renders `<html lang="en">`, head theme bootstrap, document metadata, canonical `<link>`, Open Graph (`og:*`, `article:*`), Twitter cards (`twitter:image:alt`), optional JSON-LD `<script>`, robots meta, global CSS import, skip-to-content link, `<Header />`, `<main>`, and `<Footer />`. |
-| `src/layouts/ArticleLayout.astro` | Astro layout (`0 KB` JS) | `article`, `categoryMeta`, `headings`, `relatedArticles` | Composes `BaseLayout`, `<Breadcrumbs />`, article metadata header, responsive grid pairing Markdown prose with `<TableOfContents />`, `<VerificationBanner />`, and up to 3 sibling `<ArticleCard />` items. |
-| `src/components/Header.astro` | Static Astro + `< 1 KB` toggle | `activeCategory?: CategorySlug`, `showSearch?: boolean` | Renders brand logo (`/`), primary navigation links, compact `<SearchBar variant="header" client:load />`, `<ThemeToggle />`, and accessible mobile menu drawer toggle. |
-| `src/components/ThemeToggle.astro` | Static Astro + `< 1 KB` script | None | Renders the accessible color theme menu (`Light`, `Dark`, `System default`) synced with `localStorage` (`geary-theme`) and the `<head>` bootstrap. |
-| `src/components/Footer.astro` | Static Astro (`0 KB` JS) | Imports `CATEGORIES` | Renders global unofficial BulSU student information portal disclaimer and legal links. |
-| `src/components/Breadcrumbs.astro` | Static Astro (`0 KB` JS) | `items: Array<{ label: string; href?: string }>` | Renders semantic breadcrumb trail linking parent routes and marking the current page. |
-| `src/components/CategoryCard.astro` | Static Astro (`0 KB` JS) | `category: CategoryMeta`, `count: number`, `previewArticles: ArticleEntry[]` | Renders category summary card with icon, article count, up to 3 preview links, and `"Explore all ->"` route link. |
-| `src/components/ArticleCard.astro` | Static Astro (`0 KB` JS) | `article: ArticleEntry`, `categoryMeta?: CategoryMeta`, `showCategoryBadge?: boolean` | Renders scannable article link card with title and 2-line body preview. |
-| `src/components/TableOfContents.astro` | Static Astro (`0 KB` JS) | `headings: MarkdownHeading[]`, `mode: 'desktop' \| 'mobile'` | Filters `depth === 2 \|\| depth === 3`; renders nothing when `< 2` headings exist; outputs sticky sidebar (`desktop`) or `<details>` disclosure (`mobile`). |
-| `src/components/VerificationBanner.astro` | Static Astro (`0 KB` JS) | `updatedDate: Date` | Displays official office verification notice and `updatedDate` at the bottom of articles. |
-| `src/components/SearchBar.tsx` | React island (`client:load`) | `variant: 'hero' \| 'header'`, `enableGlobalShortcut?: boolean` | Lazily fetches and caches `/search-index.json` in module memory; calls the weighted literal substring scorer (`src/lib/search.ts`); manages keyboard navigation, outside-click dismissal, zero-match pills, and fetch-error fallback UI. |
-| `src/components/ExploreSpotlight.tsx` | React island (`client:load`) | Article pool from `index.astro` | Displays 6 Featured articles cycling through 3 daily randomized groups seeded by local calendar date, with manual shuffle controls. |
-| `src/components/AcademicCalendar.tsx` | React island (`client:load`) | Data from `src/data/academic-calendar.ts` | Renders the searchable, category-filterable AY 2026–2027 BulSU Academic Calendar grouped by month on `/calendar`. |
-| `src/components/CampusMap.tsx` | React island (`client:load`) | Data from `src/data/campus-map.ts` | Renders the full-bleed interactive 2D BulSU Malolos SVG schematic, floating Google Maps-style search (`campus-map/CampusMapSearch.tsx`), floating desktop / bottom-sheet mobile locations inspector (`campus-map/BuildingInspector.tsx`), and aspect-aware pan/zoom viewport (`campus-map/useMapViewport.ts`). |
-| `src/lib/search.ts` | Pure TypeScript module | `items: SearchIndexItem[]`, `query: string` | Normalizes queries and scores multi-term matches (`title` > `headings`/`subcategory` > `preview`/`categoryLabel`); unit-tested without React DOM. |
-| `src/lib/articles.ts` | Pure TypeScript module | `articles: ArticleEntry[]` | Groups articles deterministically by subcategory (`groupArticlesBySubcategory`) and selects related articles; shared by page templates and unit tests. |
-| `src/lib/map-search.ts` | Pure TypeScript module | Campus map buildings/locations, `query: string` | Searches campus offices, facilities, and buildings for `CampusMap.tsx`; unit-tested in `tests/unit/map-search.test.ts`. |
+| `src/app.html` | Root HTML shell | SvelteKit `%sveltekit.head%` / `%sveltekit.body%` | Loads no-flash theme bootstrap script, favicons, and root document attributes. |
+| `src/routes/+layout.svelte` | Root SvelteKit layout | `children` snippet + route metadata from `page.data` | Renders skip-to-content link, `<Header />`, `<main>`, and `<Footer />`, plus global CSS and font preloads. |
+| `src/lib/components/SeoHead.svelte` | Svelte 5 component | `title`, `description`, `canonicalUrl`, `ogType`, `ogImageUrl`, `ogImageAlt`, `articleMeta?`, `noindex?`, `jsonLd?` | Renders `<svelte:head>` title, description, canonical link, Open Graph (`og:*`, `article:*`), Twitter cards, robots meta, and safe serialized JSON-LD scripts. |
+| `src/lib/components/ArticleLayout.svelte` | Svelte 5 component | `article`, `html`, `categoryMeta`, `headings`, `relatedArticles` | Composes `<Breadcrumbs />`, article metadata header, responsive grid pairing `{@html html}` prose with `<TableOfContents />`, optional Source card, unofficial verification notice, and up to 3 sibling `<ArticleCard />` items. |
+| `src/lib/components/Header.svelte` | Svelte 5 component | `activeCategory?`, `activeNav?`, `headerSearchShortcut?` | Renders brand gear logo (`/`), primary navigation links (`Home`, `Articles`, `Academic Calendar`, `Campus Map`, `Contribute`), compact `<SearchBar variant="header" />`, `<ThemeToggle />`, and accessible mobile menu drawer. |
+| `src/lib/components/ThemeToggle.svelte` | Svelte 5 component | None | Renders accessible color theme menu (`Light`, `Dark`, `System default`) synced with `localStorage` (`geary-theme`) and `src/app.html` bootstrap. |
+| `src/lib/components/Footer.svelte` | Svelte 5 component | None | Renders global footer copyright and legal links (`/terms`, `/privacy`). |
+| `src/lib/components/Breadcrumbs.svelte` | Svelte 5 component | `items: Array<{ label: string; href?: string }>` | Renders semantic breadcrumb trail linking parent routes and marking the current page (`aria-current="page"`). |
+| `src/lib/components/CategoryCard.svelte` | Svelte 5 component | `category: CategoryMeta`, `count: number`, `previewArticles` | Renders category summary card with icon, article count, up to 3 preview links, and category route link. |
+| `src/lib/components/ArticleCard.svelte` | Svelte 5 component | `article`, `categoryMeta?`, `showCategoryBadge?` | Renders scannable article link card with title and 2-line body preview. |
+| `src/lib/components/TableOfContents.svelte` | Svelte 5 component | `headings: MarkdownHeading[]`, `mode: 'desktop' \| 'mobile'` | Filters `depth === 2 \|\| depth === 3`; renders nothing when `< 2` headings exist; outputs sticky sidebar (`desktop`) or `<details>` disclosure (`mobile`). |
+| `src/lib/components/SearchBar.svelte` | Svelte 5 component | `variant: 'hero' \| 'header'`, `enableGlobalShortcut?: boolean` | Lazily fetches and caches `/search-index.json` in module memory; calls `filterAndRankArticles` (`src/lib/search.ts`); manages keyboard navigation, outside-click dismissal, zero-match category pills, and fetch-error fallback UI. |
+| `src/lib/components/ExploreSpotlight.svelte` | Svelte 5 component | `items`, `initialDateKey`, `groupSize = 3`, `groupCount = 3` | Displays 3 articles in a single row at the bottom of the Home hero, cycling automatically through 3 daily randomized groups (9 articles/day) with no manual controls and pausing on hover/focus/reduced-motion. |
+| `src/lib/components/AcademicCalendar.svelte` | Svelte 5 component | Data from `src/data/academic-calendar.ts` | Renders the searchable, category-filterable AY 2026–2027 BulSU Academic Calendar grouped by month on `/calendar`, with sticky filter bar, month jump nav, `/` & `Ctrl/Cmd+K` shortcut, and floating back-to-top button. |
+| `src/lib/components/CampusMap.svelte` | Svelte 5 component | Data from `src/data/campus-map.ts` | Renders the full-bleed interactive 2D BulSU Malolos SVG schematic, floating search (`campus-map/CampusMapSearch.svelte`), desktop card / mobile bottom-sheet inspector (`campus-map/BuildingInspector.svelte`), and pan/zoom viewport state (`campus-map/viewport.svelte.ts`). |
+| `src/lib/server/content.ts` | Server content module | Bundled `src/content/articles/**/*.md` via Vite `?raw` glob | Parses YAML frontmatter (`gray-matter`), validates via `articleSchema` (`zod`), compiles GFM Markdown + unique heading IDs (`marked`), extracts `headings` and plain-text `preview`, and exposes `getAllArticles()`, `getArticleBySlug()`, and `buildSearchIndex()`. |
+| `src/lib/search.ts` | Pure TypeScript module | `items: SearchIndexItem[]`, `query: string` | Normalizes queries and scores multi-term literal substring matches (`title` > `headings`/`subcategory` > `preview`/`categoryLabel`). |
+| `src/lib/articles.ts` | Pure TypeScript module | Articles list | Subcategory grouping, daily deterministic shuffle/partitioning (`getDailyItemGroups`), sibling selection, preview extraction, and UTC date formatting. |
+| `src/lib/calendar.ts` | Pure TypeScript module | Calendar events, filters, query | Multi-category filtering, multi-token search, and chronological month grouping for `/calendar`. |
+| `src/lib/map-search.ts` | Pure TypeScript module | Campus map buildings/locations, query | Location/building search, floor partitioning/grouping, and clamped SVG viewBox pan/zoom math. |
+| `src/lib/seo.ts` | Pure TypeScript module | Route metadata & origin | Canonical origin resolution and XSS-safe JSON-LD builders (`WebSite`, `BreadcrumbList`, `Article`). |
 
-## 5. Integrations and module contracts
+## 5. Configuration and module contracts
 
-### 5.1 Framework integrations (`astro.config.mjs`)
+### 5.1 Framework configuration (`svelte.config.js` & `vite.config.ts`)
 
-- `site` configuration: Reads `process.env.PUBLIC_SITE_URL`, falls back to Vercel URLs (`VERCEL_PROJECT_PRODUCTION_URL` / `VERCEL_URL`), and defaults locally to `https://geary.example.com`. Canonical URLs, Open Graph URLs, `robots.txt`, and sitemaps stay consistent across environments.
-- `@astrojs/react`: Enables selective client hydration for React islands inside `.astro` files.
-- `@astrojs/sitemap`: Generates `dist/sitemap-index.xml` at build time, excluding `/404` and non-HTML utility routes.
-- Tailwind CSS (`@tailwindcss/vite`): Compiles utility classes and `src/styles/global.css` tokens through Astro's Vite plugin pipeline.
-- `output: 'static'` and `build.inlineStylesheets: 'always'`: Pure SSG output targeting `dist/` with inlined CSS to avoid render-blocking stylesheet requests.
+- **`svelte.config.js`:** Uses `@sveltejs/adapter-vercel` with standard dynamic SSR output and `vitePreprocess()`.
+- **`vite.config.ts`:** Combines `tailwindcss()` (`@tailwindcss/vite`) and `sveltekit()`.
+- **Origin resolution (`src/lib/seo.ts`):** Reads `PUBLIC_SITE_URL`, falls back to `VERCEL_PROJECT_PRODUCTION_URL` / `VERCEL_URL` / incoming request `url.origin`, and defaults locally to `https://geary.example.com`.
+- **CDN cache headers (`src/lib/server/cache.ts`):** Shared `CACHE_CONTROL_HEADER = 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400'` applied across SSR page loaders and `/search-index.json`, `/sitemap.xml`, and `/robots.txt`.
 
-### 5.2 TypeScript data contracts
+### 5.2 TypeScript and Zod data contracts
 
 #### `src/data/categories.ts`
 
-Single source of truth imported by Content Collection schemas, pages, navigation components, and `search-index.json.ts`:
+Single source of truth imported by Zod schemas, routes, navigation components, and `buildSearchIndex()`:
 
 ```ts
 export const CATEGORY_SLUGS = [
@@ -224,15 +213,18 @@ export interface CategoryMeta {
 }
 ```
 
-#### `src/content.config.ts` (Astro Content Collection schema)
-
-Defines the `articles` collection using Astro's Content Layer `glob` loader and Zod validation against `CATEGORY_SLUGS`:
+#### `src/lib/content-schema.ts` (Zod article schema)
 
 ```ts
-import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
-import { z } from 'astro/zod';
-import { CATEGORY_SLUGS } from './data/categories';
+import { z } from 'zod';
+import { CATEGORY_SLUGS } from '../data/categories';
+
+const httpUrlSchema = z.url({ protocol: /^https?$/ });
+
+export const articleSourceSchema = z.object({
+  label: z.string().min(1),
+  url: httpUrlSchema.optional(),
+});
 
 export const articleSchema = z.object({
   title: z.string().min(1),
@@ -240,20 +232,14 @@ export const articleSchema = z.object({
   subcategory: z.string().min(1),
   updatedDate: z.coerce.date(),
   source: z.string().min(1).optional(),
-  sourceUrl: z.url().optional(),
+  sourceUrl: httpUrlSchema.optional(),
+  sources: z.array(articleSourceSchema).min(1).optional(),
 });
-
-export const collections = {
-  articles: defineCollection({
-    loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
-    schema: articleSchema,
-  }),
-};
 ```
 
-#### `src/pages/search-index.json.ts`
+#### `src/routes/search-index.json/+server.ts`
 
-Build-time `GET` endpoint exporting static JSON conforming to `SearchIndexItem[]`:
+Edge-cached SSR `GET` endpoint returning JSON conforming to `SearchIndexItem[]`:
 
 ```ts
 export interface SearchIndexItem {
@@ -277,7 +263,7 @@ Geary's core information portal has no external runtime dependencies: no databas
 geary/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                   # PR & push CI pipeline (check, unit tests, build, E2E/Axe)
+│       └── ci.yml                   # PR & push CI pipeline (check, unit tests, build)
 ├── docs/                            # Authoritative ISO-aligned project specifications
 │   ├── PROJECT_CHARTER.md           # ISO 12207 Project Charter
 │   ├── PRD.md                       # Adapted ISO 29148 Product Requirements Document
@@ -291,70 +277,105 @@ geary/
 │   └── WRITING_FRAMEWORK.md         # Editorial, tone & humanizer writing standard
 ├── AGENTS.md                        # Repository agent development instructions
 ├── README.md                        # Contributor quickstart, commands & spec index
-├── package.json                     # Project dependencies & scripts (dev, check, build, test)
+├── package.json                     # Project dependencies & scripts (dev, check, build, preview, test)
 ├── bun.lock                         # Bun deterministic dependency lockfile
 ├── bunfig.toml                      # Scopes `bun test` strictly to tests/unit/
-├── playwright.config.ts             # Playwright E2E/Axe config (webServer -> astro preview)
-├── astro.config.mjs                 # Astro static config + @astrojs/react + @tailwindcss/vite
-├── tsconfig.json                    # Strict TypeScript compiler configuration
-├── public/                          # Static assets copied verbatim to dist/
-│   ├── apple-touch-icon.png         # 180x180 Geary touch icon for iOS / Android
-│   ├── favicon-48x48.png            # 48x48 PNG favicon for Google Search & mobile
-│   ├── favicon-96x96.png            # 96x96 high-DPI PNG favicon
-│   ├── favicon.ico                  # Multi-size (16/32/48px) Geary fallback favicon
-│   ├── favicon.svg                  # Minimalist Geary geometric gear icon
-│   ├── googled56ea9e672e7afb1.html  # Google Search Console ownership verification
-│   └── og-image.png                 # Shared 1200x630 Open Graph social preview card
-├── tests/                           # Lean unit & Playwright E2E/Axe smoke tests
+├── playwright.config.ts             # Playwright E2E/Axe config (webServer -> vite preview)
+├── svelte.config.js                 # SvelteKit config with @sveltejs/adapter-vercel
+├── vite.config.ts                   # Vite config with @tailwindcss/vite + sveltekit()
+├── tsconfig.json                    # Strict TypeScript config extending .svelte-kit/tsconfig.json
+├── static/                          # Static assets served from site root (favicons, logos, OG image, banners)
+│   ├── apple-touch-icon.png
+│   ├── favicon-48x48.png
+│   ├── favicon-96x96.png
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── geary-logo-dark.svg
+│   ├── geary-logo-light.svg
+│   ├── googled56ea9e672e7afb1.html
+│   ├── og-image.png
+│   └── santa-hat.png
+├── tests/                           # Unit & Playwright E2E/Axe verification suites
 │   ├── unit/
-│   │   ├── search.test.ts           # Bun test suite for query scoring & index contract
-│   │   ├── articles.test.ts         # Bun test suite for subcategory grouping helpers
-│   │   ├── map-search.test.ts       # Bun test suite for campus map search matching
-│   │   └── seo.test.ts              # Bun test suite for JSON-LD builders & XSS escape
+│   │   ├── articles.test.ts         # Subcategory grouping, previews, daily spotlight & UTC dates
+│   │   ├── calendar.test.ts         # AY 2026-2027 calendar dataset, filtering & month grouping
+│   │   ├── content.test.ts          # Zod frontmatter validation & Markdown compilation + headings
+│   │   ├── map-search.test.ts       # Campus map search, directory integrity & viewBox math
+│   │   ├── search.test.ts           # Query scoring & pure buildSearchIndex() contract (< 100 KB)
+│   │   └── seo.test.ts              # JSON-LD builders & XSS-safe serialization
 │   └── e2e/
-│       └── smoke.spec.ts            # Playwright + Axe smoke, SEO, TOC, overflow & 404 tests
+│       └── smoke.spec.ts            # Playwright + Axe smoke, SEO, TOC, overflow, dark mode & 404 tests
 └── src/
+    ├── app.html                     # Root HTML shell with synchronous theme bootstrap
     ├── styles/
-    │   └── global.css               # Tailwind import, design tokens, scoped prose styles
-    ├── data/
-    │   ├── categories.ts            # Canonical 7-category registry & lookup helpers
-    │   └── campus-map.ts            # BulSU Malolos building footprints & office directory data
-    ├── lib/
-    │   ├── search.ts                # Pure query normalization & weighted scoring engine
-    │   ├── articles.ts              # Subcategory grouping & sibling article helpers
-    │   ├── map-search.ts            # Pure office/building lookup helpers for /map
-    │   └── seo.ts                   # Pure JSON-LD builders (WebSite, Article, BreadcrumbList)
-    ├── content.config.ts            # Astro Content Collection + Zod schema (`articles`)
+    │   └── global.css               # Tailwind v4 import, design tokens & scoped prose styles
     ├── content/
-    │   └── articles/                # 30 UTF-8 handbook-verified Markdown articles
-    ├── layouts/
-    │   ├── BaseLayout.astro         # Global HTML shell, theme bootstrap, Header & Footer
-    │   └── ArticleLayout.astro      # Constrained prose reading layout, TOC & related
-    ├── components/
-    │   ├── Header.astro             # Global navbar, gear logo, mobile menu, Header SearchBar
-    │   ├── ThemeToggle.astro        # Accessible Light / Dark / System theme menu
-    │   ├── Footer.astro             # Unofficial disclaimer & legal links
-    │   ├── Breadcrumbs.astro        # Hierarchical Home > Category > Article navigation
-    │   ├── CategoryCard.astro       # Directory card with count & preview links
-    │   ├── ArticleCard.astro        # Scannable article summary card
-    │   ├── TableOfContents.astro    # Conditional h2/h3 TOC (sticky desktop / <details> mobile)
-    │   ├── VerificationBanner.astro # Official office verification notice
-    │   ├── SearchBar.tsx            # Hydrated React island consuming /search-index.json
-    │   ├── ExploreSpotlight.tsx     # Hydrated React island for daily Featured articles on /
-    │   ├── CampusMap.tsx            # Hydrated React island for full-bleed 2D SVG map on /map
-    │   └── campus-map/              # CampusMap search overlay, inspector/bottom sheet, and viewport hook
-    └── pages/
-        ├── index.astro              # Home portal (Hero SearchBar + 3-card daily spotlight)
-        ├── map.astro                # Interactive 2D BulSU Malolos Campus Map island
-        ├── contribute.astro         # Community submission page with embedded Google Form
-        ├── terms.astro              # Terms of Service & unofficial disclaimer page
-        ├── privacy.astro            # Privacy Policy (zero-tracking static architecture)
-        ├── 404.astro                # Branded recovery page with SearchBar & categories (`noindex`)
-        ├── robots.txt.ts            # Build-time generator referencing Astro.site sitemap
-        ├── search-index.json.ts     # Build-time generator for /search-index.json
+    │   └── articles/                # UTF-8 handbook-verified Markdown articles
+    ├── data/
+    │   ├── academic-calendar.ts     # AY 2026-2027 BulSU academic calendar events
+    │   ├── campus-map.ts            # BulSU Malolos building footprints & office directory data
+    │   └── categories.ts            # Canonical 7-category registry & lookup helpers
+    ├── lib/
+    │   ├── articles.ts              # Subcategory grouping, daily spotlight & sibling article helpers
+    │   ├── calendar.ts              # Calendar category/search filtering & month grouping
+    │   ├── content-schema.ts        # Zod article frontmatter & source schemas
+    │   ├── map-search.ts            # Office/building lookup & viewBox math helpers for /map
+    │   ├── search-shortcut.ts       # Shared `/` and `Ctrl/Cmd+K` global shortcut binder
+    │   ├── search.ts                # Pure query normalization & weighted scoring engine
+    │   ├── seo.ts                   # Pure JSON-LD builders & canonical origin resolution
+    │   ├── server/
+    │   │   ├── cache.ts             # Shared CDN Cache-Control header constants
+    │   │   ├── content.ts           # Vite ?raw glob + gray-matter + zod + marked loader + buildSearchIndex()
+    │   │   └── markdown.ts          # Pure Markdown parser + heading slug extractor (unit-testable)
+    │   └── components/
+    │       ├── AcademicCalendar.svelte
+    │       ├── ArticleCard.svelte
+    │       ├── ArticleLayout.svelte
+    │       ├── Breadcrumbs.svelte
+    │       ├── CampusMap.svelte
+    │       ├── CategoryCard.svelte
+    │       ├── ExploreSpotlight.svelte
+    │       ├── Footer.svelte
+    │       ├── Header.svelte
+    │       ├── SearchBar.svelte
+    │       ├── SeoHead.svelte
+    │       ├── TableOfContents.svelte
+    │       ├── ThemeToggle.svelte
+    │       └── campus-map/          # CampusMapSearch.svelte, BuildingInspector.svelte, viewport.svelte.ts
+    └── routes/
+        ├── +layout.svelte           # Global shell (Header, main, Footer) + theme/route coordination
+        ├── +error.svelte            # Branded HTTP 404 recovery page with SearchBar & categories (`noindex`)
+        ├── +page.server.ts          # Home hero spotlight pool loader + CDN Cache-Control
+        ├── +page.svelte             # Home portal (Hero SearchBar, snow canvas, 3-card daily spotlight)
+        ├── articles/
+        │   ├── +page.server.ts      # 7-category counts & previews + CDN Cache-Control
+        │   ├── +page.svelte         # Articles & categories directory page (7 CategoryCards)
+        │   └── [slug]/
+        │       ├── +page.server.ts  # Article resolver, compiled HTML, headings, related + Cache-Control
+        │       └── +page.svelte     # Individual Markdown article page
+        ├── calendar/
+        │   ├── +page.server.ts      # Cache-Control header setup
+        │   └── +page.svelte         # Interactive AY 2026-2027 BulSU Academic Calendar
         ├── categories/
-        │   └── [slug].astro         # Subcategory-grouped category directory pages
-        └── articles/
-            ├── index.astro          # Articles & categories directory page (7 CategoryCards)
-            └── [slug].astro         # Individual Markdown article pages
+        │   └── [slug]/
+        │       ├── +page.server.ts  # Category resolver & grouped articles + Cache-Control
+        │       └── +page.svelte     # Subcategory-grouped category directory page
+        ├── contribute/
+        │   ├── +page.server.ts
+        │   └── +page.svelte         # Community submission page with embedded Google Form
+        ├── map/
+        │   ├── +page.server.ts
+        │   └── +page.svelte         # Full-viewport interactive 2D BulSU Malolos Campus Map
+        ├── privacy/
+        │   ├── +page.server.ts
+        │   └── +page.svelte         # Privacy Policy page
+        ├── terms/
+        │   ├── +page.server.ts
+        │   └── +page.svelte         # Terms of Service & unofficial disclaimer page
+        ├── robots.txt/
+        │   └── +server.ts           # Edge-cached robots.txt referencing sitemap.xml
+        ├── search-index.json/
+        │   └── +server.ts           # Edge-cached JSON search payload from buildSearchIndex()
+        └── sitemap.xml/
+            └── +server.ts           # Edge-cached XML sitemap listing all canonical routes
 ```

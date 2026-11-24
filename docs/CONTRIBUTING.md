@@ -6,7 +6,7 @@ Welcome to **Geary**, an unofficial, student-run information portal for Bulacan 
 
 ## 1. Local Setup
 
-Geary uses **Bun**, **Astro**, **Tailwind CSS**, and **React** (hydrated only for interactive islands).
+Geary uses **Bun**, **SvelteKit** (Svelte 5 runes), **Tailwind CSS**, and **`@sveltejs/adapter-vercel`** (dynamic SSR with edge caching).
 
 ```bash
 bun install
@@ -17,11 +17,11 @@ Useful scripts from `package.json`:
 
 | Command | Purpose |
 | --- | --- |
-| `bun run dev` | Start the local Astro dev server |
-| `bun run check` | Run `astro check` for TypeScript, Astro, and content schema validation |
+| `bun run dev` | Start the local SvelteKit dev server |
+| `bun run check` | Run `svelte-check` for TypeScript and Svelte validation |
 | `bun test` | Run Bun unit tests in `tests/unit` |
-| `bun run build` | Build the static site into `dist/` (also generates `/search-index.json` and sitemap) |
-| `bun run preview` | Preview the production build locally |
+| `bun run build` | Build the SvelteKit SSR bundle for Vercel via `vite build` |
+| `bun run preview` | Preview the production SvelteKit build locally |
 | `bun run test:e2e` | Run Playwright end-to-end and accessibility tests |
 
 ## 2. Documentation-First Workflow
@@ -32,7 +32,7 @@ The `docs/` folder is the source of truth for Geary's scope, requirements, archi
 - [PRD.md](./PRD.md) — Features, priorities, and acceptance criteria
 - [SRS.md](./SRS.md) — System constraints, functional requirements, and quality targets
 - [USER_FLOWS.md](./USER_FLOWS.md) — User journeys and edge/error flows
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — Stack, Astro island boundaries, and data contracts
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — Stack, SvelteKit SSR architecture, and data contracts
 - [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) — Color tokens, typography, contrast, and component states
 - [TESTING.md](./TESTING.md) — Test cases and verification layers
 - [REQUIREMENTS.md](./REQUIREMENTS.md) — Bidirectional traceability matrix
@@ -87,4 +87,4 @@ Contributors are welcome to use AI coding agents (such as Antigravity) alongside
 
 ## 6. Maintainer Note: Syncing Dual Remotes
 
-Maintainers who work across both `shnflrsc/geary` (`origin`) and `bulsutools/geary` (`bulsutools`) merge upstream `origin/main` into `bulsutools/main` using a dedicated sync branch (for example, `sync/upstream-main-<n>`) and PR. Keep org-specific deployment or domain settings (such as `https://geary.bulsu.tools` in `src/pages/robots.txt.ts` or org CI workflows) intact when resolving merge conflicts.
+Maintainers who work across both `shnflrsc/geary` (`origin`) and `bulsutools/geary` (`bulsutools`) merge upstream `origin/main` into `bulsutools/main` using a dedicated sync branch (for example, `sync/upstream-main-<n>`) and PR. Keep org-specific deployment or domain settings (such as `https://geary.bulsu.tools` in `src/routes/robots.txt/+server.ts` or org CI workflows) intact when resolving merge conflicts.

@@ -16,21 +16,21 @@
 
 ### 1.2 Purpose and operating environment
 
-This SRS defines the software-level constraints, external interface contracts, functional requirements, and non-functional quality requirements for Geary (`Astro SSG + Tailwind CSS + isolated React islands`). Contributors use this document as the technical reference when building features, updating schemas, or reviewing pull requests.
+This SRS defines the software-level constraints, external interface contracts, functional requirements, and non-functional quality requirements for Geary (`SvelteKit SSR + Svelte 5 + Tailwind CSS + @sveltejs/adapter-vercel`). Contributors use this document as the technical reference when building features, updating schemas, or reviewing pull requests.
 
 - Client environment: evergreen mobile and desktop browsers (Chrome, Safari, Firefox, Edge) across Android, iOS, Windows, and macOS over campus cellular (3G/4G/5G) and Wi-Fi networks.
-- Build and contributor environment: Bun (and Node.js-compatible) toolchain running Astro static compilation (`bun run check`, `bun run build`) against Git-versioned UTF-8 Markdown sources.
+- Build and contributor environment: Bun (and Node.js-compatible) toolchain running SvelteKit SSR compilation (`bun run check`, `bun run build`) against Git-versioned UTF-8 Markdown sources bundled via Vite `?raw` glob imports.
 
 ### 1.3 Definitions, acronyms, and abbreviations
 
 | Term or acronym | Definition |
 | :--- | :--- |
-| `SSG` | Static Site Generation: compiling templates and Markdown into static HTML, CSS, and JSON artifacts at build time. |
-| Astro Content Collection | Astro's schema-validated static content registry for structured Markdown files. |
-| React Island | An isolated interactive React component hydrated selectively inside static Astro HTML. |
-| `Zod` | Schema validation library enforcing build-time frontmatter and payload constraints. |
-| `JSON` | JavaScript Object Notation: static interchange format for `/search-index.json`. |
-| `DOM` | Document Object Model: browser HTML tree rendered statically or updated declaratively by React. |
+| `SSR` | Server-Side Rendering: rendering SvelteKit routes dynamically on Vercel serverless functions with CDN `Cache-Control` (`s-maxage` + `stale-while-revalidate`) edge caching. |
+| Markdown Content Loader | Pure TypeScript module (`src/lib/server/content.ts`) bundling `src/content/articles/**/*.md` via Vite `?raw` glob, parsing frontmatter with `gray-matter`, validating with `zod`, and compiling HTML + headings with `marked`. |
+| Svelte 5 Runes | Reactive primitives (`$state`, `$derived`, `$effect`, `$props`) powering all Geary components across server render and client hydration. |
+| `Zod` | Schema validation library enforcing frontmatter and search-index payload constraints. |
+| `JSON` | JavaScript Object Notation: interchange format for `/search-index.json`. |
+| `DOM` | Document Object Model: browser HTML tree rendered on the server and hydrated declaratively by Svelte 5. |
 | `WCAG` | Web Content Accessibility Guidelines (Level AA under WCAG 2.1). |
 | `BulSU` / `COR` / `TOR` / `INC` / `GWA` / `LOA` / `OSAS` | Bulacan State University domain terms: Certificate of Registration, Transcript of Records, Incomplete grade, General Weighted Average, Leave of Absence, Office of Student Affairs and Services. |
 
@@ -40,24 +40,24 @@ This SRS defines the software-level constraints, external interface contracts, f
 
 | ID | Constraint statement |
 | :--- | :--- |
-| `CON-TECH-01` | The software shall build in Astro static output mode (`output: 'static'`) with zero server-side rendering (SSR) adapters or runtime edge functions. |
-| `CON-TECH-02` | Layout and component presentation shall be styled using Tailwind CSS utility classes and design tokens. |
-| `CON-TECH-03` | React shall be hydrated strictly via Astro island directives (`client:load` or `client:idle`) and limited to stateful client interactivity (`<SearchBar />`, `<ExploreSpotlight />`, and `<CampusMap />`). |
-| `CON-TECH-04` | TypeScript and Zod shall enforce compile-time type checking and build-time frontmatter schema validation across all content and data modules. |
+| `CON-TECH-01` | The software shall build with SvelteKit (`@sveltejs/adapter-vercel`) in dynamic SSR mode, setting CDN `Cache-Control` headers (`s-maxage` + `stale-while-revalidate`) on HTML routes and endpoints (`/search-index.json`, `/sitemap.xml`, `/robots.txt`). |
+| `CON-TECH-02` | Layout and component presentation shall be styled using Tailwind CSS v4 (`@tailwindcss/vite`) utility classes and design tokens. |
+| `CON-TECH-03` | All UI components and interactive widgets (`SearchBar`, `ExploreSpotlight`, `AcademicCalendar`, `CampusMap`) shall be implemented natively in Svelte 5 (runes) with zero React runtime dependencies. |
+| `CON-TECH-04` | TypeScript (`svelte-check`) and Zod shall enforce compile-time type checking and frontmatter schema validation across all content and data modules. |
 
 ### 2.2 Financial and operational constraints
 
 | ID | Constraint statement |
 | :--- | :--- |
-| `CON-FIN-01` | Total recurring operational, hosting, storage, and third-party service cost shall remain strictly `$0.00/month`. |
-| `CON-FIN-02` | The software shall not depend on runtime backend servers, managed databases, headless CMS subscriptions, or paid third-party APIs (including LLM or hosted search endpoints). |
+| `CON-FIN-01` | Total recurring operational, hosting, storage, and third-party service cost shall remain strictly `$0.00/month` on Vercel's free tier. |
+| `CON-FIN-02` | The software shall not depend on managed databases, headless CMS subscriptions, or paid third-party APIs (including LLM or hosted search endpoints). |
 
 ### 2.3 Data and content constraints
 
 | ID | Constraint statement |
 | :--- | :--- |
 | `CON-DATA-01` | All student article content shall reside as UTF-8 Markdown (`.md`) files under Git version control so multiple contributors can author and review changes through pull requests. |
-| `CON-DATA-02` | Searchable article metadata and section headings shall be compiled at build time into a single static JSON file (`/search-index.json`). |
+| `CON-DATA-02` | Searchable article metadata and section headings shall be serialized by a pure builder into `/search-index.json` (`+server.ts`) with CDN edge caching and validated by unit tests. |
 
 ### 2.4 Scope, legal, and governance constraints
 
@@ -74,13 +74,16 @@ This SRS defines the software-level constraints, external interface contracts, f
 
 | Route pattern | Purpose |
 | :--- | :--- |
-| `/` | Home portal rendering the hero search bar, Featured articles, and the 7-Category Directory. |
+| `/` | Home portal rendering the hero search bar and single-row 3-card daily spotlight. |
+| `/articles` | Full 7-category directory index page. |
 | `/categories/[slug]` | Category directory listing articles grouped by `subcategory` with breadcrumb navigation. |
 | `/articles/[slug]` | Distraction-free reading view with metadata header, responsive TOC, Markdown prose, disclaimer, and related articles. |
 | `/calendar` | Interactive BulSU Academic Calendar (AY 2026–2027) with real-time search and category filtering. |
 | `/map` | Interactive 2D SVG schematic of BulSU Malolos Main Campus with building inspector and location search. |
-| `/404.html` | Branded recovery page embedding the search bar and links to all seven categories. |
-| `/search-index.json` | Static JSON search payload consumed by `<SearchBar />`. |
+| `/contribute`, `/privacy`, `/terms` | Contributor guidelines and legal information pages. |
+| `HTTP 404` (`+error.svelte`) | Branded recovery page embedding the search bar and links to all seven categories. |
+| `/search-index.json` | Edge-cached JSON search payload (`+server.ts`) consumed by `<SearchBar />`. |
+| `/sitemap.xml`, `/robots.txt` | Edge-cached XML sitemap and crawler directives (`+server.ts`). |
 
 #### `UI-INT-02`: Responsive viewport breakpoints
 
@@ -132,7 +135,7 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 
 ### 3.3 Communications interfaces (`COM-INT-01`)
 
-- All HTML, CSS, JavaScript, and JSON assets shall be delivered over standard HTTPS (`GET` requests) from static hosting.
+- All HTML, CSS, JavaScript, XML, and JSON responses shall be delivered over standard HTTPS (`GET` requests) from Vercel SSR with CDN `Cache-Control` headers.
 - Client-side search shall fetch `/search-index.json` asynchronously via same-origin `fetch('/search-index.json')` with zero authentication headers or cross-origin dependencies.
 
 ## 4. System functional requirements *(ISO 29148 Clause 9.6.3.1)*
@@ -141,47 +144,47 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 
 #### `SRS-FUNC-CNT-01`: Markdown article discovery
 
-- Inputs: UTF-8 `.md` files inside the articles content collection directory.
-- Processing logic: enumerate all `.md` files at build time, separate YAML frontmatter from Markdown body text, and derive URL `slug` deterministically from filenames.
-- Outputs: parsed collection entries passed to schema validation and static route builders.
-- Error handling: malformed YAML syntax halts compilation immediately with file path and line diagnostics.
+- Inputs: UTF-8 `.md` files inside `src/content/articles/`.
+- Processing logic: bundle all `.md` files via Vite `import.meta.glob('/src/content/articles/**/*.md', { query: '?raw', eager: true })`, separate YAML frontmatter from Markdown body text via `gray-matter`, and derive URL `slug` deterministically from filenames.
+- Outputs: parsed article records passed to schema validation, SSR route loaders, and search index serialization.
+- Error handling: malformed YAML syntax throws immediately with file path diagnostics.
 
 #### `SRS-FUNC-CNT-02`: Strict Zod frontmatter validation
 
 - Inputs: raw YAML frontmatter dictionary per Markdown file.
 - Processing logic: validate all fields against `SW-INT-02` (`title`, `category` enum, `subcategory`, coerced `updatedDate`, and optional `source`, `sourceUrl`, `sources`).
-- Outputs: strongly typed metadata object attached to each collection entry.
-- Error handling: missing fields, invalid dates, or unrecognized `category` values abort `astro build` / `astro check` with descriptive Zod diagnostics.
+- Outputs: strongly typed metadata object attached to each article record.
+- Error handling: missing fields, invalid dates, or unrecognized `category` values fail validation with descriptive Zod diagnostics (verified in unit tests and server load).
 
 #### `SRS-FUNC-CNT-03`: Semantic Markdown compilation
 
 - Inputs: validated Markdown body text.
-- Processing logic: compile Markdown (including GFM tables, ordered/unordered lists, blockquotes, inline code, and links) to semantic HTML with unique URL-safe `id` attributes injected on `h2`-`h4` headings.
-- Outputs: rendered HTML component injected inside the article prose container.
-- Error handling: safe escaping of literal markup with zero raw script injection.
+- Processing logic: compile Markdown (including GFM tables, ordered/unordered lists, blockquotes, inline code, and links) via `marked` to semantic HTML with unique URL-safe `id` attributes injected on `h2`-`h4` headings.
+- Outputs: rendered HTML string injected inside the article prose container (`{@html}`).
+- Error handling: disable raw HTML script injection and enforce deterministic GitHub-style heading slug uniqueness.
 
 #### `SRS-FUNC-CNT-04`: Heading metadata extraction
 
-- Inputs: parsed Markdown AST headings list.
+- Inputs: parsed Markdown tokens/headings list from `marked`.
 - Processing logic: extract each heading's `depth` (`1`-`6`), anchor `slug`, and plain `text`.
 - Outputs: structured headings list consumed by TOC generation (`SRS-FUNC-RND-05`) and search indexing (`SRS-FUNC-SRCH-01`).
 - Error handling: articles without subheadings yield an empty array `[]` without throwing.
 
-### 4.2 Static route and page generation subsystem
+### 4.2 SSR route and page rendering subsystem
 
 #### `SRS-FUNC-RND-01`: Home page hero spotlight aggregation (`/`)
 
 - Inputs: validated article collection.
-- Processing logic: sort all published articles deterministically by title and pass the pool into `<ExploreSpotlight />` (`client:load`), which deterministically shuffles and partitions 3 non-overlapping groups of 3 articles seeded by local calendar date (`YYYY-MM-DD`).
-- Outputs: static `index.html` containing the hero search island and daily rotating 3x3 single-row article spotlight at the bottom of the hero with no manual navigation controls.
+- Processing logic: sort all published articles deterministically by title in `+page.server.ts` and pass the pool into `<ExploreSpotlight />`, which deterministically shuffles and partitions 3 non-overlapping groups of 3 articles seeded by local calendar date (`YYYY-MM-DD`).
+- Outputs: server-rendered `/` response containing the hero search bar and daily rotating 3x3 single-row article spotlight at the bottom of the hero with no manual navigation controls.
 - Error handling: if the article collection is empty, omit the spotlight cleanly.
 
-#### `SRS-FUNC-RND-02`: Category static path generation (`/categories/[slug]`)
+#### `SRS-FUNC-RND-02`: Category route resolution (`/categories/[slug]`)
 
-- Inputs: canonical 7-category registry (`SW-INT-01`).
-- Processing logic: emit one static route per canonical category slug via `getStaticPaths()`, ensuring all seven category URLs exist even when empty.
-- Outputs: seven static HTML category pages.
-- Error handling: unmatched `/categories/*` paths resolve to `/404.html` (`SRS-FUNC-RND-06`).
+- Inputs: canonical 7-category registry (`SW-INT-01`) and `params.slug`.
+- Processing logic: validate `params.slug` against `CATEGORY_SLUGS` in `+page.server.ts` and return the category metadata and grouped articles, ensuring all seven category URLs resolve even when empty.
+- Outputs: server-rendered HTML category pages with CDN `Cache-Control` headers.
+- Error handling: unmatched `/categories/*` paths throw `error(404)` to render `+error.svelte` (`SRS-FUNC-RND-06`).
 
 #### `SRS-FUNC-RND-03`: Deterministic subcategory grouping
 
@@ -190,12 +193,12 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 - Outputs: subcategory sections containing scannable article cards (`title`, body `preview`).
 - Error handling: when a category has `0` articles, render a simple empty-state icon and notice (e.g., *"No articles here yet."*).
 
-#### `SRS-FUNC-RND-04`: Article static path generation (`/articles/[slug]`)
+#### `SRS-FUNC-RND-04`: Article route resolution (`/articles/[slug]`)
 
-- Inputs: validated articles collection.
-- Processing logic: emit one static route per article entry, binding metadata header (breadcrumb, `<h1>` title, formatted `Last Updated` date), social/JSON-LD meta derived from the article body preview, Markdown body, TOC, and optional source card.
-- Outputs: static HTML file at `/articles/<slug>/index.html`.
-- Error handling: duplicate file slugs fail compilation deterministically.
+- Inputs: validated articles collection and `params.slug`.
+- Processing logic: resolve the article by `slug` in `+page.server.ts`, binding metadata header (breadcrumb, `<h1>` title, formatted `Last Updated` date), social/JSON-LD meta derived from the article body preview, compiled Markdown HTML, TOC, and optional source card.
+- Outputs: server-rendered HTML response for `/articles/<slug>` with CDN `Cache-Control` headers.
+- Error handling: unknown article slugs throw `error(404)`; duplicate file slugs fail validation deterministically.
 
 #### `SRS-FUNC-RND-05`: Conditional table of contents generation
 
@@ -206,21 +209,21 @@ The system shall maintain a single canonical registry defining the 7 permitted c
   - If `< 2`: suppress TOC rendering entirely on all viewports.
 - Error handling: ensure no empty `<aside>` column or blank disclosure box renders when suppressed.
 
-#### `SRS-FUNC-RND-06`: Related articles resolution and custom `404` page
+#### `SRS-FUNC-RND-06`: Related articles resolution and custom `404` error page
 
 - Inputs: active article (`slug`, `category`), article collection, and category registry.
-- Processing logic: filter articles matching `a.category === current.category && a.slug !== current.slug`, sort deterministically, and cap at `3` entries. Independently generate `/404.html` embedding `<SearchBar />` and links to all 7 categories.
-- Outputs: up to 3 sibling article cards below the verification notice (omitted if `0` siblings exist), plus static `404.html`.
+- Processing logic: filter articles matching `a.category === current.category && a.slug !== current.slug`, sort deterministically, and cap at `3` entries. Render `src/routes/+error.svelte` for HTTP 404 responses embedding `<SearchBar />` and links to all 7 categories.
+- Outputs: up to 3 sibling article cards below the verification notice (omitted if `0` siblings exist), plus branded HTTP 404 page.
 - Error handling: never display the active article inside its own related articles list.
 
-### 4.3 Static search index and client-side search subsystem
+### 4.3 Search index endpoint and client-side search subsystem
 
-#### `SRS-FUNC-SRCH-01`: Build-time search index serialization
+#### `SRS-FUNC-SRCH-01`: Search index serialization (`GET /search-index.json`)
 
 - Inputs: validated articles collection and `SW-INT-01` category registry.
-- Processing logic: serialize every published article into a `SearchIndexItem` (`SW-INT-03`) containing `slug`, `title`, body `preview`, `category`, `categoryLabel`, `subcategory`, and plain-text `h2`/`h3` `headings`.
-- Outputs: static `search-index.json` artifact served with `application/json` content type.
-- Error handling: type-checked category mapping prevents missing labels at build time.
+- Processing logic: serialize every published article via pure `buildSearchIndex()` into a `SearchIndexItem` (`SW-INT-03`) containing `slug`, `title`, body `preview`, `category`, `categoryLabel`, `subcategory`, and plain-text `h2`/`h3` `headings`.
+- Outputs: JSON response from `src/routes/search-index.json/+server.ts` with `application/json` content type and CDN `Cache-Control` headers.
+- Error handling: type-checked category mapping prevents missing labels at compile/test time.
 
 #### `SRS-FUNC-SRCH-02`: Lazy client-side index fetching and caching
 
@@ -316,9 +319,9 @@ Defines `CampusBuilding` (`id`, `name`, `shortLabel?`, `kind`, `floors?`, `svgPa
 
 | ID | Quality requirement | Target / metric |
 | :--- | :--- | :--- |
-| `SRS-NFR-PERF-01` | All routes shall pre-render as static HTML at build time with zero server compute per request. | `0 ms` origin compute time; 100% static output. |
-| `SRS-NFR-PERF-02` | Content pages shall ship zero client-side UI framework JS outside `<SearchBar />` and minimal menu toggles. | `0` unnecessary React roots on static prose. |
-| `SRS-NFR-PERF-03` | The static `/search-index.json` file shall remain compact for cellular networks. | `< 100 KB` uncompressed JSON for MVP dataset. |
+| `SRS-NFR-PERF-01` | All SSR routes and endpoints shall emit CDN `Cache-Control` headers (`s-maxage` + `stale-while-revalidate`) for fast edge delivery on Vercel. | Edge-cached HTML/JSON with sub-100ms CDN TTFB. |
+| `SRS-NFR-PERF-02` | Client runtime shall stay lean using compiled Svelte 5 components with zero React or third-party state/UI runtime dependencies. | `0` React runtime bytes; minimal SvelteKit hydration footprint. |
+| `SRS-NFR-PERF-03` | The `/search-index.json` payload shall remain compact for cellular networks. | `< 100 KB` uncompressed JSON for MVP dataset. |
 | `SRS-NFR-PERF-04` | Synchronous client search filtering shall complete within one animation frame. | `< 16 ms` filtering time on up to `200` articles. |
 
 ### 5.2 Usability and accessibility
@@ -335,18 +338,18 @@ Defines `CampusBuilding` (`id`, `name`, `shortLabel?`, `kind`, `floors?`, `svgPa
 | ID | Quality requirement | Target / metric |
 | :--- | :--- | :--- |
 | `SRS-NFR-REL-01` | On `/search-index.json` fetch failure, `<SearchBar />` shall handle rejections safely and provide working category fallback links. | `0` uncaught runtime promise rejections. |
-| `SRS-NFR-REL-02` | All internal links and TOC anchors across generated static routes shall resolve without dead targets. | `0` broken internal routes across build output. |
+| `SRS-NFR-REL-02` | All internal links and TOC anchors across SSR routes shall resolve without dead targets. | `0` broken internal routes across verified routes. |
 
 ### 5.4 Maintainability and portability
 
 | ID | Quality requirement | Target / metric |
 | :--- | :--- | :--- |
 | `SRS-NFR-MAINT-01` | Category taxonomy metadata (`SW-INT-01`) shall exist in one canonical module shared across schemas, routes, breadcrumbs, and search indexing so contributors never edit duplicate lists. | Single source of truth; zero duplicate category lists. |
-| `SRS-NFR-MAINT-02` | Compiled static artifacts (`dist/`) shall contain zero vendor-locked runtime adapters. | Portable across Cloudflare Pages, Vercel, Netlify, and GitHub Pages. |
+| `SRS-NFR-MAINT-02` | Application code shall isolate Vercel deployment config to `svelte.config.js` (`@sveltejs/adapter-vercel`) with zero vendor-specific APIs inside route/domain logic. | Swappable adapter (`adapter-vercel`, `adapter-node`, `adapter-cloudflare`, `adapter-static`). |
 
 ### 5.5 Security
 
 | ID | Quality requirement | Target / metric |
 | :--- | :--- | :--- |
-| `SRS-NFR-SEC-01` | User search input echoed in UI states shall rely strictly on React JSX escaping with zero raw HTML injection (`dangerouslySetInnerHTML`). | Resistant to DOM-based XSS via search queries. |
-| `SRS-NFR-SEC-02` | Static deployment shall store or transmit zero user PII, cookies, credentials, or server secrets. | Zero runtime PII or credential attack surface. |
+| `SRS-NFR-SEC-01` | User search input echoed in UI states shall rely strictly on Svelte template escaping with zero raw `{@html}` injection of untrusted user input. | Resistant to DOM-based XSS via search queries. |
+| `SRS-NFR-SEC-02` | SSR deployment shall store or transmit zero user PII, cookies, credentials, or server secrets. | Zero runtime PII or credential attack surface. |

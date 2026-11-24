@@ -7,11 +7,11 @@
 | Attribute | Details |
 | :--- | :--- |
 | Document title | Implementation Roadmap and Backlog: Geary - Unofficial BulSU Student Information Portal |
-| Version | `1.1 (Verified MVP Baseline)` |
-| Date | `2026-11-17` |
+| Version | `2.0 (SvelteKit SSR Migration Plan)` |
+| Date | `2026-11-24` |
 | Standard reference | ISO/IEC/IEEE 12207:2017 - *Systems and software engineering - Software life cycle processes* (Clause 6.3.1 *Project Planning*, Clause 6.3.2 *Project Assessment and Control*, Clause 6.3.4 *Risk Management*, and Clauses 6.4.5, 6.4.7, 6.4.9, and 6.4.11 *Implementation, Integration, Verification and Validation*) |
 | Related baselines | [AGENTS.md](../AGENTS.md), [PROJECT_CHARTER.md](./PROJECT_CHARTER.md), [PRD.md](./PRD.md), [SRS.md](./SRS.md), [USER_FLOWS.md](./USER_FLOWS.md), [ARCHITECTURE.md](./ARCHITECTURE.md), [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md), [TESTING.md](./TESTING.md), [REQUIREMENTS.md](./REQUIREMENTS.md) |
-| Status | MVP Complete and Verified (`M1` to `M6`) |
+| Status | MVP Complete (`M1`–`M6`); Milestone `M7` (SvelteKit SSR Migration) In Progress |
 
 ### 1.2 Shared backlog and milestone workflow *(ISO 12207 Clause 6.3.2)*
 
@@ -19,7 +19,7 @@ Contributors share ownership of milestones and backlog items (`BL-*`) through pu
 
 1. Documentation-first PRs: Read the relevant specification files before writing code. When a PR changes scope, requirements, architecture, design tokens, or tests, update the corresponding `.md` specification file first per [AGENTS.md](../AGENTS.md).
 2. Task readiness and milestone gates: Pick up a backlog item only after its prerequisite milestone exit gate is green. Do not close a milestone until every exit criterion passes.
-3. PR verification gates: `.github/workflows/ci.yml` runs `bun run check`, `bun run build`, and `bun test` on every pull request (`build` runs before `test` so `dist/search-index.json` exists). Contributors touching UI, routes, themes, or schemas also run `bun run test:e2e` locally before merging.
+3. PR verification gates: `.github/workflows/ci.yml` runs `bun run check`, `bun test`, and `bun run build` on every pull request. Contributors touching UI, routes, themes, or schemas also run `bun run test:e2e` locally before merging.
 4. Traceability and risk updates: In the same PR that completes a `BL-*` task, check off its `[x]` box here, update its row in [REQUIREMENTS.md](./REQUIREMENTS.md) (`[~] Implemented` or `[x] Verified`), and record new defects or mitigations in Section 5.
 
 ## 2. Completed work *(ISO/IEC/IEEE 12207 Clause 6.3.2 - Project Assessment)*
@@ -52,8 +52,9 @@ Contributors share ownership of milestones and backlog items (`BL-*`) through pu
 | **`M4`: Static search index and `<SearchBar />` island** | Clause 6.4.5 *Implementation* and 6.4.7 *Integration* | Build `/search-index.json` (`< 100 KB`), pure weighted scorer (`src/lib/search.ts`), and `<SearchBar />` React island (`hero` and `header` variants) wired into Home, Header, and 404. | `TC-BLD-03` passes; client search, keyboard shortcuts, zero-match pills, and offline fallback work end-to-end. |
 | **`M5`: Verification suite and release gate** | Clauses 6.4.9 *Verification* and 6.4.11 *Validation* | Implement `tests/unit/*.test.ts` and `tests/e2e/smoke.spec.ts` (Playwright + Axe); run the 4-stage pipeline (`bun run check`, `bun run build`, `bun test`, `bun run test:e2e`) and `bun audit`. | All `TC-BLD-*`, `TC-UNIT-*`, `TC-E2E-*`, `TC-A11Y-*`, and `TC-SEC-*` checks pass with zero violations. |
 | **`M6`: Dark mode (post-MVP)** | Clauses 6.4.5, 6.4.9, and 6.4.11 | Implement Obsidian Slate and Luminous Crimson theme tokens, accessible theme preference menu, persisted preference, and no-flash bootstrap behavior. | Complete: `TC-E2E-08` and `TC-A11Y-03` pass in light and dark themes across representative routes. |
+| **`M7`: SvelteKit SSR architecture migration** | Clauses 6.4.3, 6.4.5, 6.4.7, 6.4.9, and 6.4.11 | Migrate from Astro + React islands to SvelteKit (Svelte 5 runes) + `@sveltejs/adapter-vercel` dynamic SSR with Vite `?raw` glob + `gray-matter` + `marked` + `zod` content loader and CDN `Cache-Control` headers while preserving 100% functional and visual parity. | `bun run check` (`svelte-check`), `bun test`, `bun run build` (`vite build`), and `bun run test:e2e` (Playwright + Axe) pass with `0` failures. |
 
-## 4. Prioritized implementation backlog (`BL-01` to `BL-22`) *(ISO 12207 Clauses 6.3.1 and 6.4.5)*
+## 4. Prioritized implementation backlog (`BL-01` to `BL-27`) *(ISO 12207 Clauses 6.3.1 and 6.4.5)*
 
 ### Milestone `M1`: Toolchain, integrations, and design foundation
 - [x] **`BL-01` (`P0`):** Install project dependencies via Bun (`@astrojs/react`, `react`, `react-dom`, `@types/react`, `@types/react-dom`, `tailwindcss`, `@tailwindcss/vite`, `@astrojs/check`, `typescript`, `@playwright/test`, `@axe-core/playwright`) and verify Chromium Playwright setup ([ARCHITECTURE.md](./ARCHITECTURE.md) §2, `KI-01`).
@@ -86,6 +87,13 @@ Contributors share ownership of milestones and backlog items (`BL-*`) through pu
 - [x] **`BL-20` (`P0`):** Run the full verification pipeline (`bun run check`, `bun run build`, `bun test`, `bun run test:e2e`, `bun audit`), resolve discovered issues, verify `0` failures across all `TC-*` gates ([TESTING.md](./TESTING.md) §4), and mark all rows in [REQUIREMENTS.md](./REQUIREMENTS.md) as `[x] Verified`.
 - [x] **`BL-21` (`P0`):** Implement and verify the interactive 2D campus map (`/map`), including the static data contract, location and building search, accessible SVG selection, inspector, viewport controls, `TC-UNIT-06`, and `TC-E2E-07` (`REQ-MAP-01` to `REQ-MAP-04`, `RTM-21`).
 - [x] **`BL-22` (`P1`, Post-MVP):** Implement the approved dark-mode design contract in [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) §2.2, including a Header theme menu with Light, Dark, and System default choices, persisted preference, no-flash bootstrap, tokenized surfaces, and light/dark accessibility verification (`TC-E2E-08`, `TC-A11Y-03`).
+
+### Milestone `M7`: SvelteKit SSR architecture migration
+- [ ] **`BL-23` (`P0`):** Replace Astro/React toolchain with SvelteKit, Svelte 5, `@sveltejs/adapter-vercel`, `svelte-check`, `@tailwindcss/vite`, `gray-matter`, `marked`, and `zod`; configure `svelte.config.js`, `vite.config.ts`, `tsconfig.json`, `src/app.html`, `static/` assets, and `.github/workflows/ci.yml` (`CON-TECH-01` to `CON-TECH-04`).
+- [ ] **`BL-24` (`P0`):** Implement `src/lib/content-schema.ts`, `src/lib/server/markdown.ts`, `src/lib/server/content.ts` (Vite `?raw` glob + `gray-matter` + `zod` + `marked` + pure `buildSearchIndex()`), `src/lib/server/cache.ts`, and edge-cached `/search-index.json`, `/sitemap.xml`, and `/robots.txt` `+server.ts` endpoints; update `TC-UNIT-05` and add `tests/unit/content.test.ts` (`SRS-FUNC-CNT-01` to `SRS-FUNC-CNT-04`, `SRS-FUNC-SRCH-01`).
+- [ ] **`BL-25` (`P0`):** Port root layout (`+layout.svelte`), error page (`+error.svelte`), static UI components (`Header`, `ThemeToggle`, `Footer`, `Breadcrumbs`, `CategoryCard`, `ArticleCard`, `TableOfContents`, `ArticleLayout`, `SeoHead`), and all SSR routes (`/`, `/articles`, `/articles/[slug]`, `/categories/[slug]`, `/calendar`, `/map`, `/contribute`, `/privacy`, `/terms`) (`SRS-FUNC-RND-01` to `SRS-FUNC-RND-06`, `SRS-FUNC-UI-01` to `SRS-FUNC-UI-04`).
+- [ ] **`BL-26` (`P0`):** Port interactive widgets to Svelte 5 runes (`SearchBar.svelte`, `ExploreSpotlight.svelte`, `AcademicCalendar.svelte`, `CampusMap.svelte` + `campus-map/*`) with SPA-safe `$effect` cleanup (`SRS-FUNC-SRCH-02` to `SRS-FUNC-SRCH-06`, `SRS-FUNC-MAP-01`, `SRS-FUNC-MAP-02`, `RTM-22`, `RTM-23`).
+- [ ] **`BL-27` (`P0`):** Run full verification gate (`bun run check`, `bun test`, `bun run build`, `bun run test:e2e`, `bun audit`), confirm zero regressions and valid CDN `Cache-Control` headers, and mark `M7` and all `RTM-*` rows as `[x] Verified`.
 
 ## 5. Known issues and technical risks *(ISO/IEC/IEEE 12207 Clause 6.3.4 - Risk Management)*
 

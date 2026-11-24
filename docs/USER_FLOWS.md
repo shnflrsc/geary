@@ -28,10 +28,10 @@ Actors are defined in [PROJECT_CHARTER.md](./PROJECT_CHARTER.md) Section 5:
 
 | Mode ID | Operational mode | Activation condition | Expected behavior |
 | :--- | :--- | :--- | :--- |
-| `MODE-01` | Nominal static browsing and reading | Student opens `/`, `/categories/[slug]`, or `/articles/[slug]`. | Static HTML loads immediately with category browsing, article reading, and native table-of-contents and menu controls. |
-| `MODE-02` | Interactive client search and map lookup | Student focuses the Search Bar, presses `/` or `Ctrl+K` (`Cmd+K`), or interacts with `/map`. | Client-side search fetches and caches the static search index, ranks multi-term queries, and supports keyboard navigation; `/map` runs local building search and SVG focus. |
+| `MODE-01` | Nominal SSR browsing and reading | Student opens `/`, `/categories/[slug]`, or `/articles/[slug]`. | Server-rendered HTML (edge-cached) loads immediately with category browsing, article reading, and table-of-contents and menu controls. |
+| `MODE-02` | Interactive client search and map lookup | Student focuses the Search Bar, presses `/` or `Ctrl+K` (`Cmd+K`), or interacts with `/map`. | Client-side search fetches and caches `/search-index.json`, ranks multi-term queries, and supports keyboard navigation; `/map` runs local building search and SVG focus. |
 | `MODE-03` | Degraded / off-nominal recovery | Search returns zero matches, the search index fails to load on weak mobile data, or a student hits a broken URL. | The interface shows recovery options: category quick-jump links, retry guidance, or the branded `404` page. |
-| `MODE-04` | Build-time content authoring and PR validation | A contributor adds or edits a Markdown article and runs the build locally or opens a pull request. | Schema validation checks frontmatter, rebuilds static pages, updates the search index, and runs CI checks before merge. |
+| `MODE-04` | Build-time content authoring and PR validation | A contributor adds or edits a Markdown article and runs the build locally or opens a pull request. | Zod schema validation checks frontmatter, SvelteKit builds cleanly, unit tests validate the search index payload, and CI checks run before merge. |
 
 ## 2. Master navigation and state transition diagram (ISO/IEC/IEEE 29148 Clause 9.3.4)
 
@@ -257,7 +257,7 @@ Exception and off-nominal scenarios:
 | Postconditions | Student locates an active article or returns Home. |
 
 Main success scenario:
-1. Static host serves `/404.html`.
+1. SvelteKit serves HTTP `404` via `src/routes/+error.svelte`.
 2. The page displays a plain recovery message, an interactive Search Bar, links to all 7 categories, and a `"Back to Home"` link.
 3. Student searches immediately or picks a category to continue.
 
@@ -268,12 +268,12 @@ Main success scenario:
 | Actors | `ACT-04` |
 | Operational modes | `MODE-04` |
 | Preconditions | Local repository is cloned and dependencies are installed. |
-| Postconditions | Updated static HTML routes and refreshed search index compile cleanly and pass CI review checks. |
+| Postconditions | Updated SSR routes and `/search-index.json` endpoint compile cleanly and pass CI review checks. |
 
 Main success scenario:
 1. Contributor creates or edits a `.md` file in `src/content/articles/` with valid frontmatter and Markdown content.
-2. Contributor runs the local static build and test suite.
-3. Zod schema validation passes, Astro compiles the updated pages, and `/search-index.json` refreshes.
+2. Contributor runs the local typecheck, unit test, and SSR build suite.
+3. Zod schema validation passes, SvelteKit compiles the updated bundle, and `/search-index.json` reflects the updated articles.
 4. Contributor opens a pull request; CI runs verification checks and a peer contributor reviews and merges the change.
 
 Exception and off-nominal scenarios:

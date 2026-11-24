@@ -7,70 +7,70 @@
 | Attribute | Details |
 | :--- | :--- |
 | Document title | Verification and testing specification (TESTING.md): Geary - Unofficial BulSU Student Information Portal |
-| Version | `1.0 (MVP Baseline)` |
-| Date | `2026-11-17` |
+| Version | `2.0 (SvelteKit SSR Baseline)` |
+| Date | `2026-11-24` |
 | Standard reference | ISO/IEC 25010:2011/2023 (*Systems and software Quality Requirements and Evaluation [SQuaRE]*) and ISO/IEC/IEEE 29148:2018 Clauses 6.6 and 9.6.4 (*Verification, Validation and Traceability*) |
 | Related baseline documents | [PROJECT_CHARTER.md](./PROJECT_CHARTER.md), [PRD.md](./PRD.md), [SRS.md](./SRS.md), [USER_FLOWS.md](./USER_FLOWS.md), [ARCHITECTURE.md](./ARCHITECTURE.md), [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md), [REQUIREMENTS.md](./REQUIREMENTS.md) |
 | Status | Approved Verification Baseline |
 
 ### 1.2 Verification layers
 
-Geary compiles to static HTML with Tailwind CSS and isolated React islands (`<SearchBar />`, `<CampusMap />`). Verification covers the four layers that match that architecture:
+Geary runs on SvelteKit (Svelte 5 runes) with Tailwind CSS and `@sveltejs/adapter-vercel` dynamic SSR. Verification covers the four layers that match that architecture:
 
 | Layer | Tooling | Scope and purpose |
 | :--- | :--- | :--- |
-| Layer 1: Build and schema integrity | `astro check`, `astro build`, Zod | Enforces TypeScript safety, Markdown frontmatter schema rules, 7-category static route generation, and `/search-index.json` size and validity. |
-| Layer 2: Unit tests | `Bun Test` (`bun test`) | Tests pure TypeScript logic: search query normalization, weighted scoring, literal special-character handling, subcategory grouping, campus-map search and viewport math, and the `/search-index.json` contract. |
-| Layer 3: Browser E2E smoke and responsive layout | `Playwright` | Checks real-browser behavior: `<SearchBar />` hydration, keyboard shortcuts, zero-match and offline fallbacks, desktop vs. mobile TOC, `375px` overflow, `404` recovery, SEO metadata, `/map` interaction, and dark mode persistence. |
-| Layer 4: Accessibility and static security | `@axe-core/playwright`, `bun audit` | Checks WCAG 2.1 Level AA contrast and landmarks in light and dark themes, XSS escaping in search inputs, and dependency hygiene. |
+| Layer 1: Typecheck, schema, and SSR build integrity | `svelte-check`, `vite build`, Zod | Enforces TypeScript and Svelte 5 safety, Markdown frontmatter schema rules (`src/lib/content-schema.ts`), SSR route compilation, and Vercel adapter output. |
+| Layer 2: Unit tests | `Bun Test` (`bun test`) | Tests pure TypeScript logic: Markdown parsing and Zod validation, search query normalization, weighted scoring, literal special-character handling, pure `buildSearchIndex()` payload contract (`< 100 KB`), subcategory grouping, campus-map search/viewport math, academic calendar filtering, and JSON-LD builders. |
+| Layer 3: Browser E2E smoke and responsive layout | `Playwright` | Checks real-browser behavior against `vite preview`: `<SearchBar />` hydration and shortcuts, zero-match and offline fallbacks, desktop vs. mobile TOC, `375px` overflow, HTTP `404` recovery (`+error.svelte`), SEO metadata, `/calendar` and `/map` interaction, and dark mode persistence. |
+| Layer 4: Accessibility and security | `@axe-core/playwright`, `bun audit` | Checks WCAG 2.1 Level AA contrast and landmarks in light and dark themes, XSS escaping in search inputs, and dependency hygiene. |
 
 ## 2. ISO/IEC 25010 quality model mapping
 
 | ISO/IEC 25010 characteristic | Sub-characteristics | Application to Geary | Verification layer and test IDs |
 | :--- | :--- | :--- | :--- |
-| Functional Suitability | Functional Completeness, Functional Correctness | Validated Markdown ingestion, 7-category grouping, weighted search ranking, conditional TOC, campus map, SEO metadata, and `404` recovery. | Layer 1 (`TC-BLD-02`, `TC-BLD-03`), Layer 2 (`TC-UNIT-01`, `TC-UNIT-04` to `TC-UNIT-06`), Layer 3 (`TC-E2E-01`, `TC-E2E-03`, `TC-E2E-05` to `TC-E2E-07`) |
-| Performance Efficiency | Time Behaviour, Resource Utilization | 100% static HTML output, `< 100 KB` `/search-index.json` payload, and `< 16 ms` synchronous client filtering. | Layer 1 (`TC-BLD-03`), Layer 2 (`TC-UNIT-01`) |
+| Functional Suitability | Functional Completeness, Functional Correctness | Validated Markdown ingestion, 7-category grouping, weighted search ranking, conditional TOC, academic calendar, campus map, SEO metadata, and HTTP `404` recovery. | Layer 1 (`TC-BLD-02`, `TC-BLD-03`), Layer 2 (`TC-UNIT-01`, `TC-UNIT-04` to `TC-UNIT-07`), Layer 3 (`TC-E2E-01`, `TC-E2E-03`, `TC-E2E-05` to `TC-E2E-07`) |
+| Performance Efficiency | Time Behaviour, Resource Utilization | Edge-cached SSR responses (`s-maxage` + `stale-while-revalidate`), lean Svelte 5 client runtime, `< 100 KB` `/search-index.json` payload, and `< 16 ms` synchronous client filtering. | Layer 1 (`TC-BLD-03`), Layer 2 (`TC-UNIT-01`, `TC-UNIT-05`) |
 | Usability / Interaction Capability | Appropriateness Recognizability, Operability, Accessibility | Low-cognitive-load layout, `~65ch` prose, keyboard-only search (`/` and `Ctrl+K`), WCAG 2.1 AA contrast in light and dark themes, and zero `375px` horizontal scroll. | Layer 3 (`TC-E2E-01`, `TC-E2E-03`, `TC-E2E-04`, `TC-E2E-08`), Layer 4 (`TC-A11Y-01` to `TC-A11Y-03`) |
 | Reliability | Fault Tolerance, Availability | Non-crashing UI when search returns 0 matches or `/search-index.json` fails over mobile data; zero broken internal links. | Layer 1 (`TC-BLD-04`), Layer 3 (`TC-E2E-02`, `TC-E2E-05`) |
-| Security | Integrity (XSS Resistance) | React JSX escaping prevents DOM XSS from search inputs; zero unresolved high or critical runtime dependency flaws. | Layer 2 (`TC-UNIT-02`), Layer 4 (`TC-SEC-01`, `TC-SEC-02`) |
-| Maintainability and Portability | Analysability, Modularity, Adaptability | Single-source `categories.ts` enum enforced across Zod, UI, and search; host-agnostic static `dist/` output. | Layer 1 (`TC-BLD-01`, `TC-BLD-02`, `TC-BLD-03`) |
+| Security | Integrity (XSS Resistance) | Svelte template escaping prevents DOM XSS from search inputs; zero unresolved high or critical runtime dependency flaws. | Layer 2 (`TC-UNIT-02`), Layer 4 (`TC-SEC-01`, `TC-SEC-02`) |
+| Maintainability and Portability | Analysability, Modularity, Adaptability | Single-source `categories.ts` enum enforced across Zod, UI, and search; adapter isolated to `svelte.config.js`. | Layer 1 (`TC-BLD-01`, `TC-BLD-02`, `TC-BLD-03`) |
 
 ## 3. Test suites and test case specifications (`TC-*`)
 
-### 3.1 Layer 1: Build-time, schema, and static artifact gate
+### 3.1 Layer 1: Typecheck, schema, and SSR build gate
 
-#### `TC-BLD-01`: TypeScript and Astro component typecheck
+#### `TC-BLD-01`: TypeScript and Svelte component typecheck
 - ISO 25010 characteristic: Maintainability (*Analysability, Modularity*)
 - Linked requirements: `CON-TECH-04`, `SRS-NFR-MAINT-01`
-- Inputs: Complete source tree (`src/`, `tsconfig.json`, `astro.config.mjs`).
-- Procedure: Run `bun run check` (`astro check`).
-- Pass criteria: Exits with code `0` and reports `0` TypeScript or Astro template errors across layouts, components, pages, and `SearchBar.tsx`.
+- Inputs: Complete source tree (`src/`, `tsconfig.json`, `svelte.config.js`, `vite.config.ts`).
+- Procedure: Run `bun run check` (`svelte-kit sync && svelte-check --tsconfig ./tsconfig.json`).
+- Pass criteria: Exits with code `0` and reports `0` TypeScript or Svelte errors across routes, components, and server modules.
 
 #### `TC-BLD-02`: Zod frontmatter schema enforcement (positive and negative)
 - ISO 25010 characteristic: Functional Suitability (*Functional Correctness*)
 - Linked requirements: `REQ-ART-01`, `AC-ART-01`, `CON-TECH-04`, `SRS-FUNC-CNT-01`, `SRS-FUNC-CNT-02`, `ERR-09`
-- Inputs: Valid `.md` articles in `src/content/articles/` plus a temporary negative fixture (missing `title` or invalid `category: "unknown"`).
+- Inputs: Valid `.md` articles in `src/content/articles/` plus negative unit fixtures (missing `title`, invalid `category: "unknown"`, malformed YAML).
 - Procedure:
-  1. Run `bun run build` (`astro build`) against repository articles.
-  2. Test an invalid frontmatter fixture locally and run `astro build`.
+  1. Run `bun test` (`tests/unit/content.test.ts`) to validate every repository article against `articleSchema` and verify invalid frontmatter fixtures reject with Zod errors.
+  2. Run `bun run build` (`vite build`) to verify the SSR bundle compiles cleanly.
 - Pass criteria:
-  - Valid articles build with exit code `0`.
-  - Invalid frontmatter stops `astro build` with a non-zero exit code and a Zod error naming the file and field.
+  - All repository articles pass `articleSchema` and `vite build` exits with code `0`.
+  - Invalid frontmatter fixtures throw descriptive Zod diagnostics naming the failing field.
 
-#### `TC-BLD-03`: Static route and search index artifact verification
+#### `TC-BLD-03`: SSR build, endpoint responses, and cache header verification
 - ISO 25010 characteristic: Functional Suitability (*Completeness*) and Performance Efficiency (*Resource Utilization*)
 - Linked requirements: `REQ-CAT-01`, `REQ-SRCH-01`, `CON-TECH-01`, `SRS-FUNC-RND-01` to `SRS-FUNC-RND-04`, `SRS-FUNC-SRCH-01`, `SRS-NFR-PERF-01`, `SRS-NFR-PERF-03`
-- Inputs: Output of `bun run build`.
-- Procedure: Inspect generated files in `dist/` and check the byte size of `dist/search-index.json`.
+- Inputs: Production SvelteKit build (`bun run build`) and preview server (`vite preview`).
+- Procedure: Verify `vite build` completes with `@sveltejs/adapter-vercel`, and confirm `/`, `/articles`, `/categories/<slug>`, `/articles/<slug>`, `/calendar`, `/map`, `/contribute`, `/terms`, `/privacy`, `/search-index.json`, `/sitemap.xml`, and `/robots.txt` return HTTP `200` with `Cache-Control` headers containing `s-maxage` and `stale-while-revalidate`.
 - Pass criteria:
-  - `dist/index.html`, `dist/map/index.html`, `dist/contribute/index.html`, `dist/terms/index.html`, `dist/privacy/index.html`, `dist/404.html`, all `dist/categories/<slug>/index.html` routes, and all `dist/articles/<slug>/index.html` routes exist.
-  - `dist/search-index.json` is valid JSON, stays `< 100 KB`, and matches the published article count.
+  - Build succeeds cleanly with zero errors.
+  - All canonical routes and endpoints respond with HTTP `200` and CDN `Cache-Control` headers; `/search-index.json` is valid JSON and `< 100 KB`.
 
 #### `TC-BLD-04`: Internal link and anchor integrity
 - ISO 25010 characteristic: Reliability (*Availability*)
 - Linked requirements: `SRS-NFR-REL-02`, `REQ-CAT-04`
-- Inputs: Built static output in `dist/`.
-- Procedure: Crawl `/`, category pages, and article pages in Playwright and verify that every internal `<a href="/...">` and TOC `#...` anchor resolves to an existing route or DOM element ID.
+- Inputs: Running SvelteKit preview server (`vite preview`).
+- Procedure: Crawl `/`, `/articles`, category pages, and article pages in Playwright and verify that every internal `<a href="/...">` and TOC `#...` anchor resolves to an existing route or DOM element ID.
 - Pass criteria: `0` broken internal routes (`404` responses on internal links) and `0` orphaned TOC heading anchors.
 
 ### 3.2 Layer 2: Unit test suite - pure logic and contracts (`Bun Test`)
@@ -100,15 +100,15 @@ Geary compiles to static HTML with Tailwind CSS and isolated React islands (`<Se
 - ISO 25010 characteristic: Functional Suitability (*Correctness*)
 - Linked requirements: `REQ-CAT-03`, `AC-CAT-03`, `SRS-FUNC-RND-03`, `UC-02`
 - Inputs: Unsorted mock article array spanning multiple `subcategory` strings plus an empty array `[]`.
-- Procedure: Run the category grouping helper used by `category/[slug].astro`.
+- Procedure: Run the category grouping helper used by `src/routes/categories/[slug]/+page.server.ts`.
 - Pass criteria: Articles group under unique `subcategory` keys in deterministic alphabetical order; empty input returns `[]` without throwing.
 
-#### `TC-UNIT-05`: `/search-index.json` payload schema contract
+#### `TC-UNIT-05`: Pure `buildSearchIndex()` payload schema contract (`< 100 KB`)
 - ISO 25010 characteristic: Functional Suitability (*Completeness*) and Maintainability
-- Linked requirements: `REQ-SRCH-01`, `SW-INT-03`, `SRS-FUNC-SRCH-01`
-- Inputs: Built `dist/search-index.json` artifact (requires `bun run build` first on a clean checkout).
-- Procedure: Validate every array entry against a Zod contract requiring `slug`, `title`, `preview`, `category` (in `CATEGORY_SLUGS`), `categoryLabel`, `subcategory`, and `headings` (`string[]`).
-- Pass criteria: 100% of serialized entries satisfy the `SearchIndexItem` Zod schema.
+- Linked requirements: `REQ-SRCH-01`, `SW-INT-03`, `SRS-FUNC-SRCH-01`, `SRS-NFR-PERF-03`
+- Inputs: Repository Markdown articles loaded and serialized directly through pure `buildSearchIndex()`.
+- Procedure: Validate every array entry against a Zod contract requiring `slug`, `title`, `preview`, `category` (in `CATEGORY_SLUGS`), `categoryLabel`, `subcategory`, and `headings` (`string[]`), and assert serialized UTF-8 byte length `< 100 KB`.
+- Pass criteria: 100% of serialized entries satisfy the `SearchIndexItem` Zod schema, match the repository article count, and remain `< 100 KB` (no pre-built `dist/` file dependency).
 
 #### `TC-UNIT-06`: Campus map search and viewport math
 - ISO 25010 characteristic: Functional Suitability (*Functional Correctness*) and Usability (*Operability*)
@@ -117,12 +117,19 @@ Geary compiles to static HTML with Tailwind CSS and isolated React islands (`<Se
 - Procedure: Run `tests/unit/map-search.test.ts` to verify location-first matching, parent-building labels, literal query safety, and bounded pan, zoom, and reset viewBox calculations.
 - Pass criteria: Office and building queries resolve to the expected parent building, viewport bounds hold, and empty or unmatched queries return without throwing.
 
+#### `TC-UNIT-07`: Academic calendar dataset, filtering, and chronological grouping
+- ISO 25010 characteristic: Functional Suitability (*Functional Correctness*)
+- Linked requirements: `UI-INT-01` (`/calendar`)
+- Inputs: `src/data/academic-calendar.ts` and `src/lib/calendar.ts`.
+- Procedure: Run `tests/unit/calendar.test.ts` to verify dataset completeness, unique IDs, multi-category and token filtering, and chronological month grouping.
+- Pass criteria: All assertions pass with `0` failures.
+
 ### 3.3 Layer 3: Browser E2E smoke and responsive layout suite (`Playwright`)
 
-#### `TC-E2E-01`: `<SearchBar />` React island hydration and keyboard flow
+#### `TC-E2E-01`: `<SearchBar />` Svelte 5 hydration and keyboard flow
 - ISO 25010 characteristic: Usability (*Operability*) and Functional Suitability
 - Linked requirements: `REQ-SRCH-02` to `REQ-SRCH-04`, `AC-SRCH-02` to `AC-SRCH-04`, `SRS-FUNC-SRCH-02` to `SRS-FUNC-SRCH-04`, `UJ-01`, `UC-01`, `AF-01A`, `AF-01B`
-- Inputs: Built site served locally via `astro preview`.
+- Inputs: Built site served locally via `vite preview`.
 - Procedure:
   1. Load `/`; confirm zero console or page errors and confirm `/search-index.json` fetches lazily once on focus or input.
   2. Press `/` or `Ctrl+K` while the body is focused to focus `<SearchBar />`; type `"TOR"` (or another sample article keyword); press `ArrowDown` and `Enter` to open the top result.
@@ -143,32 +150,32 @@ Geary compiles to static HTML with Tailwind CSS and isolated React islands (`<Se
 #### `TC-E2E-03`: Responsive table of contents behavior
 - ISO 25010 characteristic: Usability (*Operability, Appropriateness Recognizability*)
 - Linked requirements: `REQ-ART-04`, `AC-ART-04`, `SRS-FUNC-RND-05`, `UJ-03`, `AF-03A`, `EF-03A`, `ERR-05`
-- Inputs: Sample article with `>= 2` `h2`/`h3` headings (plus coverage for `< 2` headings when present).
+- Inputs: Sample article with `>= 2` `h2`/`h3` headings.
 - Procedure:
-  1. Visit `/articles/<slug>` at `1280x800`: assert the desktop `<aside>` TOC is visible (`position: sticky` or visible sidebar) and the mobile `<details>` TOC is hidden.
+  1. Visit `/articles/<slug>` at `1280x800`: assert the desktop `<aside>` TOC is visible and the mobile `<details>` TOC is hidden.
   2. Visit `/articles/<slug>` at `375x812`: assert the desktop sidebar is hidden and the collapsed `<details>` TOC expands on tap to show section links.
 - Pass criteria: TOC switches at the `1024px` breakpoint, clicking a TOC link updates the URL hash to `#heading-slug`, and articles with `< 2` headings render no TOC container.
 
 #### `TC-E2E-04`: Cross-viewport horizontal overflow gate
 - ISO 25010 characteristic: Usability (*Operability*)
 - Linked requirements: `REQ-UI-02`, `SRS-FUNC-UI-04`, `SRS-NFR-USAB-04`, `EF-03C`, `ERR-07`
-- Inputs: Routes `/`, `/categories/<slug>`, `/articles/<slug>` (including a Markdown table), `/map`, and `/404.html`.
+- Inputs: Routes `/`, `/articles`, `/categories/<slug>`, `/articles/<slug>` (including a Markdown table), `/calendar`, `/map`, and an unknown route (HTTP `404`).
 - Procedure: Evaluate `document.documentElement.scrollWidth <= window.innerWidth` in Playwright at `375x812` (mobile), `768x1024` (tablet), and `1280x800` (desktop).
 - Pass criteria: `scrollWidth <= innerWidth` is `true` for every tested route and viewport.
 
-#### `TC-E2E-05`: Custom `404` page recovery
+#### `TC-E2E-05`: Custom `404` error page recovery
 - ISO 25010 characteristic: Reliability (*Fault Tolerance*) and Usability
 - Linked requirements: `REQ-UI-05`, `AC-UI-05`, `SRS-FUNC-RND-06`, `UC-04`, `ERR-08`
-- Inputs: Preview server serving `dist/`.
-- Procedure: Navigate to `/this-route-does-not-exist` and inspect the rendered UI.
-- Pass criteria: Styled BulSUan `404` view renders with a hydrated `<SearchBar />`, links to all 7 categories, and a working `"Back to Home"` link to `/`.
+- Inputs: Preview server (`vite preview`).
+- Procedure: Navigate to `/this-route-does-not-exist` and inspect the HTTP status and rendered UI.
+- Pass criteria: Returns HTTP `404`, renders the styled BulSUan `404` view with a hydrated `<SearchBar />`, links to all 7 categories, and a working `"Back to Home"` link to `/`.
 
 #### `TC-E2E-06`: SEO metadata, sitemap, `robots.txt`, JSON-LD, and `404` `noindex`
 - ISO 25010 characteristic: Functional Suitability (*Completeness*) and Compatibility
 - Linked requirements: `UI-INT-01`, `SW-INT-01`
-- Inputs: Built `dist/` served via `astro preview`.
-- Procedure: Check `<link rel="canonical">`, Open Graph (`og:title`, `og:description`, `og:type`, `og:url`, `og:image`), and Twitter `summary_large_image` tags across `/`, `/categories/academics`, and `/articles/latin-honors-and-gwa`; parse JSON-LD blocks (`WebSite`, `Article`, `BreadcrumbList`); fetch `/robots.txt`, `/sitemap-index.xml`, and `/og-image.png`; verify `/404.html` includes `<meta name="robots" content="noindex, follow">` and `/404` is excluded from the sitemap.
-- Pass criteria: Every checked page has an absolute canonical URL matching `Astro.site`, valid Open Graph and Twitter metadata, parseable JSON-LD matching the page type, reachable `og-image.png` and `sitemap-index.xml`, and `noindex` on `/404.html`.
+- Inputs: Preview server (`vite preview`).
+- Procedure: Check `<link rel="canonical">`, Open Graph (`og:title`, `og:description`, `og:type`, `og:url`, `og:image`), and Twitter `summary_large_image` tags across `/`, `/categories/academics`, and `/articles/<slug>`; parse JSON-LD blocks (`WebSite`, `Article`, `BreadcrumbList`); fetch `/robots.txt`, `/sitemap.xml`, and `/og-image.png`; verify HTTP `404` pages include `<meta name="robots" content="noindex, follow">` and `/404` is excluded from `/sitemap.xml`.
+- Pass criteria: Every checked page has an absolute canonical URL, valid Open Graph and Twitter metadata, parseable JSON-LD matching the page type, reachable `og-image.png` and `sitemap.xml`, `Cache-Control` edge headers, and `noindex` on `404`.
 
 #### `TC-E2E-07`: Interactive 2D campus map (`/map`)
 - ISO 25010 characteristic: Functional Suitability and Operability
@@ -176,12 +183,12 @@ Geary compiles to static HTML with Tailwind CSS and isolated React islands (`<Se
 - Procedure: Visit `/map`, search `"Registrar"` in the map search input, verify a match appears showing `Flores Hall`, select it, verify `Flores Hall` becomes active on the SVG map and displays `Office of the University Registrar` in the inspector, click `Roxas Hall` directly on the map, and exercise zoom and reset controls.
 - Pass criteria: Location search maps matches to parent buildings, clicking a building or choosing a search result updates the inspector without runtime errors, and `/map` passes `TC-E2E-04` and `TC-A11Y-01` with `0` violations.
 
-### 3.4 Layer 4: Accessibility and static security suite
+### 3.4 Layer 4: Accessibility and security suite
 
 #### `TC-A11Y-01`: Automated WCAG 2.1 Level AA scan (`@axe-core/playwright`)
 - ISO 25010 characteristic: Usability (*Accessibility*)
 - Linked requirements: `REQ-UI-01`, `SRS-NFR-USAB-01`, `SRS-NFR-USAB-03`
-- Inputs: Built pages `/`, `/categories/<slug>`, `/articles/<slug>`, `/map`, and `/404.html`.
+- Inputs: Pages `/`, `/categories/<slug>`, `/articles/<slug>`, `/calendar`, `/map`, and HTTP `404`.
 - Procedure: Run `new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze()` on each representative page template, including the open `<SearchBar />` dropdown state.
 - Pass criteria: `violations.length === 0`, confirming WCAG 2.1 Level AA contrast across all [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) tokens.
 
@@ -204,7 +211,7 @@ Geary compiles to static HTML with Tailwind CSS and isolated React islands (`<Se
 - Linked requirements: `SRS-NFR-SEC-02`
 - Inputs: `bun.lock` and installed dependencies.
 - Procedure: Run `bun audit` before merging dependency updates or cutting a release.
-- Pass criteria: Zero unresolved `high` or `critical` runtime vulnerabilities in client-shipped dependencies (`react`, `react-dom`, island helpers).
+- Pass criteria: Zero unresolved `high` or `critical` runtime vulnerabilities in client-shipped dependencies (`svelte`, `@sveltejs/kit`).
 
 ### 3.5 Dark mode verification
 
@@ -217,26 +224,26 @@ Automated verification gates for `BL-22` (`RTM-22`), executed in `tests/e2e/smok
 
 #### `TC-A11Y-03`: Dark mode WCAG 2.1 AA audit
 - Linked requirements: `RTM-22`, [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) §2.2
-- Procedure: Run Axe against representative Home, Category, Article, Map, and 404 pages with the dark theme active.
+- Procedure: Run Axe against representative Home, Category, Article, Map, and `404` pages with the dark theme active.
 - Pass criteria: `violations.length === 0` across contrast, landmark, focus, and control-name checks.
 
 ## 4. Test execution pipeline and PR verification gates
 
-Tests run in four stages. Run `bun run build` before `bun test` in clean checkouts and CI so `dist/search-index.json` exists for `TC-UNIT-05`:
+Tests run in four stages:
 
 ```text
-[1. Type and schema check] -> [2. Static build] -> [3. Unit tests] -> [4. E2E and Axe smoke]
-       bun run check            bun run build         bun test           bun run test:e2e
+[1. Type and Svelte check] -> [2. Unit & schema tests] -> [3. SSR build] -> [4. E2E and Axe smoke]
+       bun run check                  bun test             bun run build       bun run test:e2e
 ```
 
 | Script command | Tool | Target verification | Where it runs |
 | :--- | :--- | :--- | :--- |
-| `bun run check` | `astro check` | `TC-BLD-01` (TypeScript and Astro diagnostics) | CI (`.github/workflows/ci.yml`) and local PR prep |
-| `bun run build` | `astro build` | `TC-BLD-02`, `TC-BLD-03` (Zod validation and `dist/` generation) | CI (`.github/workflows/ci.yml`) and local PR prep |
-| `bun test` (`bun run test:unit`) | `bun test` | `TC-UNIT-01` to `TC-UNIT-07` (search scorer, special chars, grouping, JSON contract, map search, academic calendar filtering) | CI (`.github/workflows/ci.yml`) and local PR prep |
-| `bun run test:e2e` | `playwright test` | `TC-BLD-04`, `TC-E2E-01` to `TC-E2E-08`, `TC-A11Y-01` to `TC-A11Y-03`, `TC-SEC-01` | Local before opening or merging UI, route, or theme PRs |
+| `bun run check` | `svelte-check` | `TC-BLD-01` (TypeScript and Svelte diagnostics) | CI (`.github/workflows/ci.yml`) and local PR prep |
+| `bun test` (`bun run test:unit`) | `bun test` | `TC-BLD-02`, `TC-UNIT-01` to `TC-UNIT-07` (frontmatter Zod schema, Markdown parsing, search scorer, pure `buildSearchIndex()` contract, grouping, map search, academic calendar) | CI (`.github/workflows/ci.yml`) and local PR prep |
+| `bun run build` | `vite build` | `TC-BLD-03` (SvelteKit + `@sveltejs/adapter-vercel` SSR build) | CI (`.github/workflows/ci.yml`) and local PR prep |
+| `bun run test:e2e` | `playwright test` | `TC-BLD-03`, `TC-BLD-04`, `TC-E2E-01` to `TC-E2E-08`, `TC-A11Y-01` to `TC-A11Y-03`, `TC-SEC-01` | Local before opening or merging UI, route, or theme PRs |
 | `bun audit` | `bun audit` | `TC-SEC-02` (dependency vulnerability check) | Local before merging dependency changes or releases |
 
-`.github/workflows/ci.yml` runs `bun run check`, `bun run build`, and `bun test` automatically on every pull request. Contributors changing layouts, styles, interactive islands, routes, or content schemas should also run `bun run test:e2e` locally before requesting review.
+`.github/workflows/ci.yml` runs `bun run check`, `bun test`, and `bun run build` automatically on every pull request. Contributors changing layouts, styles, interactive components, routes, or content schemas should also run `bun run test:e2e` locally before requesting review.
 
 Full bidirectional mapping between requirements, source artifacts, and `TC-*` test cases lives in [REQUIREMENTS.md](./REQUIREMENTS.md).

@@ -1,6 +1,6 @@
 # Geary - The Better BulSU Student Handbook
 
-Geary is an unofficial, student-managed static information portal for Bulacan State University (BulSU) students built with Astro, Tailwind CSS, and React. Always verify time-sensitive fees, schedules, and forms directly with the concerned university office.
+Geary is an unofficial, student-managed information portal for Bulacan State University (BulSU) students built with SvelteKit (Svelte 5 runes), Tailwind CSS, and `@sveltejs/adapter-vercel` dynamic SSR. Always verify time-sensitive fees, schedules, and forms directly with the concerned university office.
 
 ## Quickstart
 
@@ -11,16 +11,16 @@ bun install
 bun run dev
 ```
 
-Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical links, Open Graph URLs, `robots.txt`, and `sitemap-index.xml` resolve to your production domain (defaults to `https://geary.example.com`).
+Set `PUBLIC_SITE_URL` in your deployment environment so canonical links, Open Graph URLs, `robots.txt`, and `sitemap.xml` resolve to your production domain (defaults to `https://geary.example.com`).
 
 ## Commands
 
 | Command | Action |
 | :--- | :--- |
-| `bun run dev` | Start the local dev server at `localhost:4321` |
-| `bun run check` | Run TypeScript and Astro diagnostics (`astro check`) |
-| `bun run build` | Build the static site, `/search-index.json`, `robots.txt`, and sitemap to `dist/` |
-| `bun run preview` | Preview the built `dist/` bundle locally |
+| `bun run dev` | Start the local SvelteKit dev server at `localhost:5173` |
+| `bun run check` | Run TypeScript and Svelte diagnostics (`svelte-check`) |
+| `bun run build` | Build the SvelteKit SSR bundle for Vercel (`vite build`) |
+| `bun run preview` | Preview the production SvelteKit build locally |
 | `bun test` | Run Bun unit tests in `tests/unit/` (`bun run test:unit`) |
 | `bun run test:e2e` | Run Playwright E2E, SEO, and Axe accessibility tests in `tests/e2e/` |
 
@@ -28,7 +28,7 @@ Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical li
 
 1. Review writing guidelines, formatting standards, and source rules in [docs/WRITING_FRAMEWORK.md](./docs/WRITING_FRAMEWORK.md).
 2. Add or edit Markdown files inside `src/content/articles/`.
-3. Include valid frontmatter matching `src/content.config.ts`:
+3. Include valid frontmatter matching `src/lib/content-schema.ts`:
    - `title`: Article headline
    - `category`: One of `enrollment`, `academics`, `documents`, `scholarships`, `policies`, `organizations`, or `campus`
    - `subcategory`: Matching subgroup heading inside the category

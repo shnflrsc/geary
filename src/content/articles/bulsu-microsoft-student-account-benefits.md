@@ -10,8 +10,6 @@ sources:
     url: "https://bulsu.edu.ph/assets/bids-and-awards/notice-of-awards/noa-g-2026-20.pdf"
   - label: "BulSU ICTO Helpdesk User Guide (2026)"
     url: "https://icto-helpdesk.bulsu.edu.ph/user-guide/"
-  - label: "BulSU Contact Information"
-    url: "https://www.bulsu.edu.ph/about/contact-information"
   - label: "Microsoft Azure for Students"
     url: "https://azure.microsoft.com/en-in/free/students"
   - label: "Microsoft Learn - Student Discounts on Certification Exams (Jun 2025)"
@@ -114,4 +112,4 @@ If you cannot sign in or you see *"Your organization needs more information to k
 4. Select **Microsoft Account** or **Authenticator** as the category, describe when the problem started, and attach screenshots if needed (PNG, JPG, or PDF, up to 10 MB per file).
 5. Review your entries, click **Submit request**, and save your ticket number from the confirmation email.
 
-For follow-ups or lost ticket numbers, email **icto@bulsu.edu.ph** or call the Management Information System (MIS) office at local 1065 through the [BulSU Contact Information page](https://www.bulsu.edu.ph/about/contact-information).
+For follow-ups or lost ticket numbers, email **icto@bulsu.edu.ph**.

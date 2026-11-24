@@ -59,6 +59,38 @@ export function searchCampusLocations(
     const bLabelLower = building.shortLabel.toLowerCase();
     const bSummaryLower = building.summary.toLowerCase();
 
+    for (const college of building.colleges ?? []) {
+      if (hasCategory && categoryFilter !== 'academic') {
+        continue;
+      }
+
+      if (!query) {
+        matches.push({
+          kind: 'location',
+          id: college.id,
+          name: college.name,
+          buildingId: building.id,
+          buildingName: building.name,
+          category: 'academic',
+          score: 50,
+        });
+        continue;
+      }
+
+      const score = scoreLocationMatch(college, building.name, query);
+      if (score > 0) {
+        matches.push({
+          kind: 'location',
+          id: college.id,
+          name: college.name,
+          buildingId: building.id,
+          buildingName: building.name,
+          category: 'academic',
+          score,
+        });
+      }
+    }
+
     for (const loc of building.locations) {
       if (hasCategory && loc.category !== categoryFilter) {
         continue;
@@ -135,7 +167,7 @@ export function searchCampusLocations(
 }
 
 function scoreLocationMatch(
-  loc: CampusBuilding['locations'][number],
+  loc: { name: string; keywords?: readonly string[]; floor?: string; notes?: string },
   buildingName: string,
   query: string
 ): number {
@@ -337,6 +369,14 @@ export function computePinchViewBox(
     width: nextWidth,
     height: nextHeight,
   });
+}
+
+const TRAILING_ACRONYM_RE = /\(([^)]+)\)\s*$/;
+
+/** Extracts a concise college code (e.g., "CICT", "CPTEd", "LHS") for compact UI pills. */
+export function getCollegeShortLabel(college: { id: string; name: string }): string {
+  const match = college.name.match(TRAILING_ACRONYM_RE);
+  return match?.[1]?.trim() || college.id.toUpperCase();
 }
 
 const COLLEGE_LOCATION_RE = /^(?:College of |Laboratory High School\b)/i;

@@ -25,6 +25,12 @@ export interface CampusLocation {
   articleSlug?: string;
 }
 
+export interface CampusCollege {
+  id: string;
+  name: string;
+  keywords?: string[];
+}
+
 export interface CampusBuilding {
   id: string;
   name: string;
@@ -33,6 +39,7 @@ export interface CampusBuilding {
   svgPath: string;
   center: { x: number; y: number };
   summary: string;
+  colleges?: CampusCollege[];
   locations: CampusLocation[];
 }
 
@@ -190,11 +197,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 346.1
     },
     "summary": "Historic three-storey academic building near Bulacan Heroes Park housing CAL, CS, and CAFA.",
-    "locations": [
+    "colleges": [
       {
         "id": "cal",
         "name": "College of Arts & Letters (CAL)",
-        "category": "academic",
         "keywords": [
           "CAL",
           "Arts",
@@ -205,7 +211,6 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "cs",
         "name": "College of Science (CS)",
-        "category": "academic",
         "keywords": [
           "CS",
           "Science",
@@ -215,14 +220,15 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "cafa",
         "name": "College of Architecture and Fine Arts (CAFA)",
-        "category": "academic",
         "keywords": [
           "CAFA",
           "Architecture",
           "Fine Arts",
           "Federizo Hall"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "cafa-dean",
         "name": "CAFA Dean's Office",
@@ -751,11 +757,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 419.5
     },
     "summary": "Academic building near Federizo Hall housing the College of Sports, Exercise and Recreation (CSER).",
-    "locations": [
+    "colleges": [
       {
         "id": "cser",
         "name": "College of Sports, Exercise and Recreation (CSER)",
-        "category": "academic",
         "keywords": [
           "CSER",
           "Sports",
@@ -766,7 +771,8 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "CSER Building"
         ]
       }
-    ]
+    ],
+    "locations": []
   },
   {
     "id": "bulsu-sg-office",
@@ -792,11 +798,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 501
     },
     "summary": "Academic building on the MacArthur Highway (west) side housing the College of Industrial Technology.",
-    "locations": [
+    "colleges": [
       {
         "id": "cit",
         "name": "College of Industrial Technology (CIT)",
-        "category": "academic",
         "keywords": [
           "BIT",
           "Industrial Technology",
@@ -804,7 +809,9 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "NC II",
           "CIT"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "alvarado-cit-deans-office",
         "name": "CIT Dean's Office",
@@ -992,11 +999,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 533.8
     },
     "summary": "Academic building housing the College of Law (COL).",
-    "locations": [
+    "colleges": [
       {
         "id": "col",
         "name": "College of Law (COL)",
-        "category": "academic",
         "keywords": [
           "COL",
           "College of Law",
@@ -1004,7 +1010,9 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Juris Doctor",
           "Marcelo H. del Pilar Hall"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "pacesetter-office",
         "name": "Pacesetter Office",
@@ -1071,18 +1079,19 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 506.8
     },
     "summary": "Campus hall housing the Laboratory High School.",
-    "locations": [
+    "colleges": [
       {
         "id": "lhs",
         "name": "Laboratory High School",
-        "category": "academic",
         "keywords": [
           "LHS",
           "Laboratory High School",
           "High School",
           "Carpio Hall"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "ch-210",
         "name": "CH 210",
@@ -1107,11 +1116,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 378.6
     },
     "summary": "College of Hospitality and Tourism Management building near the E-Library.",
-    "locations": [
+    "colleges": [
       {
         "id": "chtm",
         "name": "College of Hospitality and Tourism Management (CHTM)",
-        "category": "academic",
         "keywords": [
           "CHTM",
           "Hospitality",
@@ -1120,7 +1128,8 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "CHE"
         ]
       }
-    ]
+    ],
+    "locations": []
   },
   {
     "id": "bulsu-hostel",
@@ -1333,11 +1342,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 196.8
     },
     "summary": "Two-storey academic building on the north campus wing housing the College of Social Sciences and Philosophy.",
-    "locations": [
+    "colleges": [
       {
         "id": "cssp",
         "name": "College of Social Sciences and Philosophy (CSSP)",
-        "category": "academic",
         "keywords": [
           "Mendoza Hall",
           "CSSP",
@@ -1345,7 +1353,9 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Social Sciences",
           "Philosophy"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "procurement-office",
         "name": "Procurement Office",
@@ -1432,12 +1442,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 699.7
     },
     "summary": "Academic Building housing the College of Information and Communications Technology (CICT) and the College of Nursing (CON).",
-    "locations": [
+    "colleges": [
       {
         "id": "cict",
         "name": "College of Information & Communications Technology (CICT)",
-        "floor": "3rd - 4th Floor",
-        "category": "academic",
         "keywords": [
           "CICT",
           "IT",
@@ -1449,15 +1457,15 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       {
         "id": "con",
         "name": "College of Nursing (CON)",
-        "floor": "1st - 2nd Floor",
-        "category": "academic",
         "keywords": [
           "CON",
           "Nursing",
           "BSN",
           "Pimentel Hall"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "cict-deans-office",
         "name": "CICT Dean's Office",
@@ -1999,11 +2007,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 386
     },
     "summary": "Academic building across from the Main Canteen near Gate 3 housing the College of Criminal Justice Education (CCJE).",
-    "locations": [
+    "colleges": [
       {
         "id": "ccje",
         "name": "College of Criminal Justice Education (CCJE)",
-        "category": "academic",
         "keywords": [
           "CCJE",
           "CCJE Building",
@@ -2012,7 +2019,8 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Chocolate Building"
         ]
       }
-    ]
+    ],
+    "locations": []
   },
   {
     "id": "srlc-building",
@@ -2038,11 +2046,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 434.5
     },
     "summary": "College of Business Education and Accountancy building facing Heroes Park.",
-    "locations": [
+    "colleges": [
       {
         "id": "cbea",
         "name": "College of Business Education and Accountancy (CBEA)",
-        "category": "academic",
         "keywords": [
           "Accountancy",
           "BSA",
@@ -2050,7 +2057,9 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "CBEA",
           "CBA"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "cba-103",
         "name": "CBA 103",
@@ -2184,11 +2193,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 563.7
     },
     "summary": "Five-storey building near Gate 2 serving the College of Engineering.",
-    "locations": [
+    "colleges": [
       {
         "id": "coe",
         "name": "College of Engineering (COE)",
-        "category": "academic",
         "keywords": [
           "Engineering",
           "Civil",
@@ -2198,7 +2206,9 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "CpE",
           "IE"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "nh-107",
         "name": "NH 107",
@@ -2446,11 +2456,10 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "y": 596.5
     },
     "summary": "Four-storey academic building near Gate 2 housing the College of Professional Teacher Education (CPTEd), PPESO Office, and classrooms.",
-    "locations": [
+    "colleges": [
       {
         "id": "cpted",
         "name": "College of Professional Teacher Education (CPTEd)",
-        "category": "academic",
         "keywords": [
           "CPTEd",
           "CPTE",
@@ -2459,7 +2468,9 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Teacher Education",
           "Roxas Hall"
         ]
-      },
+      }
+    ],
+    "locations": [
       {
         "id": "ppeso-office",
         "name": "PPESO Office",

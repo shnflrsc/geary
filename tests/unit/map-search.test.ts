@@ -9,6 +9,7 @@ import {
   computeZoomViewBox,
   DEFAULT_MAP_VIEWBOX,
   focusBuildingViewBox,
+  getCollegeShortLabel,
   getLocationType,
   groupLocationsByFloor,
   partitionBuildingLocations,
@@ -106,11 +107,8 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
     const pimentel = CAMPUS_BUILDINGS.find((b) => b.id === 'pimentel-hall');
     expect(pimentel).toBeDefined();
     const { colleges, others } = partitionBuildingLocations(pimentel!.locations);
-    expect(colleges.map((c) => c.name)).toEqual([
-      'College of Information & Communications Technology (CICT)',
-      'College of Nursing (CON)',
-    ]);
-    expect(others.length).toBe(pimentel!.locations.length - 2);
+    expect(colleges).toEqual([]);
+    expect(others.length).toBe(pimentel!.locations.length);
     expect(others[0]?.floor).toBe('1st Floor');
     expect(others[0]?.name).toBe('A1');
 
@@ -235,5 +233,17 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
     const zoomed = { x: 200, y: 200, width: 500, height: 425 };
     const panned = computePanViewBox(zoomed, -100, -100, { width: 1440, height: 700 });
     expect(panned.x - zoomed.x).toBeCloseTo(panned.y - zoomed.y, 6);
+  });
+
+  test('colleges live on CampusBuilding.colleges and remain searchable via searchCampusLocations', () => {
+    const cictMatches = searchCampusLocations(CAMPUS_BUILDINGS, 'CICT');
+    expect(cictMatches.some((m) => m.id === 'cict' && m.buildingId === 'pimentel-hall')).toBe(true);
+
+    const pimentel = CAMPUS_BUILDINGS.find((b) => b.id === 'pimentel-hall');
+    expect(pimentel?.colleges?.map((c) => c.id)).toEqual(['cict', 'con']);
+    expect(pimentel?.colleges?.map(getCollegeShortLabel)).toEqual(['CICT', 'CON']);
+    expect(getCollegeShortLabel({ id: 'lhs', name: 'Laboratory High School' })).toBe('LHS');
+    expect(getCollegeShortLabel({ id: 'cpted', name: 'College of Professional Teacher Education (CPTEd)' })).toBe('CPTEd');
+    expect(pimentel?.locations.some((l) => l.id === 'cict' || l.id === 'con')).toBe(false);
   });
 });

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CampusBuilding, CampusLocation } from '../../data/campus-map';
 import {
+  getCollegeShortLabel,
   getLocationType,
   groupLocationsByFloor,
   partitionBuildingLocations,
@@ -257,33 +258,63 @@ export default function BuildingInspector({
         </button>
 
         {selectedBuilding ? (
-          <div className="flex items-start justify-between gap-2">
-            <div className="min-w-0">
-              <h2 className="truncate font-heading text-lg font-bold leading-snug text-ink-primary lg:text-xl">
-                {selectedBuilding.name}
-              </h2>
-              <p className="mt-0.5 text-xs text-ink-secondary">
-                {locationCount} {locationCount === 1 ? 'location' : 'locations'}
-              </p>
-            </div>
-            <button
-              type="button"
-              data-no-drag="true"
-              onClick={onClearSelection}
-              aria-label="Close building details"
-              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-subtle text-ink-secondary transition-colors hover:bg-border-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="h-4 w-4"
-                aria-hidden="true"
+          <div>
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0">
+                <h2 className="truncate font-heading text-lg font-bold leading-snug text-ink-primary lg:text-xl">
+                  {selectedBuilding.name}
+                </h2>
+                <p className="mt-0.5 text-xs text-ink-secondary">
+                  {locationCount} {locationCount === 1 ? 'location' : 'locations'}
+                </p>
+              </div>
+              <button
+                type="button"
+                data-no-drag="true"
+                onClick={onClearSelection}
+                aria-label="Close building details"
+                className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-subtle text-ink-secondary transition-colors hover:bg-border-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            </button>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {selectedBuilding.colleges && selectedBuilding.colleges.length > 0 && (
+              <ul
+                aria-label="Colleges in this building"
+                className={`mt-2.5 flex-wrap gap-1.5 ${
+                  isMobileCollapsed ? 'hidden lg:flex' : 'flex'
+                }`}
+              >
+                {selectedBuilding.colleges.map((college) => {
+                  const isHighlightedCollege = highlightedLocationId === college.id;
+                  return (
+                    <li
+                      key={college.id}
+                      title={college.name}
+                      aria-label={college.name}
+                      data-search-match={isHighlightedCollege ? 'true' : undefined}
+                      className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold tracking-wide transition-colors ${
+                        isHighlightedCollege
+                          ? 'border-brand-crimson bg-brand-crimson text-white'
+                          : 'border-brand-crimson/20 bg-brand-crimson-wash text-brand-crimson'
+                      }`}
+                    >
+                      {getCollegeShortLabel(college)}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
         ) : (
           <div>
@@ -308,13 +339,6 @@ export default function BuildingInspector({
         >
           {selectedBuilding.locations.length > 0 ? (
             <ul ref={locationListRef} className="space-y-2.5 pb-2">
-              {partitionedLocations.colleges.map(renderLocationItem)}
-              {partitionedLocations.colleges.length > 0 &&
-                partitionedLocations.others.length > 0 && (
-                  <li role="separator" aria-hidden="true" className="py-1">
-                    <div className="border-t border-border-strong" />
-                  </li>
-                )}
               {groupedOthers.floorGroups.map((group) => {
                 const key = `${selectedBuilding.id}:${group.floor}`;
                 const isOpen = Boolean(openFloors[key]);

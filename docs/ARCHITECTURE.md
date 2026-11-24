@@ -178,10 +178,10 @@ flowchart TD
 
 ## 5. Configuration and module contracts
 
-### 5.1 Framework configuration (`svelte.config.js` & `vite.config.ts`)
+### 5.1 Framework configuration (`vite.config.ts`)
 
-- **`svelte.config.js`:** Uses `@sveltejs/adapter-vercel` with standard dynamic SSR output and `vitePreprocess()`.
-- **`vite.config.ts`:** Combines `tailwindcss()` (`@tailwindcss/vite`) and `sveltekit()`.
+- **`vite.config.ts`:** Configures `validateArticlesPlugin()` (fail-fast Zod validation of all `src/content/articles/*.md` on build), `tailwindcss()` (`@tailwindcss/vite`), and `sveltekit({ adapter })` with `@sveltejs/adapter-vercel` (`runtime: 'nodejs22.x'`, SvelteKit 3 unified Vite config without `svelte.config.js`).
+- **Subpath imports (`package.json`):** Uses `#lib/*` (`./src/lib/*`) per SvelteKit 3 conventions.
 - **Origin resolution (`src/lib/seo.ts`):** Reads `PUBLIC_SITE_URL`, falls back to `VERCEL_PROJECT_PRODUCTION_URL` / `VERCEL_URL` / incoming request `url.origin`, and defaults locally to `https://geary.example.com`.
 - **CDN cache headers (`src/lib/server/cache.ts`):** Shared `CACHE_CONTROL_HEADER = 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400'` applied across SSR page loaders and `/search-index.json`, `/sitemap.xml`, and `/robots.txt`.
 
@@ -281,9 +281,8 @@ geary/
 ├── bun.lock                         # Bun deterministic dependency lockfile
 ├── bunfig.toml                      # Scopes `bun test` strictly to tests/unit/
 ├── playwright.config.ts             # Playwright E2E/Axe config (webServer -> vite preview)
-├── svelte.config.js                 # SvelteKit config with @sveltejs/adapter-vercel
-├── vite.config.ts                   # Vite config with @tailwindcss/vite + sveltekit()
-├── tsconfig.json                    # Strict TypeScript config extending .svelte-kit/tsconfig.json
+├── vite.config.ts                   # Vite 8 + Tailwind v4 + SvelteKit 3 + @sveltejs/adapter-vercel
+├── tsconfig.json                    # Strict TypeScript config extending $app/tsconfig
 ├── static/                          # Static assets served from site root (favicons, logos, OG image, banners)
 │   ├── apple-touch-icon.png
 │   ├── favicon-48x48.png

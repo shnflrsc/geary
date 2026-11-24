@@ -63,9 +63,24 @@ function formatCitationEntry(entry: ArticleSource): JsonLdObject | string {
 
 const DEFAULT_SITE_URL = 'https://geary.example.com';
 
-/** Resolve the canonical site origin URL from Astro.site or the current request URL. */
+/** Resolve the canonical site origin URL from an explicit site URL or the current request URL. */
 export function resolveSiteOrigin(site: URL | undefined, fallbackUrl?: URL): URL {
   return site ?? (fallbackUrl ? new URL(fallbackUrl.origin) : new URL(DEFAULT_SITE_URL));
+}
+
+/** Resolve the canonical site origin from deployment env vars or the incoming SSR request URL. */
+export function resolveRequestOrigin(
+  requestUrl?: URL,
+  env: Record<string, string | undefined> = typeof process !== 'undefined' ? process.env : {},
+): URL {
+  const configured =
+    env.PUBLIC_SITE_URL ||
+    (env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : env.VERCEL_URL
+        ? `https://${env.VERCEL_URL}`
+        : undefined);
+  return resolveSiteOrigin(configured ? new URL(configured) : undefined, requestUrl);
 }
 
 /** Build Schema.org Article JSON-LD for published articles. */

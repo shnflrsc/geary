@@ -1,0 +1,68 @@
+<script lang="ts">
+  export interface HeadingItem {
+    depth: number;
+    slug: string;
+    text: string;
+  }
+
+  interface Props {
+    headings: HeadingItem[];
+    mode: 'desktop' | 'mobile';
+  }
+
+  const { headings, mode }: Props = $props();
+
+  const tocItems = $derived(headings.filter((h) => h.depth === 2 || h.depth === 3));
+  const shouldRender = $derived(tocItems.length >= 2);
+</script>
+
+{#if shouldRender && mode === 'desktop'}
+  <aside aria-label="On this page" class="hidden lg:block sticky top-24 self-start">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-secondary">
+      On this page
+    </p>
+    <nav aria-label="Article table of contents">
+      <ul class="space-y-1 border-l border-border-subtle">
+        {#each tocItems as heading (heading.slug)}
+          <li>
+            <a
+              href={`#${heading.slug}`}
+              class={`block py-1 text-sm leading-snug text-ink-secondary hover:text-brand-crimson border-l-2 border-transparent hover:border-brand-crimson -ml-px transition-colors duration-150 ${
+                heading.depth === 3 ? 'pl-6 text-[0.8125rem]' : 'pl-3 font-medium'
+              }`}
+            >
+              {heading.text}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </nav>
+  </aside>
+{/if}
+
+{#if shouldRender && mode === 'mobile'}
+  <details class="lg:hidden mb-6 rounded-xl border border-border-subtle bg-surface-card">
+    <summary class="flex min-h-[44px] cursor-pointer items-center justify-between px-4 py-2.5 text-sm font-semibold text-ink-primary list-none">
+      <span>On this page</span>
+      <span aria-hidden="true" class="text-xs text-ink-secondary">
+        {tocItems.length} sections
+      </span>
+    </summary>
+    <nav aria-label="Mobile article table of contents" class="border-t border-border-subtle px-4 py-3">
+      <ul class="space-y-1">
+        {#each tocItems as heading (heading.slug)}
+          <li>
+            <a
+              href={`#${heading.slug}`}
+              class={`block rounded py-1.5 text-sm text-ink-secondary hover:text-brand-crimson transition-colors ${
+                heading.depth === 3 ? 'pl-4 text-[0.8125rem]' : 'font-medium'
+              }`}
+            >
+              {heading.text}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </nav>
+  </details>
+{/if}

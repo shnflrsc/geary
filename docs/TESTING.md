@@ -33,7 +33,7 @@ Geary runs on SvelteKit (Svelte 5 runes) with Tailwind CSS and `@sveltejs/adapte
 | Usability / Interaction Capability | Appropriateness Recognizability, Operability, Accessibility | Low-cognitive-load layout, `~65ch` prose, keyboard-only search (`/` and `Ctrl+K`), WCAG 2.1 AA contrast in light and dark themes, and zero `375px` horizontal scroll. | Layer 3 (`TC-E2E-01`, `TC-E2E-03`, `TC-E2E-04`, `TC-E2E-08`), Layer 4 (`TC-A11Y-01` to `TC-A11Y-03`) |
 | Reliability | Fault Tolerance, Availability | Non-crashing UI when search returns 0 matches or `/search-index.json` fails over mobile data; zero broken internal links. | Layer 1 (`TC-BLD-04`), Layer 3 (`TC-E2E-02`, `TC-E2E-05`) |
 | Security | Integrity (XSS Resistance) | Svelte template escaping prevents DOM XSS from search inputs; zero unresolved high or critical runtime dependency flaws. | Layer 2 (`TC-UNIT-02`), Layer 4 (`TC-SEC-01`, `TC-SEC-02`) |
-| Maintainability and Portability | Analysability, Modularity, Adaptability | Single-source `categories.ts` enum enforced across Zod, UI, and search; adapter isolated to `svelte.config.js`. | Layer 1 (`TC-BLD-01`, `TC-BLD-02`, `TC-BLD-03`) |
+| Maintainability and Portability | Analysability, Modularity, Adaptability | Single-source `categories.ts` enum enforced across Zod, UI, and search; adapter isolated to `vite.config.ts`. | Layer 1 (`TC-BLD-01`, `TC-BLD-02`, `TC-BLD-03`) |
 
 ## 3. Test suites and test case specifications (`TC-*`)
 
@@ -42,7 +42,7 @@ Geary runs on SvelteKit (Svelte 5 runes) with Tailwind CSS and `@sveltejs/adapte
 #### `TC-BLD-01`: TypeScript and Svelte component typecheck
 - ISO 25010 characteristic: Maintainability (*Analysability, Modularity*)
 - Linked requirements: `CON-TECH-04`, `SRS-NFR-MAINT-01`
-- Inputs: Complete source tree (`src/`, `tsconfig.json`, `svelte.config.js`, `vite.config.ts`).
+- Inputs: Complete source tree (`src/`, `tsconfig.json`, `vite.config.ts`).
 - Procedure: Run `bun run check` (`svelte-kit sync && svelte-check --tsconfig ./tsconfig.json`).
 - Pass criteria: Exits with code `0` and reports `0` TypeScript or Svelte errors across routes, components, and server modules.
 

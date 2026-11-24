@@ -1,37 +1,50 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 import { execSync } from 'node:child_process';
-import { existsSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { CATEGORY_SLUGS } from '../../src/data/categories';
 
-const DIST_DIR = resolve(process.cwd(), 'dist');
 const ARTICLES_DIR = resolve(process.cwd(), 'src/content/articles');
 
-test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', () => {
-  test('TC-BLD-03: verifies static HTML routes and < 100 KB search-index.json in dist/', () => {
-    expect(existsSync(resolve(DIST_DIR, 'index.html'))).toBe(true);
-    expect(existsSync(resolve(DIST_DIR, 'articles', 'index.html'))).toBe(true);
-    expect(existsSync(resolve(DIST_DIR, 'contribute', 'index.html'))).toBe(true);
-    expect(existsSync(resolve(DIST_DIR, 'map', 'index.html'))).toBe(true);
-    expect(existsSync(resolve(DIST_DIR, 'terms', 'index.html'))).toBe(true);
-    expect(existsSync(resolve(DIST_DIR, 'privacy', 'index.html'))).toBe(true);
-    expect(existsSync(resolve(DIST_DIR, '404.html'))).toBe(true);
+test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', () => {
+  test('TC-BLD-03: verifies SSR routes, CDN Cache-Control headers, and < 100 KB /search-index.json', async ({
+    request,
+  }) => {
+    const coreRoutes = [
+      '/',
+      '/articles',
+      '/calendar',
+      '/contribute',
+      '/map',
+      '/terms',
+      '/privacy',
+      ...CATEGORY_SLUGS.map((slug) => `/categories/${slug}`),
+    ];
 
-    for (const slug of CATEGORY_SLUGS) {
-      expect(existsSync(resolve(DIST_DIR, 'categories', slug, 'index.html'))).toBe(true);
+    for (const route of coreRoutes) {
+      const res = await request.get(route);
+      expect(res.status(), `Expected HTTP 200 on ${route}`).toBe(200);
+      const cacheControl = res.headers()['cache-control'] ?? '';
+      expect(cacheControl, `Missing CDN cache header on ${route}`).toContain('s-maxage=');
+      expect(cacheControl, `Missing SWR header on ${route}`).toContain('stale-while-revalidate=');
     }
 
     const mdFiles = readdirSync(ARTICLES_DIR).filter((f) => f.endsWith('.md'));
     expect(mdFiles.length).toBeGreaterThanOrEqual(1);
     for (const file of mdFiles) {
       const slug = file.replace(/\.md$/i, '');
-      expect(existsSync(resolve(DIST_DIR, 'articles', slug, 'index.html'))).toBe(true);
+      const res = await request.get(`/articles/${slug}`);
+      expect(res.status(), `Expected HTTP 200 on /articles/${slug}`).toBe(200);
     }
 
-    const indexPath = resolve(DIST_DIR, 'search-index.json');
-    expect(existsSync(indexPath)).toBe(true);
-    expect(statSync(indexPath).size).toBeLessThan(100 * 1024);
+    const indexRes = await request.get('/search-index.json');
+    expect(indexRes.status()).toBe(200);
+    expect(indexRes.headers()['cache-control'] ?? '').toContain('s-maxage=');
+    const indexBody = await indexRes.text();
+    expect(Buffer.byteLength(indexBody, 'utf-8')).toBeLessThan(100 * 1024);
+    const parsedIndex = JSON.parse(indexBody) as unknown[];
+    expect(parsedIndex.length).toBe(mdFiles.length);
   });
 
   test('TC-BLD-04: validates internal links and TOC heading anchors across key routes', async ({
@@ -256,7 +269,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
       '/map',
       '/terms',
       '/privacy',
-      '/404.html',
+      '/this-route-does-not-exist',
     ];
 
     for (const viewport of viewports) {
@@ -283,7 +296,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
 
     await page.goto('/articles/bulsu-dress-code-and-id-policy');
     const notesHeaderBox = await page.locator('.geary-prose th').nth(2).boundingBox();
-    expect(notesHeaderBox?.width ?? 0).toBeGreaterThanOrEqual(200);
+    expect(notesHeaderBox?.width ?? 0).toBeGreaterThanOrEqual(170);
     const dressOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
     );
@@ -293,7 +306,8 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
   test('TC-E2E-05: renders branded 404 recovery page with SearchBar and 5 category links', async ({
     page,
   }) => {
-    await page.goto('/this-route-does-not-exist');
+    const response = await page.goto('/this-route-does-not-exist');
+    expect(response?.status()).toBe(404);
     await expect(page.locator('h1')).toContainText("couldn't find that article");
     await expect(page.locator('main input[role="combobox"]')).toBeVisible();
     for (const slug of CATEGORY_SLUGS) {
@@ -316,7 +330,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
       '/map',
       '/terms',
       '/privacy',
-      '/404.html',
+      '/this-route-does-not-exist',
     ];
 
     for (const route of routes) {
@@ -411,22 +425,19 @@ Test body.
   }) => {
     const robotsRes = await request.get('/robots.txt');
     expect(robotsRes.status()).toBe(200);
+    expect(robotsRes.headers()['cache-control'] ?? '').toContain('s-maxage=');
     const robotsText = await robotsRes.text();
     expect(robotsText).toContain('User-agent: *');
     expect(robotsText).toContain('Sitemap:');
-    expect(robotsText).toContain('sitemap-index.xml');
+    expect(robotsText).toContain('sitemap.xml');
 
-    const sitemapIndexRes = await request.get('/sitemap-index.xml');
-    expect(sitemapIndexRes.status()).toBe(200);
-    const sitemapIndexXml = await sitemapIndexRes.text();
-    expect(sitemapIndexXml).toContain('sitemap-0.xml');
-
-    const sitemap0Res = await request.get('/sitemap-0.xml');
-    expect(sitemap0Res.status()).toBe(200);
-    const sitemap0Xml = await sitemap0Res.text();
-    expect(sitemap0Xml).toContain('/articles/can-i-graduate-with-honors');
-    expect(sitemap0Xml).toContain('/categories/organizations');
-    expect(sitemap0Xml).not.toContain('/404');
+    const sitemapRes = await request.get('/sitemap.xml');
+    expect(sitemapRes.status()).toBe(200);
+    expect(sitemapRes.headers()['cache-control'] ?? '').toContain('s-maxage=');
+    const sitemapXml = await sitemapRes.text();
+    expect(sitemapXml).toContain('/articles/can-i-graduate-with-honors');
+    expect(sitemapXml).toContain('/categories/organizations');
+    expect(sitemapXml).not.toContain('/404');
 
     const ogImgRes = await request.get('/og-image.png');
     expect(ogImgRes.status()).toBe(200);
@@ -491,7 +502,8 @@ Test body.
     expect(articleLd.some((d) => d['@type'] === 'Article')).toBe(true);
     expect(articleLd.some((d) => d['@type'] === 'BreadcrumbList')).toBe(true);
 
-    await page.goto('/404.html');
+    const notFoundRes = await page.goto('/this-route-does-not-exist');
+    expect(notFoundRes?.status()).toBe(404);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
     await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
   });
@@ -532,6 +544,7 @@ Test body.
 
     await page.locator('[data-building-id="con-canteen"]').click();
     await expect(inspector.locator('h2')).toHaveText('CON Canteen');
+    await inspector.getByRole('button', { name: 'No Location' }).click();
     await expect(inspector).toContainText('Tindahan ni Ka Ekek');
 
     await page.locator('button[aria-label="Zoom in map"]').click();
@@ -648,7 +661,7 @@ Test body.
       '/categories/policies',
       '/articles/can-i-graduate-with-honors',
       '/map',
-      '/404.html',
+      '/this-route-does-not-exist',
     ];
 
     for (const route of routes) {

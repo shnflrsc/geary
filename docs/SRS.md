@@ -345,7 +345,7 @@ Defines `CampusBuilding` (`id`, `name`, `shortLabel?`, `kind`, `floors?`, `svgPa
 | ID | Quality requirement | Target / metric |
 | :--- | :--- | :--- |
 | `SRS-NFR-MAINT-01` | Category taxonomy metadata (`SW-INT-01`) shall exist in one canonical module shared across schemas, routes, breadcrumbs, and search indexing so contributors never edit duplicate lists. | Single source of truth; zero duplicate category lists. |
-| `SRS-NFR-MAINT-02` | Application code shall isolate Vercel deployment config to `svelte.config.js` (`@sveltejs/adapter-vercel`) with zero vendor-specific APIs inside route/domain logic. | Swappable adapter (`adapter-vercel`, `adapter-node`, `adapter-cloudflare`, `adapter-static`). |
+| `SRS-NFR-MAINT-02` | Application code shall isolate Vercel deployment config to `vite.config.ts` (`@sveltejs/adapter-vercel`) with zero vendor-specific APIs inside route/domain logic. | Swappable adapter (`adapter-vercel`, `adapter-node`, `adapter-cloudflare`, `adapter-static`). |
 
 ### 5.5 Security
 

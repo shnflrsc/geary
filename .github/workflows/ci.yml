@@ -26,11 +26,11 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Type and schema check
+      - name: Type and Svelte check
         run: bun run check
-
-      - name: Production build
-        run: bun run build
 
       - name: Unit tests
         run: bun test
+
+      - name: Production SSR build
+        run: bun run build

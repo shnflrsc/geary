@@ -1,0 +1,83 @@
+<script lang="ts">
+  import type { PageProps } from './$types';
+  import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
+  import SeoHead from '#lib/components/SeoHead.svelte';
+
+  const { data }: PageProps = $props();
+
+  const canonicalUrl = $derived(new URL('/privacy', data.siteOrigin).href);
+  const ogImageUrl = $derived(new URL('/og-image.png', data.siteOrigin).href);
+</script>
+
+<SeoHead
+  title="Privacy Policy - Geary"
+  description="Privacy Policy for Geary: zero accounts, zero tracking cookies, and client-side search."
+  {canonicalUrl}
+  {ogImageUrl}
+/>
+
+<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+  <div class="mb-8 border-b border-border-subtle pb-6 max-w-[65ch]">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Privacy Policy' },
+      ]}
+    />
+
+    <h1 class="font-heading text-[1.75rem] sm:text-[2.25rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
+      Privacy Policy
+    </h1>
+
+    <p class="mt-3 text-base sm:text-lg leading-relaxed text-ink-secondary">
+      How Geary handles data: zero accounts, client-side search, and zero personal tracking.
+    </p>
+
+    <p class="mt-4 text-xs font-medium text-ink-secondary">
+      Effective Date: November 19, 2026
+    </p>
+  </div>
+
+  <article class="geary-prose">
+    <h2>1. Overview</h2>
+    <p>
+      Geary is a student-managed information portal with no user accounts or database storage. You do not need an account to read any article, and we design the site to collect as little data as technically possible.
+    </p>
+
+    <h2>2. Information We Do Not Collect</h2>
+    <p>
+      Geary does <strong>not</strong> ask for, collect, store, or sell personal information. Specifically:
+    </p>
+    <ul>
+      <li>No user accounts, logins, or student number inputs.</li>
+      <li>No Geary-operated comment sections or submission databases.</li>
+      <li>No Geary-set advertising trackers, behavioral profiling, or tracking cookies.</li>
+    </ul>
+    <p>
+      On the optional Contribute page, Geary embeds a third-party Google Form with email collection and sign-in limits turned off. Loading that <code>docs.google.com</code> form connects your browser directly to Google under Google's own privacy policy. Any contributor credit name or follow-up contact you voluntarily enter is reviewed solely by Geary maintainers to attribute credit or ask clarification questions, and is never sold or shared for marketing.
+    </p>
+
+    <h2>3. Client-Side Search, Campus Map &amp; Daily Rotation</h2>
+    <p>
+      When you use the search bar, your browser downloads a JSON search index containing article titles, headings, and summaries. All filtering and ranking run locally inside your browser; your search terms are never sent to a Geary server or stored by us.
+    </p>
+    <p>
+      The interactive Campus Map page and the Home page's daily rotating article spotlight also run locally in your browser using bundled data and your device's local calendar date. Geary never requests GPS or browser geolocation permissions.
+    </p>
+
+    <h2>4. Hosting &amp; Standard Server Logs</h2>
+    <p>
+      Like any website on the internet, the hosting provider serving Geary’s pages may automatically record standard HTTP request logs (such as IP address, browser user-agent, requested path, and timestamp) to maintain uptime, prevent abuse, and serve pages securely. Geary does not use these logs to identify individual students.
+    </p>
+
+    <h2>5. External Links</h2>
+    <p>
+      Articles frequently reference or link to official BulSU portals, university and student council Facebook pages, Google Forms, and external resources. Once you leave Geary, those third-party platforms operate under their own privacy practices and terms.
+    </p>
+
+    <h2>6. Updates to This Policy</h2>
+    <p>
+      If Geary ever introduces optional features that process user data or analytics, this Privacy Policy will be updated before those changes take effect.
+    </p>
+  </article>
+</div>

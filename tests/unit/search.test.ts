@@ -1,10 +1,11 @@
 /// <reference types="bun" />
 import { describe, expect, test } from 'bun:test';
-import { existsSync, readFileSync, statSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { z } from 'astro/zod';
+import { z } from 'zod';
 import { CATEGORY_SLUGS } from '../../src/data/categories';
 import { filterAndRankArticles, type SearchIndexItem } from '../../src/lib/search';
+import { buildSearchIndex, loadArticlesFromRawMap } from '../../src/lib/server/markdown';
 
 const FIXTURE_ITEMS: SearchIndexItem[] = [
   {
@@ -115,16 +116,25 @@ describe('Search query normalization & weighted ranking (TC-UNIT-01..03)', () =>
   });
 });
 
-describe('Built search-index.json schema contract (TC-UNIT-05)', () => {
-  test('TC-UNIT-05: dist/search-index.json conforms to SearchIndexItem schema and stays < 100 KB', () => {
-    const distIndexPath = resolve(process.cwd(), 'dist/search-index.json');
-    expect(existsSync(distIndexPath)).toBe(true);
+describe('Pure buildSearchIndex() schema contract (TC-UNIT-05)', () => {
+  test('TC-UNIT-05: buildSearchIndex() conforms to SearchIndexItem schema and stays < 100 KB', () => {
+    const articlesDir = resolve(process.cwd(), 'src/content/articles');
+    const mdFiles = readdirSync(articlesDir).filter((file) => file.endsWith('.md'));
+    const rawMap: Record<string, string> = {};
+    for (const file of mdFiles) {
+      const fullPath = resolve(articlesDir, file);
+      rawMap[fullPath] = readFileSync(fullPath, 'utf-8');
+    }
 
-    const stats = statSync(distIndexPath);
-    expect(stats.size).toBeGreaterThan(0);
-    expect(stats.size).toBeLessThan(100 * 1024);
+    const articles = loadArticlesFromRawMap(rawMap);
+    const indexItems = buildSearchIndex(articles);
+    const serialized = JSON.stringify(indexItems);
+    const byteSize = Buffer.byteLength(serialized, 'utf-8');
 
-    const parsed = JSON.parse(readFileSync(distIndexPath, 'utf-8')) as unknown;
+    expect(indexItems.length).toBe(mdFiles.length);
+    expect(byteSize).toBeGreaterThan(0);
+    expect(byteSize).toBeLessThan(100 * 1024);
+
     const itemSchema = z.object({
       slug: z.string().min(1),
       title: z.string().min(1),
@@ -135,7 +145,7 @@ describe('Built search-index.json schema contract (TC-UNIT-05)', () => {
       headings: z.array(z.string().min(1)),
     });
 
-    const validation = z.array(itemSchema).min(1).safeParse(parsed);
+    const validation = z.array(itemSchema).min(1).safeParse(indexItems);
     expect(validation.success).toBe(true);
   });
 });

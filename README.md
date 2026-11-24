@@ -59,4 +59,4 @@ Articles on Geary are sourced from:
 3. Official `bulsu.edu.ph` websites, portals, and helpdesk documentation, plus official third-party vendor education pages where applicable.
 4. Direct confirmation from authorized university personnel or live student account checks for undocumented portal details.
 
-The [2016 Undergraduate Student Manual (BOR Resolution No. 85, Series of 2016)](https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf) is used **only as a fallback** for standing statutory rules (such as grading scales, residency rules, and student rights) that have not been superseded—it is outdated for current procedures, fees, deadlines, and schedules.
+The [2016 Undergraduate Student Manual (BOR Resolution No. 85, Series of 2016)](https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf) is used **only as a fallback** for standing statutory rules (such as grading scales, residency rules, and student rights) that have not been superseded. It is outdated for current procedures, fees, deadlines, and schedules.

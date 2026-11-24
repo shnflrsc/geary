@@ -12,6 +12,26 @@ function formatShortMonth(monthLabel: string): string {
   return `${monthName.slice(0, 3)} '${year.slice(-2)}`;
 }
 
+function renderHighlightedText(text: string, terms: readonly string[]) {
+  if (terms.length === 0) return text;
+  const escaped = terms
+    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .sort((a, b) => b.length - a.length);
+  const pattern = new RegExp(`(${escaped.join('|')})`, 'gi');
+  return text.split(pattern).map((part, index) =>
+    index % 2 === 1 ? (
+      <mark
+        key={index}
+        className="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson"
+      >
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  );
+}
+
 export default function AcademicCalendar() {
   const [query, setQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<CalendarCategory[]>([]);
@@ -55,7 +75,12 @@ export default function AcademicCalendar() {
     [filteredEvents]
   );
 
-  const hasActiveFilters = query.trim().length > 0 || selectedCategories.length > 0;
+  const searchTerms = useMemo(
+    () => query.trim().split(/\s+/).filter(Boolean),
+    [query]
+  );
+
+  const hasActiveFilters = searchTerms.length > 0 || selectedCategories.length > 0;
 
   function toggleCategory(category: CalendarCategory) {
     setSelectedCategories((prev) =>
@@ -236,7 +261,11 @@ export default function AcademicCalendar() {
                 {group.events.map((event) => (
                   <li
                     key={event.id}
-                    className={`cal-cat-${event.category} flex flex-col gap-2 px-4 py-3.5 sm:flex-row sm:items-start sm:gap-4 sm:px-5`}
+                    className={`cal-cat-${event.category} flex flex-col gap-2 px-4 py-3.5 sm:flex-row sm:items-start sm:gap-4 sm:px-5 ${
+                      searchTerms.length > 0
+                        ? 'border-l-[3px] border-l-brand-crimson bg-brand-crimson-wash/40'
+                        : ''
+                    }`}
                   >
                     <div className="flex shrink-0 items-center gap-2 sm:w-32 sm:pt-0.5">
                       <span
@@ -244,7 +273,7 @@ export default function AcademicCalendar() {
                         className="cal-dot h-2.5 w-2.5 shrink-0 rounded-xs"
                       />
                       <span className="text-sm font-bold tabular-nums text-ink-primary">
-                        {event.dateText}
+                        {renderHighlightedText(event.dateText, searchTerms)}
                       </span>
                     </div>
 
@@ -258,7 +287,7 @@ export default function AcademicCalendar() {
                             *
                           </span>
                         )}
-                        {event.title}
+                        {renderHighlightedText(event.title, searchTerms)}
                       </p>
                     </div>
                   </li>

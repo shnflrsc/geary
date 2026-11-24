@@ -49,22 +49,6 @@ export default function AcademicCalendar() {
     window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
   }
 
-  const categoryCounts = useMemo(() => {
-    const counts: Record<CalendarCategory, number> = {
-      all: 0,
-      undergraduate: 0,
-      'graduate-school': 0,
-      'laboratory-high-school': 0,
-      'college-of-law': 0,
-      'college-of-medicine': 0,
-      holiday: 0,
-    };
-    for (const event of ACADEMIC_CALENDAR_EVENTS) {
-      counts[event.category] += 1;
-    }
-    return counts;
-  }, []);
-
   const filteredEvents = useMemo(
     () => filterCalendarEvents(ACADEMIC_CALENDAR_EVENTS, query, selectedCategories),
     [query, selectedCategories]
@@ -156,7 +140,6 @@ export default function AcademicCalendar() {
               }`}
             >
               <span>All Events</span>
-              <span className="opacity-80">({ACADEMIC_CALENDAR_EVENTS.length})</span>
             </button>
 
             {CALENDAR_CATEGORIES.map((cat) => {
@@ -178,7 +161,6 @@ export default function AcademicCalendar() {
                     className="cal-dot h-2 w-2 shrink-0 rounded-full"
                   />
                   <span>{cat.label}</span>
-                  <span className="text-[11px] opacity-75">({categoryCounts[cat.id]})</span>
                 </button>
               );
             })}

@@ -291,9 +291,14 @@ export default function BuildingInspector({
               Main Campus
             </p>
             <p className="mt-0.5 text-xs text-ink-secondary">
-              {isMobileCollapsed
-                ? 'Tap a building on the map to see locations inside.'
-                : 'Select any building on the map or search above to view offices, classrooms, and facilities.'}
+              <span className="lg:hidden">
+                {sheetSnap === 'collapsed' && dragHeightPx === null
+                  ? 'Tap a building on the map to see locations inside.'
+                  : 'Select any building on the map or search above to view offices, classrooms, and facilities.'}
+              </span>
+              <span className="hidden lg:inline">
+                Select any building on the map or search above to view offices, classrooms, and facilities.
+              </span>
             </p>
           </div>
         )}

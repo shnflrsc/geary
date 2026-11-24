@@ -157,7 +157,7 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
 ### 5.1 Global header and Geary brand mark (`Header.astro`)
 
 - Anatomy: Sticky top `64px` (`h-16`) bar on `bg-[#F8F9FA]/95` with `border-b border-[#DEE2E6]`.
-  - Desktop (`>= 768px`): Geary wordmark + 8-tooth geometric gear SVG (`#8B1538` outer gear, `#D4A017` inner ring) on the left; `Home` (`/`), `Articles` (`/articles`), `Campus Map` (`/map`), and `Contribute` (`/contribute`) links; and `<SearchBar variant="header" />` (`md:w-48 lg:w-60`) on the right.
+  - Desktop (`>= 768px`): Geary wordmark + 8-tooth geometric gear SVG (`#8B1538` outer gear, `#D4A017` inner ring) on the left; `Home` (`/`), `Articles` (`/articles`), `Calendar` (`/calendar`), `Campus Map` (`/map`), and `Contribute` (`/contribute`) links (`md:px-2.5 lg:px-3`); and `<SearchBar variant="header" />` (`md:w-48 lg:w-60`) on the right.
   - Mobile (`< 768px`): On Home (`/`), `<SearchBar variant="header" />` is hidden and the gear mark + Geary wordmark sit centered beside the right-aligned drawer toggle. On interior pages, only the gear mark shows on the left (`sr-only md:not-sr-only` wordmark) and `<SearchBar variant="header" />` spans the available space (`flex-1`) between the gear mark and the drawer toggle.
 - Interactive states:
   - Default: `text-[#495057]` navigation links, `min-h-[44px]` mobile tap target.
@@ -217,6 +217,11 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
   - **Mobile (`< 1024px`):** Floating pill search bar at the top with dropdown results beneath it, floating zoom/reset controls on the right, and a draggable bottom-sheet locations card that starts collapsed (peek bar) when no building is selected and opens to half-height (snappable between peek, half, and expanded) when a building or search match is selected, showing housed-college pill chips in the header above the scrollable locations list.
 - Map surface and building states: Campus grounds on `canvas-paper` (`#F8F9FA`) / `#F1F3F5`, footpaths in `#DEE2E6`, parks in `#E8F3EA`, resting clickable buildings in `white` with `border-strong` (`#CED4DA`) strokes, hovered buildings in `brand-crimson-wash` (`#FDF2F4`) with `#8B1538` stroke, and selected buildings filled `#8B1538` with `#D4A017` highlight outline (`>= 2px`).
 - Viewport ergonomics: Selecting a building via search centers it with a responsive focal offset so the target building remains visible clear of the desktop left overlay or mobile bottom sheet; uniform aspect-aware pan and pinch scaling keeps gestures 1:1 on both portrait mobile and widescreen desktop.
+
+### 5.10 Interactive Academic Calendar (`AcademicCalendar.tsx`)
+
+- Layout: Single-column constrained container (`max-w-5xl`) on `/calendar` with a search input, scrollable/wrappable category filter chips (`All`, `University-Wide (All)`, `Undergraduate`, `Graduate School`, `Laboratory High School`, `College of Law`, `College of Medicine`, `Holiday`), quick month jump pills, and month-grouped event cards.
+- Category color badges: Each OSR category uses a high-contrast accessible dot + subtle tinted pill (dark-mode aware) matching the OSR color legend (blue for Undergraduate, orange for Graduate School, amber/gold for Laboratory High School, purple for College of Law, emerald/green for College of Medicine, crimson/red for Holiday, neutral ink for All/University-Wide).
 
 ## 6. Interaction principles and accessibility ergonomics
 

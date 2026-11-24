@@ -56,6 +56,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
       '/articles/bulsu-guidance-and-counseling-guide',
       '/articles/complete-guide-to-scholarships-at-bulsu',
       '/contribute',
+      '/calendar',
       '/map',
       '/terms',
       '/privacy',
@@ -251,6 +252,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
       '/categories/enrollment',
       '/articles/can-i-graduate-with-honors',
       '/contribute',
+      '/calendar',
       '/map',
       '/terms',
       '/privacy',
@@ -310,6 +312,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
       '/categories/policies',
       '/articles/can-i-graduate-with-honors',
       '/contribute',
+      '/calendar',
       '/map',
       '/terms',
       '/privacy',
@@ -320,7 +323,7 @@ test.describe('Geary Static Build, E2E, Accessibility & Security Smoke Suite', (
       await page.goto(route);
 
       await expect(page.locator('header')).toHaveCount(1);
-      await expect(page.locator('header nav[aria-label="Primary navigation"] a')).toHaveCount(4);
+      await expect(page.locator('header nav[aria-label="Primary navigation"] a')).toHaveCount(5);
       await expect(page.locator('main')).toHaveCount(1);
       await expect(page.locator('footer')).toHaveCount(route === '/map' ? 0 : 1);
       await expect(page.locator('h1')).toHaveCount(1);

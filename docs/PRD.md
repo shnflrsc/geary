@@ -23,6 +23,7 @@ This PRD defines the MVP feature set, expected product behavior, release priorit
 3. Instant client-side search bar (`F-03`)
 4. Low-cognitive-load UI/UX and BulSUan identity (`F-04`)
 5. Interactive 2D campus map (`F-05`)
+6. Interactive Academic Calendar (`F-06`)
 
 ## 2. Prioritization framework
 
@@ -179,3 +180,19 @@ Visiting an outdated bookmark or broken URL loads the branded `404` page with a 
 - `AC-MAP-02` (`REQ-MAP-02`): *Given* any clickable building on the map, *When* clicked, *Then* the building highlights in BulSU Crimson (`#8B1538`) and the inspector displays its name and contained locations and offices.
 - `AC-MAP-03` (`REQ-MAP-03`): *Given* a query such as `"Registrar"` or `"Scholarship"` typed into the campus map search bar, *When* matching locations appear, *Then* each result shows its parent building name (`Flores Hall`, `College of Law Annex / Near College of Law`, etc.), and selecting it focuses that building on the map and shows the matched location in the inspector.
 - `AC-MAP-04` (`REQ-MAP-04`): *Given* pan/zoom buttons and reset control, *When* triggered by mouse or keyboard, *Then* the SVG viewport zooms cleanly and resets back to full campus view.
+
+### 3.6 Feature 6: Interactive Academic Calendar (`/calendar`) (`F-06`)
+
+#### Requirements specification
+
+| Req ID | Priority | Requirement statement |
+| :--- | :--- | :--- |
+| `REQ-CAL-01` | `P1` | The system shall render the official BulSU Academic Calendar (sourced from BulSU Office of the Student Regent advisories) grouped chronologically by month on `/calendar` with zero external runtime APIs. |
+| `REQ-CAL-02` | `P1` | Each calendar event shall be categorized using the OSR legend (`Undergraduate`, `Graduate School`, `Laboratory High School`, `College of Law`, `College of Medicine`, `Holiday`) plus `All` for general university-wide events. |
+| `REQ-CAL-03` | `P1` | Visitors shall be able to search calendar events by keyword or month/date and filter by category chips instantaneously on the client. |
+| `REQ-CAL-04` | `P1` | The global Header navigation shall link directly to `/calendar` (`Calendar`) between `Articles` and `Campus Map`. |
+
+#### Acceptance criteria
+
+- `AC-CAL-01` (`REQ-CAL-01`, `REQ-CAL-02`): *Given* `/calendar`, *When* loaded, *Then* AY 2026–2027 events appear chronologically grouped by month with category badges and OSR source attribution.
+- `AC-CAL-02` (`REQ-CAL-03`): *Given* a search query (e.g., `"Mid-term"` or `"Graduation"`) or a category filter selection (e.g., `Holiday` or `College of Law`), *When* applied, *Then* matching events update instantaneously without page reload, and clearing filters restores the full schedule.

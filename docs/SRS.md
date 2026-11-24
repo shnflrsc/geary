@@ -77,6 +77,7 @@ This SRS defines the software-level constraints, external interface contracts, f
 | `/` | Home portal rendering the hero search bar, Featured articles, and the 7-Category Directory. |
 | `/categories/[slug]` | Category directory listing articles grouped by `subcategory` with breadcrumb navigation. |
 | `/articles/[slug]` | Distraction-free reading view with metadata header, responsive TOC, Markdown prose, disclaimer, and related articles. |
+| `/calendar` | Interactive BulSU Academic Calendar (AY 2026–2027) with real-time search and category filtering. |
 | `/map` | Interactive 2D SVG schematic of BulSU Malolos Main Campus with building inspector and location search. |
 | `/404.html` | Branded recovery page embedding the search bar and links to all seven categories. |
 | `/search-index.json` | Static JSON search payload consumed by `<SearchBar />`. |

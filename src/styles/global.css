@@ -498,3 +498,30 @@
 :root.dark .campus-banner-dark {
   display: block;
 }
+
+/* Academic Calendar OSR category tokens (WCAG AA light & dark) */
+.cal-cat-all { --cal-dot: #212529; --cal-ink: #212529; --cal-bg: #F1F3F5; --cal-border: #CED4DA; }
+.cal-cat-undergraduate { --cal-dot: #1D4ED8; --cal-ink: #1E40AF; --cal-bg: #EFF6FF; --cal-border: #BFDBFE; }
+.cal-cat-graduate-school { --cal-dot: #C2410C; --cal-ink: #9A3412; --cal-bg: #FFF7ED; --cal-border: #FED7AA; }
+.cal-cat-laboratory-high-school { --cal-dot: #B45309; --cal-ink: #92400E; --cal-bg: #FFFBEB; --cal-border: #FDE68A; }
+.cal-cat-college-of-law { --cal-dot: #7E22CE; --cal-ink: #6B21A8; --cal-bg: #FAF5FF; --cal-border: #E9D5FF; }
+.cal-cat-college-of-medicine { --cal-dot: #15803D; --cal-ink: #166534; --cal-bg: #F0FDF4; --cal-border: #BBF7D0; }
+.cal-cat-holiday { --cal-dot: #8B1538; --cal-ink: #8B1538; --cal-bg: #FDF2F4; --cal-border: #F5C2CE; }
+
+:root.dark .cal-cat-all { --cal-dot: #E6E8EC; --cal-ink: #E6E8EC; --cal-bg: #232730; --cal-border: #3B4252; }
+:root.dark .cal-cat-undergraduate { --cal-dot: #60A5FA; --cal-ink: #93C5FD; --cal-bg: #172554; --cal-border: #1E3A8A; }
+:root.dark .cal-cat-graduate-school { --cal-dot: #FB923C; --cal-ink: #FDBA74; --cal-bg: #431407; --cal-border: #7C2D12; }
+:root.dark .cal-cat-laboratory-high-school { --cal-dot: #FBBF24; --cal-ink: #FDE68A; --cal-bg: #451A03; --cal-border: #78350F; }
+:root.dark .cal-cat-college-of-law { --cal-dot: #C084FC; --cal-ink: #E9D5FF; --cal-bg: #3B0764; --cal-border: #581C87; }
+:root.dark .cal-cat-college-of-medicine { --cal-dot: #4ADE80; --cal-ink: #BBF7D0; --cal-bg: #052E16; --cal-border: #14532D; }
+:root.dark .cal-cat-holiday { --cal-dot: #F26B8A; --cal-ink: #F9A8BC; --cal-bg: #3A1522; --cal-border: #6B2138; }
+
+.cal-dot {
+  background-color: var(--cal-dot);
+}
+
+.cal-badge {
+  color: var(--cal-ink);
+  background-color: var(--cal-bg);
+  border-color: var(--cal-border);
+}

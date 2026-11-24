@@ -5,7 +5,7 @@ import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   activeCategory?: CategorySlug;
-  activeNav?: 'home' | 'articles' | 'contribute' | 'map';
+  activeNav?: 'home' | 'articles' | 'calendar' | 'contribute' | 'map';
   headerSearchShortcut?: boolean;
 }
 
@@ -16,6 +16,7 @@ const isHome = activeNav === 'home';
 const NAV_LINKS = [
   { label: 'Home', href: '/', key: 'home' as const },
   { label: 'Articles', href: '/articles', key: 'articles' as const },
+  { label: 'Calendar', href: '/calendar', key: 'calendar' as const },
   { label: 'Campus Map', href: '/map', key: 'map' as const },
   { label: 'Contribute', href: '/contribute', key: 'contribute' as const },
 ];
@@ -76,7 +77,7 @@ const NAV_LINKS = [
               <a
                 href={item.href}
                 aria-current={isActive ? 'page' : undefined}
-                class={`rounded-lg px-3 py-1.5 text-sm whitespace-nowrap transition-colors duration-150 ${
+                class={`rounded-lg px-2.5 lg:px-3 py-1.5 text-sm whitespace-nowrap transition-colors duration-150 ${
                   isActive
                     ? 'bg-brand-crimson-wash font-semibold text-brand-crimson'
                     : 'font-medium text-ink-secondary hover:bg-surface-subtle hover:text-brand-crimson'

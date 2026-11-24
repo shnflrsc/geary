@@ -233,7 +233,7 @@ Tests run in four stages. Run `bun run build` before `bun test` in clean checkou
 | :--- | :--- | :--- | :--- |
 | `bun run check` | `astro check` | `TC-BLD-01` (TypeScript and Astro diagnostics) | CI (`.github/workflows/ci.yml`) and local PR prep |
 | `bun run build` | `astro build` | `TC-BLD-02`, `TC-BLD-03` (Zod validation and `dist/` generation) | CI (`.github/workflows/ci.yml`) and local PR prep |
-| `bun test` (`bun run test:unit`) | `bun test` | `TC-UNIT-01` to `TC-UNIT-06` (search scorer, special chars, grouping, JSON contract, map search) | CI (`.github/workflows/ci.yml`) and local PR prep |
+| `bun test` (`bun run test:unit`) | `bun test` | `TC-UNIT-01` to `TC-UNIT-07` (search scorer, special chars, grouping, JSON contract, map search, academic calendar filtering) | CI (`.github/workflows/ci.yml`) and local PR prep |
 | `bun run test:e2e` | `playwright test` | `TC-BLD-04`, `TC-E2E-01` to `TC-E2E-08`, `TC-A11Y-01` to `TC-A11Y-03`, `TC-SEC-01` | Local before opening or merging UI, route, or theme PRs |
 | `bun audit` | `bun audit` | `TC-SEC-02` (dependency vulnerability check) | Local before merging dependency changes or releases |
 

@@ -243,11 +243,7 @@ export default function AcademicCalendar() {
                 {group.events.map((event) => (
                   <li
                     key={event.id}
-                    className={`cal-cat-${event.category} flex flex-col gap-2 px-4 py-3.5 sm:flex-row sm:items-start sm:gap-4 sm:px-5 ${
-                      searchTerms.length > 0
-                        ? 'border-l-[3px] border-l-brand-crimson bg-brand-crimson-wash/40'
-                        : ''
-                    }`}
+                    className={`cal-cat-${event.category} flex flex-col gap-2 px-4 py-3.5 sm:flex-row sm:items-start sm:gap-4 sm:px-5`}
                   >
                     <div className="flex shrink-0 items-center gap-2 sm:w-32 sm:pt-0.5">
                       <span

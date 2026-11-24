@@ -84,14 +84,12 @@ Azure for Students is **not** available with a BulSU Microsoft student account. 
 
 ### GitHub Student Developer Pack
 
-Apply on the [GitHub Student Developer Pack page](https://education.github.com/pack) using your **@ms.bulsu.edu.ph** email. If automatic domain verification does not go through, upload your Student ID or COR. Once approved, you get:
+Add and verify your **@ms.bulsu.edu.ph** email in your GitHub account settings first, then apply on the [GitHub Student Developer Pack page](https://education.github.com/pack). Once approved, you get:
 
 - **GitHub Pro:** Unlimited private repositories, 3,000 GitHub Actions minutes per month, and 180 GitHub Codespaces hours per month.
 - **GitHub Copilot Student:** Unlimited code completions, an AI credits allowance, and limited chat. This is a dedicated student tier with higher limits than Copilot Free, though distinct from paid Copilot Pro.
 - **Free 1-year domains:** One free domain from Namecheap (.me with SSL), Name.com, or .TECH.
 - **Developer tools and learning platforms:** JetBrains IDEs, MongoDB, Datadog, FrontendMasters, DataCamp, Educative, and Scrimba. Codédex Club is also listed, though its free window is 1 month.
-
-DigitalOcean retired its $200 GitHub Student Pack credit in August 2026 and is no longer included.
 
 ### Visual Studio and Microsoft Certifications
 

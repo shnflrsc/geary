@@ -188,7 +188,7 @@ Visiting an outdated bookmark or broken URL loads the branded `404` page with a 
 | Req ID | Priority | Requirement statement |
 | :--- | :--- | :--- |
 | `REQ-CAL-01` | `P1` | The system shall render the official BulSU Academic Calendar (sourced from BulSU Office of the Student Regent advisories) grouped chronologically by month on `/calendar` with zero external runtime APIs. |
-| `REQ-CAL-02` | `P1` | Each calendar event shall be categorized using the OSR legend (`Undergraduate`, `Graduate School`, `Laboratory High School`, `College of Law`, `College of Medicine`, `Holiday`) plus `All` for general university-wide events. |
+| `REQ-CAL-02` | `P1` | Each calendar event shall be categorized using the OSR legend (`Undergraduate`, `Graduate School`, `Laboratory High School`, `College of Law`, `College of Medicine`, `Holiday`) plus `Universal` for general university-wide events. |
 | `REQ-CAL-03` | `P1` | Visitors shall be able to search calendar events by keyword or month/date and filter by category chips instantaneously on the client. |
 | `REQ-CAL-04` | `P1` | The global Header navigation shall link directly to `/calendar` (`Calendar`) between `Articles` and `Campus Map`. |
 

@@ -220,7 +220,7 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
 
 ### 5.10 Interactive Academic Calendar (`AcademicCalendar.tsx`)
 
-- Layout: Single-column constrained container (`max-w-5xl`) on `/calendar` with a search input, scrollable/wrappable category filter chips (`All`, `University-Wide (All)`, `Undergraduate`, `Graduate School`, `Laboratory High School`, `College of Law`, `College of Medicine`, `Holiday`), quick month jump pills, and month-grouped event cards.
+- Layout: Single-column constrained container (`max-w-5xl`) on `/calendar` with a search input, scrollable category filter chips (`All Events`, `Universal`, `Undergraduate`, `Graduate School`, `Laboratory High School`, `College of Law`, `College of Medicine`, `Holiday`), quick month jump pills, and month-grouped event cards.
 - Category color badges: Each OSR category uses a high-contrast accessible dot + subtle tinted pill (dark-mode aware) matching the OSR color legend (blue for Undergraduate, orange for Graduate School, amber/gold for Laboratory High School, purple for College of Law, emerald/green for College of Medicine, crimson/red for Holiday, neutral ink for All/University-Wide).
 
 ## 6. Interaction principles and accessibility ergonomics

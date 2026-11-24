@@ -248,15 +248,15 @@ export default function AcademicCalendar() {
                     <div className="flex shrink-0 items-center gap-2 sm:w-32 sm:pt-0.5">
                       <span
                         aria-hidden="true"
-                        className="cal-dot h-2.5 w-2.5 shrink-0 rounded-xs"
+                        className="cal-dot h-1.5 w-1.5 shrink-0 rounded-full opacity-75"
                       />
-                      <span className="text-sm font-bold tabular-nums text-ink-primary">
+                      <span className="text-sm font-medium tabular-nums text-ink-secondary">
                         {renderHighlightedText(event.dateText, searchTerms)}
                       </span>
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm leading-relaxed text-ink-primary">
+                      <p className="text-sm font-medium leading-relaxed text-ink-primary">
                         {event.subjectToPresidentialChange && (
                           <span
                             title="Subject to approval/change by the BulSU University President"
@@ -269,7 +269,7 @@ export default function AcademicCalendar() {
                       </p>
                       {event.subjectToPresidentialChange && (
                         <p className="mt-1 text-xs leading-relaxed text-ink-secondary">
-                          The BulSU University President is granted authority to approve changes in
+                          The BulSU University President is granted authority to approve changes to
                           this event as necessary.
                         </p>
                       )}

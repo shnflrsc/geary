@@ -31,7 +31,7 @@ export const ACADEMIC_CALENDAR_META = {
 } as const;
 
 export const CALENDAR_CATEGORIES: readonly CalendarCategoryMeta[] = [
-  { id: 'all', label: 'All' },
+  { id: 'all', label: 'Universal' },
   { id: 'undergraduate', label: 'Undergraduate' },
   { id: 'graduate-school', label: 'Graduate School' },
   { id: 'laboratory-high-school', label: 'Laboratory High School' },

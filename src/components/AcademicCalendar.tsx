@@ -267,6 +267,12 @@ export default function AcademicCalendar() {
                         )}
                         {renderHighlightedText(event.title, searchTerms)}
                       </p>
+                      {event.subjectToPresidentialChange && (
+                        <p className="mt-1 text-xs leading-relaxed text-ink-secondary">
+                          The BulSU University President is granted authority to approve changes in
+                          this event as necessary.
+                        </p>
+                      )}
                     </div>
                   </li>
                 ))}
@@ -275,17 +281,6 @@ export default function AcademicCalendar() {
           ))}
         </div>
       )}
-
-      {/* Presidential Schedule Change Footnote Card */}
-      <aside
-        aria-label="Schedule change notice"
-        className="rounded-xl border border-border-subtle bg-surface-subtle/60 p-4 text-xs leading-relaxed text-ink-secondary sm:p-5"
-      >
-        <p>
-          <span className="font-bold text-brand-crimson">*</span>{' '}
-          {ACADEMIC_CALENDAR_META.presidentialNote}
-        </p>
-      </aside>
 
       {/* Source Card (matching ArticleLayout source card) */}
       <aside

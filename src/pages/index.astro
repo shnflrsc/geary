@@ -51,7 +51,7 @@ const HERO_GEARS = [
   headerSearchShortcut={false}
   jsonLd={websiteJsonLd}
 >
-  <section class="relative z-20 border-b border-border-subtle bg-canvas-paper py-12 sm:py-14 lg:py-16">
+  <section class="relative z-20 flex min-h-[calc(100svh-9.3125rem)] items-center bg-canvas-paper py-12 sm:py-14 lg:py-16">
     <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {
         HERO_GEARS.map((gear) => (
@@ -74,7 +74,7 @@ const HERO_GEARS = [
       <canvas id="hero-snow" class="block h-full w-full" aria-hidden="true"></canvas>
     </div>
 
-    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
         <h1 class="font-heading text-[1.875rem] sm:text-[2.5rem] font-extrabold leading-[1.15] tracking-[-0.025em] text-ink-primary">
           The Better BulSU Student Handbook
@@ -104,90 +104,16 @@ const HERO_GEARS = [
           to help improve Geary!
         </p>
       </div>
+
+      <ExploreSpotlight
+        client:load
+        items={featuredPool}
+        initialDateKey={initialDateKey}
+        groupSize={3}
+        groupCount={3}
+      />
     </div>
   </section>
-
-  <section
-    aria-label="Academic Calendar"
-    class="relative overflow-hidden border-b border-border-subtle bg-surface-card py-4 sm:py-5"
-  >
-    <img
-      src="/academic-calendar-light.png"
-      alt=""
-      aria-hidden="true"
-      class="campus-banner-light pointer-events-none absolute top-1/2 left-0 h-56 w-auto max-w-none -translate-y-1/2 opacity-50 select-none sm:left-6 sm:h-72 sm:opacity-80 lg:left-12 lg:h-80"
-    />
-    <img
-      src="/academic-calendar-dark.png"
-      alt=""
-      aria-hidden="true"
-      class="campus-banner-dark pointer-events-none absolute top-1/2 left-0 h-56 w-auto max-w-none -translate-y-1/2 opacity-50 select-none sm:left-6 sm:h-72 sm:opacity-80 lg:left-12 lg:h-80"
-    />
-
-    <div class="relative z-10 mx-auto flex max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8">
-      <a
-        href="/calendar"
-        class="inline-flex items-center gap-1.5 bg-[radial-gradient(closest-side,var(--color-surface-card)_60%,transparent)] px-8 py-2 text-sm font-semibold text-brand-crimson transition-colors hover:text-brand-crimson-hover hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-crimson sm:bg-none sm:px-0 sm:py-1.5"
-      >
-        Academic Calendar
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 16 16"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          class="h-3.5 w-3.5 shrink-0"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.5 8h9M9 4.5 12.5 8 9 11.5" />
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <section
-    aria-label="Campus Map"
-    class="relative overflow-hidden border-b border-border-subtle bg-surface-card py-4 sm:py-5"
-  >
-    <img
-      src="/campus-light.png"
-      alt=""
-      aria-hidden="true"
-      class="campus-banner-light pointer-events-none absolute top-1/2 right-0 h-56 w-auto max-w-none -translate-y-1/2 opacity-50 select-none sm:right-6 sm:h-72 sm:opacity-80 lg:right-12 lg:h-80"
-    />
-    <img
-      src="/campus-dark.png"
-      alt=""
-      aria-hidden="true"
-      class="campus-banner-dark pointer-events-none absolute top-1/2 right-0 h-56 w-auto max-w-none -translate-y-1/2 opacity-50 select-none sm:right-6 sm:h-72 sm:opacity-80 lg:right-12 lg:h-80"
-    />
-
-    <div class="relative z-10 mx-auto flex max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8">
-      <a
-        href="/map"
-        class="inline-flex items-center gap-1.5 bg-[radial-gradient(closest-side,var(--color-surface-card)_60%,transparent)] px-8 py-2 text-sm font-semibold text-brand-crimson transition-colors hover:text-brand-crimson-hover hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-crimson sm:bg-none sm:px-0 sm:py-1.5"
-      >
-        Campus Map
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 16 16"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          class="h-3.5 w-3.5 shrink-0"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.5 8h9M9 4.5 12.5 8 9 11.5" />
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <ExploreSpotlight
-    client:load
-    items={featuredPool}
-    initialDateKey={initialDateKey}
-    groupSize={6}
-    groupCount={3}
-  />
 
   <script>
     (() => {

@@ -169,12 +169,12 @@ The system shall maintain a single canonical registry defining the 7 permitted c
 
 ### 4.2 Static route and page generation subsystem
 
-#### `SRS-FUNC-RND-01`: Home page directory and Featured aggregation (`/`)
+#### `SRS-FUNC-RND-01`: Home page hero spotlight aggregation (`/`)
 
 - Inputs: validated article collection.
-- Processing logic: sort all published articles deterministically by title and pass the pool into `<ExploreSpotlight />` (`client:load`), which deterministically shuffles and partitions 3 non-overlapping groups of 6 articles seeded by local calendar date (`YYYY-MM-DD`).
-- Outputs: static `index.html` containing the hero search island and daily rotating 3x6 Featured section.
-- Error handling: if the article collection is empty, omit the Featured section cleanly.
+- Processing logic: sort all published articles deterministically by title and pass the pool into `<ExploreSpotlight />` (`client:load`), which deterministically shuffles and partitions 3 non-overlapping groups of 3 articles seeded by local calendar date (`YYYY-MM-DD`).
+- Outputs: static `index.html` containing the hero search island and daily rotating 3x3 single-row article spotlight at the bottom of the hero with no manual navigation controls.
+- Error handling: if the article collection is empty, omit the spotlight cleanly.
 
 #### `SRS-FUNC-RND-02`: Category static path generation (`/categories/[slug]`)
 

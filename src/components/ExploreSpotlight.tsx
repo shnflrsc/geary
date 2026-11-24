@@ -20,7 +20,7 @@ const FADE_MS = 160;
 export default function ExploreSpotlight({
   items,
   initialDateKey,
-  groupSize = 6,
+  groupSize = 3,
   groupCount = 3,
   cycleMs = 6000,
 }: ExploreSpotlightProps) {
@@ -108,9 +108,9 @@ export default function ExploreSpotlight({
   const currentItems = groups[safeGroupIndex] ?? [];
 
   return (
-    <section
-      aria-labelledby="featured-articles-heading"
-      className="py-10 sm:py-12"
+    <div
+      aria-label="Suggested articles"
+      className="mt-10 text-left"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsFocused(true)}
@@ -120,89 +120,47 @@ export default function ExploreSpotlight({
         }
       }}
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <h2
-            id="featured-articles-heading"
-            className="font-heading text-xl sm:text-2xl font-bold text-ink-primary"
+      <div
+        className={`grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 transition-opacity duration-150 ${
+          isFading ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        {currentItems.map((item) => (
+          <a
+            key={item.slug}
+            href={`/articles/${item.slug}`}
+            className="group flex flex-col justify-between rounded-xl border border-border-subtle bg-surface-card p-5 transition-colors duration-150 hover:border-brand-crimson"
           >
-            Featured
-          </h2>
+            <h2 className="font-heading text-base font-semibold leading-snug text-ink-primary transition-colors duration-150 group-hover:text-brand-crimson">
+              {item.title}
+            </h2>
 
-          {groups.length > 1 && (
-            <div
-              role="group"
-              aria-label="Featured article groups"
-              className="flex items-center"
-            >
-              {groups.map((_, index) => {
-                const isActive = index === safeGroupIndex;
-                return (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => transitionToGroup(index)}
-                    aria-label={`Show featured group ${index + 1} of ${groups.length}`}
-                    aria-pressed={isActive}
-                    className="group inline-flex h-8 w-6 cursor-pointer items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`h-2 w-2 rounded-full transition-colors duration-150 ${
-                        isActive
-                          ? 'bg-brand-crimson'
-                          : 'bg-ink-muted group-hover:bg-ink-secondary'
-                      }`}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        <div
-          className={`grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6 transition-opacity duration-150 ${
-            isFading ? 'opacity-0' : 'opacity-100'
-          }`}
-        >
-          {currentItems.map((item) => (
-            <a
-              key={item.slug}
-              href={`/articles/${item.slug}`}
-              className="group flex flex-col justify-between rounded-xl border border-border-subtle bg-surface-card p-5 transition-colors duration-150 hover:border-brand-crimson"
-            >
-              <h3 className="font-heading text-base font-semibold leading-snug text-ink-primary transition-colors duration-150 group-hover:text-brand-crimson">
-                {item.title}
-              </h3>
-
-              <div className="mt-1.5 flex items-end justify-between gap-3">
-                <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-ink-secondary">
-                  {item.preview}
-                </p>
-                <span
-                  aria-hidden="true"
-                  className="inline-flex h-[1.625em] shrink-0 items-center text-sm text-brand-crimson transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-brand-crimson-hover"
+            <div className="mt-1.5 flex items-end justify-between gap-3">
+              <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-ink-secondary">
+                {item.preview}
+              </p>
+              <span
+                aria-hidden="true"
+                className="inline-flex h-[1.625em] shrink-0 items-center text-sm text-brand-crimson transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-brand-crimson-hover"
+              >
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.75}
+                  className="h-3.5 w-3.5"
                 >
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={1.75}
-                    className="h-3.5 w-3.5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.5 8h9M9 4.5 12.5 8 9 11.5"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.5 8h9M9 4.5 12.5 8 9 11.5"
+                  />
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

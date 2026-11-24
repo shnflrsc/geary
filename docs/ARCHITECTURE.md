@@ -77,7 +77,7 @@ flowchart TB
 ### 3.2 Astro Islands hydration boundary
 
 - Zero-JS static components: `BaseLayout.astro`, `ArticleLayout.astro`, `Header.astro`, `Footer.astro`, `Breadcrumbs.astro`, `CategoryCard.astro`, `ArticleCard.astro`, `TableOfContents.astro`, and `VerificationBanner.astro` compile to static HTML and CSS.
-- Selective React hydration (`client:load`): `SearchBar.tsx` registers global keyboard shortcuts (`/`, `Ctrl+K` / `Cmd+K`) on load; `CampusMap.tsx` (on `/map`) handles interactive SVG pan, zoom, and office search; `ExploreSpotlight.tsx` (on `/`) renders 6 Featured articles cycling through 3 daily randomized groups seeded by local calendar date.
+- Selective React hydration (`client:load`): `SearchBar.tsx` registers global keyboard shortcuts (`/`, `Ctrl+K` / `Cmd+K`) on load; `CampusMap.tsx` (on `/map`) handles interactive SVG pan, zoom, and office search; `ExploreSpotlight.tsx` (in the Home `/` hero) renders 3 articles in one row cycling through 3 daily randomized groups seeded by local calendar date without manual controls.
 - Minimal progressive enhancement (`< 1 KB`): Mobile drawer state in `Header.astro` and theme switching in `ThemeToggle.astro` use small inline vanilla scripts, and mobile Table of Contents disclosure uses native HTML `<details>` and `<summary>`.
 
 ### 3.3 Content-to-build propagation
@@ -86,7 +86,7 @@ Adding or editing a single `.md` file in `src/content/articles/` updates four bu
 
 1. Article view (`/articles/[slug]`): Compiles Markdown prose, extracts `h2` and `h3` headings for TOC navigation, builds breadcrumbs, and resolves up to 3 sibling articles in the same category.
 2. Category directory (`/categories/[slug]`): Updates article counts and groups the article card under its `subcategory` heading.
-3. Home directory (`/`): Includes the article in the daily randomized 3x6 Featured pool.
+3. Home hero (`/`): Includes the article in the daily randomized 3x3 hero spotlight pool.
 4. Search payload (`/search-index.json`): Serializes the article's `slug`, `title`, `preview` (derived from the Markdown body), `category`, `categoryLabel`, `subcategory`, and `headings` array.
 
 ## 4. Component architecture and responsibilities
@@ -344,7 +344,7 @@ geary/
     │   ├── CampusMap.tsx            # Hydrated React island for full-bleed 2D SVG map on /map
     │   └── campus-map/              # CampusMap search overlay, inspector/bottom sheet, and viewport hook
     └── pages/
-        ├── index.astro              # Home portal (Hero SearchBar, Campus Map strip, Featured Articles)
+        ├── index.astro              # Home portal (Hero SearchBar + 3-card daily spotlight)
         ├── map.astro                # Interactive 2D BulSU Malolos Campus Map island
         ├── contribute.astro         # Community submission page with embedded Google Form
         ├── terms.astro              # Terms of Service & unofficial disclaimer page

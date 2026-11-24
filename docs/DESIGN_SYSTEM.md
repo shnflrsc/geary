@@ -139,7 +139,7 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
 | `space-6` | `24px` (`1.5rem`) | Tablet page gutter (`sm:px-6`), desktop card padding (`md:p-6`), desktop grid gap (`md:gap-6`). |
 | `space-8` | `32px` (`2rem`) | Desktop page gutter (`lg:px-8`), article header bottom divider margin. |
 | `space-12` | `48px` (`3rem`) | Major section vertical separation on mobile/tablet (`py-12`). |
-| `space-16` | `64px` (`4rem`) | Hero and directory vertical spacing on desktop (`lg:py-16`). |
+| `space-16` | `64px` (`4rem`) | Directory vertical spacing on desktop (`lg:py-16`) and minimum hero padding (`min-h-[calc(100svh-9.3125rem)]` filling the viewport above the footer). |
 
 ### 4.2 Container, grid, and responsive breakpoints
 
@@ -148,9 +148,9 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
 
 | Breakpoint | Viewport width | Navigation header | Home discovery grids | Subcategory / related grid | Article reading layout |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Mobile (default) | `< 768px` | Brand mark + Search trigger + Hamburger drawer toggle (`>= 44x44px`) | `1` column (`grid-cols-1`) for Featured (6 cards per group) | `1` column (`grid-cols-1`) | Single stack: Header -> Collapsed `<details>` TOC -> Prose (`100%` up to `65ch`) -> Related |
-| Tablet (`md`) | `768px - 1023px` | Brand mark + Inline category links + Compact SearchBar | `2` columns (`md:grid-cols-2`) for Featured (6 cards per group) | `2` columns (`md:grid-cols-2`) | Single stack (`max-w-prose mx-auto`) with collapsed `<details>` TOC |
-| Desktop (`lg`) | `>= 1024px` | Full single-row top nav (`h-16` / `64px`) | `3` columns (`lg:grid-cols-3`) for Featured (6 cards per group) | `2`-`3` columns (`lg:grid-cols-2` / `3`) | Two-column CSS grid: `[minmax(0, 65ch)_260px]` with sticky `"On this page"` `<aside>` TOC (`top-24`) |
+| Mobile (default) | `< 768px` | Brand mark + Search trigger + Hamburger drawer toggle (`>= 44x44px`) | `1` column (`grid-cols-1`) for hero spotlight (3 cards) | `1` column (`grid-cols-1`) | Single stack: Header -> Collapsed `<details>` TOC -> Prose (`100%` up to `65ch`) -> Related |
+| Tablet (`md`) | `768px - 1023px` | Brand mark + Inline category links + Compact SearchBar | `3` columns (`md:grid-cols-3`) single row for hero spotlight (3 cards) | `2` columns (`md:grid-cols-2`) | Single stack (`max-w-prose mx-auto`) with collapsed `<details>` TOC |
+| Desktop (`lg`) | `>= 1024px` | Full single-row top nav (`h-16` / `64px`) | `3` columns (`md:grid-cols-3`) single row for hero spotlight (3 cards) | `2`-`3` columns (`lg:grid-cols-2` / `3`) | Two-column CSS grid: `[minmax(0, 65ch)_260px]` with sticky `"On this page"` `<aside>` TOC (`top-24`) |
 
 ## 5. Component specifications and interactive states
 

@@ -80,7 +80,7 @@ These programs are offered directly by Microsoft and GitHub to verified universi
 
 ### Azure for Students
 
-Azure for Students is **not** available with a BulSU Microsoft student account. Microsoft's academic verification does not accept **@ms.bulsu.edu.ph** accounts, even when signing in directly with your BulSU credentials.
+Azure for Students is **not** available with a BulSU Microsoft student account. Academic verification displays *"Unable to confirm your University ID"* even when using your BulSU Microsoft student account.
 
 ### GitHub Student Developer Pack
 

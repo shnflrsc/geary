@@ -221,4 +221,19 @@ describe('TC-UNIT-06: Campus map search, directory integrity, and viewBox math',
     });
     expect(clampedNaN).toEqual(DEFAULT_MAP_VIEWBOX);
   });
+
+  test('focusBuildingViewBox shifts focus for overlay offsets and computePanViewBox uses uniform meet scaling', () => {
+    const target = { center: { x: 520, y: 420 } };
+    const centered = focusBuildingViewBox(target, 480);
+    const desktopShifted = focusBuildingViewBox(target, 480, { offsetXRatio: 0.14 });
+    const mobileShifted = focusBuildingViewBox(target, 480, { offsetYRatio: -0.16 });
+
+    expect(desktopShifted.x).toBeLessThan(centered.x);
+    expect(mobileShifted.y).toBeGreaterThan(centered.y);
+
+    // On a widescreen rect (1440x700), viewBox height constrains scale, so horizontal and vertical pan use the same units/px.
+    const zoomed = { x: 200, y: 200, width: 500, height: 425 };
+    const panned = computePanViewBox(zoomed, -100, -100, { width: 1440, height: 700 });
+    expect(panned.x - zoomed.x).toBeCloseTo(panned.y - zoomed.y, 6);
+  });
 });

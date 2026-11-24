@@ -6,18 +6,57 @@ import {
   partitionBuildingLocations,
 } from '../../lib/map-search';
 
+type SheetSnap = 'collapsed' | 'half' | 'expanded';
+
+const COLLAPSED_HEIGHT_PX = 68;
+const HALF_HEIGHT_RATIO = 0.48;
+const EXPANDED_HEIGHT_RATIO = 0.82;
+const DESKTOP_MEDIA_QUERY = '(min-width: 1024px)';
+
 interface BuildingInspectorProps {
   selectedBuilding: CampusBuilding | null;
   highlightedLocationId: string | null;
+  onClearSelection: () => void;
+  containerRef: React.RefObject<HTMLElement | null>;
 }
 
 export default function BuildingInspector({
   selectedBuilding,
   highlightedLocationId,
+  onClearSelection,
+  containerRef,
 }: BuildingInspectorProps) {
   const [openFloors, setOpenFloors] = useState<Record<string, boolean>>({});
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [sheetSnap, setSheetSnap] = useState<SheetSnap>('collapsed');
+  const [dragHeightPx, setDragHeightPx] = useState<number | null>(null);
+
   const locationListRef = useRef<HTMLUListElement>(null);
   const lastScrolledHighlightRef = useRef<string | null>(null);
+  const sheetDragRef = useRef<{
+    pointerId: number;
+    startY: number;
+    startHeight: number;
+    moved: boolean;
+  } | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_MEDIA_QUERY);
+    setIsDesktop(mq.matches);
+    const onChange = (event: MediaQueryListEvent) => setIsDesktop(event.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  // Automatically open bottom sheet on mobile when a building is selected, and collapse when cleared.
+  useEffect(() => {
+    if (selectedBuilding) {
+      setSheetSnap('half');
+    } else {
+      setSheetSnap('collapsed');
+    }
+    setDragHeightPx(null);
+  }, [selectedBuilding?.id, highlightedLocationId]);
 
   const partitionedLocations = useMemo(
     () =>
@@ -58,11 +97,111 @@ export default function BuildingInspector({
       matchEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     });
     return () => cancelAnimationFrame(rafId);
-  }, [highlightedLocationId, selectedBuilding?.id, openFloors]);
+  }, [highlightedLocationId, selectedBuilding?.id, openFloors, sheetSnap]);
 
   const toggleFloor = (key: string) => {
     setOpenFloors((prev) => ({ ...prev, [key]: !prev[key] }));
   };
+
+  const getContainerHeight = () => containerRef.current?.clientHeight ?? 600;
+
+  const getSnapHeightPx = (snap: SheetSnap, containerHeight: number) => {
+    if (snap === 'collapsed') return COLLAPSED_HEIGHT_PX;
+    if (snap === 'half') return Math.round(containerHeight * HALF_HEIGHT_RATIO);
+    return Math.round(containerHeight * EXPANDED_HEIGHT_RATIO);
+  };
+
+  const handleSheetPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (isDesktop) return;
+    if ((event.target as HTMLElement).closest('button[data-no-drag="true"]')) return;
+
+    const containerHeight = getContainerHeight();
+    const startHeight = getSnapHeightPx(sheetSnap, containerHeight);
+    sheetDragRef.current = {
+      pointerId: event.pointerId,
+      startY: event.clientY,
+      startHeight,
+      moved: false,
+    };
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Ignore synthetic events
+    }
+  };
+
+  const handleSheetPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = sheetDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+
+    const dy = drag.startY - event.clientY;
+    if (!drag.moved && Math.abs(dy) < 5) return;
+    drag.moved = true;
+
+    const containerHeight = getContainerHeight();
+    const maxHeight = Math.round(containerHeight * 0.86);
+    const nextHeight = Math.min(maxHeight, Math.max(COLLAPSED_HEIGHT_PX, drag.startHeight + dy));
+    setDragHeightPx(nextHeight);
+  };
+
+  const handleSheetPointerEnd = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = sheetDragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+
+    try {
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }
+    } catch {
+      // Ignore synthetic events
+    }
+
+    if (drag.moved && dragHeightPx !== null) {
+      const containerHeight = getContainerHeight();
+      const collapsedPx = getSnapHeightPx('collapsed', containerHeight);
+      const halfPx = getSnapHeightPx('half', containerHeight);
+      const expandedPx = getSnapHeightPx('expanded', containerHeight);
+      const dy = drag.startY - event.clientY;
+
+      if (dy > 40) {
+        setSheetSnap(dragHeightPx > halfPx + 24 ? 'expanded' : 'half');
+      } else if (dy < -40) {
+        setSheetSnap(dragHeightPx < halfPx - 24 ? 'collapsed' : 'half');
+      } else {
+        const distances: Array<[SheetSnap, number]> = [
+          ['collapsed', Math.abs(dragHeightPx - collapsedPx)],
+          ['half', Math.abs(dragHeightPx - halfPx)],
+          ['expanded', Math.abs(dragHeightPx - expandedPx)],
+        ];
+        distances.sort((a, b) => a[1] - b[1]);
+        setSheetSnap(distances[0]?.[0] ?? 'collapsed');
+      }
+    }
+
+    sheetDragRef.current = null;
+    setDragHeightPx(null);
+  };
+
+  const cycleSheetSnap = () => {
+    setSheetSnap((prev) => {
+      if (prev === 'collapsed') return 'half';
+      if (prev === 'half') return 'expanded';
+      return 'collapsed';
+    });
+  };
+
+  const mobileSheetStyle: React.CSSProperties | undefined = isDesktop
+    ? undefined
+    : {
+        height:
+          dragHeightPx !== null
+            ? `${dragHeightPx}px`
+            : sheetSnap === 'collapsed'
+              ? `${COLLAPSED_HEIGHT_PX}px`
+              : sheetSnap === 'half'
+                ? `${HALF_HEIGHT_RATIO * 100}%`
+                : `${EXPANDED_HEIGHT_RATIO * 100}%`,
+      };
 
   const renderLocationItem = (loc: CampusLocation) => {
     const isHighlightedLoc = highlightedLocationId === loc.id;
@@ -70,7 +209,7 @@ export default function BuildingInspector({
       <li
         key={loc.id}
         data-search-match={isHighlightedLoc ? 'true' : undefined}
-        className={`rounded-md border p-3 transition-colors ${
+        className={`rounded-lg border p-3 transition-colors ${
           isHighlightedLoc
             ? 'border-brand-crimson bg-brand-crimson-wash/50 ring-1 ring-brand-crimson'
             : 'border-border-subtle bg-canvas-paper'
@@ -84,27 +223,95 @@ export default function BuildingInspector({
     );
   };
 
+  const isMobileCollapsed = !isDesktop && sheetSnap === 'collapsed' && dragHeightPx === null;
+  const locationCount = selectedBuilding?.locations.length ?? 0;
+
   return (
     <aside
       aria-live="polite"
       aria-label="Selected building locations"
-      className="flex flex-col overflow-hidden rounded-lg border border-border-subtle bg-surface-card p-4 shadow-xs sm:p-5 lg:col-span-5 lg:h-0 lg:min-h-full xl:col-span-4"
+      style={mobileSheetStyle}
+      className={`pointer-events-auto absolute inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-2xl border-t border-border-subtle bg-surface-card shadow-[0_-8px_24px_rgba(0,0,0,0.12)] lg:static lg:inset-auto lg:h-auto! lg:min-h-0 lg:max-h-full lg:rounded-2xl lg:border lg:shadow-md ${
+        dragHeightPx === null ? 'transition-[height] duration-200 ease-out' : 'transition-none'
+      }`}
     >
-      {selectedBuilding ? (
-        <div className="flex min-h-0 flex-1 flex-col">
-          <h2 className="shrink-0 border-b border-border-subtle pb-3 font-heading text-xl font-bold text-ink-primary">
-            {selectedBuilding.name}
-          </h2>
+      {/* Mobile Drag Handle + Header Bar */}
+      <div
+        onPointerDown={handleSheetPointerDown}
+        onPointerMove={handleSheetPointerMove}
+        onPointerUp={handleSheetPointerEnd}
+        onPointerCancel={handleSheetPointerEnd}
+        className="shrink-0 touch-none px-4 pt-2.5 pb-3 lg:touch-auto lg:px-4 lg:pt-3.5 lg:pb-3"
+      >
+        <button
+          type="button"
+          onClick={cycleSheetSnap}
+          aria-label={
+            sheetSnap === 'expanded'
+              ? 'Collapse building locations sheet'
+              : 'Expand building locations sheet'
+          }
+          className="mx-auto mb-2.5 flex h-4 w-16 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-brand-crimson lg:hidden"
+        >
+          <span className="h-1.5 w-10 rounded-full bg-border-strong" aria-hidden="true" />
+        </button>
 
-          {selectedBuilding.locations.length > 0 ? (
-            <ul
-              ref={locationListRef}
-              className="mt-3 max-h-[32rem] min-h-0 flex-1 space-y-2.5 overflow-y-auto py-0.5 pl-0.5 pr-3 [scrollbar-gutter:stable] lg:max-h-none"
+        {selectedBuilding ? (
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0">
+              <h2 className="truncate font-heading text-lg font-bold leading-snug text-ink-primary lg:text-xl">
+                {selectedBuilding.name}
+              </h2>
+              <p className="mt-0.5 text-xs text-ink-secondary">
+                {locationCount} {locationCount === 1 ? 'location' : 'locations'}
+              </p>
+            </div>
+            <button
+              type="button"
+              data-no-drag="true"
+              onClick={onClearSelection}
+              aria-label="Close building details"
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-subtle text-ink-secondary transition-colors hover:bg-border-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
             >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        ) : (
+          <div>
+            <p className="font-heading text-sm font-bold text-ink-primary lg:text-base">
+              Main Campus
+            </p>
+            <p className="mt-0.5 text-xs text-ink-secondary">
+              {isMobileCollapsed
+                ? 'Tap a building on the map to see locations inside.'
+                : 'Select any building on the map or search above to view offices, classrooms, and facilities.'}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Scrollable Locations Content */}
+      {selectedBuilding && (
+        <div
+          className={`min-h-0 flex-1 overflow-y-auto overscroll-contain border-t border-border-subtle px-4 py-3 [scrollbar-gutter:stable] ${
+            isMobileCollapsed ? 'hidden lg:block' : 'block'
+          }`}
+        >
+          {selectedBuilding.locations.length > 0 ? (
+            <ul ref={locationListRef} className="space-y-2.5 pb-2">
               {partitionedLocations.colleges.map(renderLocationItem)}
               {partitionedLocations.colleges.length > 0 &&
                 partitionedLocations.others.length > 0 && (
-                  <li role="separator" aria-hidden="true" className="py-1.5">
+                  <li role="separator" aria-hidden="true" className="py-1">
                     <div className="border-t border-border-strong" />
                   </li>
                 )}
@@ -114,7 +321,7 @@ export default function BuildingInspector({
                 return (
                   <li
                     key={key}
-                    className="overflow-hidden rounded-md border border-border-subtle bg-canvas-paper"
+                    className="overflow-hidden rounded-lg border border-border-subtle bg-canvas-paper"
                   >
                     <button
                       type="button"
@@ -146,15 +353,11 @@ export default function BuildingInspector({
               })}
             </ul>
           ) : (
-            <p className="mt-3 text-sm text-ink-secondary">
+            <p className="text-sm text-ink-secondary">
               No listed locations for this building yet.
             </p>
           )}
         </div>
-      ) : (
-        <p className="text-sm text-ink-secondary">
-          Select a building on the map or search above to see locations inside.
-        </p>
       )}
     </aside>
   );

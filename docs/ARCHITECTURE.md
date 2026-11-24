@@ -180,7 +180,7 @@ flowchart TD
 | `src/components/VerificationBanner.astro` | Static Astro (`0 KB` JS) | `updatedDate: Date` | Displays official office verification notice and `updatedDate` at the bottom of articles. |
 | `src/components/SearchBar.tsx` | React island (`client:load`) | `variant: 'hero' \| 'header'`, `enableGlobalShortcut?: boolean` | Lazily fetches and caches `/search-index.json` in module memory; calls the weighted literal substring scorer (`src/lib/search.ts`); manages keyboard navigation, outside-click dismissal, zero-match pills, and fetch-error fallback UI. |
 | `src/components/ExploreSpotlight.tsx` | React island (`client:load`) | Article pool from `index.astro` | Displays 6 Featured articles cycling through 3 daily randomized groups seeded by local calendar date, with manual shuffle controls. |
-| `src/components/CampusMap.tsx` | React island (`client:load`) | Data from `src/data/campus-map.ts` | Renders the interactive 2D BulSU Malolos SVG schematic, pan/zoom controls, office/facility search (`src/lib/map-search.ts`), and building inspector panel. |
+| `src/components/CampusMap.tsx` | React island (`client:load`) | Data from `src/data/campus-map.ts` | Renders the full-bleed interactive 2D BulSU Malolos SVG schematic, floating Google Maps-style search (`campus-map/CampusMapSearch.tsx`), floating desktop / bottom-sheet mobile locations inspector (`campus-map/BuildingInspector.tsx`), and aspect-aware pan/zoom viewport (`campus-map/useMapViewport.ts`). |
 | `src/lib/search.ts` | Pure TypeScript module | `items: SearchIndexItem[]`, `query: string` | Normalizes queries and scores multi-term matches (`title` > `headings`/`subcategory` > `preview`/`categoryLabel`); unit-tested without React DOM. |
 | `src/lib/articles.ts` | Pure TypeScript module | `articles: ArticleEntry[]` | Groups articles deterministically by subcategory (`groupArticlesBySubcategory`) and selects related articles; shared by page templates and unit tests. |
 | `src/lib/map-search.ts` | Pure TypeScript module | Campus map buildings/locations, `query: string` | Searches campus offices, facilities, and buildings for `CampusMap.tsx`; unit-tested in `tests/unit/map-search.test.ts`. |
@@ -340,7 +340,8 @@ geary/
     │   ├── VerificationBanner.astro # Official office verification notice
     │   ├── SearchBar.tsx            # Hydrated React island consuming /search-index.json
     │   ├── ExploreSpotlight.tsx     # Hydrated React island for daily Featured articles on /
-    │   └── CampusMap.tsx            # Hydrated React island for interactive 2D SVG map on /map
+    │   ├── CampusMap.tsx            # Hydrated React island for full-bleed 2D SVG map on /map
+    │   └── campus-map/              # CampusMap search overlay, inspector/bottom sheet, and viewport hook
     └── pages/
         ├── index.astro              # Home portal (Hero SearchBar, Featured Articles)
         ├── map.astro                # Interactive 2D BulSU Malolos Campus Map island

@@ -79,10 +79,13 @@ export default function CampusMapSearch({
   }
 
   return (
-    <div ref={wrapperRef} className="relative">
+    <div
+      ref={wrapperRef}
+      className="relative overflow-visible lg:overflow-hidden lg:rounded-2xl lg:border lg:border-border-subtle lg:bg-surface-card lg:shadow-md"
+    >
       <div className="relative flex items-center">
         <svg
-          className="pointer-events-none absolute left-3.5 h-4 w-4 text-ink-muted"
+          className="pointer-events-none absolute left-4 h-4 w-4 text-ink-muted"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -112,25 +115,35 @@ export default function CampusMapSearch({
           }}
           onKeyDown={handleKeyDown}
           placeholder="Search Map..."
-          className="w-full rounded-lg border border-border-strong bg-surface-card py-3 pr-20 pl-10 text-sm text-ink-primary shadow-xs placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
+          className="w-full rounded-full border border-border-subtle bg-surface-card py-3 pr-11 pl-11 text-sm text-ink-primary shadow-md placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 lg:rounded-none lg:border-0 lg:bg-transparent lg:py-3.5 lg:shadow-none lg:focus:ring-0 [&::-webkit-search-cancel-button]:hidden"
         />
         {query && (
           <button
             type="button"
+            aria-label="Clear search"
             onClick={() => {
               onClear();
               setDropdownOpen(false);
               setActiveMatchIndex(-1);
             }}
-            className="absolute right-2.5 rounded px-2 py-1 text-xs font-medium text-ink-secondary hover:bg-surface-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
+            className="absolute right-2 inline-flex h-8 w-8 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
           >
-            Clear
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-4 w-4"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12" />
+            </svg>
           </button>
         )}
       </div>
 
       {showDropdown && (
-        <div className="absolute z-30 mt-1.5 max-h-80 w-full overflow-y-auto rounded-md border border-border-subtle bg-surface-card shadow-lg">
+        <div className="absolute right-0 left-0 z-30 mt-2 max-h-72 overflow-y-auto overscroll-contain rounded-2xl border border-border-subtle bg-surface-card shadow-lg lg:static lg:mt-0 lg:max-h-64 lg:rounded-none lg:border-0 lg:border-t lg:shadow-none">
           {matches.length === 0 ? (
             <div className="px-4 py-3 text-sm text-ink-secondary">
               No campus locations matched{' '}
@@ -153,15 +166,34 @@ export default function CampusMapSearch({
                       role="option"
                       aria-selected={isActive}
                       onClick={() => handleSelect(match)}
-                      className={`flex w-full items-start justify-between gap-3 px-4 py-2.5 text-left transition-colors ${
+                      className={`flex w-full items-start gap-3 px-4 py-2.5 text-left transition-colors ${
                         isActive ? 'bg-brand-crimson-wash' : 'hover:bg-surface-subtle'
                       }`}
                     >
-                      <div className="min-w-0">
+                      <span
+                        aria-hidden="true"
+                        className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-subtle text-ink-secondary"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          className="h-3.5 w-3.5"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10Z"
+                          />
+                          <circle cx="12" cy="11" r="2" />
+                        </svg>
+                      </span>
+                      <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-semibold text-ink-primary">
                           {match.name}
                         </p>
-                        <p className="mt-0.5 text-xs text-ink-secondary">
+                        <p className="mt-0.5 truncate text-xs text-ink-secondary">
                           {match.kind === 'location' ? (
                             <>
                               Inside{' '}

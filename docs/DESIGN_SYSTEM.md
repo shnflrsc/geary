@@ -212,9 +212,11 @@ Normal text and meaningful control boundaries must maintain at least `4.5:1` con
 
 ### 5.9 Interactive 2D campus map (`CampusMap.tsx`)
 
-- Layout: Responsive split container (`lg:grid-cols-[minmax(0,1fr)_360px]`) pairing the SVG viewport on the left/top with a sticky building inspector panel on desktop (stacked below on mobile).
+- Layout: Full-bleed locked-viewport canvas (`h-dvh overflow-hidden` on `<body>`, `h-full w-full` inside `<main>`) occupying the full viewport below the global Header with the Footer omitted on `/map` (and an accessible `sr-only` `<h1>`) so the map and floating search bar never scroll out of view.
+  - **Desktop (`>= 1024px`):** Floating top-left overlay stack (`~360px` wide) combining a Google Maps-style search bar, floating search-results card, and a floating locations card ("This area" style) displaying the selected building's name, close action, colleges, and floor accordions with internal scrolling; click-through outside the cards preserves map panning. Floating zoom (`+` / `-`) and reset controls sit at bottom-right; a compact map legend pill sits at bottom-left.
+  - **Mobile (`< 1024px`):** Floating pill search bar at the top with dropdown results beneath it, floating zoom/reset controls on the right, and a draggable bottom-sheet locations card that starts collapsed (peek bar) when no building is selected and opens to half-height (snappable between peek, half, and expanded) when a building or search match is selected.
 - Map surface and building states: Campus grounds on `canvas-paper` (`#F8F9FA`) / `#F1F3F5`, footpaths in `#DEE2E6`, parks in `#E8F3EA`, resting clickable buildings in `white` with `border-strong` (`#CED4DA`) strokes, hovered buildings in `brand-crimson-wash` (`#FDF2F4`) with `#8B1538` stroke, and selected buildings filled `#8B1538` with `#D4A017` highlight outline (`>= 2px`).
-- Controls: Accessible zoom in (`+`), zoom out (`-`), and reset view buttons overlaid on the map canvas; drag/scroll pan inside the bounded SVG canvas; a standalone search bar (no extra label, filter, or quick-jump ribbons); and a right-hand inspector showing only the selected building's name and contained locations.
+- Viewport ergonomics: Selecting a building via search centers it with a responsive focal offset so the target building remains visible clear of the desktop left overlay or mobile bottom sheet; uniform aspect-aware pan and pinch scaling keeps gestures 1:1 on both portrait mobile and widescreen desktop.
 
 ## 6. Interaction principles and accessibility ergonomics
 

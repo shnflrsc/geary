@@ -139,7 +139,7 @@ Clicking outside the search box, pressing `Escape`, or clearing the input dismis
 | :--- | :--- | :--- |
 | `REQ-UI-01` | `P0` | The system shall present a BulSUan visual identity built around BulSU Crimson primary accents, Gear Gold secondary highlights, a warm low-glare reading background, clean white card surfaces, and high-contrast dark typography. |
 | `REQ-UI-02` | `P0` | Article views shall maintain a comfortable reading width, generous line spacing, and clear visual distinction between steps, callouts, and tables to keep cognitive load low on mobile and desktop screens. |
-| `REQ-UI-03` | `P0` | Every page shall include a responsive global Header (Geary gear brand mark, category navigation, and search access) and global Footer (unofficial student information portal disclaimer and category directory links). |
+| `REQ-UI-03` | `P0` | Every page shall include a responsive global Header (Geary gear brand mark, category navigation, and search access), and all standard content pages shall include the global Footer (unofficial student information portal disclaimer and category directory links; `/map` omits the Footer to preserve a non-scrolling full-viewport map canvas). |
 | `REQ-UI-04` | `P1` | Subtle "Geary" geometric gear motifs and BulSU accents shall reinforce brand identity in navigation and hero areas while keeping article reading containers distraction-free. |
 | `REQ-UI-05` | `P1` | The system shall provide a custom `404` recovery page styled in the Geary theme containing the search bar and direct links to all seven categories and Home. |
 
@@ -169,7 +169,7 @@ Visiting an outdated bookmark or broken URL loads the branded `404` page with a 
 | Req ID | Priority | Requirement statement |
 | :--- | :--- | :--- |
 | `REQ-MAP-01` | `P0` | The system shall render a 2D interactive SVG schematic of BulSU Malolos Main Campus derived from OpenStreetMap building footprints, walkways, gates, and landmarks without external tile servers. |
-| `REQ-MAP-02` | `P0` | Clicking or selecting any campus building shall highlight it and open a minimal inspector listing the selected building name and the names of contained locations and offices. |
+| `REQ-MAP-02` | `P0` | Clicking or selecting any campus building shall highlight it and display its name and contained locations and offices inside a floating locations card on desktop or a collapsible bottom sheet on mobile (collapsed by default when no building is selected). |
 | `REQ-MAP-03` | `P0` | A dedicated campus search bar shall search across both buildings and indoor locations (such as Registrar, Clinic, Cashier, OSFAS, Library, and Canteen) and indicate which building contains each match; selecting a match highlights and centers that building on the map. |
 | `REQ-MAP-04` | `P1` | The map canvas shall support pan, zoom-in, zoom-out, and reset controls alongside keyboard-accessible building elements. |
 

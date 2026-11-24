@@ -285,7 +285,12 @@ export function useMapViewport() {
 
   const focusBuilding = useCallback(
     (building: Pick<CampusBuilding, 'center'>) => {
-      updateViewBox(focusBuildingViewBox(building));
+      const isDesktop =
+        typeof window !== 'undefined' && window.innerWidth >= 1024;
+      const offset = isDesktop
+        ? { offsetXRatio: 0.14, offsetYRatio: 0 }
+        : { offsetXRatio: 0, offsetYRatio: -0.16 };
+      updateViewBox(focusBuildingViewBox(building, 480, offset));
     },
     [updateViewBox]
   );

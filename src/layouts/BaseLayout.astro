@@ -33,6 +33,8 @@ interface Props {
   articleMeta?: ArticleOgMeta;
   noindex?: boolean;
   jsonLd?: JsonLdObject | JsonLdObject[];
+  hideFooter?: boolean;
+  lockViewport?: boolean;
 }
 
 const {
@@ -46,6 +48,8 @@ const {
   articleMeta,
   noindex = false,
   jsonLd,
+  hideFooter = false,
+  lockViewport = false,
 } = Astro.props;
 
 const baseOrigin = resolveSiteOrigin(Astro.site, Astro.url);
@@ -127,7 +131,7 @@ const jsonLdEntries = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       ))
     }
   </head>
-  <body>
+  <body class={lockViewport ? 'min-h-0 h-dvh overflow-hidden' : undefined}>
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-surface-card focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-crimson focus:shadow-md"
@@ -141,10 +145,10 @@ const jsonLdEntries = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       headerSearchShortcut={headerSearchShortcut}
     />
 
-    <main id="main-content" class="flex-1">
+    <main id="main-content" class={lockViewport ? 'min-h-0 flex-1 overflow-hidden' : 'flex-1'}>
       <slot />
     </main>
 
-    <Footer />
+    {!hideFooter && <Footer />}
   </body>
 </html>

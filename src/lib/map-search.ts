@@ -224,26 +224,41 @@ export function computeZoomViewBox(
   });
 }
 
-/** Centers the SVG viewBox on a building coordinate at a readable zoom level. */
+export interface FocusViewBoxOffset {
+  /** Shift target building horizontally relative to viewBox width (+ places building further right). */
+  offsetXRatio?: number;
+  /** Shift target building vertically relative to viewBox height (- places building higher). */
+  offsetYRatio?: number;
+}
+
+/** Centers the SVG viewBox on a building coordinate at a readable zoom level, with optional overlay offset. */
 export function focusBuildingViewBox(
   building: Pick<CampusBuilding, 'center'>,
-  targetWidth = 480
+  targetWidth = 480,
+  offset?: FocusViewBoxOffset
 ): ViewBoxRect {
   const clampedWidth = Math.min(
     MAX_VIEWBOX_WIDTH,
     Math.max(MIN_VIEWBOX_WIDTH, targetWidth)
   );
   const targetHeight = clampedWidth * VIEWBOX_ASPECT;
+  const rawX = offset?.offsetXRatio ?? 0;
+  const rawY = offset?.offsetYRatio ?? 0;
+  const offsetX = Number.isFinite(rawX) ? Math.min(0.35, Math.max(-0.35, rawX)) : 0;
+  const offsetY = Number.isFinite(rawY) ? Math.min(0.35, Math.max(-0.35, rawY)) : 0;
 
   return clampViewBox({
-    x: building.center.x - clampedWidth / 2,
-    y: building.center.y - targetHeight / 2,
+    x: building.center.x - clampedWidth * (0.5 + offsetX),
+    y: building.center.y - targetHeight * (0.5 + offsetY),
     width: clampedWidth,
     height: targetHeight,
   });
 }
 
-/** Computes a panned viewBox from a pixel drag delta relative to the SVG element rect. */
+/**
+ * Computes a panned viewBox from a pixel drag delta using uniform xMidYMid-meet
+ * scaling so dragging feels 1:1 on both widescreen desktop and portrait mobile viewports.
+ */
 export function computePanViewBox(
   startViewBox: ViewBoxRect,
   dxPx: number,
@@ -253,19 +268,22 @@ export function computePanViewBox(
   if (svgRect.width <= 0 || svgRect.height <= 0) {
     return startViewBox;
   }
-  const scaleX = startViewBox.width / svgRect.width;
-  const scaleY = startViewBox.height / svgRect.height;
+  const unitsPerPx = Math.max(
+    startViewBox.width / svgRect.width,
+    startViewBox.height / svgRect.height
+  );
 
   return clampViewBox({
     ...startViewBox,
-    x: startViewBox.x - dxPx * scaleX,
-    y: startViewBox.y - dyPx * scaleY,
+    x: startViewBox.x - dxPx * unitsPerPx,
+    y: startViewBox.y - dyPx * unitsPerPx,
   });
 }
 
 /**
  * Computes a combined pinch-zoom + pan viewBox keeping the campus point under
- * the initial two-finger midpoint aligned with the current two-finger midpoint.
+ * the initial two-finger midpoint aligned with the current two-finger midpoint,
+ * accounting for uniform xMidYMid-meet letterboxing inside svgRect.
  */
 export function computePinchViewBox(
   startViewBox: ViewBoxRect,
@@ -292,14 +310,23 @@ export function computePinchViewBox(
   );
   const nextHeight = nextWidth * VIEWBOX_ASPECT;
 
+  const pxPerUnit = Math.min(
+    svgRect.width / startViewBox.width,
+    svgRect.height / startViewBox.height
+  );
+  const renderedWidth = startViewBox.width * pxPerUnit;
+  const renderedHeight = startViewBox.height * pxPerUnit;
+  const contentLeft = svgRect.left + (svgRect.width - renderedWidth) / 2;
+  const contentTop = svgRect.top + (svgRect.height - renderedHeight) / 2;
+
   const startMidRelX =
-    ((startP1.x + startP2.x) / 2 - svgRect.left) / svgRect.width;
+    ((startP1.x + startP2.x) / 2 - contentLeft) / renderedWidth;
   const startMidRelY =
-    ((startP1.y + startP2.y) / 2 - svgRect.top) / svgRect.height;
+    ((startP1.y + startP2.y) / 2 - contentTop) / renderedHeight;
   const curMidRelX =
-    ((currentP1.x + currentP2.x) / 2 - svgRect.left) / svgRect.width;
+    ((currentP1.x + currentP2.x) / 2 - contentLeft) / renderedWidth;
   const curMidRelY =
-    ((currentP1.y + currentP2.y) / 2 - svgRect.top) / svgRect.height;
+    ((currentP1.y + currentP2.y) / 2 - contentTop) / renderedHeight;
 
   const anchorWorldX = startViewBox.x + startMidRelX * startViewBox.width;
   const anchorWorldY = startViewBox.y + startMidRelY * startViewBox.height;

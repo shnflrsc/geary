@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CampusMap from '../components/CampusMap';
 ---
 
@@ -8,20 +7,9 @@ import CampusMap from '../components/CampusMap';
   title="Main Campus - Geary"
   description="Interactive 2D map of Bulacan State University Malolos Main Campus. Search offices, clinics, libraries, and student facilities to see which building they are in."
   activeNav="map"
+  hideFooter={true}
+  lockViewport={true}
 >
-  <div class="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-    <div class="mb-5">
-      <Breadcrumbs
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Campus Map' },
-        ]}
-      />
-      <h1 class="mt-6 font-heading text-[1.75rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary sm:text-[2.25rem]">
-        Main Campus
-      </h1>
-    </div>
-
-    <CampusMap client:load />
-  </div>
+  <h1 class="sr-only">Main Campus</h1>
+  <CampusMap client:load />
 </BaseLayout>

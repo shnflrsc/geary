@@ -487,18 +487,6 @@
   opacity: 1;
 }
 
-.campus-banner-dark {
-  display: none;
-}
-
-:root.dark .campus-banner-light {
-  display: none;
-}
-
-:root.dark .campus-banner-dark {
-  display: block;
-}
-
 /* Academic Calendar OSR category tokens (WCAG AA light & dark) */
 .cal-cat-all { --cal-dot: #212529; --cal-ink: #212529; --cal-bg: #F1F3F5; --cal-border: #CED4DA; }
 .cal-cat-undergraduate { --cal-dot: #1D4ED8; --cal-ink: #1E40AF; --cal-bg: #EFF6FF; --cal-border: #BFDBFE; }

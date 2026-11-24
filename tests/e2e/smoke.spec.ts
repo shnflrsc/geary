@@ -105,7 +105,7 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
     }
   });
 
-  test('TC-E2E-01: hydrates SearchBar island, fetches search-index.json lazily once, and navigates via keyboard', async ({
+  test('TC-E2E-01: hydrates SearchBar, fetches search-index.json lazily once, and navigates via keyboard', async ({
     page,
   }) => {
     const pageErrors: string[] = [];

@@ -85,7 +85,7 @@ describe('SEO JSON-LD builders and safe serialization', () => {
     expect(raw).toContain('\\u003c/script>');
   });
 
-  test('resolves canonical site origin from Astro.site, fallback URL, or default', () => {
+  test('resolves canonical site origin from configured site URL, fallback URL, or default', () => {
     expect(resolveSiteOrigin(new URL('https://geary.bulsutools.org/')).href).toBe(
       'https://geary.bulsutools.org/',
     );

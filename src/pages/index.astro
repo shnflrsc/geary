@@ -106,6 +106,34 @@ const HERO_GEARS = [
     </div>
   </section>
 
+  <section
+    aria-label="Campus Map"
+    class="relative overflow-hidden border-b border-border-subtle bg-surface-card py-4 sm:py-5"
+  >
+    <img
+      src="/campus-light.png"
+      alt=""
+      aria-hidden="true"
+      class="campus-banner-light pointer-events-none absolute top-1/2 right-0 h-56 w-auto max-w-none -translate-y-1/2 opacity-50 select-none sm:right-6 sm:h-72 sm:opacity-80 lg:right-12 lg:h-80"
+    />
+    <img
+      src="/campus-dark.png"
+      alt=""
+      aria-hidden="true"
+      class="campus-banner-dark pointer-events-none absolute top-1/2 right-0 h-56 w-auto max-w-none -translate-y-1/2 opacity-50 select-none sm:right-6 sm:h-72 sm:opacity-80 lg:right-12 lg:h-80"
+    />
+
+    <div class="relative z-10 mx-auto flex max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8">
+      <a
+        href="/map"
+        class="inline-flex items-center gap-1.5 bg-[radial-gradient(closest-side,var(--color-surface-card)_60%,transparent)] px-8 py-2 text-sm font-semibold text-brand-crimson transition-colors hover:text-brand-crimson-hover hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-brand-crimson sm:bg-none sm:px-0 sm:py-1.5"
+      >
+        Check out the Campus Map
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
   <ExploreSpotlight
     client:load
     items={featuredPool}

@@ -343,7 +343,7 @@ geary/
     │   ├── CampusMap.tsx            # Hydrated React island for full-bleed 2D SVG map on /map
     │   └── campus-map/              # CampusMap search overlay, inspector/bottom sheet, and viewport hook
     └── pages/
-        ├── index.astro              # Home portal (Hero SearchBar, Featured Articles)
+        ├── index.astro              # Home portal (Hero SearchBar, Campus Map strip, Featured Articles)
         ├── map.astro                # Interactive 2D BulSU Malolos Campus Map island
         ├── contribute.astro         # Community submission page with embedded Google Form
         ├── terms.astro              # Terms of Service & unofficial disclaimer page

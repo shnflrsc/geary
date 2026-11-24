@@ -486,3 +486,15 @@
 .geary-prose .table-scroll-wrap[data-can-scroll-right="true"]::after {
   opacity: 1;
 }
+
+.campus-banner-dark {
+  display: none;
+}
+
+:root.dark .campus-banner-light {
+  display: none;
+}
+
+:root.dark .campus-banner-dark {
+  display: block;
+}

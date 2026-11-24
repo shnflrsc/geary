@@ -182,9 +182,21 @@ export default function ExploreSpotlight({
                 </p>
                 <span
                   aria-hidden="true"
-                  className="shrink-0 text-base font-semibold leading-none text-brand-crimson transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-brand-crimson-hover"
+                  className="inline-flex h-[1.625em] shrink-0 items-center text-sm text-brand-crimson transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-brand-crimson-hover"
                 >
-                  →
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.75}
+                    className="h-3.5 w-3.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.5 8h9M9 4.5 12.5 8 9 11.5"
+                    />
+                  </svg>
                 </span>
               </div>
             </a>

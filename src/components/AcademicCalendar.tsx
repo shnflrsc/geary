@@ -127,7 +127,7 @@ export default function AcademicCalendar() {
           <div
             role="group"
             aria-label="Filter calendar events by category"
-            className="mt-2 flex flex-nowrap items-center gap-1.5 overflow-x-auto px-0.5 pt-0.5 pb-2.5 [scrollbar-width:thin]"
+            className="mt-2 flex flex-nowrap items-center gap-1.5 overflow-x-auto px-0.5 pt-0.5 pb-3.5 [scrollbar-width:thin]"
           >
             <button
               type="button"
@@ -172,7 +172,7 @@ export default function AcademicCalendar() {
               {monthGroups.length > 1 ? (
                 <nav
                   aria-label="Jump to month"
-                  className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto pt-0.5 pb-2 [scrollbar-width:thin]"
+                  className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto pt-0.5 pb-3 [scrollbar-width:thin]"
                 >
                   {monthGroups.map((group) => (
                     <a

@@ -246,7 +246,7 @@ const RAW_CALENDAR_MONTHS: readonly RawMonthBlock[] = [
       {
         dateText: '24 to 29',
         category: 'all',
-        title: 'Mid-term Examination (1st Semester AY 2026-2027)',
+        title: 'Midterm Examination (1st Semester AY 2026-2027)',
       },
       {
         dateText: '27 to 28',
@@ -284,7 +284,7 @@ const RAW_CALENDAR_MONTHS: readonly RawMonthBlock[] = [
       {
         dateText: '1 to 7',
         category: 'all',
-        title: 'Mid-term Examination (1st Semester AY 2026-2027)',
+        title: 'Midterm Examination (1st Semester AY 2026-2027)',
       },
       {
         dateText: '5',
@@ -853,7 +853,7 @@ const RAW_CALENDAR_MONTHS: readonly RawMonthBlock[] = [
       {
         dateText: '25 to 30',
         category: 'all',
-        title: 'Mid-term Examination (2nd Semester AY 2026-2027)',
+        title: 'Midterm Examination (2nd Semester AY 2026-2027)',
       },
       {
         dateText: '29',

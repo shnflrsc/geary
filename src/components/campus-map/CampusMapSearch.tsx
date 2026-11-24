@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import type { MapSearchMatch } from '../../lib/map-search';
+import { bindSearchShortcut } from '../../lib/search-shortcut';
 
 interface CampusMapSearchProps {
   query: string;
@@ -19,6 +20,9 @@ export default function CampusMapSearch({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [activeMatchIndex, setActiveMatchIndex] = useState(-1);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => bindSearchShortcut(() => inputRef.current?.focus()), []);
 
   const listboxId = useId();
   const searchInputId = useId();
@@ -96,6 +100,7 @@ export default function CampusMapSearch({
           <path d="m21 21-4.3-4.3" />
         </svg>
         <input
+          ref={inputRef}
           id={searchInputId}
           type="search"
           value={query}
@@ -117,7 +122,7 @@ export default function CampusMapSearch({
           placeholder="Search Map..."
           className="w-full rounded-full border border-border-subtle bg-surface-card py-3 pr-11 pl-11 text-sm text-ink-primary shadow-md placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 lg:rounded-none lg:border-0 lg:bg-transparent lg:py-3.5 lg:shadow-none lg:focus:ring-0 [&::-webkit-search-cancel-button]:hidden"
         />
-        {query && (
+        {query ? (
           <button
             type="button"
             aria-label="Clear search"
@@ -139,6 +144,13 @@ export default function CampusMapSearch({
               <path strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12" />
             </svg>
           </button>
+        ) : (
+          <kbd
+            aria-hidden="true"
+            className="pointer-events-none absolute right-3.5 hidden sm:inline-flex items-center justify-center rounded border border-border-subtle bg-surface-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-ink-secondary"
+          >
+            /
+          </kbd>
         )}
       </div>
 

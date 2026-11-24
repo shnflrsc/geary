@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ACADEMIC_CALENDAR_EVENTS,
   ACADEMIC_CALENDAR_META,
@@ -6,6 +6,7 @@ import {
   type CalendarCategory,
 } from '../data/academic-calendar';
 import { filterCalendarEvents, groupCalendarEventsByMonth } from '../lib/calendar';
+import { bindSearchShortcut } from '../lib/search-shortcut';
 
 function formatShortMonth(monthLabel: string): string {
   const [monthName = '', year = ''] = monthLabel.split(' ');
@@ -36,6 +37,9 @@ export default function AcademicCalendar() {
   const [query, setQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<CalendarCategory[]>([]);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => bindSearchShortcut(() => searchInputRef.current?.focus()), []);
 
   useEffect(() => {
     const onScroll = () => setShowBackToTop(window.scrollY > 300);
@@ -95,14 +99,18 @@ export default function AcademicCalendar() {
               <path d="m21 21-4.3-4.3" />
             </svg>
             <input
+              ref={searchInputRef}
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Escape') searchInputRef.current?.blur();
+              }}
               aria-label="Search academic calendar events"
               placeholder="Search Academic Calendar..."
               className="w-full rounded-lg border border-border-strong bg-surface-card py-2 pr-9 pl-9 text-sm text-ink-primary placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 [&::-webkit-search-cancel-button]:hidden"
             />
-            {query && (
+            {query ? (
               <button
                 type="button"
                 onClick={() => setQuery('')}
@@ -120,6 +128,13 @@ export default function AcademicCalendar() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12" />
                 </svg>
               </button>
+            ) : (
+              <kbd
+                aria-hidden="true"
+                className="pointer-events-none absolute right-2.5 hidden sm:inline-flex items-center justify-center rounded border border-border-subtle bg-surface-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-ink-secondary"
+              >
+                /
+              </kbd>
             )}
           </div>
 

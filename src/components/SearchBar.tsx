@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { CATEGORIES } from '../data/categories';
 import { filterAndRankArticles, type SearchIndexItem } from '../lib/search';
+import { bindSearchShortcut } from '../lib/search-shortcut';
 
 interface SearchBarProps {
   variant?: 'hero' | 'header';
@@ -157,36 +158,11 @@ export default function SearchBar({
       return;
     }
 
-    const handleGlobalKeyDown = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null;
-      const isEditable =
-        target &&
-        (target.tagName === 'INPUT' ||
-          target.tagName === 'TEXTAREA' ||
-          target.tagName === 'SELECT' ||
-          target.isContentEditable);
-
-      const isSlash =
-        event.key === '/' &&
-        !event.ctrlKey &&
-        !event.metaKey &&
-        !event.altKey &&
-        !isEditable;
-      const isModK =
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === 'k' &&
-        !isEditable;
-
-      if (isSlash || isModK) {
-        event.preventDefault();
-        inputRef.current?.focus();
-        setIsOpen(true);
-        void ensureIndexLoaded();
-      }
-    };
-
-    document.addEventListener('keydown', handleGlobalKeyDown);
-    return () => document.removeEventListener('keydown', handleGlobalKeyDown);
+    return bindSearchShortcut(() => {
+      inputRef.current?.focus();
+      setIsOpen(true);
+      void ensureIndexLoaded();
+    });
   }, [enableGlobalShortcut]);
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

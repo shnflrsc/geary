@@ -1,6 +1,6 @@
 # Geary - The Better BulSU Student Handbook
 
-Geary is an unofficial, student-managed static article hub for Bulacan State University (BulSU) students built with Astro, Tailwind CSS, and React. Always verify time-sensitive fees, schedules, and forms directly with the concerned university office.
+Geary is an unofficial, student-managed static information portal for Bulacan State University (BulSU) students built with Astro, Tailwind CSS, and React. Always verify time-sensitive fees, schedules, and forms directly with the concerned university office.
 
 ## Quickstart
 
@@ -37,6 +37,7 @@ Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical li
 
 ## Project documentation
 
+- [CONTRIBUTING.md](./docs/CONTRIBUTING.md) - Contributor workflow, branching, testing gate, and article process
 - [AGENTS.md](./AGENTS.md) - Documentation-first workflow rules and dev server notes
 - [PROJECT_CHARTER.md](./docs/PROJECT_CHARTER.md) - Scope, target users, and constraints
 - [PRD.md](./docs/PRD.md) - Feature requirements and acceptance criteria
@@ -51,4 +52,11 @@ Set `PUBLIC_SITE_URL` in your build environment before deploying so canonical li
 
 ## Sources and attribution
 
-Articles on Geary prioritize recent official BulSU PDFs, Board of Regents (BOR) resolutions, verified university office and student council Facebook announcements, and official `bulsu.edu.ph` portals. Standing statutory rules not superseded by newer issuances fall back to the [Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016](https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf).
+Articles on Geary are sourced from:
+
+1. Recent official BulSU PDFs and Board of Regents (BOR) resolutions (such as the Citizen's Charter 2026, updated admission guidelines, and official policy memos).
+2. Verified official Facebook announcements from BulSU offices (UAO, Registrar, OSAS, ICTO, e-Library), colleges, BulSU SG, and Local Student Councils.
+3. Official `bulsu.edu.ph` websites, portals, and helpdesk documentation, plus official third-party vendor education pages where applicable.
+4. Direct confirmation from authorized university personnel or live student account checks for undocumented portal details.
+
+The [2016 Undergraduate Student Manual (BOR Resolution No. 85, Series of 2016)](https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf) is used **only as a fallback** for standing statutory rules (such as grading scales, residency rules, and student rights) that have not been superseded—it is outdated for current procedures, fees, deadlines, and schedules.

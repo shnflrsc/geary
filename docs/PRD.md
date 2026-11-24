@@ -1,4 +1,4 @@
-# Product requirements document (PRD): Geary (Unofficial BulSU Student Information Hub)
+# Product requirements document (PRD): Geary (Unofficial BulSU Student Information Portal)
 
 ## 1. Document control and purpose
 
@@ -6,7 +6,7 @@
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | Product Requirements Document: Geary - Unofficial BulSU Student Information Hub |
+| Document title | Product Requirements Document: Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.0 (MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | Adapted from ISO/IEC/IEEE 29148:2018 (*Systems and software engineering - Life cycle processes - Requirements engineering*, Clauses 9.4 [StRS] and 9.5 [SRS]) |
@@ -30,7 +30,7 @@ Every requirement in this PRD carries a release priority:
 
 | Priority level | Meaning | Release gate |
 | :--- | :--- | :--- |
-| `P0` (Must-Have / Core MVP) | Required for Geary to work as a centralized, searchable student hub. | Mandatory for MVP launch; release is blocked if any `P0` acceptance criterion fails. |
+| `P0` (Must-Have / Core MVP) | Required for Geary to work as a centralized, searchable student information portal. | Mandatory for MVP launch; release is blocked if any `P0` acceptance criterion fails. |
 | `P1` (Should-Have / MVP UX Polish) | Usability, orientation, and skimming features included in the MVP baseline. | Included in the MVP target release to keep cognitive load low and discovery fast. |
 | `Won't Have` (Out of Scope) | Capabilities excluded under [PROJECT_CHARTER.md](./PROJECT_CHARTER.md) (AI chatbot, user accounts, databases, official SIS integration). | Excluded from the MVP. |
 
@@ -139,7 +139,7 @@ Clicking outside the search box, pressing `Escape`, or clearing the input dismis
 | :--- | :--- | :--- |
 | `REQ-UI-01` | `P0` | The system shall present a BulSUan visual identity built around BulSU Crimson primary accents, Gear Gold secondary highlights, a warm low-glare reading background, clean white card surfaces, and high-contrast dark typography. |
 | `REQ-UI-02` | `P0` | Article views shall maintain a comfortable reading width, generous line spacing, and clear visual distinction between steps, callouts, and tables to keep cognitive load low on mobile and desktop screens. |
-| `REQ-UI-03` | `P0` | Every page shall include a responsive global Header (Geary gear brand mark, category navigation, and search access) and global Footer (unofficial student-hub disclaimer and category directory links). |
+| `REQ-UI-03` | `P0` | Every page shall include a responsive global Header (Geary gear brand mark, category navigation, and search access) and global Footer (unofficial student information portal disclaimer and category directory links). |
 | `REQ-UI-04` | `P1` | Subtle "Geary" geometric gear motifs and BulSU accents shall reinforce brand identity in navigation and hero areas while keeping article reading containers distraction-free. |
 | `REQ-UI-05` | `P1` | The system shall provide a custom `404` recovery page styled in the Geary theme containing the search bar and direct links to all seven categories and Home. |
 

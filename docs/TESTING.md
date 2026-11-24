@@ -1,4 +1,4 @@
-# Verification and testing specification (TESTING.md): Geary - Unofficial BulSU Student Information Hub
+# Verification and testing specification (TESTING.md): Geary - Unofficial BulSU Student Information Portal
 
 ## 1. Document control and verification approach *(ISO/IEC/IEEE 29148 Clause 6.6)*
 
@@ -6,7 +6,7 @@
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | Verification and testing specification (TESTING.md): Geary - Unofficial BulSU Student Information Hub |
+| Document title | Verification and testing specification (TESTING.md): Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.0 (MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | ISO/IEC 25010:2011/2023 (*Systems and software Quality Requirements and Evaluation [SQuaRE]*) and ISO/IEC/IEEE 29148:2018 Clauses 6.6 and 9.6.4 (*Verification, Validation and Traceability*) |

@@ -1,4 +1,4 @@
-# Software requirements specification (SRS): Geary (Unofficial BulSU Student Information Hub)
+# Software requirements specification (SRS): Geary (Unofficial BulSU Student Information Portal)
 
 ## 1. Introduction *(ISO 29148 Clauses 9.6.1 and 9.6.2)*
 
@@ -6,7 +6,7 @@
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | Software Requirements Specification (SRS): Geary - Unofficial BulSU Student Information Hub |
+| Document title | Software Requirements Specification (SRS): Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.0 (MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | ISO/IEC/IEEE 29148:2018 Clause 9.6 (*Software Requirements Specification [SRS]*) and ISO/IEC 25010 (*Quality Attributes*) |
@@ -74,7 +74,7 @@ This SRS defines the software-level constraints, external interface contracts, f
 
 | Route pattern | Purpose |
 | :--- | :--- |
-| `/` | Home hub rendering the hero search bar, Featured articles, and the 7-Category Directory. |
+| `/` | Home portal rendering the hero search bar, Featured articles, and the 7-Category Directory. |
 | `/categories/[slug]` | Category directory listing articles grouped by `subcategory` with breadcrumb navigation. |
 | `/articles/[slug]` | Distraction-free reading view with metadata header, responsive TOC, Markdown prose, disclaimer, and related articles. |
 | `/map` | Interactive 2D SVG schematic of BulSU Malolos Main Campus with building inspector and location search. |

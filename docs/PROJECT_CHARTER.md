@@ -1,10 +1,10 @@
-# Project charter: Geary (Unofficial BulSU Student Information Hub)
+# Project charter: Geary (Unofficial BulSU Student Information Portal)
 
 ## 1. Document control and project identification
 
 | Attribute | Details |
 | :--- | :--- |
-| Project title | Geary - Unofficial BulSU Student Information Hub |
+| Project title | Geary - Unofficial BulSU Student Information Portal |
 | Document type | Project Charter (MVP Baseline) |
 | Standard reference | ISO/IEC/IEEE 12207 (*Systems and software engineering - Software life cycle processes*, Clause 6.3.1 *Project Planning Process* and Clause 6.4.1 *Stakeholder Needs and Requirements Definition Process*) |
 | Specification directory | `docs/` (companion specs: [PRD.md](./PRD.md), [SRS.md](./SRS.md)) |
@@ -24,7 +24,7 @@ Without a single readable reference, students miss requirements and spend too mu
 
 ## 3. Project vision
 
-Geary is an unofficial, student-run information hub for Bulacan State University. It brings scattered administrative procedures, plain-language Student Handbook policies, and practical campus knowledge into one fast, mobile-first website with a BulSUan visual identity.
+Geary is an unofficial, student-run information portal for Bulacan State University. It brings scattered administrative procedures, plain-language Student Handbook policies, and practical campus knowledge into one fast, mobile-first website with a BulSUan visual identity.
 
 ## 4. Project objectives
 

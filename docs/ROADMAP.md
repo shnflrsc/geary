@@ -1,4 +1,4 @@
-# Implementation roadmap and backlog: Geary - Unofficial BulSU Student Information Hub
+# Implementation roadmap and backlog: Geary - Unofficial BulSU Student Information Portal
 
 ## 1. Document control and contributor workflow *(ISO/IEC/IEEE 12207 Clauses 6.3.1 and 6.3.2)*
 
@@ -6,7 +6,7 @@
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | Implementation Roadmap and Backlog: Geary - Unofficial BulSU Student Information Hub |
+| Document title | Implementation Roadmap and Backlog: Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.1 (Verified MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | ISO/IEC/IEEE 12207:2017 - *Systems and software engineering - Software life cycle processes* (Clause 6.3.1 *Project Planning*, Clause 6.3.2 *Project Assessment and Control*, Clause 6.3.4 *Risk Management*, and Clauses 6.4.5, 6.4.7, 6.4.9, and 6.4.11 *Implementation, Integration, Verification and Validation*) |

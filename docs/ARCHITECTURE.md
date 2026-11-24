@@ -1,10 +1,10 @@
-# Software architecture document: Geary - Unofficial BulSU Student Information Hub
+# Software architecture document: Geary - Unofficial BulSU Student Information Portal
 
 ## 1. Document control and architectural scope
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | Software architecture document: Geary - Unofficial BulSU Student Information Hub |
+| Document title | Software architecture document: Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.0 (MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | ISO/IEC/IEEE 42010 (*Architecture description*) and ISO/IEC/IEEE 12207 Clause 6.4.3 (*Architecture Definition Process*) |
@@ -172,7 +172,7 @@ flowchart TD
 | `src/layouts/ArticleLayout.astro` | Astro layout (`0 KB` JS) | `article`, `categoryMeta`, `headings`, `relatedArticles` | Composes `BaseLayout`, `<Breadcrumbs />`, article metadata header, responsive grid pairing Markdown prose with `<TableOfContents />`, `<VerificationBanner />`, and up to 3 sibling `<ArticleCard />` items. |
 | `src/components/Header.astro` | Static Astro + `< 1 KB` toggle | `activeCategory?: CategorySlug`, `showSearch?: boolean` | Renders brand logo (`/`), primary navigation links, compact `<SearchBar variant="header" client:load />`, `<ThemeToggle />`, and accessible mobile menu drawer toggle. |
 | `src/components/ThemeToggle.astro` | Static Astro + `< 1 KB` script | None | Renders the accessible color theme menu (`Light`, `Dark`, `System default`) synced with `localStorage` (`geary-theme`) and the `<head>` bootstrap. |
-| `src/components/Footer.astro` | Static Astro (`0 KB` JS) | Imports `CATEGORIES` | Renders global unofficial BulSU student hub disclaimer and legal links. |
+| `src/components/Footer.astro` | Static Astro (`0 KB` JS) | Imports `CATEGORIES` | Renders global unofficial BulSU student information portal disclaimer and legal links. |
 | `src/components/Breadcrumbs.astro` | Static Astro (`0 KB` JS) | `items: Array<{ label: string; href?: string }>` | Renders semantic breadcrumb trail linking parent routes and marking the current page. |
 | `src/components/CategoryCard.astro` | Static Astro (`0 KB` JS) | `category: CategoryMeta`, `count: number`, `previewArticles: ArticleEntry[]` | Renders category summary card with icon, article count, up to 3 preview links, and `"Explore all ->"` route link. |
 | `src/components/ArticleCard.astro` | Static Astro (`0 KB` JS) | `article: ArticleEntry`, `categoryMeta?: CategoryMeta`, `showCategoryBadge?: boolean` | Renders scannable article link card with title and 2-line body preview. |
@@ -268,7 +268,7 @@ export interface SearchIndexItem {
 
 ### 5.3 External runtime integrations
 
-Geary's core information hub has no external runtime dependencies: no databases, hosted search SaaS, LLM APIs, authentication services, or third-party tracking scripts. The `/contribute` page embeds a Google Form as an optional community submission surface; it is a documented governance exception that requires a team scope decision before expansion.
+Geary's core information portal has no external runtime dependencies: no databases, hosted search SaaS, LLM APIs, authentication services, or third-party tracking scripts. The `/contribute` page embeds a Google Form as an optional community submission surface; it is a documented governance exception that requires a team scope decision before expansion.
 
 ## 6. Project directory structure
 
@@ -342,7 +342,7 @@ geary/
     │   ├── ExploreSpotlight.tsx     # Hydrated React island for daily Featured articles on /
     │   └── CampusMap.tsx            # Hydrated React island for interactive 2D SVG map on /map
     └── pages/
-        ├── index.astro              # Home hub (Hero SearchBar, Featured Articles)
+        ├── index.astro              # Home portal (Hero SearchBar, Featured Articles)
         ├── map.astro                # Interactive 2D BulSU Malolos Campus Map island
         ├── contribute.astro         # Community submission page with embedded Google Form
         ├── terms.astro              # Terms of Service & unofficial disclaimer page

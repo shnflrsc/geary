@@ -1,4 +1,4 @@
-# Design system specification (DESIGN_SYSTEM.md): Geary - Unofficial BulSU Student Information Hub
+# Design system specification (DESIGN_SYSTEM.md): Geary - Unofficial BulSU Student Information Portal
 
 ## 1. Document control and design philosophy (ISO/IEC 25010 Usability / Interaction Capability)
 
@@ -6,7 +6,7 @@
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | Design system specification (DESIGN_SYSTEM.md): Geary - Unofficial BulSU Student Information Hub |
+| Document title | Design system specification (DESIGN_SYSTEM.md): Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.0 (MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | ISO/IEC 25010:2011/2023 (*Usability / Interaction Capability*) and WCAG 2.1 Level AA |

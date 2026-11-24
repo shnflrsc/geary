@@ -1,4 +1,4 @@
-# Requirements traceability matrix (REQUIREMENTS.md): Geary - Unofficial BulSU Student Information Hub
+# Requirements traceability matrix (REQUIREMENTS.md): Geary - Unofficial BulSU Student Information Portal
 
 ## 1. Document control and traceability protocol *(ISO/IEC/IEEE 29148 Clauses 6.5 and 9.6.4)*
 
@@ -6,7 +6,7 @@
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | Requirements Traceability Matrix (RTM): Geary - Unofficial BulSU Student Information Hub |
+| Document title | Requirements Traceability Matrix (RTM): Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.0 (MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | ISO/IEC/IEEE 29148:2018 - *Systems and software engineering - Life cycle processes - Requirements engineering* (Clause 6.5 *Requirements Traceability* and Clause 9.6.4 *Verification and Traceability*) |
@@ -90,7 +90,7 @@ This matrix is the shared traceability ledger for all contributors working on Ge
 | **`CON-DATA-01`** | `OBJ-01` | UTF-8 Markdown articles managed under `src/content/articles/` in Git. | `BL-07`, `BL-09` | `TC-BLD-02` | `[x] Verified` |
 | **`CON-DATA-02`** | `OBJ-03`, `OBJ-05` | Build-time static JSON index emitted at `dist/search-index.json`. | `BL-15` | `TC-BLD-03`, `TC-UNIT-05` | `[x] Verified` |
 | **`CON-GOV-01`** | §6.2, §7.3 | Strict MVP feature lock (no AI/RAG chatbot, user accounts, comments, or SIS integrations). | `BL-01` to `BL-20` | Scope Audit (§5) | `[x] Verified` |
-| **`CON-GOV-02`** | §7.4 | Unofficial BulSU student hub disclaimers in `VerificationBanner.astro` and `Footer.astro`. | `BL-10`, `BL-11` | `TC-BLD-03`, `TC-A11Y-02` | `[x] Verified` |
+| **`CON-GOV-02`** | §7.4 | Unofficial BulSU student information portal disclaimers in `VerificationBanner.astro` and `Footer.astro`. | `BL-10`, `BL-11` | `TC-BLD-03`, `TC-A11Y-02` | `[x] Verified` |
 
 ### 4.2 Off-nominal and error scenarios (`ERR-01` to `ERR-09`)
 

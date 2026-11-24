@@ -1,4 +1,4 @@
-# User flows and operational scenarios: Geary - Unofficial BulSU Student Information Hub
+# User flows and operational scenarios: Geary - Unofficial BulSU Student Information Portal
 
 ## 1. Document control and operational context (ISO/IEC/IEEE 29148 Clauses 9.3.1, 9.3.2, and 9.3.4)
 
@@ -6,7 +6,7 @@
 
 | Attribute | Details |
 | :--- | :--- |
-| Document title | User flows and operational scenarios: Geary - Unofficial BulSU Student Information Hub |
+| Document title | User flows and operational scenarios: Geary - Unofficial BulSU Student Information Portal |
 | Version | `1.0 (MVP Baseline)` |
 | Date | `2026-11-17` |
 | Standard reference | Adapted from ISO/IEC/IEEE 29148:2018, *Systems and software engineering - Life cycle processes - Requirements engineering* (Clause 9.3 *Operational Concept [OpsCon]*, Clause 9.3.4 *Operational Modes*, Clause 9.3.5 *Operational Scenarios*, and Clauses 6.2/6.3 *Use-Case Modeling*) |

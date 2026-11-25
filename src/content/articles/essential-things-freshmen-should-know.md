@@ -75,7 +75,7 @@ Your Certificate of Registration (COR) proves your official enrollment and serve
 
 - **Cannot view grades:** Finish faculty evaluations for every instructor for the current semester. If grades stay locked afterward, submit an ICTO helpdesk ticket.
 - **Enrollment on hold for outstanding balance:** Pay any unpaid balance at the Accounting Office and wait for the portal to update. If you think the balance is wrong, file an ICTO ticket or verify it in person at Accounting.
-- **Login or portal access problems:** Try the Forgot Password link first. If you still cannot sign in, file an ICTO ticket or visit the ICTO office at Carpio Hall Room 103 on the Main Campus.
+- **Login or portal access problems:** Try the Forgot Password link first. If you still cannot sign in, file an ICTO ticket or visit the ICTO office at Natividad Hall on the Main Campus.
 
 ### How to submit an ICTO Helpdesk ticket
 

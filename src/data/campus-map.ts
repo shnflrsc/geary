@@ -1194,6 +1194,35 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
         ]
       },
       {
+        "id": "elib-learning-commons",
+        "name": "Learning Commons",
+        "floor": "1st Floor",
+        "category": "library",
+        "keywords": [
+          "Learning Commons",
+          "Study Area",
+          "iPad",
+          "E-Library"
+        ],
+        "articleSlug": "bulsu-library-guide"
+      },
+      {
+        "id": "elib-plagiarism-desk",
+        "name": "Turnitin & Plagiarism Checking Desk",
+        "floor": "4th Floor",
+        "category": "library",
+        "keywords": [
+          "Turnitin",
+          "Plagiarism",
+          "AI Checking",
+          "Similarity Report",
+          "4th Floor",
+          "5th Floor",
+          "E-Library"
+        ],
+        "articleSlug": "bulsu-library-guide"
+      },
+      {
         "id": "elib-teleconferencing-room",
         "name": "Teleconferencing Room",
         "floor": "5th Floor",
@@ -1202,6 +1231,19 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Teleconference Room",
           "E-Library"
         ]
+      },
+      {
+        "id": "elib-smart-device-zone",
+        "name": "Smart Device Zone",
+        "floor": "6th Floor",
+        "category": "library",
+        "keywords": [
+          "Smart Device Zone",
+          "Desktop Computers",
+          "Online Databases",
+          "E-Library"
+        ],
+        "articleSlug": "bulsu-library-guide"
       },
       {
         "id": "elib-multipurpose-hall-1",
@@ -2192,7 +2234,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "x": 569.5,
       "y": 563.7
     },
-    "summary": "Five-storey building near Gate 2 serving the College of Engineering.",
+    "summary": "Five-storey building near Gate 2 serving the College of Engineering, with ICTO, OSFAS, and QAO on the Ground Floor.",
     "colleges": [
       {
         "id": "coe",
@@ -2209,6 +2251,50 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       }
     ],
     "locations": [
+      {
+        "id": "icto-office",
+        "name": "Information and Communications Technology Office (ICTO)",
+        "floor": "1st Floor",
+        "category": "administration",
+        "keywords": [
+          "ICTO",
+          "Information and Communications Technology Office",
+          "Helpdesk",
+          "ALAB SMS",
+          "Student Email",
+          "Microsoft",
+          "Natividad Hall"
+        ],
+        "articleSlug": "bulsu-microsoft-student-account-benefits"
+      },
+      {
+        "id": "osfas-office",
+        "name": "Office of the Student Financial Assistance and Scholarships (OSFAS)",
+        "floor": "1st Floor",
+        "category": "student-services",
+        "keywords": [
+          "OSFAS",
+          "Scholarship",
+          "Scholarships",
+          "Financial Assistance",
+          "TES",
+          "TDP",
+          "UniFAST",
+          "Natividad Hall"
+        ],
+        "articleSlug": "complete-guide-to-scholarships-at-bulsu"
+      },
+      {
+        "id": "qao-office",
+        "name": "Quality Assurance Office (QAO)",
+        "floor": "1st Floor",
+        "category": "administration",
+        "keywords": [
+          "QAO",
+          "Quality Assurance",
+          "Natividad Hall"
+        ]
+      },
       {
         "id": "nh-107",
         "name": "NH 107",
@@ -2455,7 +2541,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
       "x": 479.3,
       "y": 596.5
     },
-    "summary": "Four-storey academic building near Gate 2 housing the College of Professional Teacher Education (CPTEd), PPESO Office, and classrooms.",
+    "summary": "Four-storey academic building near Gate 2 housing the College of Professional Teacher Education (CPTEd), Placement and Public Employment Service Office (PPESO), and classrooms.",
     "colleges": [
       {
         "id": "cpted",
@@ -2473,7 +2559,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
     "locations": [
       {
         "id": "ppeso-office",
-        "name": "PPESO Office",
+        "name": "Placement and Public Employment Service Office (PPESO)",
         "floor": "1st Floor",
         "category": "student-services",
         "keywords": [

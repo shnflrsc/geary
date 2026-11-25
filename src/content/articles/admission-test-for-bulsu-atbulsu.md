@@ -317,4 +317,4 @@ For freshman orientation in A.Y. 2026-2027, the BulSU University Calendar listed
 ### Where to get help
 
 - **University Admissions Office (Main Campus):** Beside the College of Law Building, Brgy. Guinhawa, Malolos. Email **admissions@bulsu.edu.ph**, call (044) 919-7800 loc. 1087, or message the [BulSU Admissions Office Facebook page](https://www.facebook.com/BulSUAdmissionsOffice).
-- **ICTO Helpdesk (portal and ALAB SMS bugs):** Submit a ticket on the [BulSU ICTO Helpdesk](https://icto-helpdesk.bulsu.edu.ph/) under Information System Support. No account is needed; attach PNG, JPG, or PDF screenshots up to 10 MB and keep your ticket number. You can also email **icto@bulsu.edu.ph** or visit Carpio Hall Room 103 on Main Campus.
+- **ICTO Helpdesk (portal and ALAB SMS bugs):** Submit a ticket on the [BulSU ICTO Helpdesk](https://icto-helpdesk.bulsu.edu.ph/) under Information System Support. No account is needed; attach PNG, JPG, or PDF screenshots up to 10 MB and keep your ticket number. You can also email **icto@bulsu.edu.ph** or visit the ICTO office at Natividad Hall on Main Campus.

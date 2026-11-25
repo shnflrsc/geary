@@ -20,7 +20,7 @@ The Office of the Student Financial Assistance and Scholarships (OSFAS) manages 
 
 ## OSFAS location and contacts
 
-OSFAS moved to the **Ground Floor of Natividad Hall, beside the QAO Office, near Gate 2**. Ignore older posts that still point beside the College of Law.
+OSFAS is located in the **Ground Floor of Natividad Hall**.
 
 - Hours: Monday to Friday, 8:00 AM to 5:00 PM
 - Email: **scholarship@bulsu.edu.ph**

@@ -31,7 +31,7 @@ Geary does not measure efficiency by fewest words alone. Keep three concepts dis
 * **Compression:** Packing as much information as possible into as few words or sentences as possible.
 * **Reading efficiency:** Communicating information with the least cognitive effort required from the reader.
 
-Optimize for **reading efficiency**, not aggressive compression. Most web readers skim only 20–28% of a page—defaulting to an F-shaped pattern that misses content on walls of text, or shifting to the more efficient **layer-cake pattern** (scanning headings and subheadings until one matches their task, then reading the block below it). Frontloaded headings and scannable structure matter more than raw word count. A short paragraph that forces students to mentally unpack stacked dates, conditions, abbreviations, symbols, and parenthetical notes is harder to read than two clean sentences or a short list. When separating information improves comprehension, readability wins over saving words.
+Optimize for **reading efficiency**, not aggressive compression. Most web readers skim only a small fraction of a page—defaulting to an F-shaped pattern that misses content on walls of text, or shifting to a **layer-cake pattern** (scanning headings and subheadings until one matches their task, then reading the block below it). Frontloaded headings and scannable structure matter more than raw word count. A short paragraph that forces students to mentally unpack stacked dates, conditions, abbreviations, symbols, and parenthetical notes is harder to read than two clean sentences or a short list. When separating information improves comprehension, readability wins over saving words.
 
 ## 2. Writing Style, Tone, and Tooling
 
@@ -106,7 +106,7 @@ These established principles inform how Geary structures dense information (keep
 * **Cognitive Fluency:** Text that is visually and structurally easier to scan feels easier to understand and act on. Excessive symbol density disrupts fluency.
 * **Gestalt Principles of Perceptual Organization:** Readers naturally group related items using spacing, alignment, and hierarchy. Separating dense details into clear visual chunks makes relationships obvious.
 * **Miller's Law (George A. Miller):** Working memory is limited, so meaningful chunking helps readers retain and process details. Treat this as supporting context for grouping related facts cleanly—not as a rigid numeric rule.
-* **Text Scanning Patterns (Nielsen Norman Group):** Readers rarely read word-for-word—they switch between **layer-cake** scanning (jumping across headings), **spotted** scanning (hunting for numerals, links, and bold anchors), **bypassing** (skipping repeated prefixes on list items), and **F-pattern** scanning (on unstructured walls of text). Standalone frontloaded headings, numerals for figures, and non-repetitive list openings work with these patterns instead of against them.
+* **Web Scanning Patterns:** Readers rarely read word-for-word—they switch between scanning headings first (layer-cake), hunting for numerals, links, and bold anchors (spotted), skipping repeated list-item prefixes (bypassing), and scanning the top and left margin on unstructured walls of text (F-pattern). Standalone frontloaded headings, numerals for figures, and non-repetitive list openings work with these habits instead of against them.
 
 ## 3. Article Structure
 

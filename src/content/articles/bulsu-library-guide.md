@@ -2,7 +2,7 @@
 title: "BulSU Library Guide"
 category: "campus"
 subcategory: "Campus Facilities"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Office of the University Library"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
@@ -14,9 +14,9 @@ sources:
 
 The BulSU e-Library on the Main Campus gives registered students free study spaces, iPads, computer stations, print and digital collections, online research help, and official Turnitin plagiarism checking.
 
-## Hours and online portals
+## Operating hours
 
-Main Campus e-Library operates with **no noon break** on the following regular schedule:
+The Main Campus e-Library operates with **no noon break** on this regular schedule:
 
 | Days | Hours |
 | --- | --- |
@@ -25,49 +25,54 @@ Main Campus e-Library operates with **no noon break** on the following regular s
 
 During major exam weeks such as midterms, the e-Library occasionally opens **24-hour service** through QR reservation.
 
-External campuses set their own hours. For example, Meneses Campus operates Monday to Thursday from 7:00 AM to 6:00 PM and handles transactions online on Fridays. Check your campus library page for updates.
+External campuses set their own hours. Meneses Campus operates Monday to Thursday from 7:00 AM to 6:00 PM and handles transactions online on Fridays. Check your campus library page for updates.
 
-Use these official links for catalogs, forms, and announcements:
+### Access catalogs, forms, and announcements
 
 - Search print and digital holdings on the [BulSU Library OPAC](https://library.bulsu.edu.ph).
-- Access library resources and forms on the [BulSU Library GSite](https://bit.ly/AklatanBulSU).
+- Download library resources and forms from the [BulSU Library GSite](https://bit.ly/AklatanBulSU).
 - Follow [BulSU e-Library on Facebook](https://www.facebook.com/BulSUeLibrary) for advisories and automated transaction system reservations.
 
-## Learning Commons and Smart Device Zone
+## Use the Learning Commons and Smart Device Zone
 
 Both tech spaces inside the Main Campus e-Library are free on a first-come, first-served basis for library-registered students. Bring your BulSU ID and log in at the counter.
 
-- **Learning Commons (Ground Floor):** Collaborative study area with iPads for research and coursework.
-- **Smart Device Zone (6th Floor):** Desktop computers with free internet and access to subscribed and open online databases.
-- **Session limit:** 1 hour and 30 minutes per session. You can request a 30-minute extension if no one else is waiting.
+- Learning Commons (Ground Floor) has collaborative study areas and iPads for research and coursework.
+- Smart Device Zone (6th Floor) has desktop computers with free internet and access to subscribed and open online databases.
 
-## Online research help (LIRA)
+Each session lasts **1 hour and 30 minutes**. You can request a 30-minute extension if no one else is waiting.
 
-Use Library Information and Research Assistance (LIRA) if you need help finding books, journal sources, or fair-use scans of print references and theses.
+## Request online research help
+
+Use Library Information and Research Assistance (LIRA) when you need help finding books, journal sources, or fair-use scans of print references and theses.
 
 1. Submit your inquiry through the [LIRA Request Form](http://bit.ly/bulsulibrarylira).
 2. Wait for a librarian to check print, digital, and Open Educational Resources (OERs) and email your materials or alternative suggestions. Responses normally arrive within **20 minutes** during operating hours.
 
-## Turnitin plagiarism and AI checking
+## Request Turnitin plagiarism and AI checking
 
 All library-registered Laboratory High School, undergraduate, and graduate students can request free Turnitin plagiarism and AI checking before submitting research papers, capstones, or theses. Processing takes **5 working days**.
 
-Prepare these items before submitting through the [Main Campus Plagiarism Check Form](https://bit.ly/bulsuplagscan). External campuses may use a separate campus submission link.
+Submit your paper through the [Main Campus Plagiarism Check Form](https://bit.ly/bulsuplagscan). External campuses may use a separate campus submission link.
 
-- One PDF file with your Title Page, author names, college or department, and Chapters 1 to 5 (or Chapters 1 to 9), **excluding** preliminary pages and appendices
-- Only one submission per group for group papers
-- An endorsement letter from the Graduate School Office, if you are a Graduate School student
+Prepare these mandatory items before submitting:
+
+- 1 PDF file containing your Title Page, author names, college or department, and Chapters 1 to 5 (or Chapters 1 to 9), excluding preliminary pages and appendices
+- 1 submission only per group for group papers
+
+If you are a Graduate School student, also include an endorsement letter from the Graduate School Office.
 
 ### Passing limits and results
 
 BulSU requires **10% or lower** plagiarism similarity and **35% or lower** AI score.
 
-- **If your paper passes both limits:** You receive an emailed Plagiarism Certificate and AI Use Declaration Form. Thesis and capstone submissions also receive Confidentiality Agreement and Open Access Permission forms.
-- **If your paper exceeds either limit:** You receive the similarity report so you can revise and resubmit.
+If your paper passes both limits, you receive an emailed Plagiarism Certificate and AI Use Declaration Form. Thesis and capstone submissions also receive Confidentiality Agreement and Open Access Permission forms.
+
+If your paper exceeds either limit, you receive the similarity report so you can revise and resubmit.
 
 For in-person questions about plagiarism or AI checking, visit the 4th or 5th floor of the BulSU e-Library.
 
-## Borrowing print books and materials
+## Borrow print books and materials
 
 | Collection | Use or borrowing limit | Notes |
 | --- | --- | --- |

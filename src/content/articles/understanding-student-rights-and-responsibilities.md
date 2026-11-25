@@ -2,7 +2,7 @@
 title: "Student Rights and Responsibilities at BulSU"
 category: "policies"
 subcategory: "Rights, Discipline & Grievances"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
@@ -20,13 +20,13 @@ Enrolling at BulSU gives you protections backed by the 1987 Philippine Constitut
 
 Every officially enrolled BulSU student has the right to:
 
-- **Quality education without discrimination:** Fair access to instruction regardless of sex, socio-economic status, political beliefs, or religion.
-- **Finish your degree program:** Continue in your enrolled program through graduation, unless stopped by academic deficiency or disciplinary sanctions.
-- **Confidential records and timely release:** Privacy over your academic records and release of official certificates, transcripts, diplomas, and transfer credentials within 30 days of a completed request.
-- **Free guidance and counseling:** Access campus Guidance Services for academic, personal, or career support.
-- **Free expression, peaceful assembly, and campus press:** Publish recognized student publications protected under the Campus Journalism Act (RA 7079), organize peaceful assemblies following campus rules, invite speakers, and raise concerns with university offices.
-- **Voluntary organizations and no unauthorized fees:** Join recognized student organizations voluntarily and decline involuntary collections unless approved by your own student organizations. Forced ticket sales and compulsory unapproved fees are prohibited.
-- **Student representation in governance:** Elect your Class Mayors, Local Student Council (LSC), and the university-wide BulSU Student Government (BSU-SG). The elected SG President also represents the student body on the University Board of Regents for a one-year term.
+- Receive quality education without discrimination based on sex, socio-economic status, political beliefs, or religion.
+- Finish your enrolled degree program through graduation, unless stopped by academic deficiency or disciplinary sanctions.
+- Keep your academic records confidential and receive official certificates, transcripts, diplomas, and transfer credentials within **30 days** of a completed request.
+- Access free campus Guidance Services for academic, personal, or career support.
+- Publish recognized student publications under the Campus Journalism Act (RA 7079), organize peaceful assemblies following campus rules, invite speakers, and raise concerns with university offices.
+- Join recognized student organizations voluntarily and decline involuntary collections unless approved by your own student organizations (forced ticket sales and compulsory unapproved fees are prohibited).
+- Elect your Class Mayors, Local Student Council (LSC), and the university-wide BulSU Student Government (BSU-SG), whose elected SG President represents the student body on the University Board of Regents for a 1-year term.
 
 ## Grade transparency and consultation rights
 
@@ -37,17 +37,17 @@ Under university student-feedback standards, you have specific academic transpar
 - Be informed of your final grades before they are encoded or posted, and receive a Certificate of Grades every semester.
 - Rely on posted grades staying final unless corrected for a clerical error with your College Dean's approval.
 
-If an instructor posts grades without consultation or refuses to explain a score, escalate through the steps in [How to File a Student Complaint](/articles/how-to-file-a-student-complaint).
+If an instructor posts grades without consultation or refuses to explain a score, follow the escalation steps in [How to File a Student Complaint](/articles/how-to-file-a-student-complaint).
 
 ## Freedom of expression and its responsibilities
 
-BulSU affirms democracy, academic freedom, and critical thinking as central to university life. At the same time, public statements reflect on the university community: intellectual criticism is welcome, but it must remain respectful and avoid offensive or disparaging language.
+BulSU affirms democracy, academic freedom, and critical thinking as central to university life. Because public statements reflect on the university community, intellectual criticism must remain respectful and avoid offensive or disparaging language.
 
-Student councils and the Office of the Student Regent also champion expanded student welfare charters covering gender sensitivity, mental health breaks, and all-hazards safety guidelines. Proposed policies and consultation drafts only become binding university rules once formally approved by the administration or Board of Regents.
+Student councils and the Office of the Student Regent also champion expanded student welfare charters covering gender sensitivity, mental health breaks, and all-hazards safety guidelines. Proposed policies and consultation drafts become binding university rules only once formally approved by the administration or Board of Regents.
 
 ## Due process rights in disciplinary cases
 
-If someone files a formal disciplinary complaint against you, five due process protections apply:
+If someone files a formal disciplinary complaint against you, 5 due process protections apply:
 
 - No penalty may be imposed until due process requirements are met.
 - Any sanction requires substantial evidence, and the burden of proof rests on the complainant.

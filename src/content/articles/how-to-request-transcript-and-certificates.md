@@ -2,7 +2,7 @@
 title: "How to Request Your TOR and Certificates"
 category: "documents"
 subcategory: "Academic Records & Clearances"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Office of the University Registrar & OSAS"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
@@ -39,65 +39,66 @@ Standard fees and maximum release times on the Main Campus depend on the documen
 | Certifications not requiring clearance (listed below) | PHP 25 per copy | 4 working days | 1 documentary stamp for English Proficiency |
 | Certificate of Good Moral Character (OSAS) | PHP 25 per copy | About 5 minutes | OSAS request form; no pending disciplinary case |
 
-### Which certifications require clearance
+### Certifications by clearance requirement
 
-- **Clearance required:** Units Earned, Complete Academic Requirements (CAR), Undergraduate GWA, Undergraduate English Proficiency, and Law School Eligibility.
-- **No clearance required:** Enrollment, Graduation, Candidate for Graduation, Grading System, Second Copy Latin Honor, Graduate GWA, Graduate English Proficiency, and Special-Order Exemption.
+Clearance is required for Units Earned, Complete Academic Requirements (CAR), Undergraduate GWA, Undergraduate English Proficiency, and Law School Eligibility.
 
-### Typical turnaround reminders
+No clearance is required for Enrollment, Graduation, Candidate for Graduation, Grading System, Second Copy Latin Honor, Graduate GWA, Graduate English Proficiency, and Special-Order Exemption.
+
+### Typical processing turnarounds
 
 Actual release dates can run faster than the maximum times above. University advisories also use these shorter typical turnarounds:
 
-- **2 working days** for CAV and simple certifications
-- **6 working days** for recent TORs and most cleared documents
-- **Up to 9 working days** for pre-2008 TORs
+- 2 working days for CAV and simple certifications
+- 6 working days for recent TORs and most cleared documents
+- Up to 9 working days for pre-2008 TORs
 
 Always follow the exact release date stamped on your claim stub. By law, schools have an outer limit of 30 days once requirements are complete.
 
-## What to prepare before going to the Registrar
+## Documents to prepare
 
 Bring complete requirements on your first visit so you do not lose your place in line.
 
 ### Required for all requests
 
-- One original valid ID, such as a National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID
+Bring 1 original valid ID, such as a National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID.
 
 ### Conditional requirements
 
-- **Clearance Form:** Required for a non-graduated TOR, first-copy Certificate of Grades, or any certification requiring clearance. Get a copy at the Registrar window or download and print it from the BulSU website.
-- **Documentary stamp:** Bring 1 stamp per TOR, CAV, RLE, or English Proficiency certificate. Stamps are available at the BulSU Cashier's Office, Treasury Office, or BIR.
-- **Supporting attachments:** Bring photocopies of your TOR or COR for Certified True Copies, a passport-size photo with name tag on a white background for board-exam TORs, or a notarized Affidavit of Loss for a duplicate diploma.
-- **Representative filing or claiming:** Bring a signed authorization letter or Special Power of Attorney, plus one photocopy of your ID and one photocopy of your representative's ID.
+- Accomplished Clearance Form for a non-graduated TOR, first-copy Certificate of Grades, or any certification requiring clearance, available at the Registrar window or on the BulSU website
+- 1 documentary stamp per TOR, CAV, RLE, or English Proficiency certificate, available at the BulSU Cashier's Office, Treasury Office, or BIR
+- Supporting attachments when applicable: photocopies of your TOR or COR for Certified True Copies, a passport-size photo with name tag on a white background for board-exam TORs, or a notarized Affidavit of Loss for a duplicate diploma
+- Signed authorization letter or Special Power of Attorney, plus 1 photocopy of your ID and 1 photocopy of your representative's ID, if filing or claiming through a representative
 
-## Step-by-step walk-in request process
+## Request documents at the Registrar
 
-1. **Complete your clearance first if required.** For a non-graduated TOR, first-copy Certificate of Grades, or certification requiring clearance, have your Clearance Form signed by five offices: your College Dean's Office, the E-Library, the Accounting Office, OSAS, and the Office of the University Registrar.
-2. **Verify your record at the Registrar window.** Present your original valid ID so staff can check your record in the student management system and issue a payment slip with the exact amount due.
-3. **Pay at the Cashier's Office.** Present your payment slip at the Cashier and keep the Official Receipt. Buy any required documentary stamps here if available.
-4. **Submit your requirements and get your claim stub.** Hand your Official Receipt, Clearance Form if required, and supporting documents to the designated Registrar window. Check the release date on your claim stub before leaving.
-5. **Claim your document on the release date.** Bring your claim stub, valid ID, and any required documentary stamps not yet handed in to the Registrar window, then sign the release logbook.
+1. Complete your clearance first if required. For a non-graduated TOR, first-copy Certificate of Grades, or certification requiring clearance, have your Clearance Form signed by 5 offices: your College Dean's Office, the E-Library, the Accounting Office, OSAS, and the Office of the University Registrar.
+2. Verify your record at the Registrar window by presenting your original valid ID so staff can check your record in the student management system and issue a payment slip with the exact amount due.
+3. Pay at the Cashier's Office using your payment slip and keep the Official Receipt. Buy any required documentary stamps here if available.
+4. Submit your Official Receipt, Clearance Form if required, and supporting documents to the designated Registrar window, then check the release date on your claim stub before leaving.
+5. Claim your document on the release date by bringing your claim stub, valid ID, and any required documentary stamps not yet handed in to the Registrar window, then sign the release logbook.
 
-## Getting a Certificate of Good Moral Character
+## Request a Certificate of Good Moral Character
 
-Good Moral Character certificates are issued by OSAS, not the Registrar. Main Campus students visit OSAS Main Campus, and external campus students visit their campus OSAS office.
+OSAS issues the Certificate of Good Moral Character. Main Campus students visit OSAS Main Campus, and external campus students visit their campus OSAS office.
 
-1. Fill out the Good Moral Character request form at the OSAS counter. Staff check your name against the university database of active or pending disciplinary cases.
+1. Fill out the Good Moral Character request form at the OSAS counter so staff can check your name against the university database of active or pending disciplinary cases.
 2. Take the billing form to the Cashier's Office and pay PHP 25 per copy.
-3. Present your Official Receipt back at OSAS and wait for the Dean's signature. Walk-in release normally takes about five minutes.
+3. Present your Official Receipt back at OSAS and wait for the Dean's signature. Walk-in release normally takes about 5 minutes.
 
 ## Special cases and record holds
 
-### Submitting your high school SF-10 (Form 137)
+### Submit your high school SF-10 or Form 137
 
-If you are a newly admitted freshman, you still need to submit your SF-10, formerly Form 137, from your previous high school so your BulSU permanent record stays complete. Get the signed request form from the Registrar and ask your high school to issue your SF-10 with the exact remark `Copy for: Bulacan State University`, then submit it to your campus Registrar before the semester deadline announced on the Registrar's page.
+Newly admitted freshmen must submit their SF-10, formerly Form 137, from their previous high school so their BulSU permanent record stays complete. Get the signed request form from the Registrar and ask your high school to issue your SF-10 with the exact remark `Copy for: Bulacan State University`, then submit it to your campus Registrar before the semester deadline announced on the Registrar's page.
 
-### When the university can hold your records
+### Record holds and graduating TORs
 
 BulSU can withhold academic records or a degree only if you have an unpaid university balance or an unresolved disciplinary case. Once you settle the balance or the case closes, the hold lifts. If you are a graduating student waiting for your final "Graduated" TOR, make sure you have filed your Application for Graduation and cleared any record discrepancies sent to your email.
 
-### Updating your name in university records
+### Update your name in university records
 
 If your legal name needs a correction or update at the Registrar:
 
-- **Married while enrolled:** File an Affidavit of Change of Status together with an authenticated Marriage Contract at the Office of the University Registrar.
-- **Mismatch between school records and birth certificate:** Submit a notarized Affidavit of Discrepancy alongside your supporting credentials.
+- File an Affidavit of Change of Status together with an authenticated Marriage Contract at the Office of the University Registrar if you married while enrolled.
+- Submit a notarized Affidavit of Discrepancy alongside your supporting credentials if your name on school records differs from your birth certificate.

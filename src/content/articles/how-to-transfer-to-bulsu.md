@@ -2,7 +2,7 @@
 title: "How to Transfer to BulSU"
 category: "enrollment"
 subcategory: "Shifting & Transferring"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
@@ -20,22 +20,22 @@ sources:
     url: "https://www.facebook.com/BulSUSarmientoAdmissions/posts/pfbid02VNTfaNZJnedvS5NgAjHD6DoDBKX66UHvEwh8HBbsLih8sBFJKNr6FSXcKh2VRj8Nl"
 ---
 
-College students from other recognized higher education institutions apply through BulSU's combined **Shifters, Transferees, and Second-Degree Coursers** track. **Do not apply through the Freshman Admission portal.** Transferees who use the freshman flow are barred from all BulSU programs.
+College students from other recognized higher education institutions apply through BulSU's combined Shifters, Transferees, and Second-Degree Coursers track. **Do not apply through the Freshman Admission portal.** Transferees who use the freshman flow are barred from all BulSU programs.
 
 ## Eligibility, schedule, and fees
 
-Transfer admission covers **incoming 2nd-year students** from other recognized schools. Second-degree admission covers applicants who already hold a bachelor's or associate's degree.
+Transfer admission covers incoming 2nd-year students from other recognized schools. Second-degree admission covers applicants who already hold a bachelor's or associate's degree.
 
-Transfer applicants must also meet these academic conditions:
+Transfer applicants must meet these academic conditions:
 
-- A General Weighted Average (GPA) of **2.5 or better** across all college subjects taken
+- General Weighted Average (GPA) of **2.5 or better** across all college subjects taken
 - **No failing grade** of 5.0 or its equivalent in any academic subject
 - At most **50% of the target curriculum's units** completed
-- An open slot in your chosen program
+- Open slot in your chosen program
 
-Meeting these minimums qualifies you to apply, though slots are limited and not guaranteed. Confirm with the University Admissions Office (UAO) if your target college imposes stricter cutoffs.
+Meeting these minimums qualifies you to apply, though slots are limited and not guaranteed. Confirm with the University Admissions Office (UAO) if your target college sets stricter cutoffs.
 
-### Recent application window (A.Y. 2026-2027 reference)
+### Application window for A.Y. 2026-2027
 
 | Stage | Original window | Extended window |
 | --- | --- | --- |
@@ -48,26 +48,27 @@ During the May 2026 cycle, all campuses held hard-copy submission by appointment
 
 ### Fees
 
-On-site document submission for shifters, transferees, and second-degree coursers has **no fee**. This replaces the older P300 exam fee, though you should still check the current cycle announcement to confirm whether any testing fee applies.
+On-site document submission for shifters, transferees, and second-degree coursers has **no fee**. This replaces the older PHP 300 exam fee, though you should still check the current cycle announcement to confirm whether any testing fee applies.
 
 ## Documents to prepare
 
-Prepare both scanned copies for online filing and physical copies for your Malolos Campus appointment:
+Prepare both scanned copies for online filing and physical copies for your Malolos Campus appointment. Submitting altered or incomplete credentials disqualifies your application.
 
-- Certified copy of your Official Transcript of Records (TOR) or Certificate of Grades. Graduates of private higher education institutions must include a Special Order.
+### Required for all applicants
+
+- Certified copy of your Official Transcript of Records (TOR) or Certificate of Grades
 - Certificate of Good Moral Character from your previous school
 - Original and photocopy of your current Certificate of Registration (COR) and class cards for initial evaluation
+- 2 color ID photos (2" x 2") on a white background; computer-generated photos are rejected
+
+### Conditional requirements
+
+- Special Order, if you graduated from a private higher education institution
 - Honorable Dismissal from your previous school, required for Registrar enrollment and for second-degree applicants
-- Two 2" x 2" color ID photos on a white background; computer-generated photos are rejected
-- Notarized Affidavit of Discrepancy if the name on your records differs from your birth certificate
+- Letter of intent addressed to the College Dean, if you are applying as a second-degree courser
+- Notarized Affidavit of Discrepancy, if the name on your records differs from your birth certificate
 
-If you are applying as a **second-degree courser**, also prepare:
-
-- Letter of intent addressed to the College Dean
-
-Submitting altered or incomplete credentials disqualifies your application.
-
-## Application and credit transfer steps
+## Apply and request transfer credits
 
 1. Check the [BulSU Admissions Office Facebook page](https://www.facebook.com/BulSUAdmissionsOffice) when the Shifters, Transferees, and Second-Degree Coursers window opens to confirm your target course has open slots.
 2. Complete the online application using the portal link posted for that cycle. For reference, recent freshman admissions use the [BulSU Online Application Portal](https://admissions.bulsu.edu.ph/).

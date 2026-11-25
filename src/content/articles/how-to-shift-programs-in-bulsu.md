@@ -2,7 +2,7 @@
 title: "How to Shift Programs in BulSU"
 category: "enrollment"
 subcategory: "Shifting & Transferring"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
@@ -24,14 +24,14 @@ Enrolled BulSU students who want to switch courses apply through the combined Sh
 
 ## Eligibility, schedule, and residency limits
 
-Shifting covers:
+Shifting is open to these student groups:
 
-- **Main Campus shifters:** incoming 2nd-year or 3rd-year students
-- **External campus shifters:** incoming 3rd-year students
+- Main Campus shifters who are incoming 2nd-year or 3rd-year students
+- External campus shifters who are incoming 3rd-year students
 
 Voluntary shifters need satisfactory academic standing and an open slot in the receiving program. Shifting does not reset your maximum residency clock from initial entry. You still have 6 years for a 4-year course and 7.5 years for a 5-year course, so switching late can limit how many semesters you have left.
 
-### Recent application window (A.Y. 2026-2027 reference)
+### Application window for A.Y. 2026-2027
 
 Only limited slots open each year. During the May 2026 cycle, applications ran on this schedule:
 
@@ -42,7 +42,7 @@ Only limited slots open each year. During the May 2026 cycle, applications ran o
 
 On-site document submission for shifters has **no fee**. Confirm on the current cycle announcement if any college testing fee applies.
 
-## When you must take an exam
+## Shifting exam requirements
 
 Whether you need an exam depends on the kind of move you are making:
 
@@ -64,9 +64,9 @@ Prepare scanned copies for online filing and matching physical copies for your M
 - Clearance
 - Original and photocopy of your current Certificate of Registration (COR) and class cards
 
-## Application steps
+## Apply to shift programs
 
-1. Watch the [BulSU Admissions Office Facebook page](https://www.facebook.com/BulSUAdmissionsOffice) for the list of open programs for Shifters, Transferees, and Second-Degree Coursers across Main Campus and the Bustos, Hagonoy, Meneses, San Rafael, and Sarmiento campuses.
+1. Check the [BulSU Admissions Office Facebook page](https://www.facebook.com/BulSUAdmissionsOffice) for the list of open programs for Shifters, Transferees, and Second-Degree Coursers across Main Campus and the Bustos, Hagonoy, Meneses, San Rafael, and Sarmiento campuses.
 2. Submit your online application using the portal link announced for that window.
 3. Bring your physical requirements to the University Admissions Office at Malolos Campus on your scheduled appointment date. In May 2026, appointments were temporarily held at the BulSU E-Library 2nd Floor, and validation takes about 8 minutes.
 4. Watch your registered email for confirmation and, if your move requires testing, your tentative exam schedule.
@@ -76,10 +76,10 @@ Prepare scanned copies for online filing and matching physical copies for your M
 
 BulSU also allows or recommends shifting when your grades drop under Academic Delinquency rules:
 
-- Failing or dropping two subjects while on probation drops you from your current course, though you may apply to shift with acceptance from the receiving Dean and approval from the Vice President for Academic Affairs (VPAA).
+- Failing or dropping 2 subjects while on probation drops you from your current course, though you may apply to shift with acceptance from the receiving Dean and approval from the Vice President for Academic Affairs (VPAA).
 - Failing 50% to 75% of your enrolled subjects triggers a recommendation to shift to another program, subject to the receiving Dean's acceptance and VPAA approval.
 
-Failing more than 75% of your enrolled subjects in one semester, or 50% or more while on probation, disqualifies you from the university.
+Failing more than 75% of your enrolled subjects in 1 semester, or 50% or more while on probation, disqualifies you from the university.
 
 ## Contacts
 

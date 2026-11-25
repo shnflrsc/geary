@@ -2,7 +2,7 @@
 title: "How to File a Leave of Absence"
 category: "enrollment"
 subcategory: "Leave & Readmission"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"
@@ -16,35 +16,37 @@ sources:
     url: "https://www.facebook.com/permalink.php?story_fbid=pfbid0ooC5AuHyF7xdot8Smp8Vuz3FMJyqzvWzRhyR9ep5htpm2J1s8HnRbDREYNbXXNNPl&id=61576726373776"
 ---
 
-Filing an official Leave of Absence (LOA) lets you pause enrollment for a semester or up to a full year without using up your maximum residency. Stopping class attendance without an approved LOA keeps your residency clock running and can lead to failing or Unofficially Dropped (`UD`) marks.
+Filing an official Leave of Absence (LOA) lets you pause enrollment for 1 semester or up to 1 full year without using up your maximum residency. Stopping class attendance without an approved LOA keeps your residency clock running and can lead to failing or Unofficially Dropped (`UD`) marks.
 
 ## Limits, deadlines, and penalties
 
-- **1-year maximum:** An official LOA cannot exceed one year.
-- **Residency protection:** Semesters covered by an approved LOA do not count toward maximum residency. Standard residency limits are 4 years for 2-year courses, 6 years for 4-year courses, and 7.5 years for 5-year courses.
-- **Penalty for overstaying:** Staying away beyond one year lets your Dean require **3 to 6 additional academic units** when you return.
+Keep these residency and duration rules in mind before filing:
+
+- Maximum duration is **1 year** for an official LOA.
+- Approved LOA semesters do not count toward maximum residency, which is 4 years for 2-year courses, 6 years for 4-year courses, and 7.5 years for 5-year courses.
+- Overstaying beyond 1 year lets your Dean require **3 to 6 additional academic units** when you return.
 
 The Office of the University Registrar announces each semester's filing deadline on Facebook. For timing reference, the 1st Semester 2025-2026 cutoff for dropping and LOA was October 4, 2025.
 
-**Note for Student Government officers:** Stepping back from Student Government council duties follows a separate internal filing rule and does not replace filing an academic LOA with the Registrar.
+Student Government officers follow a separate internal filing rule when stepping back from council duties, which does not replace filing an academic LOA with the Registrar.
 
-## How to file an LOA
+## File a leave of absence
 
 1. Request the LOA Form from the Office of the University Registrar before the semester's filing deadline.
 2. Fill out the form completely and get every required clearance or signature listed on it.
 3. Photocopy your fully signed LOA form before turning it in.
 4. Submit the original form to the Office of the University Registrar and ask the receiving clerk to write their full name and signature on your photocopy as proof of receipt. Keep this copy for readmission.
 
-## Applying for readmission when you return
+## Apply for readmission
 
-### General procedure
+### Standard readmission steps
 
 1. Go in person to the Office of the University Registrar to apply for readmission. Bring your signed LOA photocopy to speed up verification.
 2. Take the Readmission Slip issued by the Registrar and hand it personally to your College or Campus Dean, or their authorized representative. The Dean cannot deny a readmitted student from enrolling.
 
 ### External campus requirements
 
-Check your College Dean or campus admissions page before your return semester for local requirements. For reference, returning students at Sarmiento Campus submitted:
+Check your College Dean or campus admissions page before your return semester for local requirements. For reference, returning students at Sarmiento Campus submitted these documents:
 
 - Re-admission Letter addressed to the Campus Dean
 - Completed Clearance Form

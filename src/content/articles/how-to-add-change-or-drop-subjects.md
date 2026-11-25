@@ -2,7 +2,7 @@
 title: "How to Add, Change, or Drop Subjects"
 category: "academics"
 subcategory: "Enrollment & Load Changes"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "BulSU ICTO - Regular and Irregular Student Enrollment Guides in ALAB SMS (Nov 14, 2026)"
     url: "https://www.facebook.com/bulsu.icto/posts/pfbid0EbpbEz5CeD5FbZgMWbxnE42PfWLDo8B1xPJewtTGzeCu9ErTecwdYEQKd1px7Shnl"
@@ -16,35 +16,37 @@ sources:
     url: "https://www.facebook.com/BulSUSCRegistrar/posts/pfbid0JKj5Zn4qK7dRMHcFwqmURbWYzqVXqVEyffjKnNYwKVvKfCM5dMrVT3ww6hq8Lmdfl"
 ---
 
-BulSU handles adding, changing, and dropping subjects through the ALAB SMS Portal during the enrollment adjustment period, subject to college and Registrar approval. Routine adding and changing must happen within the **first 2 weeks of regular classes**. Official dropping stays open up to **1 week before midterm examinations**.
+BulSU processes adding, changing, and dropping subjects through the ALAB SMS Portal during the enrollment adjustment period, subject to college and Registrar approval. Routine adding and changing must happen within the **first 2 weeks of regular classes**. Official dropping stays open up to **1 week before midterm examinations**.
 
 ## Rules before requesting changes
 
-- **Finish enlisting first:** During regular or irregular enrollment in ALAB SMS, clicking Save does not submit your enrollment. You must click **Enlist** after checking your assessment.
-- **Subject unavailable:** Coordinate with your college first if a subject does not appear in ALAB SMS.
-- **No cross-semester adding:** You cannot add 1st-semester subjects during the 2nd semester.
-- **Dropping risk:** Dropping two subjects in one term blocks you from enrolling in requisite subjects the next semester. Dropping two subjects while on probation drops you from your course.
+Check these rules before submitting a request:
 
-## How to add, change, or drop subjects in ALAB SMS
+- Finish enlisting during regular or irregular enrollment in ALAB SMS. Clicking Save does not submit your enrollment; you must click Enlist after checking your assessment.
+- Coordinate with your college first if a subject does not appear in ALAB SMS.
+- Avoid adding 1st-semester subjects during the 2nd semester, as cross-semester adding is not allowed.
+- Watch your drop count: dropping 2 subjects in 1 term blocks you from enrolling in requisite subjects the next semester, and **dropping 2 subjects while on probation drops you from your course**.
 
-1. Log in to the [ALAB SMS Portal](https://alabsms.bulsu.edu.ph/) with your BulSU account and open **Add/Drop/Change** from the sidebar.
-2. To add a subject, search for the course, select an open class section, and check the line added in the Request panel.
-3. To change a subject, choose **Another schedule** to switch to an open section of the same course, or choose **Another course** to search for a replacement subject and select its class.
-4. To drop a subject, select the course to drop and review all pending lines in the Request panel.
-5. Enter a reason between 5 and 255 characters, such as "Schedule adjustment for this term," and click **Send Request**.
-6. Wait for Registrar approval and monitor your status under **Your requests**.
+## Add, change, or drop subjects in ALAB SMS
+
+1. Log in to the [ALAB SMS Portal](https://alabsms.bulsu.edu.ph/) with your BulSU account and open Add/Drop/Change from the sidebar.
+2. Add a subject by searching for the course, selecting an open class section, and checking the line added in the Request panel.
+3. Change a subject by choosing Another schedule to switch to an open section of the same course, or choosing Another course to search for a replacement subject and select its class.
+4. Drop a subject by selecting the course to drop and reviewing all pending lines in the Request panel.
+5. Enter a reason between 5 and 255 characters, such as "Schedule adjustment for this term," and click Send Request.
+6. Wait for Registrar approval and track your status under Your requests.
 
 If you miss the online adjustment deadline, request assistance directly from the Office of the University Registrar. For login or account trouble, submit a ticket through the [ICTO Helpdesk](https://icto-helpdesk.bulsu.edu.ph/).
 
-## Substituting subjects under an old curriculum
+## Substitute subjects under an old curriculum
 
-You may substitute a new subject for a retired curriculum subject when all three conditions hold:
+You may substitute a new subject for a retired curriculum subject when all 3 conditions hold:
 
-- The old subject belongs to a revised or replaced curriculum and is no longer offered.
-- The old and new subjects are similar or related.
-- The replacement carries equal or more credit units.
+- Old subject belongs to a revised or replaced curriculum and is no longer offered.
+- Replacement subject is similar or related to the old subject.
+- Replacement carries equal or more credit units.
 
-## Formal dropping form and grade marks
+## Drop a subject using the formal Dropping Form
 
 Outside the online adjustment window, you can still drop a subject up to **1 week before midterm exams** by filing a formal Dropping Form from the Office of the University Registrar. Have it signed in this order:
 

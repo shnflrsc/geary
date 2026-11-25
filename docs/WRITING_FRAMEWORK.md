@@ -31,7 +31,7 @@ Geary does not measure efficiency by fewest words alone. Keep three concepts dis
 * **Compression:** Packing as much information as possible into as few words or sentences as possible.
 * **Reading efficiency:** Communicating information with the least cognitive effort required from the reader.
 
-Optimize for **reading efficiency**, not aggressive compression. A short paragraph that forces students to mentally unpack stacked dates, conditions, abbreviations, symbols, and parenthetical notes is harder to read than two clean sentences or a short list. When separating information improves comprehension, readability wins over saving words.
+Optimize for **reading efficiency**, not aggressive compression. Most web readers skim only 20–28% of a page—defaulting to an F-shaped pattern that misses content on walls of text, or shifting to the more efficient **layer-cake pattern** (scanning headings and subheadings until one matches their task, then reading the block below it). Frontloaded headings and scannable structure matter more than raw word count. A short paragraph that forces students to mentally unpack stacked dates, conditions, abbreviations, symbols, and parenthetical notes is harder to read than two clean sentences or a short list. When separating information improves comprehension, readability wins over saving words.
 
 ## 2. Writing Style, Tone, and Tooling
 
@@ -77,8 +77,11 @@ Avoid:
 
 ### 2.4 Language
 
-* Use standard, accessible English as the default language.
+* Use plain, accessible English as the default language—assume many readers speak English as an additional language, so avoid idioms, rare vocabulary, and complex phrasing.
+* Use the words students actually search for and say (e.g., "shifting," "dropping a subject," "TOR") rather than echoing bureaucratic memo wording.
 * Preserve official university names, office titles, document labels, and program names as written—do not translate them unnecessarily.
+* Keep institutional or technical jargon only when students will see it on official forms or portals, and explain it immediately at the point of use.
+* Deliver caveats and supporting details at the exact step where the reader needs them rather than tucking them away elsewhere.
 * Use the same term consistently throughout an article.
 
 ### 2.5 Symbol Grouping
@@ -103,6 +106,7 @@ These established principles inform how Geary structures dense information (keep
 * **Cognitive Fluency:** Text that is visually and structurally easier to scan feels easier to understand and act on. Excessive symbol density disrupts fluency.
 * **Gestalt Principles of Perceptual Organization:** Readers naturally group related items using spacing, alignment, and hierarchy. Separating dense details into clear visual chunks makes relationships obvious.
 * **Miller's Law (George A. Miller):** Working memory is limited, so meaningful chunking helps readers retain and process details. Treat this as supporting context for grouping related facts cleanly—not as a rigid numeric rule.
+* **Text Scanning Patterns (Nielsen Norman Group):** Readers rarely read word-for-word—they switch between **layer-cake** scanning (jumping across headings), **spotted** scanning (hunting for numerals, links, and bold anchors), **bypassing** (skipping repeated prefixes on list items), and **F-pattern** scanning (on unstructured walls of text). Standalone frontloaded headings, numerals for figures, and non-repetitive list openings work with these patterns instead of against them.
 
 ## 3. Article Structure
 
@@ -129,7 +133,7 @@ Never include:
 
 * Background history or broad context.
 * Generic opening lines (e.g., "Navigating university processes can be challenging...").
-* Restatements of the title.
+* Restatements of the title or the article's frontmatter `description`/summary.
 * Section-by-section previews of what the article will cover.
 
 ### 3.3 Section Organization
@@ -140,6 +144,17 @@ Use descriptive Markdown headings to group information logically:
 * `##` for primary sections.
 * `###` for subsections.
 * `####` only when genuinely necessary.
+* Never skip heading levels (e.g., jumping from `##` to `####`)—consistent hierarchy is required for screen readers and outline navigation.
+
+Write headings that are:
+
+* **Descriptive and frontloaded:** Put the most important word first; avoid generic labels like "Introduction" or "Overview."
+* **Standalone (out-of-context):** Every heading must make sense on its own when scanned out of order—never rely on prior prose (e.g., "A note on the above"), clever puns, or vague labels, and never just repeat the first sentence of the paragraph below.
+* **Active when task-based:** Start procedural headings with a verb (e.g., "Apply for a transfer" rather than "You can apply for a transfer").
+* **Removable:** Body prose must still make sense if the heading is deleted—never open a section with a pronoun referring back to the heading (e.g., "This requires...").
+* **Plain-language:** Do not use technical terms or unexplained abbreviations in headings.
+* **Statements, not questions:** Avoid question headings (outside §10 FAQ)—they are hard to frontload and readers want answers, not questions.
+* **Readable as an outline:** Reading only the headings from top to bottom should convey the article's full flow.
 
 Avoid excessive nesting, repetitive headings, arbitrary splits, or one-sentence sections that belong elsewhere.
 
@@ -224,9 +239,14 @@ Do not force every detail into a table or list—use structured formats only whe
 
 Use bullet lists (`-` or `*`) for unordered related items, options, or facts. Each bullet must add distinct information. Do not turn regular prose into bullets.
 
+* Keep list items parallel in structure (all verb-led or all noun phrases).
+* Frontload the differentiating word in each bullet—never repeat the same opening phrase on every line (move shared phrasing like "You must submit" into the lead-in sentence so scanners do not bypass the list).
+* Aim for 2–7 items per list—never use a 1-item list, and split longer lists into grouped subsections when natural.
+* Introduce lists with a heading, complete sentence, or short colon lead-in rather than awkward mid-sentence fragments.
+
 ### 5.3 Numbered Lists
 
-Use numbered lists (`1.`) strictly for sequential steps, chronological actions, or ranked items. Never number unrelated points.
+Use numbered lists (`1.`) strictly for sequential steps, chronological actions, or ranked items. Never number unrelated points. Keep items grammatically parallel and split long sequences into clear phases when natural.
 
 ### 5.4 No Checkbox Lists
 
@@ -234,7 +254,11 @@ Never use Markdown checkbox/task lists (`- [ ]` or `- [x]`) in articles. Always 
 
 ### 5.5 Tables
 
-Use tables only to compare structured data across multiple categories (e.g., fees, schedules, program differences, processing timelines). Avoid tables for explanations, long text, or step-by-step instructions.
+Use tables only to compare structured data across multiple categories (e.g., fees, schedules, program differences, processing timelines) or to lay out branching "if–then" conditions (e.g., requirements by student type) that would turn into tangled prose. Avoid tables for explanations, long text, or step-by-step instructions.
+
+* Put the defining label (program, form, fee type, office) in the leftmost column.
+* Keep entries within each column parallel in grammar and format, and keep cell text brief for mobile screens.
+* Never leave cells blank or use ambiguous lone dashes—write `None` or `Not applicable` explicitly.
 
 ### 5.6 Links
 
@@ -242,6 +266,7 @@ Use tables only to compare structured data across multiple categories (e.g., fee
 * Use descriptive link text that tells readers exactly where the link leads—never use "here" or "this."
 * Avoid raw URLs.
 * Link directly to the specific official page, post, form, or document.
+* When linking to an online portal, form, or service, place the link under a heading that matches that task (e.g., "Apply online").
 * Never invent or include unverified URLs.
 
 Examples:
@@ -254,11 +279,17 @@ Examples:
 Use Markdown formatting (bold, italic, inline code, blockquotes) sparingly and only when strictly necessary. Heavy formatting creates visual clutter and weakens real emphasis.
 
 * **Bold:** Reserve for critical deadlines, dealbreaker warnings, or brief scan anchors where plain text would bury a key detail. Never bold entire paragraphs, routine terms, or repeated mentions of the same office or document.
+* **Numerals:** Use digits (`3`, `15 days`, `₱50`) rather than spelled-out words for counts, fees, deadlines, and dates so spotted-pattern scanners catch them immediately.
 * *Italic:* Use rarely—only for document titles, brief parenthetical notes, or subtle clarification when plain text is ambiguous.
 * Inline code: Use very sparingly. Restrict it strictly to literal technical values, commands, file paths, or exact text a reader must type verbatim (such as a portal code). Never use inline code for email addresses (use **bold** instead), general emphasis, UI labels, or ordinary nouns.
 * Blockquotes: Use only for brief official excerpts or standout rules that need visual separation.
+* Avoid ALL CAPS for emphasis (reserve capitals for official acronyms like `TOR` or `BOR`) and never underline non-link text, which readers mistake for hyperlinks.
 
 When in doubt, leave it as plain text.
+
+### 5.8 No Footnotes
+
+Do not use Markdown footnotes (`[^1]`) in articles. Footnotes are a print convention that disrupt web and mobile scanning. If a detail is important, integrate it directly into the body text; if it is not, leave it out.
 
 ## 6. Information Prioritization
 
@@ -360,9 +391,9 @@ Add an FAQ section only for specific, practical questions readers are likely to 
 ### Structure and Readability
 
 * [ ] The title clearly states the subject.
-* [ ] There is no unnecessary introduction or closing summary.
+* [ ] There is no unnecessary introduction, closing summary, or repetition of the title or frontmatter `description`.
 * [ ] Critical information appears before step-by-step instructions.
-* [ ] Headings are specific to the article's topic—no literal framework labels (e.g., "Must-Know Information" or "Additional Useful Information").
+* [ ] Headings are specific, frontloaded, standalone (make sense out of order without echoing the first sentence), active where task-based, removable, plain-language, and not framed as questions (outside §10 FAQ)—no literal framework labels (e.g., "Must-Know Information" or "Additional Useful Information").
 * [ ] Paragraphs are short (1–3 sentences) and structured formats (lists, tables, blockquotes) are chosen when they reduce cognitive effort.
 * [ ] No Symbol Grouping—dense numbers, dates, abbreviations, slashes, and parentheticals are distributed cleanly across sentences, lists, or tables rather than compressed into one paragraph.
 * [ ] Filler, repetition, and wordy phrasing have been cut without aggressively compressing dense details.
@@ -376,7 +407,7 @@ Add an FAQ section only for specific, practical questions readers are likely to 
 
 ### Formatting and Resources
 
-* [ ] Markdown is clean, consistent, and mobile-friendly (no checkbox/task lists `- [ ]` or `- [x]`).
+* [ ] Markdown is clean, consistent, and mobile-friendly (parallel lists, no blank table cells, no checkbox/task lists `- [ ]` / `- [x]`, and no footnotes `[^1]`).
 * [ ] Bold, italic, and especially inline code are used sparingly and only where necessary.
 * [ ] Inline source references are brief and used only when helpful for context or action—full citations live in the Sources card.
 * [ ] External sources mentioned in the text (such as Facebook posts or portals) use descriptive inline links when verified URLs exist.

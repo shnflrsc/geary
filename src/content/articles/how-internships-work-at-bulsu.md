@@ -2,7 +2,7 @@
 title: "How Internships and Job Placement Work at BulSU"
 category: "academics"
 subcategory: "Internships & Graduation"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "BulSU CarDSI - General Internship Orientation 2026 (Nov 10, 2026)"
     url: "https://www.facebook.com/cardsis/posts/pfbid0yh6KYrz3BdMNmbDfAUAxFFpfspFZkQfMddt2XV5gFmfSwwyVruoWtqR8foausVBul"
@@ -18,23 +18,23 @@ sources:
 
 Two BulSU offices handle your move from college to employment. Career Development and Student Internship Services (CarDSI) oversees undergraduate internships, while International Affairs handles overseas internships under CMO No. 22, s. 2013. The Placement and Public Employment Service Office (PPESO) connects students, graduating seniors, and alumni with jobs and campus assistantships.
 
-## How undergraduate internships work
+## Complete your undergraduate internship placement
 
 Internship timing varies by college, and some programs start practicum placement as early as the summer before 3rd year. **Skipping any step in the official placement flow results in automatic de-registration from your internship course.**
 
 Follow this sequence with your college's Student Internship Program (SIP) Coordinator:
 
-1. **Attend your college's internship orientation.** CarDSI and colleges hold mandatory orientations before deployment. Check your college's page for exact attire, no-bag rules, and whether a parent or guardian must attend to sign waivers.
-2. **Submit the Student-Intern Information Sheet** to your SIP Coordinator.
-3. **Pick three Host Training Establishments (HTEs)** from the approved list. If your preferred company is not listed, ask your SIP Coordinator to vet it and set up a partnership before applying.
-4. **Contact the approved HTEs** to confirm internship slots and schedule interviews.
-5. **Complete and sign all placement documents before deployment.** Placement becomes official only after you, the agency representative, your SIP Coordinator, and your parent sign the agreement documents. Colleges such as CIT also require a notarized Memorandum of Agreement (MOA) before deployment.
+1. Attend your college's mandatory internship orientation. Check your college's page for exact attire, no-bag rules, and whether a parent or guardian must attend to sign waivers.
+2. Submit the Student-Intern Information Sheet to your SIP Coordinator.
+3. Pick 3 Host Training Establishments (HTEs) from the approved list. If your preferred company is not listed, ask your SIP Coordinator to vet it and set up a partnership before applying.
+4. Contact the approved HTEs to confirm internship slots and schedule interviews.
+5. Complete and sign all placement documents before deployment. Placement becomes official only after you, the agency representative, your SIP Coordinator, and your parent sign the agreement documents. Colleges such as CIT also require a notarized Memorandum of Agreement (MOA) before deployment.
 
 Pre-deployment requirements, including medical clearance, insurance, and MOA deadlines, vary by college. Confirm your exact packet with your SIP Coordinator.
 
 ## Duties during your practicum
 
-Once deployed, interns are expected to:
+Once deployed, you must:
 
 - Contact your site supervisor a few days before your start date
 - Notify your SIP Coordinator on the day you start logging hours
@@ -50,12 +50,16 @@ Misconduct or violating campus or company rules can lead CarDSI to pull you from
 
 PPESO runs free career readiness and employment programs for students, graduating seniors, and alumni:
 
-- **Campus job fairs:** PPESO hosts university-wide job fairs with local employers and government hiring drives, such as DPWH recruitment for BulSU alumni and graduating students. For overseas jobs, PPESO does not place students directly and refers applicants to licensed agencies.
-- **Institutional Student Assistants (ISA):** Paid on-campus student work coordinated through PPESO. Freshmen are encouraged to apply starting 2nd semester.
-- **Labor education and pre-employment seminars:** Career counseling and workplace readiness briefings run alongside CarDSI and Guidance Services.
-- **Special employment programs:** PPESO posts calls for SPES (holiday student employment), TULAY (employment access for Persons with Disabilities), and WHIP (DPWH local hiring). Watch [BulSU-PPESO on Facebook](https://www.facebook.com/bulsu.ppeso) for active openings.
+| Program | What PPESO offers |
+| --- | --- |
+| Campus job fairs | University-wide job fairs with local employers and government hiring drives, such as DPWH recruitment for BulSU alumni and graduating students. For overseas jobs, PPESO refers applicants to licensed agencies. |
+| Institutional Student Assistants (ISA) | Paid on-campus student work coordinated through PPESO. Freshmen are encouraged to apply starting 2nd semester. |
+| Labor education and pre-employment seminars | Career counseling and workplace readiness briefings run alongside CarDSI and Guidance Services. |
+| Special employment programs | Posts calls for SPES (holiday student employment), TULAY (employment access for Persons with Disabilities), and WHIP (DPWH local hiring). |
 
-## Contacts
+Watch [BulSU-PPESO on Facebook](https://www.facebook.com/bulsu.ppeso) for active openings.
+
+## Office contacts
 
 - PPESO Office: Ground Floor, Roxas Hall
 - Email: **bulsu.ppeso@bulsu.edu.ph**

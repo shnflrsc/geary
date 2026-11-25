@@ -2,13 +2,13 @@
 title: "Student Organizations Directory"
 category: "organizations"
 subcategory: "Student Orgs & Leadership"
-updatedDate: 2026-11-22
+updatedDate: 2026-11-25
 sources:
   - label: "BulSU OSOA Main Campus - List of Recognized Student Organizations for Academic Year 2026-2027"
     url: "https://www.facebook.com/osobulsu/posts/pfbid02SfRboxuAnbDt7ntFxJCuYFMXr4ygq6EaWE3CD1bs6E2fCnYGrAWjuPfkNEUtZ1cSl"
 ---
 
-## I. University-wide Organizations
+## University-wide organizations
 
 ### Academic
 
@@ -25,7 +25,7 @@ sources:
 
 ### Environmental
 
-- [BulSU-Bound Tails (BBT)](https://www.facebook.com/bulsuboundtails/)
+[BulSU-Bound Tails (BBT)](https://www.facebook.com/bulsuboundtails/)
 
 ### Fraternities
 
@@ -38,7 +38,7 @@ sources:
 - [BulSU - The Otaku Philippines (BulSU-TOP)](https://www.facebook.com/1321985397961785/)
 - [Rock Our Music Association of the Students in the University (ROMASU)](https://www.facebook.com/271686722850790/)
 
-### Socio-Civic
+### Socio-civic
 
 - [Kaya Natin! Youth - Bulacan State University (KNY-BulSU)](https://www.facebook.com/knyouthbulsu)
 - [Bulacan State University Association of Peer Facilitators and Advocates of Mental Health (BulSU A-PFAM)](https://www.facebook.com/bulsu.apfam)
@@ -64,11 +64,11 @@ sources:
 - You Are Part (Y.A.P.)
 - Overcomers' Club
 
-### Sports and Fitness
+### Sports and fitness
 
-- [League of Sports and Fitness Ambassadors (LSFA)](https://www.facebook.com/269120450484930/)
+[League of Sports and Fitness Ambassadors (LSFA)](https://www.facebook.com/269120450484930/)
 
-## II. College-based Organizations
+## College-based organizations
 
 ### College of Fine Arts and Architecture (CAFA)
 

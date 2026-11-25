@@ -2,7 +2,7 @@
 title: "BulSU Guidance and Counseling Services"
 category: "campus"
 subcategory: "Student Support & Welfare"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "BulSU Guidance and Counseling Services Center Main Campus - Six Core Services & Contact Guide (Aug 12, 2025)"
     url: "https://www.facebook.com/BulSUGCSCMain/videos/4208534679418109/"
@@ -12,22 +12,25 @@ sources:
 
 BulSU's Guidance and Counseling Services Center (GCSC) provides free, confidential academic and personal support to students.
 
-## How to contact or book GCSC
+## Contact or book a GCSC appointment
 
-- **Main Campus office:** RH 104-105, Roxas Hall
-- **Phone:** (044) 919-7800, local 1071 or 1072
-- **Email:** **bulsuguidancecenter@bulsu.edu.ph**
-- **Facebook:** [BulSU GCSC Main Campus](https://www.facebook.com/BulSUGCSCMain)
-- **Online booking:** [GCSC Counseling Appointment Form](https://forms.gle/QZRMGU8yjAyRNnmL8)
+Book a session online through the [GCSC Counseling Appointment Form](https://forms.gle/QZRMGU8yjAyRNnmL8) or reach the Main Campus office directly:
 
-## Six core services at GCSC
+| Channel | Details |
+| --- | --- |
+| Main Campus office | RH 104-105, Roxas Hall |
+| Phone | (044) 919-7800, local 1071 or 1072 |
+| Email | **bulsuguidancecenter@bulsu.edu.ph** |
+| Facebook | [BulSU GCSC Main Campus](https://www.facebook.com/BulSUGCSCMain) |
 
-- **Counseling Service:** Confidential one-on-one or group counseling for stress, anxiety, academic struggles, relationship concerns, or major decisions. You may book voluntarily, walk in, or be referred by a faculty member or office.
-- **Testing Service:** Standardized psychological and readiness assessments with counselor interpretation, along with scholarship and graduate admission tests.
-- **Individual Inventory Service:** Builds your confidential Student Cumulative Record starting from freshman or transferee entry to help counselors match you with the right support.
-- **Information Service:** Seminars, webinars, Peer Facilitators training, and resources on campus adjustment, mental health, and career direction.
-- **Follow-up Service:** Monitors student progress after counseling, conducts graduating Exit Interviews, and reaches out to students facing low grades or academic probation to help rebuild study habits and coping skills.
-- **Referral Service:** Connects students who need specialized outside medical, psychological, financial, or family support to qualified professionals and partner agencies.
+## 6 core services at GCSC
+
+- Counseling Service offers confidential one-on-one or group sessions for stress, anxiety, academic struggles, relationship concerns, or major decisions. You can book voluntarily, walk in, or be referred by a faculty member or office.
+- Testing Service administers standardized psychological and readiness assessments with counselor interpretation, plus scholarship and graduate admission tests.
+- Individual Inventory Service builds your confidential Student Cumulative Record starting from freshman or transferee entry so counselors can match you with the right support.
+- Information Service runs seminars, webinars, Peer Facilitators training, and resources on campus adjustment, mental health, and career direction.
+- Follow-up Service monitors student progress after counseling, conducts graduating Exit Interviews, and reaches out to students facing low grades or academic probation to help rebuild study habits and coping skills.
+- Referral Service connects students who need specialized outside medical, psychological, financial, or family support to qualified professionals and partner agencies.
 
 ### Standardized tests by year level
 
@@ -40,7 +43,7 @@ BulSU's Guidance and Counseling Services Center (GCSC) provides free, confidenti
 
 ## Mental health crisis hotlines
 
-For urgent emotional support outside campus office hours, reach out to these free Philippine crisis lines shared by GCSC:
+For urgent emotional support outside campus office hours, call these free Philippine crisis lines shared by GCSC:
 
 | Hotline | Contact numbers |
 | --- | --- |

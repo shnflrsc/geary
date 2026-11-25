@@ -2,7 +2,7 @@
 title: "BulSU Microsoft Student Account Benefits"
 category: "campus"
 subcategory: "Digital Services & Accounts"
-updatedDate: 2026-11-24
+updatedDate: 2026-11-25
 sources:
   - label: "BulSU VPAA Guidelines on the Hybrid-Flexible (Hyflex) Learning Modalities (2022)"
     url: "https://bulsu.edu.ph/assets/announcements/guidelines-vpaa-2022/Guidelines-on-the-Hybrid-Flexible-Hyflex-Learning-Modalities.pdf"
@@ -42,14 +42,16 @@ sources:
 
 Your BulSU Microsoft student account (**@ms.bulsu.edu.ph**) includes a full **Microsoft 365 Apps for enterprise** license for desktop and web apps, an Outlook email inbox, Microsoft Teams, Forms, Microsoft 365 Copilot, and 5 GB of OneDrive storage. It also qualifies you for free developer tools and student discounts in the Philippines.
 
-## What your student account includes
+## Included Microsoft 365 apps and services
 
-- **Microsoft 365 Apps for enterprise:** Desktop and web versions of Word, Excel, PowerPoint, and OneNote.
-- **Outlook:** Active school email inbox on **@ms.bulsu.edu.ph**.
-- **Microsoft Teams:** Official platform for classes, attendance, and university meetings.
-- **OneDrive:** **5 GB** cloud storage cap per student.
-- **Microsoft Forms:** Surveys, quizzes, and class forms.
-- **Microsoft 365 Copilot:** AI assistant integrated into your Microsoft 365 workspace.
+| Service | What your account includes |
+| --- | --- |
+| Microsoft 365 Apps for enterprise | Desktop and web versions of Word, Excel, PowerPoint, and OneNote |
+| Outlook | Active school email inbox on **@ms.bulsu.edu.ph** |
+| Microsoft Teams | Official platform for classes, attendance, and university meetings |
+| OneDrive | **5 GB** cloud storage cap per student |
+| Microsoft Forms | Surveys, quizzes, and class forms |
+| Microsoft 365 Copilot | AI assistant integrated into your Microsoft 365 workspace |
 
 ## Third-party student perks in the Philippines
 
@@ -64,17 +66,18 @@ You can receive verification codes in your **@ms.bulsu.edu.ph** Outlook inbox. T
 | [Google Gemini for Students](https://gemini.google/students/) | 1-year free Google AI Plus with 400 GB Google One storage (open until December 31, 2026) | Student verification on Google student hub |
 | [Spotify Premium Student](https://www.spotify.com/ph-en/student/) | ₱85/month instead of ₱169/month, up to 4 years | Annual SheerID check (portal or COR/ID) |
 | [Apple Music Student](https://www.apple.com/ph/apple-music/) | ₱85/month including Apple TV, up to 48 months | UNiDAYS verification |
-| [Adobe Creative Cloud](https://www.adobe.com/ph_en/creativecloud/buy/students.html) | Around US $15.99 to $19.99/month first year, then ~$39.99/month renewal (12-month plan) | School email or enrollment proof |
+| [Adobe Creative Cloud](https://www.adobe.com/ph_en/creativecloud/buy/students.html) | Around US $15.99 to $19.99/month 1st year, then about $39.99/month renewal (12-month plan) | School email or enrollment proof |
 | Perplexity Pro | $10/month (50% off standard pricing) | SheerID at checkout |
 
 ### Offers that are not free for college students
 
-- **Canva Education:** Restricted to K–12 schools. College students do not get free Canva Education individually, Canva is not part of the GitHub Student Developer Pack, and BulSU does not carry a Canva for Campus license.
-- **Cursor Pro:** Discontinued its free 1-year student Pro plan globally. Students can still use Cursor's standard free tier or apply for credits through campus events and graduate research programs.
+Canva Education is restricted to K-12 schools. College students do not get free Canva Education individually, Canva is not part of the GitHub Student Developer Pack, and BulSU does not carry a Canva for Campus license.
+
+Cursor Pro discontinued its free 1-year student Pro plan globally. Students can still use Cursor's standard free tier or apply for credits through campus events and graduate research programs.
 
 ## Free Microsoft and developer perks
 
-These programs are offered directly by Microsoft and GitHub to verified university students, separate from BulSU's campus license.
+Microsoft and GitHub offer these programs directly to verified university students, separate from BulSU's campus license.
 
 ### Azure for Students
 
@@ -84,15 +87,18 @@ Azure for Students is **not** available with a BulSU Microsoft student account. 
 
 Add and verify your **@ms.bulsu.edu.ph** email in your GitHub account settings first, then apply on the [GitHub Student Developer Pack page](https://education.github.com/pack). Once approved, you get:
 
-- **GitHub Pro:** Unlimited private repositories, 3,000 GitHub Actions minutes per month, and 180 GitHub Codespaces hours per month.
-- **GitHub Copilot Student:** Unlimited code completions, an AI credits allowance, and limited chat. This is a dedicated student tier with higher limits than Copilot Free, though distinct from paid Copilot Pro.
-- **Free 1-year domains:** One free domain from Namecheap (.me with SSL), Name.com, or .TECH.
-- **Developer tools and learning platforms:** JetBrains IDEs, MongoDB, Datadog, FrontendMasters, DataCamp, Educative, and Scrimba. Codédex Club is also listed, though its free window is 1 month.
+| Benefit | What is included |
+| --- | --- |
+| GitHub Pro | Unlimited private repositories, 3,000 GitHub Actions minutes per month, and 180 GitHub Codespaces hours per month |
+| GitHub Copilot Student | Unlimited code completions, an AI credits allowance, and limited chat (higher limits than Copilot Free, distinct from paid Copilot Pro) |
+| Free 1-year domains | 1 free domain from Namecheap (.me with SSL), Name.com, or .TECH |
+| Developer tools and learning platforms | JetBrains IDEs, MongoDB, Datadog, FrontendMasters, DataCamp, Educative, Scrimba, and a 1-month Codédex Club window |
 
 ### Visual Studio and Microsoft Certifications
 
-- **Visual Studio Dev Essentials:** Free access to Visual Studio Community, Visual Studio Code, SQL Server Developer Edition, Azure DevOps, and partner training perks through the [Visual Studio Dev Essentials portal](https://visualstudio.microsoft.com/dev-essentials/).
-- **Microsoft Certification exam discounts:** Students in the Philippines qualify for academic exam pricing. Sign in to your Microsoft Learn profile, open the Interest Survey, set your career path to **Student**, and verify your academic status before registering on the [Microsoft Learn student discounts page](https://learn.microsoft.com/en-us/credentials/certifications/student-discounts).
+Through the [Visual Studio Dev Essentials portal](https://visualstudio.microsoft.com/dev-essentials/), you get free access to Visual Studio Community, Visual Studio Code, SQL Server Developer Edition, Azure DevOps, and partner training perks.
+
+Students in the Philippines also qualify for academic pricing on Microsoft Certification exams. Sign in to your Microsoft Learn profile, open the Interest Survey, set your career path to **Student**, and verify your academic status before registering on the [Microsoft Learn student discounts page](https://learn.microsoft.com/en-us/credentials/certifications/student-discounts).
 
 ## Storage limits and leaving BulSU
 
@@ -100,9 +106,9 @@ Your OneDrive quota is **5 GB**, which fills up quickly if you save video record
 
 BulSU does not publish a public deactivation schedule for **@ms.bulsu.edu.ph** accounts after graduation, a leave of absence, or dropping. Back up any files you want to keep before your final semester ends, and email **icto@bulsu.edu.ph** if you need the current retention timeline for your account.
 
-## Account setup, password resets, and MFA help
+## Reset passwords and fix Microsoft Authenticator lockouts
 
-Account setup, password resets, and Microsoft Authenticator lockouts are handled by BulSU's Information and Communications Technology Office (ICTO).
+BulSU's Information and Communications Technology Office (ICTO) handles account setup, password resets, and Microsoft Authenticator lockouts.
 
 If you cannot sign in or you see *"Your organization needs more information to keep your account secure"* after switching phones, submit an ICTO ticket:
 

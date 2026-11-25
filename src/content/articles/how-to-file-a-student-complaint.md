@@ -2,7 +2,7 @@
 title: "How to File a Student Complaint"
 category: "policies"
 subcategory: "Rights, Discipline & Grievances"
-updatedDate: 2026-11-21
+updatedDate: 2026-11-25
 sources:
   - label: "BulSU SG Academic Affairs Committee - TAMBAD 2026 Grade Consultation Grievance (Nov 11, 2026)"
     url: "https://www.facebook.com/permalink.php?story_fbid=pfbid02khKjQ4YVz8jJZLNsrwj5SidqMsURn1YX7Y8Ci6k9rAouyXNiSzvqRwXpwggb7T3xl&id=61573139957540"
@@ -14,8 +14,6 @@ sources:
     url: "https://www.facebook.com/reel/1360501146174954/"
 ---
 
-Filing through the right BulSU office gets your concern addressed faster than sending messages at random. Use the table below to find where to file first.
-
 ## Pick the right channel first
 
 | Type of concern | Where to file first |
@@ -26,16 +24,17 @@ Filing through the right BulSU office gets your concern addressed faster than se
 | Bullying, abuse, hazing, or misconduct seeking penalties | College or campus Student Discipline Committee |
 | Gender-based sexual harassment | [BulSU Gender and Development (GAD) Center](https://www.facebook.com/gadcbulsu) and university CODI channels |
 
-## What to prepare before filing
+## Documents to prepare
 
-Gather your documentation before submitting a grievance so the receiving office can act right away:
+Gather these items before submitting a grievance so the receiving office can act right away:
 
 - Written narrative with your full name, student details, course or office involved, exact dates, and a clear factual account of what happened
 - Supporting screenshots, emails, grade sheets, class messages, or documents
 - Active email address and mobile number for follow-ups
-- Sworn witness statements or affidavits, if you are filing a formal disciplinary complaint
 
-## Grade consultation and weather-related grievances
+If you are filing a formal disciplinary complaint, also prepare sworn witness statements or affidavits.
+
+## Report grade consultation and weather-related concerns
 
 If an instructor refuses to explain how your grade was computed or posts final grades without consultation:
 
@@ -44,30 +43,30 @@ If an instructor refuses to explain how your grade was computed or posts final g
 3. Escalate the report to your Local Student Council if the issue stays unresolved so they can coordinate with your college administration or the Office of Student Affairs and Services (OSAS).
 4. Submit your concern through the current semester's Student Government grade-transparency form. Student councils post these links each term under campaigns like TAMBAD by SG Academic Affairs, SIWALAT by the Office of the Student Regent, or college drives like CCJE's PAGLANTAD.
 
-For academic consideration complaints during typhoons, widespread flooding, or power outages, file directly through the BulSU Student Grievance Desk managed by the SG Office of the Vice President at **bulsusg.ovp@gmail.com**.
+For academic consideration complaints during typhoons, widespread flooding, or power outages, submit the [BulSU Student Grievance Form](https://tinyurl.com/BulSUStudentGrievanceForm) or email the BulSU Student Grievance Desk managed by the [BulSU SG Office of the Vice President](https://www.facebook.com/bulsusgovp) at **bulsusg.ovp@gmail.com**.
 
-## Unfair treatment and Student Grievance Intervention
+## File a Student Grievance Intervention complaint
 
-For broader issues involving unfair treatment, abuse of authority, or poor instruction or service from any classmate, instructor, staff member, or administrator, BulSU provides Student Grievance Intervention.
+BulSU provides Student Grievance Intervention for unfair treatment, abuse of authority, or poor instruction or service from any classmate, instructor, staff member, or administrator.
 
-**Direct-victim rule:** You must be the direct victim of the unfair treatment. Friends, classmates, or parents cannot file a formal grievance on your behalf.
+**Only the direct victim may file.** Friends, classmates, or parents cannot file a formal grievance on your behalf.
 
-1. Try informal resolution first if you are comfortable doing so. Speak directly with the person involved or send a written letter describing the concern; they are expected to respond promptly through a dialogue or written reply. This step is encouraged, not required.
+1. Try informal resolution first if you are comfortable doing so. Speak directly with the person involved or send a written letter describing the concern; they are expected to respond promptly through a dialogue or written reply. This step is optional.
 2. Submit your written complaint to the Director for Student Welfare (DSW) or through Student Government. If your complaint is against the DSW, file directly with the Dean of OSAS.
 3. Wait for screening and formal endorsement. The DSW checks validity, mediates when possible, and sends formal representations to the college, department, or office involved without acting as judge.
 4. Track follow-ups and automatic escalation. The DSW follows up until the issue is resolved. If an office ignores or stalls the endorsement, the DSW elevates the complaint to the next higher office along with a complaint of inaction, all the way up to the University President.
 
 ## Disciplinary complaints, harassment, and peaceful assemblies
 
-### Formal disciplinary complaints
+### File a formal disciplinary complaint
 
 If you are seeking formal disciplinary penalties, file sworn written statements, witness affidavits, and documentary evidence directly with your college or campus Student Discipline Committee.
 
-### Gender-based sexual harassment
+### Report gender-based sexual harassment
 
-These cases are covered under the Anti-Sexual Harassment Act (RA 7877) and the Safe Spaces Act (RA 11313). Contact the [BulSU Gender and Development (GAD) Center](https://www.facebook.com/gadcbulsu), which runs Legal Aid Clinics and shares official reporting flowcharts and guidance alongside university CODI procedures.
+Gender-based sexual harassment cases fall under the Anti-Sexual Harassment Act (RA 7877) and the Safe Spaces Act (RA 11313). Contact the [BulSU Gender and Development (GAD) Center](https://www.facebook.com/gadcbulsu), which runs Legal Aid Clinics and shares official reporting flowcharts and guidance alongside university CODI procedures.
 
-### Group grievances and peaceful assemblies
+### Request a peaceful on-campus assembly
 
 Submit a formal position paper for dialogue first. To hold a peaceful on-campus assembly, recognized sponsors must file a written request with the **University President at least 2 school days before** the event or announcement while keeping gates, roads, and classes clear. Include these details in your request:
 

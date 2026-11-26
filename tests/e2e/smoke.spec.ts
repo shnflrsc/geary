@@ -360,7 +360,7 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       await page.goto(route);
 
       await expect(page.locator('header')).toHaveCount(1);
-      await expect(page.locator('header nav[aria-label="Primary navigation"] a')).toHaveCount(6);
+      await expect(page.locator('header nav[aria-label="Primary navigation"] a')).toHaveCount(5);
       await expect(page.locator('main')).toHaveCount(1);
       await expect(page.locator('footer')).toHaveCount(route === '/map' ? 0 : 1);
       await expect(page.locator('h1')).toHaveCount(1);
@@ -814,7 +814,7 @@ Test body.
     await expect(dialog).toBeHidden();
     await expect(page.getByTestId('ask-unread-badge')).toHaveText('1');
 
-    await page.getByRole('button', { name: 'Ask Geary (1 unread message)' }).click();
+    await page.getByRole('button', { name: 'Ask Geary, 1 unread message' }).click();
     await expect(dialog).toBeVisible();
     await expect(page.getByTestId('ask-unread-badge')).toBeHidden();
     await expect(dialog).toContainText('Hi! What can I help you with?');
@@ -876,7 +876,7 @@ Test body.
     );
 
     await page.goto('/');
-    await page.getByRole('button', { name: 'Ask Geary (1 unread message)' }).click();
+    await page.getByRole('button', { name: 'Ask Geary, 1 unread message' }).click();
     const dialog = page.getByRole('dialog', { name: 'Ask Geary' });
     await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
     await dialog.getByRole('button', { name: 'Ask', exact: true }).click();

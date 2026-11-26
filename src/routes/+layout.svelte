@@ -87,7 +87,6 @@
 
   {#if !hideFooter}
     <Footer />
+    <AskPanel />
   {/if}
-
-  <AskPanel />
 </div>

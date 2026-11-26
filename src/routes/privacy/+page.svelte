@@ -57,7 +57,7 @@
       On the optional Contribute page, Geary embeds a third-party Google Form with email collection and sign-in limits turned off. Loading that <code>docs.google.com</code> form connects your browser directly to Google under Google's own privacy policy. Any contributor credit name or follow-up contact you voluntarily enter is reviewed solely by Geary maintainers to attribute credit or ask clarification questions, and is never sold or shared for marketing.
     </p>
 
-    <h2>3. Client-Side Search, Campus Map, Daily Rotation &amp; Ask the Handbook</h2>
+    <h2>3. Client-Side Search, Campus Map, Daily Rotation &amp; Ask Geary</h2>
     <p>
       When you use the search bar, your browser downloads a JSON search index containing article titles, headings, and summaries. All filtering and ranking run locally inside your browser; your search terms are never sent to a Geary server or stored by us.
     </p>
@@ -65,7 +65,7 @@
       The interactive Campus Map page and the Home page's daily rotating article spotlight also run locally in your browser using bundled data and your device's local calendar date. Geary never requests GPS or browser geolocation permissions.
     </p>
     <p>
-      On the <a href="/ask">Ask the handbook</a> page, your browser first retrieves relevant article passages locally from a JSON ask corpus (<code>/ask-index.json</code>) — your question is not sent anywhere at that stage. Only when the question is submitted does a single request go to Geary's <code>/api/ask</code> endpoint, which forwards the question and the matched public article excerpts to Cloudflare Workers AI to generate a cited answer. That endpoint stores nothing, sets no cookies, and keeps no logs of your question; the only data that leaves your device is that one request containing your question text and public handbook content.
+      When you use the Ask Geary chat widget, your browser first retrieves relevant article passages locally from a JSON ask corpus (<code>/ask-index.json</code>), so your question is not sent anywhere at that stage. Only when the question is submitted does a single request go to Geary's <code>/api/ask</code> endpoint, which forwards the question and the matched public article excerpts to Cloudflare Workers AI to generate a cited answer. That endpoint stores nothing, sets no cookies, and keeps no logs of your question; the only data that leaves your device is that one request containing your question text and public handbook content.
     </p>
 
     <h2>4. Hosting &amp; Standard Server Logs</h2>

@@ -394,35 +394,37 @@
   </div>
 {/if}
 
-<button
-  bind:this={launcherEl}
-  type="button"
-  onclick={toggleWidget}
-  aria-label={hasUnread ? 'Ask Geary (1 unread message)' : 'Ask Geary'}
-  aria-expanded={open}
-  aria-controls={panelId}
-  title="Ask Geary"
-  class="fixed right-4 bottom-4 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full border border-border-strong bg-surface-card shadow-lg transition-all duration-150 hover:scale-105 hover:border-brand-crimson hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2 sm:right-6 sm:bottom-6"
->
-  <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" class="h-7 w-7 shrink-0">
-    <g fill="var(--color-brand-crimson)">
-      <rect x="13" y="2" width="6" height="28" rx="1.5" />
-      <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(45 16 16)" />
-      <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(90 16 16)" />
-      <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(135 16 16)" />
-      <circle cx="16" cy="16" r="10.5" />
-    </g>
-    <circle cx="16" cy="16" r="6.5" fill="var(--color-brand-gold)" />
-    <circle cx="16" cy="16" r="3.4" fill="var(--color-surface-card)" />
-  </svg>
+<div class="fixed right-4 bottom-4 z-40 sm:right-6 sm:bottom-6">
+  <button
+    bind:this={launcherEl}
+    type="button"
+    onclick={toggleWidget}
+    aria-label={hasUnread ? 'Ask Geary, 1 unread message' : 'Ask Geary'}
+    aria-expanded={open}
+    aria-controls={panelId}
+    title="Ask Geary"
+    class="inline-flex h-14 w-14 items-center justify-center rounded-full border border-border-strong bg-surface-card shadow-lg transition-all duration-150 hover:scale-105 hover:border-brand-crimson hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2"
+  >
+    <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" class="h-7 w-7 shrink-0">
+      <g fill="var(--color-brand-crimson)">
+        <rect x="13" y="2" width="6" height="28" rx="1.5" />
+        <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(45 16 16)" />
+        <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(90 16 16)" />
+        <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(135 16 16)" />
+        <circle cx="16" cy="16" r="10.5" />
+      </g>
+      <circle cx="16" cy="16" r="6.5" fill="var(--color-brand-gold)" />
+      <circle cx="16" cy="16" r="3.4" fill="var(--color-surface-card)" />
+    </svg>
+  </button>
 
   {#if hasUnread}
     <span
       aria-hidden="true"
       data-testid="ask-unread-badge"
-      class="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-crimson-solid px-1 text-[11px] font-bold leading-none text-white ring-2 ring-canvas-paper"
+      class="pointer-events-none absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-crimson-solid px-1 text-[11px] font-bold leading-none text-white ring-2 ring-canvas-paper"
     >
       1
     </span>
   {/if}
-</button>
+</div>

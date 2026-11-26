@@ -4,7 +4,7 @@
   import SearchBar from './SearchBar.svelte';
   import ThemeToggle from './ThemeToggle.svelte';
 
-  export type NavSection = 'home' | 'articles' | 'ask' | 'calendar' | 'contribute' | 'map';
+  export type NavSection = 'home' | 'articles' | 'calendar' | 'contribute' | 'map';
 
   interface Props {
     activeCategory?: CategorySlug;
@@ -17,7 +17,6 @@
   const NAV_LINKS = [
     { label: 'Home', href: '/', key: 'home' as const },
     { label: 'Articles', href: '/articles', key: 'articles' as const },
-    { label: 'Ask', href: '/ask', key: 'ask' as const },
     { label: 'Academic Calendar', href: '/calendar', key: 'calendar' as const },
     { label: 'Campus Map', href: '/map', key: 'map' as const },
     { label: 'Contribute', href: '/contribute', key: 'contribute' as const },

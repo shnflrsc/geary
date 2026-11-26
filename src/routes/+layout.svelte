@@ -16,6 +16,7 @@
   import { page } from '$app/state';
   import Header, { type NavSection } from '#lib/components/Header.svelte';
   import Footer from '#lib/components/Footer.svelte';
+  import AskPanel from '#lib/components/AskPanel.svelte';
   import { CATEGORY_SLUGS, type CategorySlug } from '../data/categories';
 
   interface Props {
@@ -31,7 +32,6 @@
     if (isError) return undefined;
     if (pathname === '/') return 'home';
     if (pathname === '/articles' || pathname.startsWith('/articles/')) return 'articles';
-    if (pathname === '/ask') return 'ask';
     if (pathname === '/calendar') return 'calendar';
     if (pathname === '/map') return 'map';
     if (pathname === '/contribute') return 'contribute';
@@ -88,4 +88,6 @@
   {#if !hideFooter}
     <Footer />
   {/if}
+
+  <AskPanel />
 </div>

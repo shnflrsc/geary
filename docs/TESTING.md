@@ -265,18 +265,18 @@ Automated verification gates for `BL-22` (`RTM-22`), executed in `tests/e2e/smok
 - Procedure: Run Axe against representative Home, Category, Article, Map, and `404` pages with the dark theme active.
 - Pass criteria: `violations.length === 0` across contrast, landmark, focus, and control-name checks.
 
-### 3.6 Ask-the-handbook verification (`/ask`)
+### 3.6 Ask Geary floating widget verification
 
-#### `TC-E2E-09`: Ask panel retrieval, cited answer & fallbacks
+#### `TC-E2E-09`: Ask Geary widget retrieval, cited answer & fallbacks
 - ISO 25010 characteristic: Functional Suitability and Usability (*Operability*)
 - Linked requirements: `REQ-ASK-02` to `REQ-ASK-05`, `AC-ASK-02` to `AC-ASK-05`, `SRS-FUNC-ASK-02` to `SRS-FUNC-ASK-05`, `SRS-NFR-REL-03`, `SRS-NFR-SEC-03`, `UJ-07`, `UC-07`, `EF-07A` to `EF-07D`, `ERR-10` to `ERR-12`
 - Inputs: Built site served via `vite preview`; `/api/ask` intercepted with `page.route()` since Workers AI bindings do not run under local preview.
 - Procedure:
-  1. Load `/ask`; submit "how do I apply for a scholarship"; assert `/ask-index.json` fetched once and `POST /api/ask` fired with `{ query, sources }` where every source `url` matches `/articles/`.
+  1. Load `/`; assert the **Ask Geary** floating launcher is visible and closed by default with a `1` unread badge; click it to open, assert the badge clears, `"Hi! What can I help you with?"` is visible, and submit `"how do I apply for a scholarship"`; assert `/ask-index.json` fetched once and `POST /api/ask` fired with `{ query, sources }` where every source `url` matches `/articles/`.
   2. Fulfill `/api/ask` with `{ "answer": "Apply through the online admissions portal [1] after preparing documents [2]." }`; assert `[1]`/`[2]` render as links to real article URLs and the Sources list shows titles, categories, and *Last updated* dates.
   3. Submit an unrelated question (e.g., "zzzz quantum physics"); assert no `POST /api/ask` request fires and the not-covered notice with 7 category links renders.
   4. Intercept `/api/ask` returning `{ "answer": "NOT_COVERED" }`; assert the not-covered UI renders.
-  5. In a fresh context, fail `/ask-index.json` (HTTP 500) and `/api/ask` (HTTP 503); assert calm fallback notices, zero page errors, and retry/category links.
+  5. In a fresh context, fail `/ask-index.json` (HTTP 500) and `/api/ask` (HTTP 503); open **Ask Geary** and assert the short friendly unavailable chat message renders with zero page errors.
 - Pass criteria: Cited answers link only to indexed article URLs; unsupported questions never reach the answer endpoint; all failure modes render recovery UI with zero uncaught exceptions.
 
 ## 4. Test execution pipeline and PR verification gates

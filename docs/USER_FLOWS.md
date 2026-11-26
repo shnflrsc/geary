@@ -32,7 +32,7 @@ Actors are defined in [PROJECT_CHARTER.md](./PROJECT_CHARTER.md) Section 5:
 | `MODE-02` | Interactive client search and map lookup | Student focuses the Search Bar, presses `/` or `Ctrl+K` (`Cmd+K`), or interacts with `/map`. | Client-side search fetches and caches `/search-index.json`, ranks multi-term queries, and supports keyboard navigation; `/map` runs local building search and SVG focus. |
 | `MODE-03` | Degraded / off-nominal recovery | Search returns zero matches, the search index fails to load on weak mobile data, or a student hits a broken URL. | The interface shows recovery options: category quick-jump links, retry guidance, or the branded `404` page. |
 | `MODE-04` | Build-time content authoring and PR validation | A contributor adds or edits a Markdown article and runs the build locally or opens a pull request. | Zod schema validation checks frontmatter, SvelteKit builds cleanly, unit tests validate the search index payload, and CI checks run before merge. |
-| `MODE-05` | Ask-the-handbook Q&A | Student submits a natural-language question on `/ask`. | Client retrieves evidence chunks locally from `/ask-index.json`, then a single `POST /api/ask` call returns a cited answer or a not-covered fallback. |
+| `MODE-05` | Ask Geary Q&A | Student opens the floating **Ask Geary** chat widget in the bottom-right corner and submits a natural-language question. | Client retrieves evidence chunks locally from `/ask-index.json`, then a single `POST /api/ask` call returns a cited answer or a not-covered fallback. |
 | `MODE-06` | Interactive request checklist | Student opens `/wizard` or follows a `#<request-id>` deep link from an article or category card. | Svelte island renders request picker and requirements checklist; checkbox state persists in `localStorage` and URL hash without backend calls. |
 
 ## 2. Master navigation and state transition diagram (ISO/IEC/IEEE 29148 Clause 9.3.4)
@@ -79,7 +79,7 @@ flowchart TD
     P404 -->|"Search or Category Links"| MATCH
     P404 -->|"Back to Home"| HOME
 
-    ASK_PAGE["Ask Page (/ask)"] -->|"Submit question"| RETRIEVE{"Client Retrieval: evidence found?"}
+    ASK_PAGE["Ask Geary Floating Widget"] -->|"Submit question"| RETRIEVE{"Client Retrieval: evidence found?"}
     RETRIEVE -->|"No / weak evidence"| NOT_COV["Not-Covered Notice + 7 Category Links"]
     RETRIEVE -->|"Top-k chunks"| API_CALL["POST /api/ask (Workers AI)"]
     API_CALL -->|"Cited answer"| ANSWER["Answer Card: [n] citations + Sources w/ updatedDate"]
@@ -181,13 +181,13 @@ sequenceDiagram
   4. The inspector displays the building name and the offices or facilities inside it.
 - Expected outcome: The student identifies the right building without external map tiles or backend API calls.
 
-### `UJ-07`: Ask the Handbook a question
+### `UJ-07`: Ask Geary a question
 
 - Actor: `ACT-01`, `ACT-02`, or `ACT-03`
 - Trigger: Student phrases a question in plain language (e.g., "how do I apply for a scholarship") instead of guessing search keywords.
 - Operational mode: `MODE-05` (nominal), `MODE-03` (not-covered / service-failure fallback)
 - Steps:
-  1. Student opens `/ask` via the Header `Ask` link or a direct URL.
+  1. Student clicks the floating **Ask Geary** button in the bottom-right corner (closed by default with a `1` unread badge; clears on open) or the `Ask Geary` trigger on `/`, revealing the hardcoded greeting `"Hi! What can I help you with?"`.
   2. Student types a question (or taps an example question) and submits.
   3. The browser lazily downloads `/ask-index.json` once and retrieves the top matching article passages locally.
   4. With sufficient evidence, the island posts the question plus retrieved chunks to `/api/ask`; the Workers AI model answers strictly from those excerpts.
@@ -332,7 +332,7 @@ Main success scenario:
 3. Search results pair each matching location with its parent building (for example, `Office of the University Registrar - Flores Hall`).
 4. Selecting a result or building highlights that building on the map, pans and focuses to it, and updates the inspector with its floors, offices, contact hints, and linked Geary articles.
 
-### `UC-07`: Ask the Handbook a question (`/ask`)
+### `UC-07`: Ask Geary a question (floating widget)
 
 | Field | Details |
 | :--- | :--- |
@@ -342,7 +342,7 @@ Main success scenario:
 | Postconditions | Student reads a cited answer or reaches the guides-index fallback; nothing is stored server-side. |
 
 Main success scenario:
-1. Student opens `/ask` and submits a natural-language question.
+1. Student opens the floating **Ask Geary** widget (closed by default with a `1` notification badge and hardcoded `"Hi! What can I help you with?"` greeting) and submits a natural-language question.
 2. `<AskPanel />` lazily fetches and caches `/ask-index.json`, then retrieves ranked evidence chunks entirely in the browser.
 3. The island `POST`s `{ query, sources }` to `/api/ask`; the endpoint validates the payload and calls Workers AI with a grounded prompt.
 4. The model answers using only the supplied excerpts with inline `[n]` citations, or returns `NOT_COVERED`.

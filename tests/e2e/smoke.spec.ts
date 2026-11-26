@@ -17,8 +17,7 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/calendar',
       '/contribute',
       '/map',
-      '/ask',
-      '/terms',
+        '/terms',
       '/privacy',
       '/wizard',
       ...CATEGORY_SLUGS.map((slug) => `/categories/${slug}`),
@@ -92,8 +91,7 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/contribute',
       '/calendar',
       '/map',
-      '/ask',
-      '/wizard',
+        '/wizard',
       '/terms',
       '/privacy',
     ];
@@ -290,8 +288,7 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/contribute',
       '/calendar',
       '/map',
-      '/ask',
-      '/wizard',
+        '/wizard',
       '/terms',
       '/privacy',
       '/this-route-does-not-exist',
@@ -353,8 +350,7 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/contribute',
       '/calendar',
       '/map',
-      '/ask',
-      '/wizard',
+        '/wizard',
       '/terms',
       '/privacy',
       '/this-route-does-not-exist',
@@ -789,7 +785,7 @@ Test body.
     expect(pageErrors).toEqual([]);
   });
 
-  test('TC-E2E-09: ask flow retrieves evidence locally and cites sources', async ({
+  test('TC-E2E-09: ask widget retrieves evidence locally and cites sources', async ({
     page,
   }) => {
     let askIndexFetches = 0;
@@ -813,14 +809,21 @@ Test body.
       });
     });
 
-    await page.goto('/ask');
-    await expect(page.locator('h1')).toHaveCount(1);
+    await page.goto('/');
+    const dialog = page.getByRole('dialog', { name: 'Ask Geary' });
+    await expect(dialog).toBeHidden();
+    await expect(page.getByTestId('ask-unread-badge')).toHaveText('1');
 
-    await page.getByRole('textbox').fill('how do I apply for a scholarship');
-    await page.getByRole('button', { name: 'Ask', exact: true }).click();
+    await page.getByRole('button', { name: 'Ask Geary (1 unread message)' }).click();
+    await expect(dialog).toBeVisible();
+    await expect(page.getByTestId('ask-unread-badge')).toBeHidden();
+    await expect(dialog).toContainText('Hi! What can I help you with?');
 
-    const answerLink = page.locator(
-      'main a[href^="/articles/"][aria-label^="Source "]',
+    await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
+    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+
+    const answerLink = dialog.locator(
+      'a[href^="/articles/"][aria-label^="Source "]',
     );
     await expect(answerLink.first()).toBeVisible();
     expect(askIndexFetches).toBe(1);
@@ -831,18 +834,18 @@ Test body.
       expect(source.url).toMatch(/^\/articles\//);
     }
 
-    await expect(page.locator('main')).toContainText('Sources');
-    await expect(page.locator('main')).toContainText('Last updated');
+    await expect(dialog).toContainText('Sources');
+    await expect(dialog).toContainText('Last updated');
     const citedHref = await answerLink.first().getAttribute('href');
     expect(citedHref).toMatch(/^\/articles\//);
 
     // Unrelated question: no evidence -> /api/ask is never called.
-    await page.getByRole('textbox').fill('zzzz quantum physics');
-    await page.getByRole('button', { name: 'Ask', exact: true }).click();
-    await expect(page.locator('main')).toContainText("don't have a guide covering that yet");
+    await dialog.getByRole('textbox').fill('zzzz quantum physics');
+    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await expect(dialog).toContainText("don't have a guide covering that yet");
     expect(apiAskCalls).toBe(1);
     for (const slug of CATEGORY_SLUGS) {
-      await expect(page.locator(`main a[href="/categories/${slug}"]`)).toBeVisible();
+      await expect(dialog.locator(`a[href="/categories/${slug}"]`)).toBeVisible();
     }
 
     // NOT_COVERED from the endpoint falls back to category links too.
@@ -854,12 +857,12 @@ Test body.
         body: JSON.stringify({ answer: 'NOT_COVERED' }),
       });
     });
-    await page.getByRole('textbox').fill('how do I apply for a scholarship');
-    await page.getByRole('button', { name: 'Ask', exact: true }).click();
-    await expect(page.locator('main')).toContainText("don't have a guide covering that yet");
+    await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
+    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await expect(dialog).toContainText("don't have a guide covering that yet");
   });
 
-  test('TC-E2E-09b: ask page degrades calmly when index or endpoint fails', async ({
+  test('TC-E2E-09b: ask widget degrades calmly when index or endpoint fails', async ({
     page,
   }) => {
     const pageErrors: string[] = [];
@@ -872,15 +875,17 @@ Test body.
       route.fulfill({ status: 503, body: 'unavailable' }),
     );
 
-    await page.goto('/ask');
-    await page.getByRole('textbox').fill('how do I apply for a scholarship');
-    await page.getByRole('button', { name: 'Ask', exact: true }).click();
-    await expect(page.locator('main')).toContainText('handbook index couldn');
-    await expect(page.locator('main a[href="/articles"]').first()).toBeVisible();
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Ask Geary (1 unread message)' }).click();
+    const dialog = page.getByRole('dialog', { name: 'Ask Geary' });
+    await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
+    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await expect(dialog).toContainText('Ask Geary is unavailable at the moment');
 
     await page.unroute('**/ask-index.json');
-    await page.getByRole('button', { name: 'Retry' }).click();
-    await expect(page.locator('main')).toContainText('answer service is unavailable');
+    await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
+    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await expect(dialog).toContainText('Ask Geary is unavailable at the moment');
     expect(pageErrors).toEqual([]);
   });
 });

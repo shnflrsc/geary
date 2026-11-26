@@ -213,13 +213,14 @@
       <p class="mt-4 text-xs sm:text-sm leading-relaxed text-ink-secondary">
         Content is still a work in progress. Expect missing or outdated information.
         <br class="hidden md:inline" />
-        <a
-          href="/ask"
+        <button
+          type="button"
+          onclick={() => window.dispatchEvent(new CustomEvent('geary:open-ask'))}
           class="font-medium text-brand-crimson hover:text-brand-crimson-hover hover:underline underline-offset-2 transition-colors"
         >
-          Ask the handbook
-        </a>
-        {' '}a question,{" "}
+          Ask Geary
+        </button>
+        {' '}a question,{' '}
         <a
           href="/contribute"
           class="font-medium text-brand-crimson hover:text-brand-crimson-hover hover:underline underline-offset-2 transition-colors"

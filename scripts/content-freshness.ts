@@ -259,7 +259,7 @@ function articleHealth(article: ArticleRecord, checks: Map<string, UrlCheck>): s
 // --- Report -----------------------------------------------------------------
 
 function mdCell(s: string): string {
-  return s.replace(/\|/g, '\\|').replace(/\n/g, ' ');
+  return s.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\n/g, ' ');
 }
 
 function buildReport(

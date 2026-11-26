@@ -125,7 +125,7 @@
   <div>
     <p class="mb-4 text-sm leading-relaxed text-ink-secondary">
       Pick the request you are preparing for. Check off each requirement as you
-      gather it — your progress saves on this device only.
+      gather it. Your progress saves on this device only.
     </p>
     <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2" aria-label="Document requests">
       {#each requests as request (request.id)}
@@ -277,7 +277,7 @@
         <p class="leading-relaxed">
           Fees, requirements, and schedules change across Academic Years. Always verify
           final details with the issuing office before your visit. Progress is saved on
-          this device only — share this page's link to send someone your checklist.
+          this device only. Share this page's link to send someone your checklist.
         </p>
       </aside>
 

@@ -33,10 +33,11 @@
       Document Request Wizard
     </h1>
     <p class="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
-      Pick what you are requesting — a transcript, certificate, ID replacement, or
-      credential — and check off each requirement as you gather it. Every checklist
-      comes straight from Geary's verified guides; fees and processing times are
-      unofficial summaries, so confirm details with the issuing office.
+      Pick what you are requesting (such as a transcript, certificate, ID
+      replacement, or credential) and check off each requirement as you gather it.
+      Every checklist comes straight from Geary's verified guides; fees and
+      processing times are unofficial summaries, so confirm details with the
+      issuing office.
     </p>
   </div>
 

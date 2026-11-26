@@ -11,6 +11,26 @@ const MAX_SOURCES = 8;
 const MAX_SOURCE_TEXT = 4000;
 const MAX_ANSWER_TOKENS = 700;
 
+interface AiBinding {
+  run(model: string, inputs: Record<string, unknown>): Promise<unknown>;
+}
+
+async function resolveAiBinding(
+  platform: App.Platform | undefined,
+): Promise<AiBinding | undefined> {
+  if (platform?.env?.AI) return platform.env.AI;
+  try {
+    // SvelteKit 3 / adapter-cloudflare v9 exposes bindings via `cloudflare:workers` rather than `platform.env`.
+    const cfWorkersId = 'cloudflare:workers';
+    const mod = (await import(/* @vite-ignore */ cfWorkersId)) as {
+      env?: { AI?: AiBinding };
+    };
+    return mod?.env?.AI;
+  } catch {
+    return undefined;
+  }
+}
+
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
     status,
@@ -69,7 +89,7 @@ export const POST: RequestHandler = async ({ request, platform }) => {
     return jsonResponse({ error: 'At least one valid source is required' }, 400);
   }
 
-  const ai = platform?.env?.AI;
+  const ai = await resolveAiBinding(platform);
   if (!ai) {
     return jsonResponse({ error: 'Ask service is not configured' }, 503);
   }

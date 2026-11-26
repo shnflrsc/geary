@@ -55,13 +55,14 @@ Geary is an unofficial, student-run information portal for Bulacan State Univers
 
 ## 6. Project scope (MVP baseline)
 
-### 6.1 In scope (five confirmed MVP pillars)
+### 6.1 In scope (six confirmed MVP capabilities)
 
 1. Articles and Markdown authoring: publishing structured procedural how-to articles, handbook summaries, and campus life articles written in Markdown.
 2. Categories and purposeful organization: grouping all articles under seven student-intent categories (*Enrollment*, *Academics*, *Documents*, *Scholarships*, *Policies*, *Organizations*, and *Campus*) with sub-topic headings and reading orientation aids.
 3. Client-side search bar: instant keyword search across all published articles running entirely in the browser with no backend cost.
 4. Low-cognitive-load UI/UX and BulSUan identity: a calm, mobile-first reading layout and consistent navigation built for BulSU students.
 5. Interactive 2D campus map and location finder: an SVG schematic of the BulSU Malolos Main Campus (`/map`) with clickable buildings, indoor office listings, and instant location search with no backend dependencies.
+6. Interactive academic calendar: a searchable, category-filtered BulSU Academic Calendar (`/calendar`) sourced from Office of the Student Regent advisories with zero external runtime APIs.
 
 ### 6.2 Out of scope (excluded from MVP)
 
@@ -69,7 +70,7 @@ Geary is an unofficial, student-run information portal for Bulacan State Univers
 - User accounts and authentication: no student logins, profiles, or user sessions.
 - Managed databases and user-generated backends: no managed databases, comment sections, voting systems, or persistent write APIs.
 - Official portal integration: no connection to official BulSU enrollment portals, SIS, or administrative systems.
-- Unapproved auxiliary features: anything outside the five confirmed MVP pillars is deferred until after the MVP ships.
+- Unapproved auxiliary features: anything outside the six confirmed MVP capabilities is deferred until after the MVP ships.
 
 ## 7. Project constraints
 
@@ -83,7 +84,7 @@ The site is built with SvelteKit (Svelte 5 runes), Tailwind CSS, and `@sveltejs/
 
 ### 7.3 Scope and UX constraints
 
-- Development stays strictly within the five confirmed MVP capabilities.
+- Development stays strictly within the six confirmed MVP capabilities.
 - Layout, styling, and navigation must keep reading friction and visual distraction low.
 
 ### 7.4 Operational, team, and legal constraints

@@ -63,7 +63,7 @@ This SRS defines the software-level constraints, external interface contracts, f
 
 | ID | Constraint statement |
 | :--- | :--- |
-| `CON-GOV-01` | Software capabilities are locked strictly to the five MVP capabilities (Articles/Markdown, 7-Category Hierarchy, Client-Side Search Bar, Low-Cognitive-Load BulSUan UI/UX, and Interactive 2D Campus Map); AI/RAG chatbots, authentication, user submissions, and BulSU SIS integrations are prohibited. The existing embedded contribution form is a documented governance exception pending a dedicated scope decision. |
+| `CON-GOV-01` | Software capabilities are locked strictly to the six MVP capabilities (Articles/Markdown, 7-Category Hierarchy, Client-Side Search Bar, Low-Cognitive-Load BulSUan UI/UX, Interactive 2D Campus Map, and Interactive Academic Calendar); AI/RAG chatbots, authentication, user submissions, and BulSU SIS integrations are prohibited. The existing embedded contribution form is a documented governance exception pending a dedicated scope decision. |
 | `CON-GOV-02` | The software shall display an explicit unofficial disclaimer across the global footer and article views stating that Geary is student-maintained and unaffiliated with Bulacan State University administration. |
 
 ## 3. External interface requirements *(ISO 29148 Clause 9.6.3.2)*

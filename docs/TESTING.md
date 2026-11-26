@@ -108,7 +108,7 @@ Geary runs on SvelteKit (Svelte 5 runes) with Tailwind CSS and `@sveltejs/adapte
 - Linked requirements: `REQ-SRCH-01`, `SW-INT-03`, `SRS-FUNC-SRCH-01`, `SRS-NFR-PERF-03`
 - Inputs: Repository Markdown articles loaded and serialized directly through pure `buildSearchIndex()`.
 - Procedure: Validate every array entry against a Zod contract requiring `slug`, `title`, `preview`, `category` (in `CATEGORY_SLUGS`), `categoryLabel`, `subcategory`, and `headings` (`string[]`), and assert serialized UTF-8 byte length `< 100 KB`.
-- Pass criteria: 100% of serialized entries satisfy the `SearchIndexItem` Zod schema, match the repository article count, and remain `< 100 KB` (no pre-built `dist/` file dependency).
+- Pass criteria: 100% of serialized entries satisfy the `SearchIndexItem` Zod schema, match the repository article count, and remain `< 100 KB` (no pre-built build-output file dependency).
 
 #### `TC-UNIT-06`: Campus map search and viewport math
 - ISO 25010 characteristic: Functional Suitability (*Functional Correctness*) and Usability (*Operability*)

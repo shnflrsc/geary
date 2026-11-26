@@ -16,7 +16,7 @@
 
 ### 1.2 Purpose
 
-This PRD defines the MVP feature set, expected product behavior, release priorities, and acceptance criteria for Geary so contributors across engineering, design, and writing work from the same contract. Scope is bounded to five confirmed capabilities:
+This PRD defines the MVP feature set, expected product behavior, release priorities, and acceptance criteria for Geary so contributors across engineering, design, and writing work from the same contract. Scope is bounded to six confirmed capabilities:
 
 1. Articles and Markdown content (`F-01`)
 2. Categories and purposeful organization (`F-02`)

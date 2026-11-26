@@ -22,7 +22,7 @@ Geary is built for low cognitive load, predictable navigation, and a clear BulSU
 | Appropriateness recognizability | Signals BulSU identity through Crimson (`#8B1538`) and Gear Gold (`#D4A017`) accents, a geometric gear mark, and a task-oriented 7-category student directory. |
 | Learnability | Repeatable page templates, hierarchical breadcrumbs (`Home > Category > Article`), and consistent card layouts let first-time freshmen navigate without training. |
 | Operability | Mobile-first touch targets (`>= 44x44px`), keyboard shortcuts (`/` or `Ctrl+K` / `Cmd+K`, `Arrow` keys, `Enter`, `Escape`), and responsive Table of Contents placement (`<details>` on mobile, sticky rail on desktop). |
-| User error protection | Calm recovery paths on zero-match search queries (7 category pills), offline search fallback links, and a branded `/404.html` page with search and directory links. |
+| User error protection | Calm recovery paths on zero-match search queries (7 category pills), offline search fallback links, and a branded HTTP `404` page (`+error.svelte`) with search and directory links. |
 | User interface aesthetics | Slate-Paper (`#F8F9FA`) surfaces keep reading clean without glare; `1px` cool borders (`#DEE2E6`) replace heavy shadows; article prose (`~65ch`) has no decorative watermarks or popups. |
 | Accessibility | Meets WCAG 2.1 Level AA color contrast (`>= 4.5:1` normal text), semantic HTML5 landmarks, visible `:focus-visible` outlines, and zero horizontal overflow at `375px`, `768px`, and `1280px`. |
 

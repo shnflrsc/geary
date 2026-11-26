@@ -6,6 +6,9 @@
   "assets": {
     "binding": "ASSETS"
   },
+  "ai": {
+    "binding": "AI"
+  },
   "routes": [
     {
       "pattern": "geary.bulsu.tools",

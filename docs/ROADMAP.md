@@ -11,7 +11,7 @@
 | Date | `2026-11-24` |
 | Standard reference | ISO/IEC/IEEE 12207:2017 - *Systems and software engineering - Software life cycle processes* (Clause 6.3.1 *Project Planning*, Clause 6.3.2 *Project Assessment and Control*, Clause 6.3.4 *Risk Management*, and Clauses 6.4.5, 6.4.7, 6.4.9, and 6.4.11 *Implementation, Integration, Verification and Validation*) |
 | Related baselines | [AGENTS.md](../AGENTS.md), [PROJECT_CHARTER.md](./PROJECT_CHARTER.md), [PRD.md](./PRD.md), [SRS.md](./SRS.md), [USER_FLOWS.md](./USER_FLOWS.md), [ARCHITECTURE.md](./ARCHITECTURE.md), [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md), [TESTING.md](./TESTING.md), [REQUIREMENTS.md](./REQUIREMENTS.md) |
-| Status | MVP Complete (`M1`–`M6`); Milestones `M7` (SvelteKit SSR Migration), `M8` (Ask-the-Handbook Q&A port), and the document-request wizard port (`BL-34`) implemented |
+| Status | MVP Complete (`M1`–`M6`); SvelteKit SSR baseline (`M7`), Ask-the-Handbook Q&A (`M8`), and the document-request wizard (`BL-34`) implemented and verified |
 
 ### 1.2 Shared backlog and milestone workflow *(ISO 12207 Clause 6.3.2)*
 
@@ -26,23 +26,28 @@ Contributors share ownership of milestones and backlog items (`BL-*`) through pu
 
 ### `M0.1`: Specification and governance baseline (`[x]` Completed)
 - [x] Defined MVP scope, stakeholders (`ACT-01` to `ACT-04`), and constraints in [PROJECT_CHARTER.md](./PROJECT_CHARTER.md) (`ISO 12207`).
-- [x] Defined MVP features (`F-01` to `F-04`), priorities (`P0`/`P1`), and acceptance criteria in [PRD.md](./PRD.md) (`ISO 29148`).
+- [x] Defined the initial MVP features (`F-01` to `F-04`), later extended through `F-06` (campus map and academic calendar), with priorities (`P0`/`P1`) and acceptance criteria in [PRD.md](./PRD.md) (`ISO 29148`).
 - [x] Defined formal software constraints, contracts, functional specs, and NFRs in [SRS.md](./SRS.md) (`ISO 29148 Clause 9.6` and `ISO 25010`).
-- [x] Defined operational modes (`MODE-01` to `MODE-04`), journeys (`UJ-01` to `UJ-05`), use cases (`UC-01` to `UC-05`), and error scenarios (`ERR-01` to `ERR-09`) in [USER_FLOWS.md](./USER_FLOWS.md) (`ISO 29148 Clause 9.3`).
-- [x] Defined Bun + Astro + Tailwind CSS + React islands architecture and contracts in [ARCHITECTURE.md](./ARCHITECTURE.md) (`ISO 42010` and `ISO 12207 Clause 6.4.3`).
+- [x] Defined operational modes (`MODE-01` to `MODE-04`), journeys (`UJ-01` to `UJ-06`), use cases (`UC-01` to `UC-06`), and error scenarios (`ERR-01` to `ERR-09`) in [USER_FLOWS.md](./USER_FLOWS.md) (`ISO 29148 Clause 9.3`).
+- [x] Defined the original Bun + Astro + Tailwind CSS + React islands architecture and contracts in [ARCHITECTURE.md](./ARCHITECTURE.md) (`ISO 42010` and `ISO 12207 Clause 6.4.3`); superseded by the SvelteKit SSR baseline in `M7`.
 - [x] Defined BulSUan tokens, WCAG 2.1 AA contrast ratios, typography, spacing, and component states in [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) (`ISO 25010`).
 - [x] Defined the 4-layer test cases (`TC-*`) and execution pipeline in [TESTING.md](./TESTING.md) (`ISO 25010` and `ISO 29148 Clause 6.6`).
 - [x] Defined the bidirectional Requirements Traceability Matrix (`RTM-*`) in [REQUIREMENTS.md](./REQUIREMENTS.md) (`ISO 29148 Clauses 6.5 and 9.6.4`).
 - [x] Configured documentation-first workflow rules in [AGENTS.md](../AGENTS.md).
 
 ### `M0.2`: Minimal workspace initialization (`[x]` Completed)
-- [x] Initialized Astro (`^7.4.12`) starter project on Bun (`package.json`, `bun.lock`, `astro.config.mjs`, `tsconfig.json`, `src/pages/index.astro`, `public/favicon.svg`, `public/favicon.ico`).
+- [x] Initialized the Astro (`^7.4.12`) starter project on Bun (`package.json`, `bun.lock`, `astro.config.mjs`, `tsconfig.json`, `src/pages/index.astro`, `public/favicon.svg`, `public/favicon.ico`); replaced by SvelteKit in `M7`.
 
 ### `M5.1`: Campus map delivery (`[x]` Completed)
 - [x] Implemented the static `/map` route, campus-map dataset, literal building and location search, SVG pan/zoom/reset controls, accessible building selection, and building inspector (`REQ-MAP-01` to `REQ-MAP-04`, `SRS-FUNC-MAP-01`, `SRS-FUNC-MAP-02`).
 - [x] Added map unit and browser verification (`TC-UNIT-06`, `TC-E2E-07`) and recorded traceability in [REQUIREMENTS.md](./REQUIREMENTS.md) (`RTM-21`).
 
+### `M7`: SvelteKit SSR migration (`[x]` Completed)
+- [x] Migrated the full site to SvelteKit 3, Svelte 5 runes, and `@sveltejs/adapter-vercel` SSR with the Vite `?raw` content pipeline, CDN edge caching, and a Svelte-native interactive widget suite (`BL-23` to `BL-27`, [ARCHITECTURE.md](./ARCHITECTURE.md) v2.0).
+
 ## 3. Implementation milestones and life-cycle gates (`M1` to `M8`) *(ISO 12207 Clauses 6.3.1 and 6.4)*
+
+Milestones `M1`–`M6` were delivered on the original Astro + React islands stack and are retained as historical audit records. Milestone `M7` replaced that stack with SvelteKit SSR; the current baseline and all active architecture references are the SvelteKit descriptions in [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 | Milestone | ISO 12207 Life-Cycle Process | Scope Summary | Verifiable Exit Gate |
 | :--- | :--- | :--- | :--- |
@@ -56,6 +61,8 @@ Contributors share ownership of milestones and backlog items (`BL-*`) through pu
 | **`M8`: Ask-the-Handbook Q&A (SvelteKit port of #8)** | Clauses 6.4.5, 6.4.7, 6.4.9, and 6.4.11 | Citation-grounded `/ask` Q&A in Svelte 5: chunked corpus endpoint, client-side retrieval, stateless `/api/ask` server route on Workers AI, and not-covered fallbacks — supersedes the unmerged Astro/React PR #8. | `TC-BLD-03`, `TC-UNIT-09`, and `TC-E2E-09` pass; `AI` binding configured on the deployment target before production answers work (`KI-08`). |
 
 ## 4. Prioritized implementation backlog (`BL-01` to `BL-34`) *(ISO 12207 Clauses 6.3.1 and 6.4.5)*
+
+`BL-01`–`BL-22` describe the completed pre-migration Astro implementation and remain as historical records. `BL-23`–`BL-27` are the current SvelteKit SSR baseline, and `BL-28`–`BL-34` cover the post-MVP MCP server, Ask-the-Handbook Q&A, and document-request wizard.
 
 ### Milestone `M1`: Toolchain, integrations, and design foundation
 - [x] **`BL-01` (`P0`):** Install project dependencies via Bun (`@astrojs/react`, `react`, `react-dom`, `@types/react`, `@types/react-dom`, `tailwindcss`, `@tailwindcss/vite`, `@astrojs/check`, `typescript`, `@playwright/test`, `@axe-core/playwright`) and verify Chromium Playwright setup ([ARCHITECTURE.md](./ARCHITECTURE.md) §2, `KI-01`).
@@ -87,6 +94,8 @@ Contributors share ownership of milestones and backlog items (`BL-*`) through pu
 - [x] **`BL-19` (`P0`):** Configure `playwright.config.ts` (`webServer` targeting `astro preview`) and implement `tests/e2e/smoke.spec.ts` covering `TC-BLD-04`, `TC-E2E-01` to `TC-E2E-05`, `TC-A11Y-01`, `TC-A11Y-02`, and `TC-SEC-01` (`KI-05`).
 - [x] **`BL-20` (`P0`):** Run the full verification pipeline (`bun run check`, `bun run build`, `bun test`, `bun run test:e2e`, `bun audit`), resolve discovered issues, verify `0` failures across all `TC-*` gates ([TESTING.md](./TESTING.md) §4), and mark all rows in [REQUIREMENTS.md](./REQUIREMENTS.md) as `[x] Verified`.
 - [x] **`BL-21` (`P0`):** Implement and verify the interactive 2D campus map (`/map`), including the static data contract, location and building search, accessible SVG selection, inspector, viewport controls, `TC-UNIT-06`, and `TC-E2E-07` (`REQ-MAP-01` to `REQ-MAP-04`, `RTM-21`).
+
+### Milestone `M6`: Dark mode (post-MVP)
 - [x] **`BL-22` (`P1`, Post-MVP):** Implement the approved dark-mode design contract in [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) §2.2, including a Header theme menu with Light, Dark, and System default choices, persisted preference, no-flash bootstrap, tokenized surfaces, and light/dark accessibility verification (`TC-E2E-08`, `TC-A11Y-03`).
 
 ### Milestone `M7`: SvelteKit SSR architecture migration
@@ -111,7 +120,7 @@ Contributors share ownership of milestones and backlog items (`BL-*`) through pu
 | :--- | :--- | :--- | :--- |
 | **`KI-01`** | Resolved | Initialized `package.json` contained only `"astro": "^7.4.12"`; React, Tailwind CSS, TypeScript check, and test packages were not yet installed. | Installed required runtime and dev packages via Bun (`BL-01`) and configured Playwright to use system Google Chrome (`channel: 'chrome'`). |
 | **`KI-02`** | Resolved | Installed `astro@7.4.12` marks `import { z } from 'astro:content'` as `@deprecated` (to be removed in Astro 8) and uses Content Layer loaders. | Imported `z` from `'astro/zod'` and `glob` from `'astro/loaders'` inside `src/content.config.ts` (`BL-07`). |
-| **`KI-03`** | Resolved | On `/` (and `/404.html` when header search is visible), mounting two `<SearchBar />` islands can create competing global `/` and `Ctrl+K` listeners. | Scoped global hotkey registration behind `enableGlobalShortcut?: boolean` (`true` on Hero/404 primary search; `false` on Header) and added `data-search-ready` hydration signaling (`BL-17`). |
+| **`KI-03`** | Resolved | On `/` (and the branded 404 page when header search is visible), mounting two `<SearchBar />` islands can create competing global `/` and `Ctrl+K` listeners. | Scoped global hotkey registration behind `enableGlobalShortcut?: boolean` (`true` on Hero/404 primary search; `false` on Header) and added `data-search-ready` hydration signaling (`BL-17`). |
 | **`KI-04`** | Resolved | Gear Gold (`#D4A017`) yields `2.2:1` contrast on light surfaces and fails WCAG 2.1 AA (`TC-A11Y-01`) if used for text. | Restricted `#D4A017` to borders and icons, paired `#FEF9E7` backgrounds with `#785300` text, and added `tabindex="0"` for horizontally scrollable Markdown tables (`BL-04`, `TC-A11Y-01`). |
 | **`KI-05`** | Resolved | On Windows environments, background servers started in separate commands can be unreachable across subsequent shell sessions. | Configured Playwright `webServer` to launch and tear down `astro preview` inside the same test command (`BL-19`). |
 | **`KI-06`** | Resolved | `@astrojs/check@0.9.12` rejects `typescript@7.0.2`, and bare `bun test` attempts to execute Playwright `.spec.ts` files. | Pinned `typescript@6.0.3`, added `/// <reference types="bun" />` to `tests/unit/*.test.ts`, and added `bunfig.toml` (`root = "tests/unit"`). |

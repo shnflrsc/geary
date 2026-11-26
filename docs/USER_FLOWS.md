@@ -75,7 +75,7 @@ flowchart TD
     HDR_SRCH --> MATCH
     HDR_SRCH --> CAT_PAGE
 
-    BAD_URL --> P404["Custom 404 Page (/404.html)"]
+    BAD_URL --> P404["Custom 404 Page (+error.svelte)"]
     P404 -->|"Search or Category Links"| MATCH
     P404 -->|"Back to Home"| HOME
 
@@ -394,7 +394,7 @@ Exception / off-nominal scenarios:
 | `ERR-05` | Short article (`< 2` headings) | `MODE-01` | Article has 0 or 1 section headings | Hide both mobile disclosure TOC and desktop sticky TOC | Read prose directly without blank space |
 | `ERR-06` | Solo article in category | `MODE-01` | No sibling articles exist in same category | Omit *Related Articles in This Category* cleanly | Use Breadcrumbs, Header nav, or Search |
 | `ERR-07` | Wide table / long URL on mobile | `MODE-01` | Multi-column table or long URL on `375px` screen | Scroll table horizontally inside its container; wrap long URLs | Swipe horizontally inside table only |
-| `ERR-08` | Nonexistent / broken route | `MODE-03` | Mistyped or outdated bookmark URL | Serve branded `/404.html` with Search Bar and 7 category links | Search or navigate to Home / Category |
+| `ERR-08` | Nonexistent / broken route | `MODE-03` | Mistyped or outdated bookmark URL | Serve the branded HTTP `404` page (`+error.svelte`) with Search Bar and 7 category links | Search or navigate to Home / Category |
 | `ERR-09` | Invalid Markdown frontmatter | `MODE-04` | Missing/invalid metadata or unrecognized category slug | Abort local build and PR CI check immediately with validation diagnostic | Fix frontmatter and re-run build |
 | `ERR-10` | Ask corpus fetch failure | `MODE-03` | `/ask-index.json` fails to download | Catch error safely; show service-unavailable notice + retry + 7 category links | Retry or browse categories |
 | `ERR-11` | Question not covered by corpus | `MODE-03` | Weak retrieval evidence or model `NOT_COVERED` | Show not-covered notice + 7 category pills + `/articles` link; zero invented claims | Refine question or browse guides |

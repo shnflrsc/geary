@@ -130,6 +130,15 @@ describe('retrieveAskSources', () => {
     expect(sources[0]?.slug).toBe('how-to-request-transcript-and-certificates');
   });
 
+  test('strips punctuation and question stop words from natural queries', () => {
+    const sources = retrieveAskSources(
+      FIXTURE_ITEMS,
+      'Where can I apply for a scholarship?',
+    );
+    expect(sources.length).toBeGreaterThan(0);
+    expect(sources[0]?.slug).toBe('complete-guide-to-scholarships-at-bulsu');
+  });
+
   test('returns empty for unrelated or whitespace queries', () => {
     expect(retrieveAskSources(FIXTURE_ITEMS, 'zzzz quantum physics nebula')).toEqual([]);
     expect(retrieveAskSources(FIXTURE_ITEMS, '   ')).toEqual([]);

@@ -83,10 +83,48 @@ export function buildAskChunks(body: string, maxChars = ASK_CHUNK_MAX_CHARS): As
   return chunks.map((text, index) => ({ id: `c${index + 1}`, text }));
 }
 
+const ASK_STOP_WORDS = new Set([
+  'a',
+  'an',
+  'and',
+  'are',
+  'at',
+  'can',
+  'do',
+  'does',
+  'for',
+  'from',
+  'how',
+  'i',
+  'in',
+  'is',
+  'it',
+  'my',
+  'of',
+  'on',
+  'or',
+  'the',
+  'to',
+  'what',
+  'when',
+  'where',
+  'which',
+  'who',
+  'why',
+  'with',
+  'you',
+  'your',
+]);
+
 function normalizeTokens(query: string): string[] {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return [];
-  return normalized.split(/\s+/).filter(Boolean);
+  const rawTokens = normalized
+    .split(/\s+/)
+    .map((token) => token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, ''))
+    .filter(Boolean);
+  const meaningful = rawTokens.filter((token) => !ASK_STOP_WORDS.has(token));
+  return meaningful.length > 0 ? meaningful : rawTokens;
 }
 
 /**

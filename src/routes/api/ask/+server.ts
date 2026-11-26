@@ -5,7 +5,7 @@ import {
   type AskSource,
 } from '#lib/ask';
 
-const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct';
+const DEFAULT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 const MAX_QUERY_LENGTH = 500;
 const MAX_SOURCES = 8;
 const MAX_SOURCE_TEXT = 4000;
@@ -112,7 +112,8 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
     const answer = raw.trim() || ASK_NOT_COVERED_SENTINEL;
     return jsonResponse({ answer });
-  } catch {
+  } catch (err) {
+    console.error('[api/ask] Workers AI error:', err);
     return jsonResponse({ error: 'Answer service unavailable' }, 502);
   }
 };

@@ -297,18 +297,7 @@
       {/if}
 
       <div aria-live="polite" class="space-y-3">
-        {#if phase === 'loading'}
-          <div class="flex justify-start">
-            <p
-              role="status"
-              class="max-w-[85%] rounded-2xl rounded-tl-sm border border-border-subtle bg-surface-card px-3.5 py-2.5 text-sm text-ink-secondary"
-            >
-              Checking the handbook…
-            </p>
-          </div>
-        {/if}
-
-        {#if phase === 'asking'}
+        {#if busy}
           <div class="flex justify-start">
             <p
               role="status"

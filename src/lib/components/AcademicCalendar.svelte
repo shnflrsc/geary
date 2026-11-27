@@ -455,7 +455,7 @@
             }}
             aria-expanded={filtersOpen}
             aria-haspopup="true"
-            aria-label="Filters: filter calendar events"
+            aria-label={selectedCategories.length > 0 ? `Filters ${selectedCategories.length} active` : 'Filters'}
             class={`inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
               filtersOpen || selectedCategories.length > 0
                 ? 'border-brand-crimson bg-brand-crimson-wash text-brand-crimson'

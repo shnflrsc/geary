@@ -322,16 +322,14 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
     expect(dressOverflow).toBe(true);
   });
 
-  test('TC-E2E-05: renders branded 404 recovery page with SearchBar and 5 category links', async ({
+  test('TC-E2E-05: renders a 404 page with a link home', async ({
     page,
   }) => {
     const response = await page.goto('/this-route-does-not-exist');
     expect(response?.status()).toBe(404);
-    await expect(page.locator('h1')).toContainText("couldn't find that article");
-    await expect(page.locator('main input[role="combobox"]')).toBeVisible();
-    for (const slug of CATEGORY_SLUGS) {
-      await expect(page.locator(`main a[href="/categories/${slug}"]`)).toBeVisible();
-    }
+    await expect(page.locator('h1')).toHaveText('404');
+    await expect(page.locator('main')).toContainText("We couldn't find that page.");
+    await expect(page.locator('main a[href="/"]')).toBeVisible();
     await page.locator('main a[href="/"]').click();
     await expect(page).toHaveURL(/\/$/);
   });

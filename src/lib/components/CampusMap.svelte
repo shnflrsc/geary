@@ -378,29 +378,6 @@
         MACARTHUR HIGHWAY
       </text>
     </g>
-
-    <g
-      transform={SHOW_CAMPUS_2 ? 'translate(1030, -440)' : 'translate(944, 58)'}
-      style="pointer-events: none"
-    >
-      <circle
-        r="22"
-        fill="var(--color-surface-card)"
-        stroke="var(--color-border-strong)"
-        stroke-width="1.5"
-      />
-      <polygon points="0,-14 5,4 0,0 -5,4" fill="var(--color-brand-crimson)" />
-      <text
-        x="0"
-        y="14"
-        text-anchor="middle"
-        font-size="9"
-        font-weight="700"
-        fill="var(--color-ink-primary)"
-      >
-        N
-      </text>
-    </g>
   </svg>
 
   <div class="pointer-events-none absolute inset-0 z-20 flex flex-col lg:right-auto lg:w-[392px] lg:gap-2.5 lg:p-4 xl:w-[412px]">
@@ -422,11 +399,33 @@
     />
   </div>
 
-  <div
-    class="absolute right-3 bottom-20 z-10 flex flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface-card/95 shadow-md divide-y divide-border-subtle lg:right-4 lg:bottom-4"
-    role="group"
-    aria-label="Map zoom controls"
-  >
+  <div class="pointer-events-none absolute right-3 bottom-20 z-10 flex flex-col items-center gap-2 lg:right-4 lg:bottom-4">
+    <div
+      role="img"
+      aria-label="Compass pointing North"
+      title="North"
+      class="flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle bg-surface-card/95 shadow-md"
+    >
+      <svg viewBox="-20 -20 40 40" class="h-8 w-8" aria-hidden="true">
+        <polygon points="0,-13 4.5,3 0,-0.5 -4.5,3" fill="var(--color-brand-crimson)" />
+        <text
+          x="0"
+          y="12"
+          text-anchor="middle"
+          font-size="8.5"
+          font-weight="700"
+          fill="var(--color-ink-primary)"
+        >
+          N
+        </text>
+      </svg>
+    </div>
+
+    <div
+      class="pointer-events-auto flex flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface-card/95 shadow-md divide-y divide-border-subtle"
+      role="group"
+      aria-label="Map zoom controls"
+    >
     <button
       type="button"
       aria-label="Zoom in map"
@@ -466,6 +465,7 @@
         />
       </svg>
     </button>
+    </div>
   </div>
 
   <div

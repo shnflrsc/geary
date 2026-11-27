@@ -362,7 +362,7 @@
             }}
             aria-expanded={filtersOpen}
             aria-haspopup="true"
-            aria-label="Filter calendar events"
+            aria-label="Filters: filter calendar events"
             class={`inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
               filtersOpen || selectedCategories.length > 0
                 ? 'border-brand-crimson bg-brand-crimson-wash text-brand-crimson'
@@ -483,15 +483,13 @@
 
       <!-- Desktop 7-column calendar + side detail panel filling remaining viewport -->
       <div class="hidden md:grid md:min-h-0 md:flex-1 md:grid-cols-[minmax(0,1fr)_360px] md:gap-3 md:p-3 lg:grid-cols-[minmax(0,1fr)_400px]">
-        <div
-          role="grid"
+        <section
           aria-label={`${activeMonthMeta.label} calendar`}
           class="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface-card"
         >
-          <div role="row" class="grid shrink-0 grid-cols-7 bg-surface-card">
+          <div class="grid shrink-0 grid-cols-7 bg-surface-card">
             {#each WEEKDAYS_UPPER as dayName (dayName)}
               <div
-                role="columnheader"
                 class="border-r border-border-subtle/70 pt-1.5 text-center text-[11px] font-medium tracking-wider text-ink-secondary last:border-r-0"
               >
                 {dayName}
@@ -504,48 +502,51 @@
             style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(0, 1fr));`}
           >
             {#each gridModel.weeks as week, weekIdx (weekIdx)}
-              <div role="row" class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
+              <div class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
                 <div class="grid h-full grid-cols-7">
                   {#each week.days as cell, colIdx (cell.date)}
                     {@const isSelected = cell.date === selectedDate}
                     {@const isToday = cell.date === todayIso}
                     {@const isLastRow = weekIdx === gridModel.weeks.length - 1}
-                    <button
-                      type="button"
-                      role="gridcell"
-                      aria-selected={isSelected}
-                      aria-label={formatIsoDateReadable(cell.date)}
-                      onclick={() => selectDay(cell.date)}
-                      class={`flex h-full min-h-0 cursor-pointer flex-col items-center justify-between border-r border-border-subtle/70 px-1.5 pt-1 pb-1 text-center transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
-                        isLastRow && colIdx === 0 ? 'rounded-bl-2xl' : ''
-                      } ${isLastRow && colIdx === 6 ? 'rounded-br-2xl' : ''} ${
-                        isSelected
-                          ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70'
-                          : cell.inMonth
-                            ? 'bg-surface-card hover:bg-surface-subtle/40'
-                            : 'bg-surface-card text-ink-muted hover:bg-surface-subtle/40'
-                      }`}
-                    >
-                      <span
-                        class={`inline-flex h-6 min-w-6 items-center justify-center rounded-full px-1.5 text-xs font-medium tabular-nums ${
-                          isToday
-                            ? 'bg-brand-crimson text-white font-semibold'
-                            : isSelected
-                              ? 'bg-brand-crimson-wash text-brand-crimson font-semibold'
-                              : cell.inMonth
-                                ? 'text-ink-primary'
-                                : 'text-ink-muted'
+                    <div class="relative h-full min-h-0 border-r border-border-subtle/70 last:border-r-0">
+                      <button
+                        type="button"
+                        aria-pressed={isSelected}
+                        aria-label={cell.overflowCount > 0
+                          ? `${formatIsoDateReadable(cell.date)}, ${cell.overflowCount} more`
+                          : formatIsoDateReadable(cell.date)}
+                        onclick={() => selectDay(cell.date)}
+                        class={`flex h-full w-full min-h-0 cursor-pointer flex-col items-center justify-start px-1.5 pt-1 pb-1 text-center transition-colors focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                          isLastRow && colIdx === 0 ? 'rounded-bl-2xl' : ''
+                        } ${isLastRow && colIdx === 6 ? 'rounded-br-2xl' : ''} ${
+                          isSelected
+                            ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70'
+                            : cell.inMonth
+                              ? 'bg-surface-card hover:bg-surface-subtle/40'
+                              : 'bg-surface-card text-ink-muted hover:bg-surface-subtle/40'
                         }`}
                       >
-                        {cell.day}
-                      </span>
+                        <span
+                          class={`inline-flex h-6 min-w-6 items-center justify-center rounded-full px-1.5 text-xs font-medium tabular-nums ${
+                            isToday
+                              ? 'bg-brand-crimson text-white font-semibold'
+                              : isSelected
+                                ? 'bg-brand-crimson-wash text-brand-crimson font-semibold'
+                                : cell.inMonth
+                                  ? 'text-ink-primary'
+                                  : 'text-ink-muted'
+                          }`}
+                        >
+                          {cell.day}
+                        </span>
+                      </button>
 
                       {#if cell.overflowCount > 0}
-                        <span class="mt-auto self-start px-1.5 pb-1 text-[11px] font-semibold leading-normal text-ink-secondary hover:text-brand-crimson">
+                        <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-1.5 text-[11px] font-semibold leading-normal text-ink-secondary">
                           {cell.overflowCount} more
                         </span>
                       {/if}
-                    </button>
+                    </div>
                   {/each}
                 </div>
 
@@ -592,7 +593,7 @@
               </div>
             {/each}
           </div>
-        </div>
+        </section>
 
         <aside
           aria-label="Selected day details"
@@ -609,7 +610,14 @@
               No events on this date.
             </p>
           {:else}
-            <ul class="mt-4 min-h-0 flex-1 space-y-3 overflow-y-auto pr-3 [scrollbar-width:thin]">
+            <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+            <div
+              role="region"
+              tabindex="0"
+              aria-label="Selected day events"
+              class="mt-4 min-h-0 flex-1 overflow-y-auto pr-3 [scrollbar-width:thin] focus-visible:outline-2 focus-visible:outline-brand-crimson"
+            >
+              <ul class="space-y-3">
               {#each selectedDayEvents as event (event.id)}
                 {@const isFocused = selectedEventId === event.id}
                 <li
@@ -652,15 +660,15 @@
                   {/if}
                 </li>
               {/each}
-            </ul>
+              </ul>
+            </div>
           {/if}
         </aside>
       </div>
 
       <!-- Mobile Google-Calendar-style near-full-height grid + separate agenda card peeking below -->
       <div class="space-y-3 pb-4 md:hidden">
-        <div
-          role="grid"
+        <section
           aria-label={`${activeMonthMeta.label} calendar`}
           class="flex h-[calc(100svh-13.5rem)] min-h-[380px] flex-col border-b border-border-subtle bg-surface-card"
         >
@@ -703,12 +711,10 @@
           </div>
 
           <div
-            role="row"
             class="grid shrink-0 grid-cols-7 border-b border-border-subtle/70 bg-surface-card"
           >
             {#each WEEKDAYS_MOBILE as dayName, idx (idx)}
               <div
-                role="columnheader"
                 class="py-1 text-center text-[11px] font-medium text-ink-secondary"
               >
                 {dayName}
@@ -721,16 +727,17 @@
             style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(0, 1fr));`}
           >
             {#each gridModel.weeks as week, weekIdx (weekIdx)}
-              <div role="row" class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
+              <div class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
                 <div class="grid h-full grid-cols-7">
                   {#each week.days as cell (cell.date)}
                     {@const isSelected = cell.date === selectedDate}
                     {@const isToday = cell.date === todayIso}
                     <button
                       type="button"
-                      role="gridcell"
-                      aria-selected={isSelected}
-                      aria-label={formatIsoDateReadable(cell.date)}
+                      aria-pressed={isSelected}
+                      aria-label={cell.overflowCount > 0
+                        ? `${formatIsoDateReadable(cell.date)}, ${cell.overflowCount} more`
+                        : formatIsoDateReadable(cell.date)}
                       onclick={() => selectDay(cell.date)}
                       class={`flex h-full min-h-0 cursor-pointer flex-col items-center justify-between border-r border-border-subtle/70 px-0.5 pt-1 pb-0.5 text-center transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
                         isSelected
@@ -755,7 +762,7 @@
                       </span>
 
                       {#if cell.overflowCount > 0}
-                        <span class="mt-auto self-start px-1 text-[10px] font-bold leading-none text-ink-secondary">
+                        <span aria-hidden="true" class="mt-auto self-start px-1 text-[10px] font-bold leading-none text-ink-secondary">
                           …
                         </span>
                       {/if}
@@ -796,7 +803,7 @@
               </div>
             {/each}
           </div>
-        </div>
+        </section>
 
         <!-- Separate selected-day events card below the mobile calendar -->
         <div class="px-3">

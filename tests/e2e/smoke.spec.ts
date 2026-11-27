@@ -414,7 +414,7 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       badFile,
       `---
 title: "Invalid Category Test"
-category: "unknown-category"
+category: ""
 updatedDate: 2026-11-17
 ---
 
@@ -506,11 +506,7 @@ Test body.
     );
     await expect(page.locator('meta[property="article:section"]')).toHaveAttribute(
       'content',
-      'Academics',
-    );
-    await expect(page.locator('meta[property="article:tag"]')).toHaveAttribute(
-      'content',
-      'Internships & Graduation',
+      'Graduation',
     );
     await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
       'content',

@@ -6,6 +6,7 @@ import {
   buildAskMessages,
   hasAnswerableEvidence,
   parseCitedAnswer,
+  renderAskAnswerHtml,
   retrieveAskSources,
   type AskIndexItem,
   type AskSource,
@@ -18,7 +19,6 @@ function makeItem(overrides: Partial<AskIndexItem> = {}): AskIndexItem {
     excerpt: 'A short excerpt about the topic.',
     category: 'documents',
     categoryLabel: 'Documents',
-    subcategory: 'Document Requests',
     headings: ['Step-by-Step Workflow'],
     updatedDate: '2026-11-17',
     url: '/articles/sample-article',
@@ -35,7 +35,6 @@ const FIXTURE_ITEMS: AskIndexItem[] = [
       'Scholarship types, eligibility rules, and how to apply for financial assistance.',
     category: 'scholarships',
     categoryLabel: 'Scholarships',
-    subcategory: 'Scholarship Applications',
     headings: ['How to Apply', 'Required Documents'],
     updatedDate: '2026-10-05',
     url: '/articles/complete-guide-to-scholarships-at-bulsu',
@@ -56,7 +55,6 @@ const FIXTURE_ITEMS: AskIndexItem[] = [
     excerpt: 'TOR, COG, and Good Moral request steps at the Registrar.',
     category: 'documents',
     categoryLabel: 'Documents',
-    subcategory: 'Document Requests',
     headings: ['Step-by-Step Request Workflow'],
     updatedDate: '2026-09-20',
     url: '/articles/how-to-request-transcript-and-certificates',
@@ -73,7 +71,6 @@ const FIXTURE_ITEMS: AskIndexItem[] = [
     excerpt: 'e-Library access, Turnitin, and borrowing rules.',
     category: 'campus',
     categoryLabel: 'Campus',
-    subcategory: 'Library',
     headings: ['e-Library and Turnitin'],
     updatedDate: '2026-08-11',
     url: '/articles/bulsu-library-guide',
@@ -154,7 +151,6 @@ describe('retrieveAskSources', () => {
         slug: 'scholarship-heavy',
         title: 'Scholarship Application Deep Dive',
         excerpt: 'Scholarship application guidance.',
-        subcategory: 'Scholarships',
         chunks: manyChunks,
       }),
       ...FIXTURE_ITEMS,
@@ -201,7 +197,6 @@ describe('parseCitedAnswer', () => {
       title: 'Article A',
       url: '/articles/a',
       categoryLabel: 'Documents',
-      subcategory: 'Requests',
       updatedDate: '2026-01-01',
       excerpt: 'Excerpt',
       text: 'Text',
@@ -212,7 +207,6 @@ describe('parseCitedAnswer', () => {
       title: 'Article B',
       url: '/articles/b',
       categoryLabel: 'Academics',
-      subcategory: 'Grades',
       updatedDate: '2026-02-02',
       excerpt: 'Excerpt',
       text: 'Text',
@@ -266,5 +260,35 @@ describe('parseCitedAnswer', () => {
       .map((s) => s.text)
       .join('');
     expect(text).toContain('<b>bold</b>');
+  });
+});
+
+describe('renderAskAnswerHtml', () => {
+  const sources: AskSource[] = [
+    {
+      n: 1,
+      slug: 'a',
+      title: 'Article A',
+      url: '/articles/a',
+      categoryLabel: 'Academics',
+      updatedDate: '2026-01-01',
+      excerpt: 'Excerpt A',
+      text: 'Passage A',
+    },
+  ];
+
+  test('renders markdown lists, bold text, and inline citation links while escaping raw HTML', () => {
+    const parsed = parseCitedAnswer(
+      'Steps:\n\n1. **Submit** form [1]\n- Keep receipt\n\n<script>alert(1)</script>',
+      sources,
+    );
+    const html = renderAskAnswerHtml(parsed.segments);
+    expect(html).toContain('<ol>');
+    expect(html).toContain('<ul>');
+    expect(html).toContain('<strong>Submit</strong>');
+    expect(html).toContain('href="/articles/a"');
+    expect(html).toContain('data-citation');
+    expect(html).not.toContain('<script>');
+    expect(html).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
   });
 });

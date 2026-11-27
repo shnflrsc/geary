@@ -3,7 +3,6 @@
   import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
   import CategoryCard from '#lib/components/CategoryCard.svelte';
   import SeoHead from '#lib/components/SeoHead.svelte';
-  import { CATEGORIES } from '../../data/categories';
   import { buildBreadcrumbJsonLd } from '#lib/seo';
 
   const { data }: PageProps = $props();
@@ -41,7 +40,7 @@
   </div>
 
   <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
-    {#each CATEGORIES as category (category.slug)}
+    {#each data.categories as category (category.slug)}
       <CategoryCard {category} />
     {/each}
   </div>

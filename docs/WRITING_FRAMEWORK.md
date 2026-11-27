@@ -4,7 +4,8 @@
 
 **Applies to:** All articles, tutorials, and informational content published on Geary.
 
-**Terminology rule:** Always refer to Geary's published entries as **articles** (never "guides") in UI copy, metadata, labels, and site prose.
+* **Terminology rule:** Always refer to Geary's published entries as **articles** (never "guides") in UI copy, metadata, labels, and site prose.
+* **Category naming rule:** Keep article `category` values to one word whenever possible (or multiple short words if reasonable, e.g., `student-life`). Frontmatter values are lowercased and normalized automatically and rendered in Title Case in the UI. You may optionally set `categoryIcon` (`admission`, `academics`, `document`, `scholarship`, `policy`, `organizations`, or `campus`).
 
 **Last-updated rule:** Any and all updates to an article (content, links, sources, formatting, or frontmatter) MUST update its `updatedDate` frontmatter field to the current date (`YYYY-MM-DD`).
 
@@ -213,6 +214,18 @@ Include concise, practical details readers need during or after the process:
 * Alternative procedures.
 
 Do not use this section as a catch-all for critical rules that belong earlier in the guide.
+
+### 4.5 Document Request and Retrieval Articles
+
+For articles covering how to request, retrieve, or acquire official documents (such as `Transcript of Records (TOR)`, `Student ID Replacement`, `Certificate of Good Moral Character`, or `Certificate of Grades`), use this fast-lookup format:
+
+* **Title:** Name the article after the document itself (e.g., `Transcript of Records (TOR)` rather than `How to Request a Transcript of Records`).
+* **No intro:** Skip introductory paragraphs completely and start immediately with the main section.
+* **Primary section (`## How to get`):** Name the section `## How to get` only, and deliver the essential details right away using plain lists without narrative descriptions:
+  * **Location:** The specific office or window where the document is requested and claimed.
+  * **Requirements:** A bulleted list of required items, forms, or fees.
+  * **Step-by-step:** A numbered list of actions to complete the request.
+* **Additional information:** Place any extra details (processing times, fees, special cases, proxy/authorization rules, or contact info) after `## How to get` at the bottom of the article. Do not use a generic `## Additional information` heading—name each section after the specific content it covers, and split into multiple sections when covering distinct topics.
 
 ## 5. Markdown Formatting Standards
 

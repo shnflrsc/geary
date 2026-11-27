@@ -1,8 +1,8 @@
 ---
 title: "BulSU Guidance and Counseling Services"
-category: "campus"
-subcategory: "Student Support & Welfare"
-updatedDate: 2026-11-25
+category: "health"
+categoryIcon: "health"
+updatedDate: 2026-11-27
 sources:
   - label: "BulSU Guidance and Counseling Services Center Main Campus - Six Core Services & Contact Guide (Aug 12, 2025)"
     url: "https://www.facebook.com/BulSUGCSCMain/videos/4208534679418109/"

@@ -1,8 +1,8 @@
 ---
 title: "How to Apply for Student Assistantships"
-category: "scholarships"
-subcategory: "Work & Financial Support"
-updatedDate: 2026-11-25
+category: "careers"
+categoryIcon: "careers"
+updatedDate: 2026-11-27
 sources:
   - label: "BulSU PPESO - Institutional Student Assistant (ISA) Program A.Y. 2026-2027 (Jul 2, 2026)"
     url: "https://www.facebook.com/bulsu.ppeso/posts/pfbid0jbDVz9DTGPQJinuN1hzsV4BVHQ4KnRGTsyhcxaGH7bRdtSqNmQDzqbw52dWvS7nJl"

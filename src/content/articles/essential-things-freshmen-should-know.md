@@ -1,7 +1,6 @@
 ---
 title: "What Every BulSU Freshman Should Know"
 category: "enrollment"
-subcategory: "Orientation & First Year"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU Student Affairs - Main Campus - HANDOG Freshmen Students Orientation Schedule (Jun 22-26, 2026)"

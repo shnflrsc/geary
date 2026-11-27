@@ -12,7 +12,6 @@ export interface ArticleLike {
   data: {
     title: string;
     category: CategorySlug;
-    subcategory: string;
     updatedDate: Date;
     source?: string;
     sourceUrl?: string;
@@ -88,11 +87,6 @@ export function resolveArticleSources(
   return resolved;
 }
 
-export interface SubcategoryGroup<T extends ArticleLike> {
-  subcategory: string;
-  articles: T[];
-}
-
 /** Resolve the canonical route slug for a Content Layer or legacy collection entry. */
 export function getArticleSlug(entry: Pick<ArticleLike, 'id' | 'slug'>): string {
   return (entry.slug ?? entry.id).replace(/\.md$/i, '');
@@ -106,30 +100,6 @@ export function formatArticleDate(date: Date): string {
     day: 'numeric',
     timeZone: 'UTC',
   });
-}
-
-/**
- * Group category articles deterministically by `subcategory` (alphabetical groups,
- * alphabetical article titles inside each group).
- */
-export function groupArticlesBySubcategory<T extends ArticleLike>(
-  articles: readonly T[],
-): SubcategoryGroup<T>[] {
-  const buckets = new Map<string, T[]>();
-
-  for (const article of articles) {
-    const key = article.data.subcategory.trim();
-    const list = buckets.get(key) ?? [];
-    list.push(article);
-    buckets.set(key, list);
-  }
-
-  return Array.from(buckets.entries())
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([subcategory, items]) => ({
-      subcategory,
-      articles: [...items].sort((a, b) => a.data.title.localeCompare(b.data.title)),
-    }));
 }
 
 /** Return up to `limit` sibling articles in the same category, excluding the current slug. */

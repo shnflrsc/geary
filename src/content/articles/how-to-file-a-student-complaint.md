@@ -1,7 +1,6 @@
 ---
 title: "How to File a Student Complaint"
 category: "policies"
-subcategory: "Rights, Discipline & Grievances"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU SG Academic Affairs Committee - TAMBAD 2026 Grade Consultation Grievance (Nov 11, 2026)"

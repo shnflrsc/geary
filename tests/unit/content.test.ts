@@ -31,23 +31,34 @@ describe('Markdown content loader & Zod validation (TC-BLD-02)', () => {
     expect(honors?.html).toContain('id="latin-honors-cutoffs-and-grade-floors"');
   });
 
-  test('rejects invalid category enum and missing required frontmatter fields', () => {
-    const invalidCategory = `---
-title: "Invalid Category Test"
-category: "unknown-category"
-subcategory: "Test"
+  test('normalizes dynamic categories and rejects empty category or missing title', () => {
+    const dynamicCategory = `---
+title: "Dynamic Category Test"
+category: "  Student Life  "
+categoryIcon: "campus"
 updatedDate: 2026-11-17
 ---
 
 Body text.
 `;
-    expect(() => parseArticleMarkdown('bad-category.md', invalidCategory)).toThrow(
+    const parsed = parseArticleMarkdown('dynamic-category.md', dynamicCategory);
+    expect(parsed.data.category).toBe('student-life');
+    expect(parsed.data.categoryIcon).toBe('campus');
+
+    const emptyCategory = `---
+title: "Empty Category Test"
+category: "   "
+updatedDate: 2026-11-17
+---
+
+Body text.
+`;
+    expect(() => parseArticleMarkdown('bad-category.md', emptyCategory)).toThrow(
       /invalid article schema.*category/i,
     );
 
     const missingTitle = `---
 category: "academics"
-subcategory: "Test"
 updatedDate: 2026-11-17
 ---
 
@@ -62,7 +73,6 @@ Body text.
     const validMd = `---
 title: "Sample Article"
 category: "academics"
-subcategory: "General"
 updatedDate: 2026-11-17
 ---
 

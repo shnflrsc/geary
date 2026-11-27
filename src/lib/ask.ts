@@ -1,3 +1,4 @@
+import { Marked, type Tokens } from 'marked';
 import type { CategorySlug } from '../data/categories';
 
 export interface AskIndexChunk {
@@ -11,7 +12,6 @@ export interface AskIndexItem {
   excerpt: string;
   category: CategorySlug;
   categoryLabel: string;
-  subcategory: string;
   headings: string[];
   /** ISO `YYYY-MM-DD` freshness date from article frontmatter. */
   updatedDate: string;
@@ -27,7 +27,6 @@ export interface AskSource {
   title: string;
   url: string;
   categoryLabel: string;
-  subcategory: string;
   updatedDate: string;
   excerpt: string;
   text: string;
@@ -150,10 +149,9 @@ export function retrieveAskSources(
   for (const item of items) {
     const title = item.title.toLowerCase();
     const headingsText = item.headings.join(' ').toLowerCase();
-    const subcategory = item.subcategory.toLowerCase();
     const excerpt = item.excerpt.toLowerCase();
     const chunkTexts = item.chunks.map((c) => c.text.toLowerCase());
-    const articleText = `${title} ${headingsText} ${subcategory} ${excerpt} ${chunkTexts.join(' ')}`;
+    const articleText = `${title} ${headingsText} ${excerpt} ${chunkTexts.join(' ')}`;
 
     if (!tokens.every((token) => articleText.includes(token))) {
       continue;
@@ -162,7 +160,7 @@ export function retrieveAskSources(
     let metaScore = title.includes(normalized) ? 20 : 0;
     for (const token of tokens) {
       if (title.includes(token)) metaScore += 10;
-      if (headingsText.includes(token) || subcategory.includes(token)) metaScore += 5;
+      if (headingsText.includes(token)) metaScore += 5;
       if (excerpt.includes(token)) metaScore += 2;
     }
 
@@ -195,7 +193,6 @@ export function retrieveAskSources(
     title: candidate.item.title,
     url: candidate.item.url,
     categoryLabel: candidate.item.categoryLabel,
-    subcategory: candidate.item.subcategory,
     updatedDate: candidate.item.updatedDate,
     excerpt: candidate.item.excerpt,
     text: candidate.chunk.text,
@@ -211,6 +208,7 @@ const ASK_SYSTEM_PROMPT = [
   'You are the Ask-the-Handbook assistant for Geary, an unofficial Bulacan State University student information hub.',
   'Answer the student\'s question using ONLY the numbered sources provided. Never use outside knowledge, never invent policies, fees, deadlines, offices, or links.',
   'Keep the answer concise, direct, and student-friendly. Use plain English and address the reader as "you".',
+  'Format your response using clean Markdown (such as bullet lists, numbered lists, or bold text) when it makes steps or items clearer.',
   'Cite every factual claim inline with only the source number in square brackets, e.g. [1] or [2] (never include dates or titles inside the brackets). Only cite numbers that appear in the source list.',
   'If the sources do not answer the question, reply with exactly NOT_COVERED and nothing else.',
 ].join('\n');
@@ -223,7 +221,7 @@ export function buildAskMessages(
   const sourceBlocks = sources
     .map(
       (source) =>
-        `[${source.n}] ${source.title} — ${source.categoryLabel} › ${source.subcategory} (last updated ${source.updatedDate})\n` +
+        `[${source.n}] ${source.title} — ${source.categoryLabel} (last updated ${source.updatedDate})\n` +
         `URL: ${source.url}\n` +
         `Summary: ${source.excerpt}\n` +
         `Passage:\n${source.text}`,
@@ -286,4 +284,58 @@ export function parseCitedAnswer(
   pushText(trimmed.slice(lastIndex));
 
   return { status: 'answered', segments };
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+const askMarkdown = new Marked({ gfm: true, breaks: true });
+askMarkdown.use({
+  renderer: {
+    html({ text }: Tokens.HTML | Tokens.Tag) {
+      return escapeHtml(text);
+    },
+    link({ href, title, tokens }: Tokens.Link) {
+      const safeHref =
+        href && (href.startsWith('/') || /^https?:\/\//i.test(href))
+          ? escapeHtml(href)
+          : '#';
+      const label = this.parser.parseInline(tokens);
+      const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
+      const external = /^https?:\/\//i.test(safeHref)
+        ? ' target="_blank" rel="noopener noreferrer"'
+        : '';
+      return `<a href="${safeHref}"${titleAttr}${external}>${label}</a>`;
+    },
+  },
+});
+
+/** Render parsed Ask Geary answer segments as sanitized Markdown HTML with inline citation links. */
+export function renderAskAnswerHtml(segments: readonly AnswerSegment[]): string {
+  const citations = new Map<string, Extract<AnswerSegment, { type: 'citation' }>>();
+  let markdown = '';
+
+  segments.forEach((segment, index) => {
+    if (segment.type === 'text') {
+      markdown += segment.text;
+    } else {
+      const token = `GEARYCITE${index}TOKEN`;
+      citations.set(token, segment);
+      markdown += token;
+    }
+  });
+
+  let html = askMarkdown.parse(markdown, { async: false });
+  for (const [token, citation] of citations) {
+    const badge = `<a data-citation href="${escapeHtml(citation.url)}" aria-label="Source ${citation.n}: ${escapeHtml(citation.title)}" class="mx-0.5 inline-flex items-center justify-center rounded bg-brand-crimson-wash px-1 py-px align-super text-[0.65rem] font-semibold leading-none text-brand-crimson transition-colors hover:bg-brand-crimson-solid hover:text-white">${citation.n}</a>`;
+    html = html.replaceAll(token, badge);
+  }
+
+  return html.trim();
 }

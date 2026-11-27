@@ -1,8 +1,8 @@
 ---
 title: "BulSU Microsoft Student Account Benefits"
-category: "campus"
-subcategory: "Digital Services & Accounts"
-updatedDate: 2026-11-25
+category: "technology"
+categoryIcon: "technology"
+updatedDate: 2026-11-27
 sources:
   - label: "BulSU VPAA Guidelines on the Hybrid-Flexible (Hyflex) Learning Modalities (2022)"
     url: "https://bulsu.edu.ph/assets/announcements/guidelines-vpaa-2022/Guidelines-on-the-Hybrid-Flexible-Hyflex-Learning-Modalities.pdf"

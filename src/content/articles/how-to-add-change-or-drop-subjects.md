@@ -1,7 +1,6 @@
 ---
 title: "How to Add, Change, or Drop Subjects"
 category: "academics"
-subcategory: "Enrollment & Load Changes"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU ICTO - Regular and Irregular Student Enrollment Guides in ALAB SMS (Nov 14, 2026)"

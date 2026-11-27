@@ -1,8 +1,7 @@
 import type { RequestHandler } from './$types';
-import { CATEGORIES } from '../../data/categories';
 import { requestOrigin } from '#lib/seo-runtime';
 import { CACHE_CONTROL_HEADER } from '#lib/server/cache';
-import { getAllArticles } from '#lib/server/content';
+import { getAllArticles, getDynamicCategories } from '#lib/server/content';
 
 function escapeXml(value: string): string {
   return value
@@ -24,7 +23,7 @@ export const GET: RequestHandler = ({ url }) => {
     entries.push({ loc: new URL(path, origin).href });
   }
 
-  for (const category of CATEGORIES) {
+  for (const category of getDynamicCategories()) {
     entries.push({ loc: new URL(`/categories/${category.slug}`, origin).href });
   }
 

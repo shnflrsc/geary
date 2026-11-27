@@ -1,7 +1,6 @@
 ---
 title: "How to File a Leave of Absence"
 category: "enrollment"
-subcategory: "Leave & Readmission"
 updatedDate: 2026-11-25
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"

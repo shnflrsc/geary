@@ -18,7 +18,6 @@
   articleMeta={{
     modifiedTime: data.modifiedTime,
     section: data.categoryMeta.title,
-    tag: data.subcategory,
   }}
   jsonLd={data.jsonLd}
 />

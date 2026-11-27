@@ -1,8 +1,8 @@
 ---
 title: "BulSU Medical Services and Student Insurance Guide"
-category: "campus"
-subcategory: "Health, Safety & Housing"
-updatedDate: 2026-11-25
+category: "health"
+categoryIcon: "health"
+updatedDate: 2026-11-27
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Health Services & Office of Student Welfare"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"

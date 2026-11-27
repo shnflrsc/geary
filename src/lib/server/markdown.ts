@@ -145,7 +145,6 @@ export function buildSearchIndex(articles: readonly ParsedArticle[]): SearchInde
         preview: entry.preview,
         category: entry.data.category,
         categoryLabel: categoryMeta?.title ?? entry.data.category,
-        subcategory: entry.data.subcategory,
         headings: entry.headings
           .filter((h) => h.depth === 2 || h.depth === 3)
           .map((h) => h.text),

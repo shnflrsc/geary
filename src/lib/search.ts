@@ -6,7 +6,6 @@ export interface SearchIndexItem {
   preview: string;
   category: CategorySlug;
   categoryLabel: string;
-  subcategory: string;
   headings: string[];
 }
 
@@ -34,10 +33,9 @@ export function filterAndRankArticles(
   for (const item of items) {
     const title = item.title.toLowerCase();
     const headingsText = item.headings.join(' ').toLowerCase();
-    const subcategory = item.subcategory.toLowerCase();
     const preview = item.preview.toLowerCase();
     const categoryLabel = item.categoryLabel.toLowerCase();
-    const combined = `${title} ${headingsText} ${subcategory} ${preview} ${categoryLabel}`;
+    const combined = `${title} ${headingsText} ${preview} ${categoryLabel}`;
 
     const matchesAllTokens = tokens.every((token) => combined.includes(token));
     if (!matchesAllTokens) {
@@ -50,7 +48,7 @@ export function filterAndRankArticles(
       if (title.includes(token)) {
         score += 10;
       }
-      if (headingsText.includes(token) || subcategory.includes(token)) {
+      if (headingsText.includes(token)) {
         score += 5;
       }
       if (preview.includes(token) || categoryLabel.includes(token)) {

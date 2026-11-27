@@ -17,9 +17,8 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/calendar',
       '/contribute',
       '/map',
-        '/terms',
+      '/terms',
       '/privacy',
-      '/wizard',
       ...CATEGORY_SLUGS.map((slug) => `/categories/${slug}`),
     ];
 
@@ -91,7 +90,6 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/contribute',
       '/calendar',
       '/map',
-        '/wizard',
       '/terms',
       '/privacy',
     ];
@@ -288,7 +286,6 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/contribute',
       '/calendar',
       '/map',
-        '/wizard',
       '/terms',
       '/privacy',
       '/this-route-does-not-exist',
@@ -350,7 +347,6 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       '/contribute',
       '/calendar',
       '/map',
-        '/wizard',
       '/terms',
       '/privacy',
       '/this-route-does-not-exist',
@@ -362,7 +358,9 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       await expect(page.locator('header')).toHaveCount(1);
       await expect(page.locator('header nav[aria-label="Primary navigation"] a')).toHaveCount(5);
       await expect(page.locator('main')).toHaveCount(1);
-      await expect(page.locator('footer')).toHaveCount(route === '/map' ? 0 : 1);
+      await expect(page.locator('footer')).toHaveCount(
+        route === '/map' || route === '/calendar' ? 0 : 1,
+      );
       await expect(page.locator('h1')).toHaveCount(1);
 
       if (route.startsWith('/articles/')) {
@@ -417,7 +415,6 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       `---
 title: "Invalid Category Test"
 category: "unknown-category"
-subcategory: "Test"
 updatedDate: 2026-11-17
 ---
 
@@ -697,94 +694,6 @@ Test body.
     }
   });
 
-  test('TC-E2E-10: document request wizard picker, checklist persistence, hash sharing, and entry points', async ({
-    page,
-    browser,
-  }) => {
-    const pageErrors: string[] = [];
-    page.on('pageerror', (err) => pageErrors.push(err.message));
-
-    // Picker lists declared request types after island hydration
-    await page.goto('/wizard');
-    await expect(
-      page.getByRole('heading', { name: 'Document Request Wizard' }),
-    ).toBeVisible();
-    const torCard = page.getByRole('button', { name: /Transcript of Records \(TOR\)/ });
-    await expect(torCard).toBeVisible();
-    await expect(
-      page.getByRole('button', { name: /Student ID Replacement/ }),
-    ).toBeVisible();
-
-    // Deep link selects the request and renders summary rows + checklist
-    await page.goto('/wizard#tor');
-    await expect(
-      page.getByRole('heading', { name: 'Transcript of Records (TOR)' }),
-    ).toBeVisible();
-    await expect(page.getByText('Office of the University Registrar').first()).toBeVisible();
-    await expect(page.getByText('PHP 50 per page')).toBeVisible();
-    await expect(page.getByText('6 working days', { exact: false }).first()).toBeVisible();
-    const checkboxes = page.locator('input[type="checkbox"]');
-    await expect(checkboxes).toHaveCount(6);
-    await expect(page.getByText('0 of 6 checked')).toBeVisible();
-    await expect(
-      page.locator('a[href="/articles/how-to-request-transcript-and-certificates"]'),
-    ).toBeVisible();
-
-    // Toggle two items: progress, localStorage, and hash all update
-    await checkboxes.nth(0).check();
-    await checkboxes.nth(1).check();
-    await expect(page.getByText('2 of 6 checked')).toBeVisible();
-    await expect(page).toHaveURL(/#tor:0,1$/);
-    await expect
-      .poll(() => page.evaluate(() => window.localStorage.getItem('geary:wizard:v1')))
-      .toContain('"tor"');
-
-    // State restores after reload
-    await page.reload();
-    await expect(page.locator('input[type="checkbox"]').nth(0)).toBeChecked();
-    await expect(page.locator('input[type="checkbox"]').nth(1)).toBeChecked();
-    await expect(page.locator('input[type="checkbox"]').nth(2)).not.toBeChecked();
-
-    // Shared hash applies checks in a fresh context (isolated localStorage)
-    const sharedContext = await browser.newContext({ baseURL: 'http://localhost:4322' });
-    const sharedPage = await sharedContext.newPage();
-    const sharedErrors: string[] = [];
-    sharedPage.on('pageerror', (err) => sharedErrors.push(err.message));
-    await sharedPage.goto('/wizard#tor:1,4');
-    await expect(
-      sharedPage.getByRole('heading', { name: 'Transcript of Records (TOR)' }),
-    ).toBeVisible();
-    await expect(sharedPage.locator('input[type="checkbox"]').nth(1)).toBeChecked();
-    await expect(sharedPage.locator('input[type="checkbox"]').nth(4)).toBeChecked();
-    await expect(sharedPage.locator('input[type="checkbox"]').nth(0)).not.toBeChecked();
-    expect(sharedErrors).toEqual([]);
-    await sharedContext.close();
-
-    // Malformed/unknown hash falls back to picker with zero errors
-    await page.goto('/wizard#bogus-request-id');
-    await expect(torCard).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Transcript of Records (TOR)' })).toHaveCount(
-      0,
-    );
-
-    // Entry points: category wizard card and article body links
-    await page.goto('/categories/documents');
-    await expect(page.locator('a[href="/wizard#tor"]').first()).toBeVisible();
-    await expect(page.locator('a[href="/wizard#student-id-replacement"]').first()).toBeVisible();
-
-    await page.goto('/articles/how-to-replace-a-lost-student-id');
-    await expect(
-      page.locator('.geary-prose a[href="/wizard#student-id-replacement"]'),
-    ).toBeVisible();
-
-    await page.goto('/articles/how-to-request-transcript-and-certificates');
-    await expect(
-      page.locator('.geary-prose a[href="/wizard#good-moral-character"]').first(),
-    ).toBeVisible();
-
-    expect(pageErrors).toEqual([]);
-  });
-
   test('TC-E2E-09: ask widget retrieves evidence locally and cites sources', async ({
     page,
   }) => {
@@ -842,13 +751,12 @@ Test body.
     // Unrelated question: no evidence -> /api/ask is never called.
     await dialog.getByRole('textbox').fill('zzzz quantum physics');
     await dialog.getByRole('button', { name: 'Send', exact: true }).click();
-    await expect(dialog).toContainText("don't have a guide covering that yet");
+    await expect(dialog).toContainText(
+      "Sorry, I don't know that yet. Please ask me another question.",
+    );
     expect(apiAskCalls).toBe(1);
-    for (const slug of CATEGORY_SLUGS) {
-      await expect(dialog.locator(`a[href="/categories/${slug}"]`)).toBeVisible();
-    }
 
-    // NOT_COVERED from the endpoint falls back to category links too.
+    // NOT_COVERED from the endpoint shows the same fallback message.
     await page.unroute('**/api/ask');
     await page.route('**/api/ask', async (route) => {
       await route.fulfill({
@@ -859,7 +767,9 @@ Test body.
     });
     await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
     await dialog.getByRole('button', { name: 'Send', exact: true }).click();
-    await expect(dialog).toContainText("don't have a guide covering that yet");
+    await expect(dialog).toContainText(
+      "Sorry, I don't know that yet. Please ask me another question.",
+    );
   });
 
   test('TC-E2E-09b: ask widget degrades calmly when index or endpoint fails', async ({

@@ -32,64 +32,10 @@
     </h1>
   </div>
 
-  {#if data.wizardRequests.length > 0}
-    <section
-      aria-labelledby="wizard-card-heading"
-      class="mb-10 rounded-xl border border-border-subtle bg-surface-card p-5 sm:p-6"
-    >
-      <div class="flex flex-wrap items-start justify-between gap-4">
-        <div class="max-w-xl">
-          <h2 id="wizard-card-heading" class="font-heading text-lg font-bold text-ink-primary">
-            Check off your requirements
-          </h2>
-          <p class="mt-1.5 text-sm leading-relaxed text-ink-secondary">
-            {data.wizardRequests.length === 1
-              ? 'One request type has an interactive checklist.'
-              : `${data.wizardRequests.length} request types have interactive checklists.`}
-            Track fees, office, processing time, and what you still need to bring.
-          </p>
-          <ul class="mt-3 flex flex-wrap gap-2">
-            {#each data.wizardRequests as request (request.id)}
-              <li>
-                <a
-                  href="/wizard#{request.id}"
-                  class="inline-flex items-center rounded-full border border-border-subtle bg-surface-subtle px-3 py-1.5 text-xs font-medium text-ink-primary transition-colors duration-150 hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
-                >
-                  {request.title}
-                </a>
-              </li>
-            {/each}
-          </ul>
-        </div>
-        <a
-          href="/wizard"
-          class="inline-flex shrink-0 items-center rounded-lg bg-brand-crimson px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-brand-crimson-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
-        >
-          Open the wizard
-        </a>
-      </div>
-    </section>
-  {/if}
-
-  {#if data.subcategoryGroups.length > 0}
-    <div class="space-y-10">
-      {#each data.subcategoryGroups as group, idx (group.subcategory)}
-        {@const slugPart = group.subcategory
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-+|-+$/g, '')}
-        {@const headingId = slugPart ? `sub-${slugPart}` : `sub-group-${idx}`}
-        <section aria-labelledby={headingId}>
-          <h2 id={headingId} class="mb-4 font-heading text-lg sm:text-xl font-bold text-ink-primary">
-            {group.subcategory}
-          </h2>
-
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
-            {#each group.articles as article (article.slug)}
-              <ArticleCard {article} />
-            {/each}
-          </div>
-        </section>
+  {#if data.articles.length > 0}
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+      {#each data.articles as article (article.slug)}
+        <ArticleCard {article} />
       {/each}
     </div>
   {:else}

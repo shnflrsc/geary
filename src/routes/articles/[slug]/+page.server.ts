@@ -1,10 +1,9 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { getCategoryBySlug } from '../../../data/categories';
 import { formatArticleDate, resolveArticleSources } from '#lib/articles';
 import { buildArticleJsonLd, buildBreadcrumbJsonLd } from '#lib/seo';
 import { requestOrigin } from '#lib/seo-runtime';
-import { getArticleBySlug } from '#lib/server/content';
+import { getArticleBySlug, getDynamicCategoryBySlug } from '#lib/server/content';
 
 export const load: PageServerLoad = ({ params, url }) => {
   const article = getArticleBySlug(params.slug);
@@ -12,7 +11,7 @@ export const load: PageServerLoad = ({ params, url }) => {
     error(404, 'Article not found');
   }
 
-  const categoryMeta = getCategoryBySlug(article.data.category);
+  const categoryMeta = getDynamicCategoryBySlug(article.data.category);
   if (!categoryMeta) {
     error(500, `Unknown category slug: ${article.data.category}`);
   }
@@ -47,7 +46,6 @@ export const load: PageServerLoad = ({ params, url }) => {
     activeCategory: categoryMeta.slug,
     title: article.data.title,
     preview: article.preview,
-    subcategory: article.data.subcategory,
     modifiedTime: article.data.updatedDate.toISOString(),
     formattedDate: formatArticleDate(article.data.updatedDate),
     articleUrl,

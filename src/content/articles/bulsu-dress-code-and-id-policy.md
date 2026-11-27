@@ -1,7 +1,6 @@
 ---
 title: "BulSU Dress Code, Grooming, and ID Policy"
 category: "policies"
-subcategory: "Campus Rules & Dress Code"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU Office of the Chancellors - Uniform Policy & Mandatory Wearing Advisories A.Y. 2026-2027 (Jun-Jul 2026)"

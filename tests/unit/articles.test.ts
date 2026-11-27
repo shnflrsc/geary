@@ -7,7 +7,6 @@ import {
   getArticleSlug,
   getDailyItemGroups,
   getRelatedArticles,
-  groupArticlesBySubcategory,
   pickDailyItems,
   type ArticleLike,
 } from '../../src/lib/articles';
@@ -19,7 +18,6 @@ const MOCK_ARTICLES: ArticleLike[] = [
     data: {
       title: 'Zeta Form Guide',
       category: 'documents',
-      subcategory: 'Forms',
       updatedDate: new Date('2026-11-10'),
     },
   },
@@ -29,7 +27,6 @@ const MOCK_ARTICLES: ArticleLike[] = [
     data: {
       title: 'Alpha Form Guide',
       category: 'documents',
-      subcategory: 'Forms',
       updatedDate: new Date('2026-11-12'),
     },
   },
@@ -39,7 +36,6 @@ const MOCK_ARTICLES: ArticleLike[] = [
     data: {
       title: 'Beta Academic Record',
       category: 'documents',
-      subcategory: 'Academic Records',
       updatedDate: new Date('2026-11-15'),
     },
   },
@@ -49,30 +45,12 @@ const MOCK_ARTICLES: ArticleLike[] = [
     data: {
       title: 'Campus Map',
       category: 'campus',
-      subcategory: 'Navigation',
       updatedDate: new Date('2026-11-16'),
     },
   },
 ];
 
 describe('Article taxonomy and grouping helpers (TC-UNIT-04)', () => {
-  test('TC-UNIT-04: groups articles deterministically by subcategory and title', () => {
-    const registrarArticles = MOCK_ARTICLES.filter(
-      (a) => a.data.category === 'documents',
-    );
-    const groups = groupArticlesBySubcategory(registrarArticles);
-
-    expect(groups.map((g) => g.subcategory)).toEqual(['Academic Records', 'Forms']);
-    expect(groups[1]?.articles.map((a) => a.data.title)).toEqual([
-      'Alpha Form Guide',
-      'Zeta Form Guide',
-    ]);
-  });
-
-  test('TC-UNIT-04: handles empty article arrays gracefully', () => {
-    expect(groupArticlesBySubcategory([])).toEqual([]);
-  });
-
   test('resolves slugs, previews, and sibling related articles', () => {
     expect(getArticleSlug({ id: 'freshman-enrollment-guide.md' })).toBe(
       'freshman-enrollment-guide',

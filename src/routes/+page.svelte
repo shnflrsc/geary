@@ -179,7 +179,7 @@
   jsonLd={websiteJsonLd}
 />
 
-<section class="relative z-20 flex min-h-[calc(100svh-9.3125rem)] items-center bg-canvas-paper py-12 sm:py-14 lg:py-16">
+<section class="relative z-20 flex flex-1 items-center bg-canvas-paper py-6 sm:py-8">
   <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
     {#each HERO_GEARS as gear, index (index)}
       <svg viewBox="0 0 200 200" fill="none" class={`absolute ${gear.className}`}>

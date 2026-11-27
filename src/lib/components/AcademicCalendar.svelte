@@ -1,17 +1,29 @@
 <script lang="ts">
+  import { replaceState } from '$app/navigation';
+  import { page } from '$app/state';
   import {
     ACADEMIC_CALENDAR_EVENTS,
-    ACADEMIC_CALENDAR_META,
     CALENDAR_CATEGORIES,
+    CALENDAR_CATEGORY_MAP,
     type CalendarCategory,
+    type CalendarEvent,
   } from '../../data/academic-calendar';
-  import { filterCalendarEvents, groupCalendarEventsByMonth } from '#lib/calendar';
+  import {
+    buildMonthGrid,
+    CALENDAR_MONTHS,
+    countMatchingEventsByMonth,
+    filterCalendarEvents,
+    formatIsoDateReadable,
+    getDefaultCalendarMonth,
+    getDefaultSelectedDate,
+    getTodayIso,
+    isValidCalendarMonth,
+    parseEventDateSpans,
+  } from '#lib/calendar';
   import { bindSearchShortcut } from '#lib/search-shortcut';
 
-  function formatShortMonth(monthLabel: string): string {
-    const [monthName = '', year = ''] = monthLabel.split(' ');
-    return `${monthName.slice(0, 3)} '${year.slice(-2)}`;
-  }
+  const WEEKDAYS_UPPER = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'] as const;
+  const WEEKDAYS_MOBILE = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as const;
 
   function splitHighlightedParts(
     text: string,
@@ -28,32 +40,186 @@
     }));
   }
 
+  function formatEventCardDate(event: CalendarEvent): string {
+    const [monthName = '', year = ''] = event.monthLabel.split(' ');
+    if (event.dateText.trim().toUpperCase() === 'TBA') {
+      return `${monthName} ${year} · TBA`.trim();
+    }
+    return `${monthName} ${event.dateText}, ${year}`.trim();
+  }
+
+  function formatSearchResultDate(event: CalendarEvent): string {
+    const [monthName = '', year = ''] = event.monthLabel.split(' ');
+    if (event.dateText.trim().toUpperCase() === 'TBA') {
+      return `${monthName} ${year} · TBA`.trim();
+    }
+    const formattedDates = event.dateText.trim().replace(/\s+to\s+/gi, '-');
+    return `${monthName} ${formattedDates}, ${year}`.trim();
+  }
+
+  const todayIso = getTodayIso();
+  const initialParamMonth = page.url.searchParams.get('month');
+  const initialMonth = isValidCalendarMonth(initialParamMonth)
+    ? initialParamMonth
+    : getDefaultCalendarMonth();
+
   let query = $state('');
   let selectedCategories = $state<CalendarCategory[]>([]);
-  let showBackToTop = $state(false);
+  let activeMonth = $state(initialMonth);
+  let selectedDate = $state(getDefaultSelectedDate(initialMonth));
+  let selectedEventId = $state<string | null>(null);
+  let filtersOpen = $state(false);
+  let searchResultsOpen = $state(false);
+  let highlightedResultIndex = $state(-1);
   let searchInputEl: HTMLInputElement | undefined = $state();
+  let searchContainerEl: HTMLDivElement | undefined = $state();
+  let filterMenuEl: HTMLDivElement | undefined = $state();
 
   const filteredEvents = $derived(
     filterCalendarEvents(ACADEMIC_CALENDAR_EVENTS, query, selectedCategories),
   );
-  const monthGroups = $derived(groupCalendarEventsByMonth(filteredEvents));
+  const monthMatchCounts = $derived(countMatchingEventsByMonth(filteredEvents));
+  const gridModel = $derived(buildMonthGrid(activeMonth, filteredEvents));
   const searchTerms = $derived(query.trim().split(/\s+/).filter(Boolean));
   const hasActiveFilters = $derived(searchTerms.length > 0 || selectedCategories.length > 0);
+  const showSearchResults = $derived(searchResultsOpen && searchTerms.length > 0);
+
+  const activeMonthIndex = $derived(
+    CALENDAR_MONTHS.findIndex((item) => item.month === activeMonth),
+  );
+  const activeMonthMeta = $derived(CALENDAR_MONTHS[activeMonthIndex] ?? CALENDAR_MONTHS[0]!);
+  const prevMatchingMonth = $derived.by(() => {
+    for (let i = activeMonthIndex - 1; i >= 0; i -= 1) {
+      const m = CALENDAR_MONTHS[i]!;
+      if (!hasActiveFilters || (monthMatchCounts[m.month] ?? 0) > 0) return m.month;
+    }
+    return null;
+  });
+  const nextMatchingMonth = $derived.by(() => {
+    for (let i = activeMonthIndex + 1; i < CALENDAR_MONTHS.length; i += 1) {
+      const m = CALENDAR_MONTHS[i]!;
+      if (!hasActiveFilters || (monthMatchCounts[m.month] ?? 0) > 0) return m.month;
+    }
+    return null;
+  });
+  const canGoPrev = $derived(prevMatchingMonth !== null);
+  const canGoNext = $derived(nextMatchingMonth !== null);
+  const selectedDayEvents = $derived(gridModel.eventsByDate[selectedDate] ?? []);
 
   $effect(() => bindSearchShortcut(() => searchInputEl?.focus()));
 
   $effect(() => {
-    const onScroll = () => {
-      showBackToTop = window.scrollY > 300;
+    if (!filtersOpen) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (filterMenuEl && !filterMenuEl.contains(event.target as Node)) {
+        filtersOpen = false;
+      }
     };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') filtersOpen = false;
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
   });
 
-  function scrollToTop() {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+  // Sync active month to ?month=YYYY-MM without adding browser history entries.
+  $effect(() => {
+    if (typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('month') !== activeMonth) {
+      url.searchParams.set('month', activeMonth);
+      replaceState(url, page.state);
+    }
+  });
+
+  $effect(() => {
+    if (!searchResultsOpen) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (searchContainerEl && !searchContainerEl.contains(event.target as Node)) {
+        searchResultsOpen = false;
+        highlightedResultIndex = -1;
+      }
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
+  });
+
+  function selectSearchResult(event: CalendarEvent) {
+    const { spans, tba } = parseEventDateSpans(event);
+    if (!tba && spans.length > 0) {
+      const startDate = spans[0]!.start;
+      const targetMonth = startDate.slice(0, 7);
+      if (isValidCalendarMonth(targetMonth)) {
+        activeMonth = targetMonth;
+      }
+      selectDay(startDate, event.id);
+    } else {
+      selectMonth(event.month);
+      selectedEventId = event.id;
+    }
+    searchResultsOpen = false;
+    highlightedResultIndex = -1;
+    searchInputEl?.blur();
+  }
+
+  function handleSearchKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      if (showSearchResults) {
+        event.preventDefault();
+        searchResultsOpen = false;
+        highlightedResultIndex = -1;
+      } else {
+        searchInputEl?.blur();
+      }
+      return;
+    }
+
+    if (!showSearchResults || filteredEvents.length === 0) return;
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      highlightedResultIndex = (highlightedResultIndex + 1) % filteredEvents.length;
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      highlightedResultIndex =
+        highlightedResultIndex <= 0 ? filteredEvents.length - 1 : highlightedResultIndex - 1;
+    } else if (event.key === 'Enter' && highlightedResultIndex >= 0) {
+      const target = filteredEvents[highlightedResultIndex];
+      if (target) {
+        event.preventDefault();
+        selectSearchResult(target);
+      }
+    }
+  }
+
+  function selectMonth(monthKey: string) {
+    if (!isValidCalendarMonth(monthKey)) return;
+    activeMonth = monthKey;
+    selectedDate = getDefaultSelectedDate(monthKey);
+    selectedEventId = null;
+  }
+
+  function stepMonth(delta: number) {
+    const target = delta < 0 ? prevMatchingMonth : nextMatchingMonth;
+    if (target) selectMonth(target);
+  }
+
+  function jumpToToday() {
+    const targetMonth = getDefaultCalendarMonth();
+    activeMonth = targetMonth;
+    selectedDate = getDefaultSelectedDate(targetMonth);
+    selectedEventId = null;
+  }
+
+  function selectDay(date: string, eventId: string | null = null) {
+    selectedDate = date;
+    selectedEventId = eventId;
   }
 
   function toggleCategory(category: CalendarCategory) {
@@ -61,269 +227,643 @@
       ? selectedCategories.filter((item) => item !== category)
       : [...selectedCategories, category];
   }
-
-  function clearAllFilters() {
-    query = '';
-    selectedCategories = [];
-  }
 </script>
 
-<section aria-label="BulSU Academic Calendar events">
-  <div class="sticky top-16 z-30 border-b border-border-subtle bg-canvas-paper/95 backdrop-blur-sm">
-    <div class="mx-auto max-w-5xl px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8">
-      <div class="relative flex items-center">
-        <svg
-          class="pointer-events-none absolute left-3 h-4 w-4 text-ink-muted"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          aria-hidden="true"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
-        <input
-          bind:this={searchInputEl}
-          type="search"
-          bind:value={query}
-          onkeydown={(event) => {
-            if (event.key === 'Escape') searchInputEl?.blur();
-          }}
-          aria-label="Search academic calendar events"
-          placeholder="Search Academic Calendar..."
-          class="w-full rounded-lg border border-border-strong bg-surface-card py-2 pr-9 pl-9 text-sm text-ink-primary placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 [&::-webkit-search-cancel-button]:hidden"
-        />
-        {#if query}
+<section
+  aria-label="BulSU Academic Calendar events"
+  class="flex flex-col md:h-full md:min-h-0 md:overflow-hidden"
+>
+  <div class="flex min-h-0 flex-1 flex-col">
+    <div class="flex shrink-0 items-center justify-between gap-3 border-b border-border-subtle bg-canvas-paper px-4 py-2.5 md:grid md:grid-cols-[13.5rem_minmax(0,1fr)_auto] md:items-center md:gap-4 md:px-6">
+      <h2 class="hidden font-heading text-xl font-bold tracking-tight text-ink-primary md:block md:truncate md:text-2xl">
+        {activeMonthMeta.label}
+      </h2>
+
+      <div class="flex w-full items-center gap-2 md:mx-auto md:max-w-lg">
+        <div bind:this={searchContainerEl} class="relative flex min-w-0 flex-1 items-center">
+          <svg
+            class="pointer-events-none absolute left-3 h-4 w-4 text-ink-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            bind:this={searchInputEl}
+            type="search"
+            bind:value={query}
+            onfocus={() => {
+              if (searchTerms.length > 0) searchResultsOpen = true;
+            }}
+            oninput={() => {
+              searchResultsOpen = true;
+              highlightedResultIndex = -1;
+            }}
+            onkeydown={handleSearchKeydown}
+            role="combobox"
+            aria-expanded={showSearchResults}
+            aria-controls="calendar-search-results"
+            aria-activedescendant={highlightedResultIndex >= 0 ? `calendar-search-option-${highlightedResultIndex}` : undefined}
+            aria-label="Search academic calendar events"
+            placeholder="Search Academic Calendar..."
+            class="h-9 w-full rounded-lg border border-border-strong bg-surface-card pr-9 pl-9 text-sm text-ink-primary placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 [&::-webkit-search-cancel-button]:hidden"
+          />
+          {#if query}
+            <button
+              type="button"
+              onclick={() => {
+                query = '';
+                searchResultsOpen = false;
+                highlightedResultIndex = -1;
+              }}
+              aria-label="Clear calendar search"
+              class="absolute right-2 inline-flex h-6 w-6 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="h-3.5 w-3.5"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          {:else}
+            <kbd
+              aria-hidden="true"
+              class="pointer-events-none absolute right-2.5 hidden sm:inline-flex items-center justify-center rounded border border-border-subtle bg-surface-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-ink-secondary"
+            >
+              /
+            </kbd>
+          {/if}
+
+          {#if showSearchResults}
+            <div
+              class="absolute top-full left-0 right-0 z-50 mt-1.5 max-h-80 overflow-y-auto rounded-xl border border-border-subtle bg-surface-card p-1.5 shadow-xl"
+            >
+              {#if filteredEvents.length === 0}
+                <p role="status" class="px-3 py-2.5 text-xs text-ink-secondary">
+                  No matching events found.
+                </p>
+              {:else}
+                <ul
+                  id="calendar-search-results"
+                  role="listbox"
+                  aria-label="Calendar search results"
+                  class="space-y-0.5"
+                >
+                  {#each filteredEvents as event, i (event.id)}
+                    {@const isHighlighted = i === highlightedResultIndex}
+                    <li role="presentation">
+                      <button
+                        type="button"
+                        role="option"
+                        id={`calendar-search-option-${i}`}
+                        aria-selected={isHighlighted}
+                        onclick={() => selectSearchResult(event)}
+                        class={`flex w-full cursor-pointer items-baseline gap-3 rounded-lg px-2.5 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                          isHighlighted
+                            ? 'bg-brand-crimson-wash text-ink-primary'
+                            : 'hover:bg-surface-subtle'
+                        }`}
+                      >
+                        <span class="min-w-0 flex-1 text-xs font-medium leading-snug text-ink-primary sm:text-sm">
+                          {#each splitHighlightedParts(event.title, searchTerms) as part, idx (idx)}
+                            {#if part.match}
+                              <mark class="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson">{part.text}</mark>
+                            {:else}
+                              {part.text}
+                            {/if}
+                          {/each}
+                        </span>
+                        <span class="shrink-0 text-right text-xs font-medium tabular-nums text-ink-secondary">
+                          {formatSearchResultDate(event)}
+                        </span>
+                      </button>
+                    </li>
+                  {/each}
+                </ul>
+              {/if}
+            </div>
+          {/if}
+        </div>
+
+        <div bind:this={filterMenuEl} class="relative shrink-0">
           <button
             type="button"
             onclick={() => {
-              query = '';
+              filtersOpen = !filtersOpen;
             }}
-            aria-label="Clear calendar search"
-            class="absolute right-2 inline-flex h-6 w-6 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="h-3.5 w-3.5"
-              aria-hidden="true"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
-        {:else}
-          <kbd
-            aria-hidden="true"
-            class="pointer-events-none absolute right-2.5 hidden sm:inline-flex items-center justify-center rounded border border-border-subtle bg-surface-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-ink-secondary"
-          >
-            /
-          </kbd>
-        {/if}
-      </div>
-
-      <div
-        role="group"
-        aria-label="Filter calendar events by category"
-        class="mt-2 flex flex-nowrap items-center gap-1.5 overflow-x-auto px-0.5 pt-0.5 pb-3.5 [scrollbar-width:thin]"
-      >
-        <button
-          type="button"
-          aria-pressed={selectedCategories.length === 0}
-          onclick={() => {
-            selectedCategories = [];
-          }}
-          class={`inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-semibold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
-            selectedCategories.length === 0
-              ? 'border-brand-crimson bg-brand-crimson text-white'
-              : 'border-border-subtle bg-surface-card text-ink-secondary hover:border-border-strong hover:text-ink-primary'
-          }`}
-        >
-          <span>All Events</span>
-        </button>
-
-        {#each CALENDAR_CATEGORIES as cat (cat.id)}
-          {@const isSelected = selectedCategories.includes(cat.id)}
-          <button
-            type="button"
-            aria-pressed={isSelected}
-            onclick={() => toggleCategory(cat.id)}
-            class={`cal-cat-${cat.id} inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
-              isSelected
-                ? 'cal-badge font-semibold ring-1 ring-inset ring-current'
-                : 'border-border-subtle bg-surface-card text-ink-secondary hover:border-border-strong hover:text-ink-primary'
+            aria-expanded={filtersOpen}
+            aria-haspopup="true"
+            aria-label="Filter calendar events"
+            class={`inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+              filtersOpen || selectedCategories.length > 0
+                ? 'border-brand-crimson bg-brand-crimson-wash text-brand-crimson'
+                : 'border-border-strong bg-surface-card text-ink-primary hover:border-brand-crimson hover:text-brand-crimson'
             }`}
           >
-            <span aria-hidden="true" class="cal-dot h-2 w-2 shrink-0 rounded-full"></span>
-            <span>{cat.label}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M7 12h10m-7 6h4" />
+            </svg>
+            <span class="hidden sm:inline">Filters</span>
+            {#if selectedCategories.length > 0}
+              <span class="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-crimson px-1 text-[10px] font-bold text-white">
+                {selectedCategories.length}
+              </span>
+            {/if}
           </button>
-        {/each}
-      </div>
 
-      {#if monthGroups.length > 1 || hasActiveFilters}
-        <div class="mt-1 flex items-center justify-between gap-3 text-xs text-ink-secondary">
-          {#if monthGroups.length > 1}
-            <nav
-              aria-label="Jump to month"
-              class="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto pt-0.5 pb-3 [scrollbar-width:thin]"
+          {#if filtersOpen}
+            <div
+              role="dialog"
+              aria-label="Calendar filters"
+              class="absolute right-0 z-40 mt-2 w-64 rounded-xl border border-border-subtle bg-surface-card p-2 shadow-xl"
             >
-              {#each monthGroups as group (group.month)}
-                <a
-                  href={`#month-${group.month}`}
-                  class="shrink-0 rounded px-2 py-0.5 text-xs font-medium text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
-                >
-                  {formatShortMonth(group.monthLabel)}
-                </a>
-              {/each}
-            </nav>
-          {:else}
-            <span></span>
-          {/if}
-          {#if hasActiveFilters}
-            <button
-              type="button"
-              onclick={clearAllFilters}
-              class="shrink-0 cursor-pointer font-semibold text-brand-crimson hover:text-brand-crimson-hover hover:underline focus-visible:outline-2 focus-visible:outline-brand-crimson"
-            >
-              Reset
-            </button>
-          {/if}
-        </div>
-      {/if}
-    </div>
-  </div>
+              <p class="px-2.5 pt-1 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-ink-secondary">
+                Categories
+              </p>
 
-  <div class="mx-auto max-w-5xl space-y-5 px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
-    {#if monthGroups.length === 0}
-      <div class="rounded-xl border border-border-subtle bg-surface-card p-8 text-center">
-        <p class="font-heading text-base font-bold text-ink-primary">
-          No matching calendar events
-        </p>
-        <p class="mt-1 text-sm text-ink-secondary">
-          Try another keyword or clear your active category filters.
-        </p>
-        <button
-          type="button"
-          onclick={clearAllFilters}
-          class="mt-4 inline-flex cursor-pointer items-center rounded-lg bg-brand-crimson px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-brand-crimson-hover focus-visible:outline-2 focus-visible:outline-brand-crimson"
-        >
-          Show all events
-        </button>
-      </div>
-    {:else}
-      <div class="space-y-6">
-        {#each monthGroups as group (group.month)}
-          <section
-            id={`month-${group.month}`}
-            aria-labelledby={`heading-${group.month}`}
-            class="scroll-mt-56 overflow-hidden rounded-xl border border-border-subtle bg-surface-card shadow-xs sm:scroll-mt-60"
-          >
-            <div class="border-b border-border-subtle bg-surface-subtle/70 px-4 py-3 sm:px-5">
-              <h2
-                id={`heading-${group.month}`}
-                class="font-heading text-base font-bold tracking-tight text-ink-primary sm:text-lg"
-              >
-                {group.monthLabel}
-              </h2>
-            </div>
-
-            <ul class="divide-y divide-border-subtle">
-              {#each group.events as event (event.id)}
-                <li
-                  class={`cal-cat-${event.category} flex flex-col gap-2 px-4 py-3.5 sm:flex-row sm:items-start sm:gap-4 sm:px-5`}
+              <div role="group" aria-label="Filter calendar events by category" class="space-y-0.5">
+                <button
+                  type="button"
+                  aria-pressed={selectedCategories.length === 0}
+                  onclick={() => {
+                    selectedCategories = [];
+                  }}
+                  class="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs font-medium text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-2 focus-visible:outline-brand-crimson"
                 >
-                  <div class="flex shrink-0 items-center gap-2 sm:w-32 sm:pt-0.5">
+                  <span
+                    aria-hidden="true"
+                    class={`inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border transition-colors ${
+                      selectedCategories.length === 0
+                        ? 'border-brand-crimson bg-brand-crimson text-white'
+                        : 'border-border-strong bg-transparent'
+                    }`}
+                  >
+                    {#if selectedCategories.length === 0}
+                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" class="h-3 w-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.5 8.5 6.5 11.5 12.5 5" />
+                      </svg>
+                    {/if}
+                  </span>
+                  <span>All Events</span>
+                </button>
+
+                <div class="my-1 border-t border-border-subtle"></div>
+
+                {#each CALENDAR_CATEGORIES as cat (cat.id)}
+                  {@const isSelected = selectedCategories.includes(cat.id)}
+                  <button
+                    type="button"
+                    aria-pressed={isSelected}
+                    onclick={() => toggleCategory(cat.id)}
+                    class={`cal-cat-${cat.id} flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs font-medium text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-2 focus-visible:outline-brand-crimson`}
+                  >
                     <span
                       aria-hidden="true"
-                      class="cal-dot h-1.5 w-1.5 shrink-0 rounded-full opacity-75"
-                    ></span>
-                    <span class="text-sm font-medium tabular-nums text-ink-secondary">
-                      {#each splitHighlightedParts(event.dateText, searchTerms) as part, idx (idx)}
-                        {#if part.match}
-                          <mark class="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson">{part.text}</mark>
-                        {:else}
-                          {part.text}
-                        {/if}
-                      {/each}
+                      style={isSelected
+                        ? 'background-color: var(--cal-dot); border-color: var(--cal-dot);'
+                        : 'border-color: var(--cal-dot);'}
+                      class="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border-2 text-white transition-colors"
+                    >
+                      {#if isSelected}
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" class="h-3 w-3 dark:text-canvas-paper">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.5 8.5 6.5 11.5 12.5 5" />
+                        </svg>
+                      {/if}
                     </span>
-                  </div>
+                    <span class="truncate">{cat.label}</span>
+                  </button>
+                {/each}
+              </div>
+            </div>
+          {/if}
+        </div>
+      </div>
 
-                  <div class="min-w-0 flex-1">
-                    <p class="text-sm font-medium leading-relaxed text-ink-primary">
-                      {#if event.subjectToPresidentialChange}
-                        <span
-                          title="Subject to approval/change by the BulSU University President"
-                          class="mr-1 font-bold text-brand-crimson"
-                        >
-                          *
+      <div class="hidden items-center gap-1.5 md:flex">
+        <button
+          type="button"
+          onclick={jumpToToday}
+          class="inline-flex h-9 cursor-pointer items-center rounded-lg border border-border-subtle bg-surface-card px-3 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
+        >
+          Today
+        </button>
+        <button
+          type="button"
+          onclick={() => stepMonth(-1)}
+          disabled={!canGoPrev}
+          aria-label="Previous month"
+          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onclick={() => stepMonth(1)}
+          disabled={!canGoNext}
+          aria-label="Next month"
+          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+      <!-- Desktop 7-column calendar + side detail panel filling remaining viewport -->
+      <div class="hidden md:grid md:min-h-0 md:flex-1 md:grid-cols-[minmax(0,1fr)_360px] md:gap-3 md:p-3 lg:grid-cols-[minmax(0,1fr)_400px]">
+        <div
+          role="grid"
+          aria-label={`${activeMonthMeta.label} calendar`}
+          class="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface-card"
+        >
+          <div role="row" class="grid shrink-0 grid-cols-7 bg-surface-card">
+            {#each WEEKDAYS_UPPER as dayName (dayName)}
+              <div
+                role="columnheader"
+                class="border-r border-border-subtle/70 pt-1.5 text-center text-[11px] font-medium tracking-wider text-ink-secondary last:border-r-0"
+              >
+                {dayName}
+              </div>
+            {/each}
+          </div>
+
+          <div
+            class="grid min-h-0 flex-1"
+            style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(0, 1fr));`}
+          >
+            {#each gridModel.weeks as week, weekIdx (weekIdx)}
+              <div role="row" class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
+                <div class="grid h-full grid-cols-7">
+                  {#each week.days as cell, colIdx (cell.date)}
+                    {@const isSelected = cell.date === selectedDate}
+                    {@const isToday = cell.date === todayIso}
+                    {@const isLastRow = weekIdx === gridModel.weeks.length - 1}
+                    <button
+                      type="button"
+                      role="gridcell"
+                      aria-selected={isSelected}
+                      aria-label={formatIsoDateReadable(cell.date)}
+                      onclick={() => selectDay(cell.date)}
+                      class={`flex h-full min-h-0 cursor-pointer flex-col items-center justify-between border-r border-border-subtle/70 px-1.5 pt-1 pb-1 text-center transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                        isLastRow && colIdx === 0 ? 'rounded-bl-2xl' : ''
+                      } ${isLastRow && colIdx === 6 ? 'rounded-br-2xl' : ''} ${
+                        isSelected
+                          ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70'
+                          : cell.inMonth
+                            ? 'bg-surface-card hover:bg-surface-subtle/40'
+                            : 'bg-surface-card text-ink-muted hover:bg-surface-subtle/40'
+                      }`}
+                    >
+                      <span
+                        class={`inline-flex h-6 min-w-6 items-center justify-center rounded-full px-1.5 text-xs font-medium tabular-nums ${
+                          isToday
+                            ? 'bg-brand-crimson text-white font-semibold'
+                            : isSelected
+                              ? 'bg-brand-crimson-wash text-brand-crimson font-semibold'
+                              : cell.inMonth
+                                ? 'text-ink-primary'
+                                : 'text-ink-muted'
+                        }`}
+                      >
+                        {cell.day}
+                      </span>
+
+                      {#if cell.overflowCount > 0}
+                        <span class="mt-auto self-start px-1.5 pb-1 text-[11px] font-semibold leading-normal text-ink-secondary hover:text-brand-crimson">
+                          {cell.overflowCount} more
                         </span>
                       {/if}
-                      {#each splitHighlightedParts(event.title, searchTerms) as part, idx (idx)}
-                        {#if part.match}
-                          <mark class="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson">{part.text}</mark>
-                        {:else}
-                          {part.text}
-                        {/if}
-                      {/each}
-                    </p>
-                    {#if event.subjectToPresidentialChange}
-                      <p class="mt-1 text-xs leading-relaxed text-ink-secondary">
-                        The BulSU University President is granted authority to approve changes to
-                        this event as necessary.
-                      </p>
-                    {/if}
+                    </button>
+                  {/each}
+                </div>
+
+                <!-- Google-Calendar-style multi-day solid bars & clean single-day dot rows -->
+                <div class="pointer-events-none absolute inset-x-0 top-7.5 grid grid-cols-7 gap-y-0.5">
+                  {#each week.visibleSegments as seg (`${seg.event.id}-${seg.startCol}-${seg.lane}`)}
+                    {@const isActiveEvent = selectedEventId === seg.event.id}
+                    {@const isSolidBar =
+                      seg.endCol > seg.startCol ||
+                      seg.continuesBefore ||
+                      seg.continuesAfter ||
+                      seg.event.category === 'holiday'}
+                    <button
+                      type="button"
+                      onclick={(e) => {
+                        e.stopPropagation();
+                        selectDay(seg.anchorDate, seg.event.id);
+                      }}
+                      title={seg.event.title}
+                      style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
+                      class={`cal-cat-${seg.event.category} pointer-events-auto flex h-[20px] min-w-0 cursor-pointer items-center gap-1.5 overflow-hidden whitespace-nowrap px-1.5 text-left text-[11px] leading-none transition-all focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                        seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-1 rounded-l-[5px]'
+                      } ${
+                        seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-1.5 rounded-r-[5px]'
+                      } ${
+                        isSolidBar
+                          ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)] font-medium hover:brightness-95'
+                          : 'text-ink-primary font-medium hover:bg-surface-subtle/80'
+                      } ${
+                        isActiveEvent
+                          ? isSolidBar
+                            ? 'ring-1 ring-inset ring-white/80 dark:ring-brand-crimson'
+                            : 'bg-brand-crimson-wash/60 ring-1 ring-inset ring-brand-crimson'
+                          : ''
+                      }`}
+                    >
+                      {#if !isSolidBar}
+                        <span aria-hidden="true" class="cal-dot h-2 w-2 shrink-0 rounded-full"></span>
+                      {/if}
+                      <span class="min-w-0 overflow-hidden whitespace-nowrap">{seg.event.title}</span>
+                    </button>
+                  {/each}
+                </div>
+              </div>
+            {/each}
+          </div>
+        </div>
+
+        <aside
+          aria-label="Selected day details"
+          class="flex h-full min-h-0 flex-col rounded-2xl border border-border-subtle bg-surface-card p-5"
+        >
+          <div class="shrink-0 border-b border-border-subtle pb-3">
+            <h3 class="font-heading text-base font-bold text-ink-primary">
+              {formatIsoDateReadable(selectedDate)}
+            </h3>
+          </div>
+
+          {#if selectedDayEvents.length === 0}
+            <p class="pt-4 text-sm text-ink-secondary">
+              No events on this date.
+            </p>
+          {:else}
+            <ul class="mt-4 min-h-0 flex-1 space-y-3 overflow-y-auto pr-3 [scrollbar-width:thin]">
+              {#each selectedDayEvents as event (event.id)}
+                {@const isFocused = selectedEventId === event.id}
+                <li
+                  class={`cal-cat-${event.category} rounded-lg border p-3.5 transition-colors ${
+                    isFocused
+                      ? 'border-brand-crimson bg-brand-crimson-wash/30'
+                      : 'border-border-subtle bg-canvas-paper/60'
+                  }`}
+                >
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="cal-badge inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium">
+                      <span aria-hidden="true" class="cal-dot h-1.5 w-1.5 rounded-full"></span>
+                      <span>{CALENDAR_CATEGORY_MAP[event.category].label}</span>
+                    </span>
+                    <span class="text-[11px] font-medium tabular-nums text-ink-secondary">
+                      {formatEventCardDate(event)}
+                    </span>
                   </div>
+                  <p class="mt-2.5 text-sm font-medium leading-relaxed text-ink-primary">
+                    {#if event.subjectToPresidentialChange}
+                      <span
+                        title="Subject to approval/change by the BulSU University President"
+                        class="mr-1 font-bold text-brand-crimson"
+                      >
+                        *
+                      </span>
+                    {/if}
+                    {#each splitHighlightedParts(event.title, searchTerms) as part, idx (idx)}
+                      {#if part.match}
+                        <mark class="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson">{part.text}</mark>
+                      {:else}
+                        {part.text}
+                      {/if}
+                    {/each}
+                  </p>
+                  {#if event.subjectToPresidentialChange}
+                    <p class="mt-1.5 text-xs leading-relaxed text-ink-secondary">
+                      The BulSU University President is granted authority to approve changes to this event as necessary.
+                    </p>
+                  {/if}
                 </li>
               {/each}
             </ul>
-          </section>
-        {/each}
+          {/if}
+        </aside>
       </div>
-    {/if}
 
-    <aside
-      aria-label="Calendar source"
-      class="rounded-xl border border-border-subtle bg-surface-card p-4 sm:p-5"
-    >
-      <p class="text-xs font-semibold uppercase tracking-wider text-ink-secondary">
-        Source
-      </p>
-      <ul class="mt-2 space-y-1.5">
-        <li>
-          <a
-            href={ACADEMIC_CALENDAR_META.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-baseline gap-1.5 text-sm font-medium text-brand-crimson hover:text-brand-crimson-hover hover:underline underline-offset-2 transition-colors"
+      <!-- Mobile Google-Calendar-style near-full-height grid + separate agenda card peeking below -->
+      <div class="space-y-3 pb-4 md:hidden">
+        <div
+          role="grid"
+          aria-label={`${activeMonthMeta.label} calendar`}
+          class="flex h-[calc(100svh-13.5rem)] min-h-[380px] flex-col border-b border-border-subtle bg-surface-card"
+        >
+          <div class="flex shrink-0 items-center justify-between gap-2 border-b border-border-subtle px-3 py-2">
+            <h2 class="font-heading text-base font-bold tracking-tight text-ink-primary">
+              {activeMonthMeta.label}
+            </h2>
+
+            <div class="flex items-center gap-1">
+              <button
+                type="button"
+                onclick={jumpToToday}
+                class="inline-flex h-8 cursor-pointer items-center rounded-lg border border-border-subtle bg-canvas-paper px-2.5 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
+              >
+                Today
+              </button>
+              <button
+                type="button"
+                onclick={() => stepMonth(-1)}
+                disabled={!canGoPrev}
+                aria-label="Previous month"
+                class="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-canvas-paper text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onclick={() => stepMonth(1)}
+                disabled={!canGoNext}
+                aria-label="Next month"
+                class="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-canvas-paper text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div
+            role="row"
+            class="grid shrink-0 grid-cols-7 border-b border-border-subtle/70 bg-surface-card"
           >
-            <span>{ACADEMIC_CALENDAR_META.sourceLabel}</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </li>
-      </ul>
-    </aside>
-  </div>
+            {#each WEEKDAYS_MOBILE as dayName, idx (idx)}
+              <div
+                role="columnheader"
+                class="py-1 text-center text-[11px] font-medium text-ink-secondary"
+              >
+                {dayName}
+              </div>
+            {/each}
+          </div>
 
-  {#if showBackToTop}
-    <button
-      type="button"
-      onclick={scrollToTop}
-      aria-label="Back to top"
-      class="fixed right-21 bottom-6 z-30 inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border-subtle bg-surface-card/95 px-3.5 py-2 text-xs font-semibold text-ink-primary shadow-md backdrop-blur-xs transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson sm:right-24 sm:bottom-8"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        class="h-3.5 w-3.5"
-        aria-hidden="true"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="m18 15-6-6-6 6" />
-      </svg>
-      <span>Back to top</span>
-    </button>
-  {/if}
+          <div
+            class="grid min-h-0 flex-1"
+            style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(0, 1fr));`}
+          >
+            {#each gridModel.weeks as week, weekIdx (weekIdx)}
+              <div role="row" class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
+                <div class="grid h-full grid-cols-7">
+                  {#each week.days as cell (cell.date)}
+                    {@const isSelected = cell.date === selectedDate}
+                    {@const isToday = cell.date === todayIso}
+                    <button
+                      type="button"
+                      role="gridcell"
+                      aria-selected={isSelected}
+                      aria-label={formatIsoDateReadable(cell.date)}
+                      onclick={() => selectDay(cell.date)}
+                      class={`flex h-full min-h-0 cursor-pointer flex-col items-center justify-between border-r border-border-subtle/70 px-0.5 pt-1 pb-0.5 text-center transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                        isSelected
+                          ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70'
+                          : cell.inMonth
+                            ? 'bg-surface-card'
+                            : 'bg-surface-card text-ink-muted'
+                      }`}
+                    >
+                      <span
+                        class={`inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-medium tabular-nums ${
+                          isToday
+                            ? 'bg-brand-crimson text-white font-semibold'
+                            : isSelected
+                              ? 'bg-brand-crimson-wash text-brand-crimson font-semibold'
+                              : cell.inMonth
+                                ? 'text-ink-primary'
+                                : 'text-ink-muted'
+                        }`}
+                      >
+                        {cell.day}
+                      </span>
+
+                      {#if cell.overflowCount > 0}
+                        <span class="mt-auto self-start px-1 text-[10px] font-bold leading-none text-ink-secondary">
+                          …
+                        </span>
+                      {/if}
+                    </button>
+                  {/each}
+                </div>
+
+                <!-- Mobile miniature event bars inside cells -->
+                <div class="pointer-events-none absolute inset-x-0 top-6.5 grid grid-cols-7 gap-y-0.5">
+                  {#each week.visibleSegments as seg (`m-${seg.event.id}-${seg.startCol}-${seg.lane}`)}
+                    {@const isSolidBar =
+                      seg.endCol > seg.startCol ||
+                      seg.continuesBefore ||
+                      seg.continuesAfter ||
+                      seg.event.category === 'holiday'}
+                    <button
+                      type="button"
+                      onclick={(e) => {
+                        e.stopPropagation();
+                        selectDay(seg.anchorDate, seg.event.id);
+                      }}
+                      title={seg.event.title}
+                      style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
+                      class={`cal-cat-${seg.event.category} pointer-events-auto flex h-[15px] min-w-0 cursor-pointer items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${
+                        seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-0.5 rounded-l-[3px]'
+                      } ${
+                        seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-0.5 rounded-r-[3px]'
+                      } ${
+                        isSolidBar
+                          ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)]'
+                          : 'cal-badge border'
+                      }`}
+                    >
+                      <span class="min-w-0 overflow-hidden whitespace-nowrap">{seg.event.title}</span>
+                    </button>
+                  {/each}
+                </div>
+              </div>
+            {/each}
+          </div>
+        </div>
+
+        <!-- Separate selected-day events card below the mobile calendar -->
+        <div class="px-3">
+          <section
+            aria-label="Selected day agenda"
+            class="rounded-xl border border-border-subtle bg-surface-card p-4 shadow-xs"
+          >
+            <div class="border-b border-border-subtle pb-2.5">
+              <h3 class="font-heading text-sm font-bold text-ink-primary">
+                {formatIsoDateReadable(selectedDate)}
+              </h3>
+            </div>
+
+            <div class="pt-3">
+              {#if selectedDayEvents.length === 0}
+                <p class="text-sm text-ink-secondary">
+                  No events on this date.
+                </p>
+              {:else}
+                <ul class="space-y-2.5">
+                  {#each selectedDayEvents as event (event.id)}
+                    {@const isFocused = selectedEventId === event.id}
+                    <li
+                      class={`cal-cat-${event.category} rounded-lg border p-3 ${
+                        isFocused
+                          ? 'border-brand-crimson bg-brand-crimson-wash/30'
+                          : 'border-border-subtle bg-canvas-paper/60'
+                      }`}
+                    >
+                      <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="cal-badge inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium">
+                          <span aria-hidden="true" class="cal-dot h-1.5 w-1.5 rounded-full"></span>
+                          <span>{CALENDAR_CATEGORY_MAP[event.category].label}</span>
+                        </span>
+                        <span class="text-[11px] font-medium tabular-nums text-ink-secondary">
+                          {formatEventCardDate(event)}
+                        </span>
+                      </div>
+                      <p class="mt-2 text-sm font-medium leading-relaxed text-ink-primary">
+                        {#if event.subjectToPresidentialChange}
+                          <span
+                            title="Subject to approval/change by the BulSU University President"
+                            class="mr-1 font-bold text-brand-crimson"
+                          >
+                            *
+                          </span>
+                        {/if}
+                        {#each splitHighlightedParts(event.title, searchTerms) as part, idx (idx)}
+                          {#if part.match}
+                            <mark class="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson">{part.text}</mark>
+                          {:else}
+                            {part.text}
+                          {/if}
+                        {/each}
+                      </p>
+                      {#if event.subjectToPresidentialChange}
+                        <p class="mt-1 text-xs leading-relaxed text-ink-secondary">
+                          The BulSU University President is granted authority to approve changes to this event as necessary.
+                        </p>
+                      {/if}
+                    </li>
+                  {/each}
+                </ul>
+              {/if}
+            </div>
+          </section>
+        </div>
+      </div>
+  </div>
 </section>

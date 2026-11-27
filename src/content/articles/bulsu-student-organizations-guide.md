@@ -1,7 +1,6 @@
 ---
 title: "BulSU Student Organizations Guide"
 category: "organizations"
-subcategory: "Student Orgs & Leadership"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU OSOA Main Campus - Organization Recognition & Renewal Advisories (2025-2026)"

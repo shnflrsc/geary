@@ -1,7 +1,6 @@
 ---
 title: "Student Organizations Directory"
 category: "organizations"
-subcategory: "Student Orgs & Leadership"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU OSOA Main Campus - List of Recognized Student Organizations for Academic Year 2026-2027"

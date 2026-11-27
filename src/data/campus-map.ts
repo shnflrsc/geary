@@ -1341,7 +1341,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Diploma",
           "Transfer Credentials"
         ],
-        "articleSlug": "how-to-request-transcript-and-certificates"
+        "articleSlug": "transcript-of-records"
       },
       {
         "id": "clinic",
@@ -1433,7 +1433,7 @@ export const CAMPUS_BUILDINGS: readonly CampusBuilding[] = [
           "Enrollment",
           "Valencia Hall"
         ],
-        "articleSlug": "how-to-request-transcript-and-certificates"
+        "articleSlug": "transcript-of-records"
       },
       {
         "id": "valencia-health-services",

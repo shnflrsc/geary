@@ -1,7 +1,6 @@
 ---
 title: "BulSU Student Publication Guide"
 category: "organizations"
-subcategory: "Sports, Culture & Media"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU Student Publications Office - Pacesetter Editorial Board Application & Selection (Mar-Apr 2026)"

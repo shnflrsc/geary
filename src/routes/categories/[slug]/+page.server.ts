@@ -1,32 +1,24 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { getCategoryBySlug } from '../../../data/categories';
-import { groupArticlesBySubcategory } from '#lib/articles';
 import { buildBreadcrumbJsonLd } from '#lib/seo';
 import { requestOrigin } from '#lib/seo-runtime';
-import { getAllArticles } from '#lib/server/content';
-import { getWizardRequestsForCategory } from '#lib/wizard';
+import { getAllArticles, getDynamicCategoryBySlug } from '#lib/server/content';
 
 export const load: PageServerLoad = ({ params, url }) => {
-  const category = getCategoryBySlug(params.slug);
+  const category = getDynamicCategoryBySlug(params.slug);
   if (!category) {
     error(404, 'Category not found');
   }
 
   const allArticles = getAllArticles();
-  const categoryArticles = allArticles.filter((entry) => entry.data.category === category.slug);
-  const grouped = groupArticlesBySubcategory(categoryArticles).map((group) => ({
-    subcategory: group.subcategory,
-    articles: group.articles.map((article) => ({
+  const articles = allArticles
+    .filter((entry) => entry.data.category === category.slug)
+    .sort((a, b) => a.data.title.localeCompare(b.data.title))
+    .map((article) => ({
       slug: article.slug,
       title: article.data.title,
       preview: article.preview,
-    })),
-  }));
-
-  const wizardRequests = getWizardRequestsForCategory(allArticles, category.slug).map(
-    (request) => ({ id: request.id, title: request.title }),
-  );
+    }));
 
   const baseOrigin = requestOrigin(url);
   const canonicalUrl = new URL(`/categories/${category.slug}`, baseOrigin).href;
@@ -39,8 +31,7 @@ export const load: PageServerLoad = ({ params, url }) => {
   return {
     activeCategory: category.slug,
     category,
-    subcategoryGroups: grouped,
-    wizardRequests,
+    articles,
     canonicalUrl,
     breadcrumbJsonLd,
   };

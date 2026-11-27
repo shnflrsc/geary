@@ -1,7 +1,6 @@
 ---
 title: "Student Rights and Responsibilities at BulSU"
 category: "policies"
-subcategory: "Rights, Discipline & Grievances"
 updatedDate: 2026-11-25
 sources:
   - label: "UNDERGRADUATE STUDENT MANUAL OF BULACAN STATE UNIVERSITY, BOR Resolution No. 85, Series of 2016"

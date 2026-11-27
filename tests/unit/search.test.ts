@@ -3,7 +3,6 @@ import { describe, expect, test } from 'bun:test';
 import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { z } from 'zod';
-import { CATEGORY_SLUGS } from '../../src/data/categories';
 import { filterAndRankArticles, type SearchIndexItem } from '../../src/lib/search';
 import { buildSearchIndex, loadArticlesFromRawMap } from '../../src/lib/server/markdown';
 
@@ -15,7 +14,6 @@ const FIXTURE_ITEMS: SearchIndexItem[] = [
       'Completion period deadlines, Completion Form routing, and Registrar submission steps.',
     category: 'documents',
     categoryLabel: 'Registrar & Documents',
-    subcategory: 'Academic Records',
     headings: ['Step-by-Step INC Grade Completion', 'Checking Your Updated Portal Record'],
   },
   {
@@ -25,7 +23,6 @@ const FIXTURE_ITEMS: SearchIndexItem[] = [
       'Simplified breakdown of BulSU GWA brackets, residency minimums, and grade disqualifiers.',
     category: 'academics',
     categoryLabel: 'Handbook & Policies',
-    subcategory: 'Academic Standing & Honors',
     headings: [
       'Latin Honors GWA Brackets',
       'Common Disqualifiers to Watch Out For',
@@ -39,7 +36,6 @@ const FIXTURE_ITEMS: SearchIndexItem[] = [
       'Window flow, clearance prerequisites, estimated fees, and claiming tips at BulSU.',
     category: 'documents',
     categoryLabel: 'Registrar & Documents',
-    subcategory: 'Document Requests',
     headings: ['What to Bring Before Lining Up', 'Step-by-Step Request Workflow'],
   },
   {
@@ -48,7 +44,6 @@ const FIXTURE_ITEMS: SearchIndexItem[] = [
     preview: 'Includes a brief mention of INC grading rules and honors review.',
     category: 'academics',
     categoryLabel: 'Handbook & Policies',
-    subcategory: 'General Rules',
     headings: ['Overview'],
   },
   {
@@ -57,7 +52,6 @@ const FIXTURE_ITEMS: SearchIndexItem[] = [
     preview: 'Testing literal character matching for GWA > 1.75 thresholds.',
     category: 'academics',
     categoryLabel: 'Handbook & Policies',
-    subcategory: 'Special Cases',
     headings: ['Edge Cases'],
   },
 ];
@@ -83,7 +77,6 @@ describe('Search query normalization & weighted ranking (TC-UNIT-01..03)', () =>
       preview: 'Guide body preview for student procedures and forms.',
       category: 'enrollment',
       categoryLabel: 'Admissions & Enrollment',
-      subcategory: 'General',
       headings: ['Requirements', 'Steps'],
     }));
 
@@ -139,9 +132,8 @@ describe('Pure buildSearchIndex() schema contract (TC-UNIT-05)', () => {
       slug: z.string().min(1),
       title: z.string().min(1),
       preview: z.string().min(1),
-      category: z.enum(CATEGORY_SLUGS),
+      category: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/),
       categoryLabel: z.string().min(1),
-      subcategory: z.string().min(1),
       headings: z.array(z.string().min(1)),
     });
 

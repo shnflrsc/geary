@@ -13,7 +13,7 @@ export interface CorpusArticle {
   title: string;
   category: string;
   categoryLabel: string;
-  subcategory: string;
+  subcategory?: string;
   updatedDate: string;
   preview: string;
   sources: CorpusSource[];
@@ -70,7 +70,7 @@ export function searchArticles(
   const scored: Array<{ article: CorpusArticle; score: number }> = [];
   for (const article of pool) {
     const title = article.title.toLowerCase();
-    const context = `${article.subcategory} ${article.preview} ${article.categoryLabel}`.toLowerCase();
+    const context = `${article.subcategory ?? ''} ${article.preview} ${article.categoryLabel}`.toLowerCase();
     const body = articleBodyText(article);
     const haystack = `${title} ${context} ${body}`;
 
@@ -92,7 +92,7 @@ export function searchArticles(
       slug: article.slug,
       title: article.title,
       category: article.category,
-      subcategory: article.subcategory,
+      subcategory: article.subcategory ?? '',
       updatedDate: article.updatedDate,
       preview: article.preview,
     }));
@@ -123,9 +123,10 @@ export function listCategories(corpus: Corpus): CategoryNode[] {
 
       const subMap = new Map<string, Array<{ slug: string; title: string }>>();
       for (const article of articles) {
-        const list = subMap.get(article.subcategory) ?? [];
+        const sub = article.subcategory ?? 'General';
+        const list = subMap.get(sub) ?? [];
         list.push({ slug: article.slug, title: article.title });
-        subMap.set(article.subcategory, list);
+        subMap.set(sub, list);
       }
 
       return {

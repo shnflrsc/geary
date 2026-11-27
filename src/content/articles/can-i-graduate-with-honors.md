@@ -1,8 +1,8 @@
 ---
 title: "Can I Graduate With Honors?"
-category: "academics"
-subcategory: "Internships & Graduation"
-updatedDate: 2026-11-25
+category: "graduation"
+categoryIcon: "graduation"
+updatedDate: 2026-11-27
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"
     url: "https://www.bulsu.edu.ph/assets/downloads/files/student_handbook.pdf"

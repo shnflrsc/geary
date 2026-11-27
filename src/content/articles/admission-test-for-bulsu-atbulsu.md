@@ -1,7 +1,6 @@
 ---
 title: "Admission Test for BulSU (ATBulSU)"
 category: "enrollment"
-subcategory: "Admission & Enrollment"
 updatedDate: 2026-11-25
 sources:
   - label: "BulSU Freshman Undergraduate Admissions Policy (Updated Guidelines BulSU Freshmen 2027-2028, Student Policy Development Office / UAO - PDF)"

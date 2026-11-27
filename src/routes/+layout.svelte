@@ -17,7 +17,7 @@
   import Header, { type NavSection } from '#lib/components/Header.svelte';
   import Footer from '#lib/components/Footer.svelte';
   import AskPanel from '#lib/components/AskPanel.svelte';
-  import { CATEGORY_SLUGS, type CategorySlug } from '../data/categories';
+  import type { CategoryMeta, CategorySlug } from '../data/categories';
 
   interface Props {
     children: Snippet;
@@ -41,8 +41,9 @@
   const activeCategory = $derived.by<CategorySlug | undefined>(() => {
     if (isError) return undefined;
     const match = pathname.match(/^\/categories\/([^/]+)$/);
-    if (match && (CATEGORY_SLUGS as readonly string[]).includes(match[1])) {
-      return match[1] as CategorySlug;
+    const categories = (page.data as { categories?: CategoryMeta[] } | undefined)?.categories ?? [];
+    if (match && categories.some((category) => category.slug === match[1])) {
+      return match[1];
     }
     const fromData = (page.data as { activeCategory?: CategorySlug } | undefined)?.activeCategory;
     return fromData;
@@ -51,8 +52,10 @@
   const headerSearchShortcut = $derived(
     !isError && pathname !== '/' && pathname !== '/calendar' && pathname !== '/map',
   );
-  const hideFooter = $derived(!isError && pathname === '/map');
+  const hideFooter = $derived(!isError && (pathname === '/map' || pathname === '/calendar'));
   const lockViewport = $derived(!isError && pathname === '/map');
+  const lockDesktopViewport = $derived(!isError && pathname === '/calendar');
+  const isHome = $derived(!isError && pathname === '/');
 
   $effect(() => {
     const locked = lockViewport;
@@ -71,7 +74,13 @@
   <link rel="preload" href={jakarta800Url} as="font" type="font/woff2" crossorigin="anonymous" />
 </svelte:head>
 
-<div class={lockViewport ? 'flex h-dvh min-h-0 flex-col overflow-hidden' : 'contents'}>
+<div
+  class={lockViewport
+    ? 'flex h-dvh min-h-0 flex-col overflow-hidden'
+    : lockDesktopViewport
+      ? 'flex min-h-dvh flex-col md:h-dvh md:min-h-0 md:overflow-hidden'
+      : 'contents'}
+>
   <a
     href="#main-content"
     class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-surface-card focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-crimson focus:shadow-md"
@@ -81,7 +90,16 @@
 
   <Header {activeCategory} {activeNav} {headerSearchShortcut} />
 
-  <main id="main-content" class={lockViewport ? 'min-h-0 flex-1 overflow-hidden' : 'flex-1'}>
+  <main
+    id="main-content"
+    class={lockViewport
+      ? 'min-h-0 flex-1 overflow-hidden'
+      : lockDesktopViewport
+        ? 'flex-1 md:min-h-0 md:overflow-hidden'
+        : isHome
+          ? 'flex flex-1 flex-col'
+          : 'flex-1'}
+  >
     {@render children()}
   </main>
 

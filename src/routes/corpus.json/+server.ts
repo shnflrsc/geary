@@ -1,9 +1,12 @@
 import type { RequestHandler } from './$types';
 import { CACHE_HEADERS } from '#lib/server/cache';
-import { getAllArticles } from '#lib/server/content';
+import {
+  getAllArticles,
+  getDynamicCategories,
+  getDynamicCategoryBySlug,
+} from '#lib/server/content';
 import { slugFromFilePath } from '#lib/server/markdown';
 import { resolveArticleSources } from '#lib/articles';
-import { CATEGORIES, getCategoryBySlug } from '../../data/categories';
 
 /**
  * Raw `.md` sources keyed by route slug, captured verbatim (frontmatter + body)
@@ -22,14 +25,13 @@ for (const [filePath, content] of Object.entries(RAW_ARTICLE_FILES)) {
 
 export const GET: RequestHandler = () => {
   const articles = getAllArticles().map((article) => {
-    const categoryMeta = getCategoryBySlug(article.data.category);
+    const categoryMeta = getDynamicCategoryBySlug(article.data.category);
 
     return {
       slug: article.slug,
       title: article.data.title,
       category: article.data.category,
       categoryLabel: categoryMeta?.title ?? article.data.category,
-      subcategory: article.data.subcategory,
       updatedDate: article.data.updatedDate.toISOString(),
       preview: article.preview,
       sources: resolveArticleSources(article.data),
@@ -37,7 +39,7 @@ export const GET: RequestHandler = () => {
     };
   });
 
-  return new Response(JSON.stringify({ categories: CATEGORIES, articles }), {
+  return new Response(JSON.stringify({ categories: getDynamicCategories(), articles }), {
     headers: {
       'content-type': 'application/json; charset=utf-8',
       ...CACHE_HEADERS,

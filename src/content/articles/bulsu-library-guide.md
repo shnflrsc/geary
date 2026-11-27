@@ -1,7 +1,6 @@
 ---
 title: "BulSU Library Guide"
 category: "campus"
-subcategory: "Campus Facilities"
 updatedDate: 2026-11-25
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Office of the University Library"
@@ -83,4 +82,4 @@ For in-person questions about plagiarism or AI checking, visit the 4th or 5th fl
 | Theses and Dissertations | Room use only | Available inside for literature reviews |
 | Cartographic and Audio-Visual Materials | Room use or classroom use | Submit a written request letter at least 1 day ahead for classroom use |
 
-Return borrowed items and settle any library fees before the end of each semester. Pending library obligations will hold your clearance for [TOR and certificate requests](/articles/how-to-request-transcript-and-certificates) or [graduation](/articles/bulsu-graduation-requirements).
+Return borrowed items and settle any library fees before the end of each semester. Pending library obligations will hold your clearance for [TOR and certificate requests](/articles/transcript-of-records) or [graduation](/articles/bulsu-graduation-requirements).

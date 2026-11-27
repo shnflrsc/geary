@@ -29,9 +29,13 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { CATEGORIES } from '../../data/categories';
+  import { CATEGORIES, type CategoryMeta } from '../../data/categories';
   import { filterAndRankArticles } from '#lib/search';
   import { bindSearchShortcut } from '#lib/search-shortcut';
+
+  const dynamicCategories = $derived(
+    (page.data as { categories?: CategoryMeta[] } | undefined)?.categories ?? CATEGORIES,
+  );
 
   interface Props {
     variant?: 'hero' | 'header';
@@ -343,7 +347,7 @@
               Browse by category instead:
             </p>
             <div class="flex flex-wrap gap-1.5">
-              {#each CATEGORIES as category (category.slug)}
+              {#each dynamicCategories as category (category.slug)}
                 <a
                   href={`/categories/${category.slug}`}
                   class="inline-flex items-center rounded-full border border-border-subtle bg-canvas-paper px-3 py-1 text-xs font-medium text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors"

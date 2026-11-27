@@ -4,6 +4,7 @@ import {
   type ParsedArticle,
 } from './markdown';
 import type { SearchIndexItem } from '../search';
+import { buildDynamicCategories, type CategoryMeta } from '../../data/categories';
 
 const RAW_ARTICLE_FILES = import.meta.glob<string>('/src/content/articles/**/*.md', {
   query: '?raw',
@@ -13,6 +14,7 @@ const RAW_ARTICLE_FILES = import.meta.glob<string>('/src/content/articles/**/*.m
 
 let cachedArticles: ParsedArticle[] | null = null;
 let cachedSearchIndex: SearchIndexItem[] | null = null;
+let cachedCategories: CategoryMeta[] | null = null;
 
 /** Return all validated, compiled Markdown articles sorted deterministically by title. */
 export function getAllArticles(): ParsedArticle[] {
@@ -33,4 +35,17 @@ export function getSearchIndex(): SearchIndexItem[] {
     cachedSearchIndex = buildSearchIndex(getAllArticles());
   }
   return cachedSearchIndex;
+}
+
+/** Return all dynamically discovered categories from published articles. */
+export function getDynamicCategories(): CategoryMeta[] {
+  if (!cachedCategories) {
+    cachedCategories = buildDynamicCategories(getAllArticles());
+  }
+  return cachedCategories;
+}
+
+/** Resolve a dynamic category by normalized slug, or undefined if no articles use it. */
+export function getDynamicCategoryBySlug(slug: string): CategoryMeta | undefined {
+  return getDynamicCategories().find((category) => category.slug === slug);
 }

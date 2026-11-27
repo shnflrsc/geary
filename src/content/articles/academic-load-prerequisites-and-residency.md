@@ -1,7 +1,6 @@
 ---
 title: "Academic Load, Prerequisites, and Residency"
 category: "academics"
-subcategory: "Enrollment & Load Changes"
 updatedDate: 2026-11-25
 sources:
   - label: "Undergraduate Student Manual of Bulacan State University, BOR Resolution No. 85, Series of 2016"

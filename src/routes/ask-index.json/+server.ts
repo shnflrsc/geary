@@ -1,8 +1,7 @@
 import type { RequestHandler } from './$types';
 import { CACHE_HEADERS } from '#lib/server/cache';
-import { getAllArticles } from '#lib/server/content';
+import { getAllArticles, getDynamicCategoryBySlug } from '#lib/server/content';
 import { buildAskChunks, type AskIndexItem } from '#lib/ask';
-import { getCategoryBySlug } from '../../data/categories';
 
 let cachedAskIndex: AskIndexItem[] | null = null;
 
@@ -13,7 +12,7 @@ function buildAskIndex(): AskIndexItem[] {
   }
 
   cachedAskIndex = getAllArticles().map((article) => {
-    const categoryMeta = getCategoryBySlug(article.data.category);
+    const categoryMeta = getDynamicCategoryBySlug(article.data.category);
 
     return {
       slug: article.slug,
@@ -21,7 +20,6 @@ function buildAskIndex(): AskIndexItem[] {
       excerpt: article.preview,
       category: article.data.category,
       categoryLabel: categoryMeta?.title ?? article.data.category,
-      subcategory: article.data.subcategory,
       headings: article.headings
         .filter((h) => h.depth === 2 || h.depth === 3)
         .map((h) => h.text),

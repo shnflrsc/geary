@@ -60,7 +60,6 @@ function sanitizeSources(raw: unknown): AskSource[] {
       title: clampString(record.title, 300),
       url,
       categoryLabel: clampString(record.categoryLabel, 100),
-      subcategory: clampString(record.subcategory, 200),
       updatedDate: clampString(record.updatedDate, 20),
       excerpt: clampString(record.excerpt, 500),
       text: clampString(record.text, MAX_SOURCE_TEXT),

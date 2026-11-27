@@ -2,10 +2,13 @@
   import { page } from '$app/state';
   import SearchBar from '#lib/components/SearchBar.svelte';
   import SeoHead from '#lib/components/SeoHead.svelte';
-  import { CATEGORIES } from '../data/categories';
+  import { CATEGORIES, type CategoryMeta } from '../data/categories';
 
   const siteOrigin = $derived(
     (page.data as { siteOrigin?: string } | undefined)?.siteOrigin ?? page.url.origin,
+  );
+  const dynamicCategories = $derived(
+    (page.data as { categories?: CategoryMeta[] } | undefined)?.categories ?? CATEGORIES,
   );
   const ogImageUrl = $derived(new URL('/og-image.png', siteOrigin).href);
 </script>
@@ -39,7 +42,7 @@
       Browse Student Categories
     </h2>
     <div class="flex flex-wrap gap-2">
-      {#each CATEGORIES as category (category.slug)}
+      {#each dynamicCategories as category (category.slug)}
         <a
           href={`/categories/${category.slug}`}
           class="inline-flex min-h-[40px] items-center rounded-full border border-border-subtle bg-canvas-paper px-3.5 py-1.5 text-sm font-medium text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors"

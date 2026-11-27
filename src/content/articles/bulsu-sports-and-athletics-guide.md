@@ -1,8 +1,8 @@
 ---
 title: "BulSU Sports, Cultural Arts, and Competitions"
-category: "organizations"
-subcategory: "Sports, Culture & Media"
-updatedDate: 2026-11-25
+category: "athletics"
+categoryIcon: "athletics"
+updatedDate: 2026-11-27
 sources:
   - label: "BulSU Sports Development Office - Tryouts & SCUAA III Regional Meet Advisories (2025-2026)"
     url: "https://www.facebook.com/bulsusdo/posts/pfbid02GBZ2QtPpV7KQAEaLDVpDubMwNQp574ZsoBohptkLdFndHPPUL1rfduBoFJK922L2l"

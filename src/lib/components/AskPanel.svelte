@@ -28,12 +28,11 @@
 
 <script lang="ts">
   import { tick } from 'svelte';
-  import { page } from '$app/state';
-  import { CATEGORIES } from '../../data/categories';
   import { formatArticleDate } from '#lib/articles';
   import {
     hasAnswerableEvidence,
     parseCitedAnswer,
+    renderAskAnswerHtml,
     retrieveAskSources,
     type AnswerSegment,
     type AskSource,
@@ -108,13 +107,6 @@
       void openWidget();
     }
   }
-
-  // Close drawer automatically on route navigation so destination content is unobscured.
-  $effect(() => {
-    const _path = page.url.pathname;
-    void _path;
-    open = false;
-  });
 
   $effect(() => {
     const onOpenEvent = () => {
@@ -330,19 +322,10 @@
         {#if phase === 'answered'}
           <div class="flex justify-start">
             <div class="max-w-[90%] rounded-2xl rounded-tl-sm border border-border-subtle bg-surface-card px-3.5 py-3">
-              <p class="whitespace-pre-line text-sm leading-relaxed text-ink-primary">
-                {#each segments as segment, index (index)}
-                  {#if segment.type === 'citation'}
-                    <a
-                      href={segment.url}
-                      aria-label="Source {segment.n}: {segment.title}"
-                      class="mx-0.5 inline-flex items-center justify-center rounded bg-brand-crimson-wash px-1 py-px align-super text-[0.65rem] font-semibold leading-none text-brand-crimson transition-colors hover:bg-brand-crimson-solid hover:text-white"
-                    >{segment.n}</a>
-                  {:else}
-                    {segment.text}
-                  {/if}
-                {/each}
-              </p>
+              <div class="text-sm leading-relaxed text-ink-primary [&_p+p]:mt-2 [&_p+ul]:mt-1.5 [&_p+ol]:mt-1.5 [&_ul+p]:mt-2 [&_ol+p]:mt-2 [&_ul]:my-1.5 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:my-1.5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li+li]:mt-0.5 [&_strong]:font-semibold [&_code]:rounded [&_code]:bg-surface-subtle [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-xs [&_blockquote]:my-1.5 [&_blockquote]:border-l-2 [&_blockquote]:border-brand-crimson/40 [&_blockquote]:pl-3 [&_blockquote]:text-ink-secondary [&_h1]:mt-2 [&_h1]:font-semibold [&_h2]:mt-2 [&_h2]:font-semibold [&_h3]:mt-1.5 [&_h3]:font-semibold [&_a:not([data-citation])]:text-brand-crimson [&_a:not([data-citation])]:underline [&_a:not([data-citation])]:underline-offset-2">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html renderAskAnswerHtml(segments)}
+              </div>
 
               <div class="mt-3 border-t border-border-subtle pt-2.5">
                 <h3 class="text-[11px] font-semibold uppercase tracking-wider text-ink-secondary">
@@ -370,29 +353,9 @@
 
         {#if phase === 'not-covered'}
           <div class="flex justify-start">
-            <div class="max-w-[90%] rounded-2xl rounded-tl-sm border border-border-subtle bg-surface-card px-3.5 py-3">
-              <p class="text-sm leading-relaxed text-ink-primary">
-                We don&apos;t have a guide covering that yet. Try rephrasing with
-                BulSU terms like &ldquo;TOR&rdquo;, &ldquo;COR&rdquo;, or
-                &ldquo;INC&rdquo;, or browse by topic:
-              </p>
-              <div class="mt-2.5 flex flex-wrap gap-1.5">
-                {#each CATEGORIES as category (category.slug)}
-                  <a
-                    href="/categories/{category.slug}"
-                    class="inline-flex items-center rounded-full border border-border-subtle bg-canvas-paper px-2.5 py-1 text-[11px] font-medium text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors"
-                  >
-                    {category.title}
-                  </a>
-                {/each}
-                <a
-                  href="/articles"
-                  class="inline-flex items-center rounded-full border border-border-subtle bg-canvas-paper px-2.5 py-1 text-[11px] font-medium text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors"
-                >
-                  All articles
-                </a>
-              </div>
-            </div>
+            <p class="max-w-[85%] rounded-2xl rounded-tl-sm border border-border-subtle bg-surface-card px-3.5 py-2.5 text-sm leading-relaxed text-ink-primary">
+              Sorry, I don&apos;t know that yet. Please ask me another question.
+            </p>
           </div>
         {/if}
 

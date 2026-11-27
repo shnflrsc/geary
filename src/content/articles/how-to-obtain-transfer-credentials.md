@@ -1,69 +1,42 @@
 ---
-title: "How to Obtain Transfer Credentials"
+title: "Transfer Credentials (Honorable Dismissal)"
 category: "documents"
-subcategory: "ID & Credentials"
-updatedDate: 2026-11-25
+updatedDate: 2026-11-27
 sources:
   - label: "Bulacan State University Citizen's Charter 2026 (1st Edition) - Office of the University Registrar"
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
   - label: "BulSU Freshman Undergraduate Admissions Policy (Updated Guidelines 2027-2028)"
     url: "https://drive.google.com/file/d/16mFYH2WBi2gbmhCntvnljXbUiRUiwJZr/view"
-wizard:
-  - id: "transfer-credentials"
-    title: "Transfer Credentials (Honorable Dismissal)"
-    summary: "Credential for leaving BulSU to enroll in another college or university."
-    office: "Office of the University Registrar"
-    fee: "PHP 25"
-    processingTime: "About 4 working days after complete requirements"
-    requirements:
-      - label: "One original valid ID"
-        note: "National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID"
-      - label: "Official Receipt for PHP 25"
-        note: "From the Cashier's Office"
-      - label: "Accomplished Clearance Form"
-        note: "Only if you have not graduated; signed by College Dean's Office, Library, Accounting, OSAS, and Registrar"
-      - label: "Original admission credentials"
-        note: "Only if not yet submitted: Form 137 or SF-10 for freshmen, or prior college TOR for transferees, remarked \"Copy for: Bulacan State University\""
-      - label: "Representative documents"
-        note: "Only if a representative files or claims for you: signed authorization letter or Special Power of Attorney plus photocopies of both IDs"
 ---
 
-When you leave Bulacan State University to enroll in another college or university, your next school will ask for your Transfer Credentials, also called an Honorable Dismissal, from the Office of the University Registrar. Processing costs **PHP 25** and takes about **4 working days** after you submit complete requirements.
+## How to get
 
-[Check off your requirements in the Document Request Wizard](/wizard#transfer-credentials) as you gather them.
+**Location**
+- Office of the University Registrar (Main Campus)
+- Cashier's Office (for payment)
 
-If you are a newly admitted freshman who has already enrolled in a BulSU program, you can only receive an honorable dismissal once the semester officially starts.
+**Requirements**
+- 1 original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID)
+- Official Receipt for PHP 25
+- Accomplished Clearance Form signed by your College Dean's Office, Library, Accounting Office, OSAS, and Registrar (if you have not graduated)
+- Original Form 137/SF-10 or prior college Transcript of Records remarked `Copy for: Bulacan State University` (if not yet submitted)
+- Signed authorization letter or Special Power of Attorney and 1 photocopy each of your ID and your representative's ID (if filing or claiming through a representative)
 
-## Documents to prepare
+**Step-by-step**
+1. Complete your Clearance Form across the 5 required offices if you have not graduated, and settle any college lab or organization accountabilities first.
+2. Present your valid ID at the Registrar's window to verify your student record and get a payment slip.
+3. Pay PHP 25 at the Cashier's Office and keep the Official Receipt.
+4. Submit the Official Receipt, signed Clearance Form (if applicable), and any missing admission credentials at the Registrar's window to receive your claim stub.
+5. Return on the release date stamped on your claim stub with your stub and valid ID to pick up your Honorable Dismissal.
 
-### Required for all applicants
+## Fee and processing time
 
-- 1 original valid ID, such as a National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID
-- Official Receipt for PHP 25 from the Cashier's Office
+Processing costs PHP 25 and takes about 4 working days after you submit complete requirements. Newly admitted freshmen who have already enrolled in a BulSU program can only receive an honorable dismissal once the semester officially starts.
 
-### Conditional requirements
+## Requesting your TOR for your new school
 
-- Accomplished Clearance Form, available at the Registrar window or on the BulSU website, if you have not graduated yet
-- Original Form 137 or SF-10 for freshmen, or original Transcript of Records (TOR) from your prior college for previous transferees, remarked `Copy for: Bulacan State University`, if you have not submitted your admission credentials yet
-- Signed authorization letter or Special Power of Attorney, plus 1 photocopy of your ID and 1 photocopy of your representative's ID, if filing or claiming through a representative
-
-## Request transfer credentials
-
-1. Clear all accountabilities if you have not graduated. Have your Clearance Form signed by your College Dean's Office, Library, Accounting Office, Office of Student Affairs and Services (OSAS), and the Office of the University Registrar. If you handled laboratory equipment or student organization property, settle those with your college first.
-2. Verify your record at the Registrar's window by presenting your valid ID so staff can check your student record and issue a payment slip.
-3. Pay **PHP 25** at the Cashier's Office and keep the Official Receipt.
-4. Submit your Official Receipt, signed Clearance Form if applicable, and any missing admission credentials at the designated Registrar window to receive your claim stub.
-5. Return on the release date shown on your claim stub, usually after 4 working days, with your stub and valid ID to pick up your Honorable Dismissal.
-
-## Request your Transcript of Records for your new school
-
-Your Honorable Dismissal lets your new university admit you and usually comes with a return slip or request form from your receiving school. Bring that original return slip back to the BulSU Registrar when requesting your TOR with the remark `Copy for: [Name of New School]`.
-
-A non-graduated TOR costs **PHP 50 per page** and requires 1 documentary stamp. Processing takes about **6 working days** for records from 2008 to present, or up to **13 working days** for records from 2007 and earlier.
+Your Honorable Dismissal usually comes with a return slip from your new school. Bring that original return slip back to the BulSU Registrar to request your Transcript of Records remarked `Copy for: [Name of New School]`.
 
 ## Transferring after dismissal or academic delinquency
 
-Even if you were dismissed or academically disqualified from continuing your program at BulSU, you still have the right to transfer out and receive your credentials:
-
-- BulSU cannot block a dismissed or academically delinquent student from transferring to another school once all financial and property clearances are settled.
-- The university can hold your credentials only for unpaid financial obligations or a pending disciplinary case awaiting final decision. Once resolved, standard release timelines apply, with an outer legal limit of 30 days from a complete request.
+BulSU cannot block a dismissed or academically delinquent student from transferring once financial and property clearances are settled. Records can only be held for unpaid financial obligations or a pending disciplinary case, subject to a 30-day legal outer limit once resolved.

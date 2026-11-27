@@ -41,7 +41,7 @@ export const CALENDAR_CATEGORIES: readonly CalendarCategoryMeta[] = [
 ] as const;
 
 export const CALENDAR_CATEGORY_MAP: Record<CalendarCategory, CalendarCategoryMeta> = {
-  all: { id: 'all', label: 'All' },
+  all: { id: 'all', label: 'Universal' },
   undergraduate: { id: 'undergraduate', label: 'Undergraduate' },
   'graduate-school': { id: 'graduate-school', label: 'Graduate School' },
   'laboratory-high-school': { id: 'laboratory-high-school', label: 'Laboratory High School' },
@@ -907,11 +907,6 @@ const RAW_CALENDAR_MONTHS: readonly RawMonthBlock[] = [
         dateText: '1 to 31',
         category: 'undergraduate',
         title: "Women's Month",
-      },
-      {
-        dateText: 'TBA',
-        category: 'laboratory-high-school',
-        title: 'Encoding of Last Term Grade (Grade 10)',
       },
       {
         dateText: '5',

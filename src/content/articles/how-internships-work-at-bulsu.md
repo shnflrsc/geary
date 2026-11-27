@@ -1,8 +1,8 @@
 ---
 title: "How Internships and Job Placement Work at BulSU"
-category: "academics"
-subcategory: "Internships & Graduation"
-updatedDate: 2026-11-25
+category: "careers"
+categoryIcon: "careers"
+updatedDate: 2026-11-27
 sources:
   - label: "BulSU CarDSI - General Internship Orientation 2026 (Nov 10, 2026)"
     url: "https://www.facebook.com/cardsis/posts/pfbid0yh6KYrz3BdMNmbDfAUAxFFpfspFZkQfMddt2XV5gFmfSwwyVruoWtqR8foausVBul"

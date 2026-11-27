@@ -820,7 +820,7 @@ Test body.
     await expect(dialog).toContainText('Hi! What can I help you with?');
 
     await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
-    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await dialog.getByRole('button', { name: 'Send', exact: true }).click();
 
     const answerLink = dialog.locator(
       'a[href^="/articles/"][aria-label^="Source "]',
@@ -835,13 +835,13 @@ Test body.
     }
 
     await expect(dialog).toContainText('Sources');
-    await expect(dialog).toContainText('Last updated');
+    await expect(dialog.getByRole('textbox')).toHaveValue('');
     const citedHref = await answerLink.first().getAttribute('href');
     expect(citedHref).toMatch(/^\/articles\//);
 
     // Unrelated question: no evidence -> /api/ask is never called.
     await dialog.getByRole('textbox').fill('zzzz quantum physics');
-    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await dialog.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(dialog).toContainText("don't have a guide covering that yet");
     expect(apiAskCalls).toBe(1);
     for (const slug of CATEGORY_SLUGS) {
@@ -858,7 +858,7 @@ Test body.
       });
     });
     await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
-    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await dialog.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(dialog).toContainText("don't have a guide covering that yet");
   });
 
@@ -879,12 +879,12 @@ Test body.
     await page.getByRole('button', { name: 'Ask Geary, 1 unread message' }).click();
     const dialog = page.getByRole('dialog', { name: 'Ask Geary' });
     await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
-    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await dialog.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(dialog).toContainText('Ask Geary is unavailable at the moment');
 
     await page.unroute('**/ask-index.json');
     await dialog.getByRole('textbox').fill('how do I apply for a scholarship');
-    await dialog.getByRole('button', { name: 'Ask', exact: true }).click();
+    await dialog.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(dialog).toContainText('Ask Geary is unavailable at the moment');
     expect(pageErrors).toEqual([]);
   });

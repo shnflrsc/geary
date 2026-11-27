@@ -69,14 +69,31 @@
   let launcherEl: HTMLButtonElement | undefined = $state();
   let inputEl: HTMLInputElement | undefined = $state();
   let scrollEl: HTMLDivElement | undefined = $state();
+  let keyboardInset = $state(0);
+  let visualHeight = $state<number | null>(null);
 
   const busy = $derived(phase === 'loading' || phase === 'asking');
+  const uniqueSources = $derived.by(() => {
+    const seen = new Set<string>();
+    return sources.filter((source) => {
+      if (seen.has(source.slug)) return false;
+      seen.add(source.slug);
+      return true;
+    });
+  });
+  const panelStyle = $derived(
+    keyboardInset > 0 && visualHeight
+      ? `bottom: ${keyboardInset + 12}px; max-height: ${Math.max(220, visualHeight - 24)}px;`
+      : undefined,
+  );
 
   async function openWidget() {
     open = true;
     hasUnread = false;
     await tick();
-    inputEl?.focus();
+    if (!window.matchMedia('(pointer: coarse)').matches && window.innerWidth >= 640) {
+      inputEl?.focus();
+    }
   }
 
   function closeWidget() {
@@ -116,10 +133,35 @@
     };
   });
 
+  $effect(() => {
+    if (!open || typeof window === 'undefined' || !window.visualViewport) {
+      keyboardInset = 0;
+      visualHeight = null;
+      return;
+    }
+    const vv = window.visualViewport;
+    const syncViewport = () => {
+      const inset = Math.max(0, Math.round(window.innerHeight - (vv.height + vv.offsetTop)));
+      keyboardInset = inset > 40 ? inset : 0;
+      visualHeight = inset > 40 ? Math.round(vv.height) : null;
+      if (inset > 40 && scrollEl) {
+        scrollEl.scrollTop = scrollEl.scrollHeight;
+      }
+    };
+    syncViewport();
+    vv.addEventListener('resize', syncViewport);
+    vv.addEventListener('scroll', syncViewport);
+    return () => {
+      vv.removeEventListener('resize', syncViewport);
+      vv.removeEventListener('scroll', syncViewport);
+    };
+  });
+
   async function submitQuestion(question: string) {
     const trimmed = question.trim();
     if (!trimmed || busy) return;
 
+    query = '';
     phase = 'loading';
     sources = [];
     segments = [];
@@ -173,8 +215,14 @@
   }
 
   function onExampleClick(example: string) {
-    query = example;
     void submitQuestion(example);
+  }
+
+  function onInputFocus() {
+    requestAnimationFrame(() => {
+      if (scrollEl) scrollEl.scrollTop = scrollEl.scrollHeight;
+      inputEl?.scrollIntoView({ block: 'nearest' });
+    });
   }
 </script>
 
@@ -183,6 +231,7 @@
     id={panelId}
     role="dialog"
     aria-label="Ask Geary"
+    style={panelStyle}
     class="fixed right-4 bottom-21 z-50 flex max-h-[min(76dvh,560px)] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-canvas-paper shadow-2xl sm:right-6 sm:bottom-24"
   >
     <header class="flex items-center justify-between gap-3 border-b border-border-subtle bg-surface-card px-4 py-3">
@@ -273,7 +322,7 @@
               role="status"
               class="max-w-[85%] rounded-2xl rounded-tl-sm border border-border-subtle bg-surface-card px-3.5 py-2.5 text-sm text-ink-secondary"
             >
-              Writing an answer from {sources.length} article passage{sources.length === 1 ? '' : 's'}…
+              Please wait...
             </p>
           </div>
         {/if}
@@ -287,10 +336,8 @@
                     <a
                       href={segment.url}
                       aria-label="Source {segment.n}: {segment.title}"
-                      class="mx-0.5 inline-flex items-center rounded border border-brand-crimson/30 bg-brand-crimson-wash px-1 py-px align-super text-[0.7rem] font-semibold text-brand-crimson hover:bg-brand-crimson-solid hover:text-white transition-colors"
-                    >
-                      [{segment.n}]
-                    </a>
+                      class="mx-0.5 inline-flex items-center justify-center rounded bg-brand-crimson-wash px-1 py-px align-super text-[0.65rem] font-semibold leading-none text-brand-crimson transition-colors hover:bg-brand-crimson-solid hover:text-white"
+                    >{segment.n}</a>
                   {:else}
                     {segment.text}
                   {/if}
@@ -302,7 +349,7 @@
                   Sources
                 </h3>
                 <ul class="mt-1.5 space-y-2">
-                  {#each sources as source (source.slug + '-' + source.n)}
+                  {#each uniqueSources as source (source.slug)}
                     <li>
                       <a
                         href={source.url}
@@ -311,19 +358,12 @@
                         {source.title}
                       </a>
                       <p class="mt-0.5 text-[11px] text-ink-secondary">
-                        {source.categoryLabel} · {source.subcategory} · Last updated
                         {formatArticleDate(new Date(`${source.updatedDate}T00:00:00`))}
                       </p>
                     </li>
                   {/each}
                 </ul>
               </div>
-
-              <p class="mt-2.5 text-[11px] leading-relaxed text-ink-secondary">
-                Answers are generated from Geary articles and can be incomplete.
-                Verify fees, deadlines, and policies with the official BulSU office
-                before acting.
-              </p>
             </div>
           </div>
         {/if}
@@ -380,15 +420,34 @@
         inputmode="search"
         enterkeyhint="search"
         bind:value={query}
+        onfocus={onInputFocus}
         placeholder="Ask Geary a question..."
         class="h-10 min-w-0 flex-1 rounded-xl border border-border-strong bg-canvas-paper px-3 text-sm text-ink-primary placeholder:text-ink-muted transition-colors focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
       />
       <button
         type="submit"
         disabled={busy || query.trim().length === 0}
-        class="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-brand-crimson-solid px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-crimson-hover disabled:cursor-not-allowed disabled:opacity-60"
+        aria-label="Send"
+        title="Send"
+        class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-crimson-solid text-white transition-colors hover:bg-brand-crimson-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {phase === 'asking' ? '…' : 'Ask'}
+        {#if phase === 'asking'}
+          <span aria-hidden="true" class="text-sm font-bold leading-none">…</span>
+        {:else}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+          >
+            <path d="m22 2-7 20-4-9-9-4Z" />
+            <path d="M22 2 11 13" />
+          </svg>
+        {/if}
       </button>
     </form>
   </div>

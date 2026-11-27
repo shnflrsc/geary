@@ -311,7 +311,7 @@
       type="button"
       onclick={scrollToTop}
       aria-label="Back to top"
-      class="fixed right-4 bottom-4 z-30 inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border-subtle bg-surface-card/95 px-3.5 py-2 text-xs font-semibold text-ink-primary shadow-md backdrop-blur-xs transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson sm:right-6 sm:bottom-6"
+      class="fixed right-21 bottom-6 z-30 inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border-subtle bg-surface-card/95 px-3.5 py-2 text-xs font-semibold text-ink-primary shadow-md backdrop-blur-xs transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson sm:right-24 sm:bottom-8"
     >
       <svg
         viewBox="0 0 24 24"

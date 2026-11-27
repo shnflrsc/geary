@@ -246,6 +246,19 @@ describe('parseCitedAnswer', () => {
     expect(text).not.toContain('[1]');
   });
 
+  test('strips inline last updated dates from citation markers', () => {
+    const parsed = parseCitedAnswer(
+      'Check fees [1, last updated 2026-11-25] and dates [2, 2026-02-02].',
+      sources,
+    );
+    expect(parsed.status).toBe('answered');
+    const citations = parsed.segments.filter((s) => s.type === 'citation');
+    expect(citations).toEqual([
+      { type: 'citation', n: 1, url: '/articles/a', title: 'Article A' },
+      { type: 'citation', n: 2, url: '/articles/b', title: 'Article B' },
+    ]);
+  });
+
   test('escapes nothing but preserves plain text safely', () => {
     const parsed = parseCitedAnswer('Use <b>bold</b> safely [1].', sources);
     const text = parsed.segments

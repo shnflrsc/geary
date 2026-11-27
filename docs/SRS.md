@@ -75,7 +75,7 @@ This SRS defines the software-level constraints, external interface contracts, f
 
 | Route pattern | Purpose |
 | :--- | :--- |
-| `/` | Home portal rendering the hero search bar and single-row 3-card daily spotlight. |
+| `/` | Home portal rendering the hero search bar and links to the calendar, map, and contribution page. |
 | `/articles` | Full 7-category directory index page. |
 | `/categories/[slug]` | Category directory listing articles grouped by `subcategory` with breadcrumb navigation. |
 | `/articles/[slug]` | Distraction-free reading view with metadata header, responsive TOC, Markdown prose, disclaimer, and related articles. |
@@ -232,12 +232,9 @@ Optional `wizard` array on article frontmatter (`SW-INT-02`) declaring document-
 
 ### 4.2 SSR route and page rendering subsystem
 
-#### `SRS-FUNC-RND-01`: Home page hero spotlight aggregation (`/`)
+#### `SRS-FUNC-RND-01`: Home page hero spotlight aggregation (`/`) — retired
 
-- Inputs: validated article collection.
-- Processing logic: sort all published articles deterministically by title in `+page.server.ts` and pass the pool into `<ExploreSpotlight />`, which deterministically shuffles and partitions 3 non-overlapping groups of 3 articles seeded by local calendar date (`YYYY-MM-DD`).
-- Outputs: server-rendered `/` response containing the hero search bar and daily rotating 3x3 single-row article spotlight at the bottom of the hero with no manual navigation controls.
-- Error handling: if the article collection is empty, omit the spotlight cleanly.
+- Removed from MVP; the Home hero no longer loads or displays spotlight articles.
 
 #### `SRS-FUNC-RND-02`: Category route resolution (`/categories/[slug]`)
 

@@ -7,21 +7,31 @@ sources:
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
 ---
 
-## How to get
+## What is a Student ID?
 
-**Location**
+A student ID identifies a student and is used for campus entry. A replacement is a duplicate issued after the original is lost.
+
+## Requirements
+
+- Active enrollment for the current term
+- 1 original valid ID
+- Original notarized Affidavit of Loss
+- Official Receipt for PHP 150
+
+### If filing or claiming through a representative
+
+- Signed authorization letter or Special Power of Attorney
+- 1 photocopy of your ID
+- 1 photocopy of your representative's ID
+
+## Location
+
 - Office of Student Affairs and Services (OSAS) (to log the lost ID)
 - Office of the University Registrar (to apply and claim)
 - Cashier's Office (for payment)
 
-**Requirements**
-- Active enrollment for the current term
-- 1 original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or another accepted ID)
-- Original notarized Affidavit of Loss
-- Official Receipt for PHP 150
-- Signed authorization letter or Special Power of Attorney and 1 photocopy each of your ID and your representative's ID (if filing or claiming through a representative)
+## Step-by-step
 
-**Step-by-step**
 1. Report your missing ID to OSAS and the Office of the University Registrar so the loss is logged.
 2. Have a notary public prepare and notarize an Affidavit of Loss stating how and when the ID went missing.
 3. Present your valid ID at the Registrar's window to verify your enrollment and get a payment slip.

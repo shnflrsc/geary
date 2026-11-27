@@ -9,7 +9,7 @@
 
   type SheetSnap = 'collapsed' | 'half' | 'expanded';
 
-  const COLLAPSED_HEIGHT_PX = 68;
+  const COLLAPSED_HEIGHT_PX = 104;
   const HALF_HEIGHT_RATIO = 0.48;
   const EXPANDED_HEIGHT_RATIO = 0.82;
   const DESKTOP_MEDIA_QUERY = '(min-width: 1024px)';
@@ -294,14 +294,7 @@
           Main Campus
         </p>
         <p class="mt-0.5 text-xs text-ink-secondary">
-          <span class="lg:hidden">
-            {sheetSnap === 'collapsed' && dragHeightPx === null
-              ? 'Tap a building on the map to see locations inside.'
-              : 'Select any building on the map or search above to view offices, classrooms, and facilities.'}
-          </span>
-          <span class="hidden lg:inline">
-            Select any building on the map or search above to view offices, classrooms, and facilities.
-          </span>
+          Select any building on the map to see the locations inside.
         </p>
       </div>
     {/if}

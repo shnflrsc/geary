@@ -1,6 +1,7 @@
 <script lang="ts">
   import { replaceState } from '$app/navigation';
   import { page } from '$app/state';
+  import { tick } from 'svelte';
   import {
     ACADEMIC_CALENDAR_EVENTS,
     CALENDAR_CATEGORIES,
@@ -64,22 +65,34 @@
     : getDefaultCalendarMonth();
 
   let query = $state('');
-  let selectedCategories = $state<CalendarCategory[]>([]);
+  let selectedCategories = $state<CalendarCategory[]>(['all', 'undergraduate', 'holiday']);
   let activeMonth = $state(initialMonth);
   let selectedDate = $state(getDefaultSelectedDate(initialMonth));
   let selectedEventId = $state<string | null>(null);
+  let mobileAgendaOpen = $state(false);
+  let mobileAgendaEl: HTMLElement | undefined = $state();
   let filtersOpen = $state(false);
   let searchResultsOpen = $state(false);
   let highlightedResultIndex = $state(-1);
   let searchInputEl: HTMLInputElement | undefined = $state();
   let searchContainerEl: HTMLDivElement | undefined = $state();
   let filterMenuEl: HTMLDivElement | undefined = $state();
+  let swipeStart: { x: number; y: number } | null = null;
+  let swipeAxis: 'horizontal' | 'vertical' | null = null;
+  let swipeOffset = $state(0);
+  let swipeAnimating = false;
+  let mobileGridEl: HTMLDivElement | undefined = $state();
+  let mobileGridWidth = $state(0);
 
   const filteredEvents = $derived(
     filterCalendarEvents(ACADEMIC_CALENDAR_EVENTS, query, selectedCategories),
   );
   const monthMatchCounts = $derived(countMatchingEventsByMonth(filteredEvents));
   const gridModel = $derived(buildMonthGrid(activeMonth, filteredEvents));
+  const selectedColumn = $derived(
+    gridModel.weeks.flatMap((week) => week.days).findIndex((cell) => cell.date === selectedDate) % 7,
+  );
+  const pointerX = $derived((selectedColumn + 0.5) * mobileGridWidth / 7 + swipeOffset);
   const searchTerms = $derived(query.trim().split(/\s+/).filter(Boolean));
   const hasActiveFilters = $derived(searchTerms.length > 0 || selectedCategories.length > 0);
   const showSearchResults = $derived(searchResultsOpen && searchTerms.length > 0);
@@ -104,9 +117,22 @@
   });
   const canGoPrev = $derived(prevMatchingMonth !== null);
   const canGoNext = $derived(nextMatchingMonth !== null);
-  const selectedDayEvents = $derived(gridModel.eventsByDate[selectedDate] ?? []);
+  const selectedDayEvents = $derived.by(() => {
+    const events = buildMonthGrid(selectedDate.slice(0, 7), filteredEvents).eventsByDate[selectedDate] ?? [];
+    const selected = filteredEvents.find((event) => event.id === selectedEventId);
+    return selected && parseEventDateSpans(selected).tba && !events.some((event) => event.id === selected.id)
+      ? [...events, selected]
+      : events;
+  });
 
   $effect(() => bindSearchShortcut(() => searchInputEl?.focus()));
+
+  $effect(() => {
+    const grid = mobileGridEl;
+    if (!grid) return;
+    grid.addEventListener('touchmove', moveCalendarSwipe, { passive: false });
+    return () => grid.removeEventListener('touchmove', moveCalendarSwipe);
+  });
 
   $effect(() => {
     if (!filtersOpen) return;
@@ -150,7 +176,7 @@
     };
   });
 
-  function selectSearchResult(event: CalendarEvent) {
+  async function selectSearchResult(event: CalendarEvent) {
     const { spans, tba } = parseEventDateSpans(event);
     if (!tba && spans.length > 0) {
       const startDate = spans[0]!.start;
@@ -166,6 +192,11 @@
     searchResultsOpen = false;
     highlightedResultIndex = -1;
     searchInputEl?.blur();
+    mobileAgendaOpen = true;
+    await tick();
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      mobileAgendaEl?.scrollIntoView({ block: 'nearest' });
+    }
   }
 
   function handleSearchKeydown(event: KeyboardEvent) {
@@ -210,16 +241,78 @@
     if (target) selectMonth(target);
   }
 
+  function startCalendarSwipe(event: TouchEvent) {
+    if (swipeAnimating) return;
+    const touch = event.touches.length === 1 ? event.touches[0] : undefined;
+    swipeStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+    swipeAxis = null;
+  }
+
+  function moveCalendarSwipe(event: TouchEvent) {
+    const touch = event.touches[0];
+    if (!swipeStart || !touch) return;
+    const dx = touch.clientX - swipeStart.x;
+    const dy = touch.clientY - swipeStart.y;
+    if (!swipeAxis && Math.max(Math.abs(dx), Math.abs(dy)) > 0) {
+      swipeAxis = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
+    }
+    if (swipeAxis === 'horizontal') {
+      event.preventDefault();
+      swipeOffset = dx * ((dx > 0 && !canGoPrev) || (dx < 0 && !canGoNext) ? 0.2 : 1);
+    }
+  }
+
+  async function endCalendarSwipe(event: TouchEvent) {
+    const touch = event.changedTouches[0];
+    if (!swipeStart || !touch) return;
+    const dx = touch.clientX - swipeStart.x;
+    swipeStart = null;
+    const grid = mobileGridEl;
+    if (!grid) return;
+    const shouldChange = swipeAxis === 'horizontal' && Math.abs(dx) >= 30 &&
+      (dx < 0 ? canGoNext : canGoPrev);
+    swipeAxis = null;
+    if (Math.abs(swipeOffset) > 5) event.preventDefault();
+    const offset = swipeOffset;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    swipeAnimating = true;
+    if (!reducedMotion) {
+      const target = shouldChange ? (dx < 0 ? -grid.clientWidth : grid.clientWidth) : 0;
+      await new Promise<void>((resolve) => {
+        const start = performance.now();
+        const frame = (now: number) => {
+          const progress = Math.min((now - start) / 100, 1);
+          swipeOffset = offset + (target - offset) * (1 - (1 - progress) ** 3);
+          if (progress < 1) requestAnimationFrame(frame);
+          else resolve();
+        };
+        requestAnimationFrame(frame);
+      });
+    }
+    if (shouldChange) activeMonth = (dx < 0 ? nextMatchingMonth : prevMatchingMonth)!;
+    swipeOffset = 0;
+    swipeAnimating = false;
+  }
+
   function jumpToToday() {
     const targetMonth = getDefaultCalendarMonth();
     activeMonth = targetMonth;
     selectedDate = getDefaultSelectedDate(targetMonth);
     selectedEventId = null;
+    mobileAgendaOpen = true;
   }
 
-  function selectDay(date: string, eventId: string | null = null) {
+  async function selectDay(date: string, eventId: string | null = null) {
     selectedDate = date;
     selectedEventId = eventId;
+    mobileAgendaOpen = true;
+    await tick();
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      mobileAgendaEl?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        block: 'nearest',
+      });
+    }
   }
 
   function toggleCategory(category: CalendarCategory) {
@@ -667,10 +760,10 @@
       </div>
 
       <!-- Mobile Google-Calendar-style near-full-height grid + separate agenda card peeking below -->
-      <div class="space-y-3 pb-4 md:hidden">
+      <div class={`md:hidden ${mobileAgendaOpen ? 'space-y-3 pb-4' : ''}`}>
         <section
           aria-label={`${activeMonthMeta.label} calendar`}
-          class="flex h-[calc(100svh-13.5rem)] min-h-[380px] flex-col border-b border-border-subtle bg-surface-card"
+          class="flex h-[calc(100svh-7.75rem)] min-h-[380px] flex-col overflow-hidden border-b border-border-subtle bg-surface-card"
         >
           <div class="flex shrink-0 items-center justify-between gap-2 border-b border-border-subtle px-3 py-2">
             <h2 class="font-heading text-base font-bold tracking-tight text-ink-primary">
@@ -723,14 +816,59 @@
           </div>
 
           <div
-            class="grid min-h-0 flex-1"
-            style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(0, 1fr));`}
+            role="presentation"
+            bind:this={mobileGridEl}
+            bind:clientWidth={mobileGridWidth}
+            ontouchstart={startCalendarSwipe}
+            ontouchmove={moveCalendarSwipe}
+            ontouchend={endCalendarSwipe}
+            ontouchcancel={() => { swipeStart = null; swipeAxis = null; swipeOffset = 0; }}
+            class="relative grid min-h-0 flex-1"
+            style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(0, 1fr)); transform: translateX(${swipeOffset}px);`}
           >
+            {#each [prevMatchingMonth, nextMatchingMonth] as adjacentMonth, side (side)}
+              {#if adjacentMonth}
+                {@const adjacentGrid = buildMonthGrid(adjacentMonth, filteredEvents)}
+                <div
+                  aria-hidden="true"
+                  class={`pointer-events-none absolute inset-0 grid bg-surface-card ${side === 0 ? '-translate-x-full' : 'translate-x-full'}`}
+                  style={`grid-template-rows: repeat(${adjacentGrid.weeks.length}, minmax(0, 1fr));`}
+                >
+                  {#each adjacentGrid.weeks as week}
+                    <div class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
+                      <div class="grid h-full grid-cols-7">
+                        {#each week.days as cell}
+                          <div class={`flex h-full min-h-0 flex-col items-center justify-between border-r border-border-subtle/70 px-0.5 pt-1 pb-0.5 text-center last:border-r-0 ${mobileAgendaOpen && cell.date === selectedDate ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70' : ''}`}>
+                            <span class={`inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-medium tabular-nums ${cell.date === todayIso ? 'bg-brand-crimson text-white font-semibold' : mobileAgendaOpen && cell.date === selectedDate ? 'bg-brand-crimson-wash text-brand-crimson font-semibold' : cell.inMonth ? 'text-ink-primary' : 'text-ink-muted'}`}>
+                              {cell.day}
+                            </span>
+                            {#if cell.overflowCount > 0}
+                              <span class="mt-auto self-start px-1 text-[10px] font-bold leading-none text-ink-secondary">…</span>
+                            {/if}
+                          </div>
+                        {/each}
+                      </div>
+                      <div class="absolute inset-x-0 top-6.5 grid grid-cols-7 gap-y-0.5">
+                        {#each week.visibleSegments as seg}
+                          {@const isSolidBar = seg.endCol > seg.startCol || seg.continuesBefore || seg.continuesAfter || seg.event.category === 'holiday'}
+                          <div
+                            style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
+                            class={`cal-cat-${seg.event.category} flex h-[15px] min-w-0 items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-0.5 rounded-l-[3px]'} ${seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-0.5 rounded-r-[3px]'} ${isSolidBar ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)]' : 'cal-badge border'}`}
+                          >
+                            <span class="min-w-0 overflow-hidden whitespace-nowrap">{seg.event.title}</span>
+                          </div>
+                        {/each}
+                      </div>
+                    </div>
+                  {/each}
+                </div>
+              {/if}
+            {/each}
             {#each gridModel.weeks as week, weekIdx (weekIdx)}
               <div class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
                 <div class="grid h-full grid-cols-7">
                   {#each week.days as cell (cell.date)}
-                    {@const isSelected = cell.date === selectedDate}
+                    {@const isSelected = mobileAgendaOpen && cell.date === selectedDate}
                     {@const isToday = cell.date === todayIso}
                     <button
                       type="button"
@@ -806,15 +944,26 @@
         </section>
 
         <!-- Separate selected-day events card below the mobile calendar -->
-        <div class="px-3">
+        {#if mobileAgendaOpen}
+        <div class="relative px-3" bind:this={mobileAgendaEl}>
+          {#if selectedColumn >= 0 && pointerX >= 12 && pointerX <= mobileGridWidth - 12}
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute -top-1.5 z-10 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-border-subtle bg-surface-card"
+              style={`left: ${pointerX}px;`}
+            ></span>
+          {/if}
           <section
             aria-label="Selected day agenda"
             class="rounded-xl border border-border-subtle bg-surface-card p-4 shadow-xs"
           >
-            <div class="border-b border-border-subtle pb-2.5">
+            <div class="flex items-center justify-between gap-3 border-b border-border-subtle pb-2.5">
               <h3 class="font-heading text-sm font-bold text-ink-primary">
                 {formatIsoDateReadable(selectedDate)}
               </h3>
+              <button type="button" onclick={() => { mobileAgendaOpen = false; selectedEventId = null; }} aria-label="Close selected day agenda" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-ink-secondary hover:bg-canvas-paper hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12" /></svg>
+              </button>
             </div>
 
             <div class="pt-3">
@@ -871,6 +1020,7 @@
             </div>
           </section>
         </div>
+        {/if}
       </div>
   </div>
 </section>

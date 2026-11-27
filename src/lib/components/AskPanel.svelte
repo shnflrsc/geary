@@ -224,7 +224,7 @@
     role="dialog"
     aria-label="Ask Geary"
     style={panelStyle}
-    class="fixed right-4 bottom-21 z-50 flex max-h-[min(76dvh,560px)] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-canvas-paper shadow-2xl sm:right-6 sm:bottom-24"
+    class="fixed right-4 bottom-40 z-50 flex max-h-[min(65dvh,560px)] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-canvas-paper shadow-2xl sm:right-6 sm:bottom-24 sm:max-h-[min(76dvh,560px)]"
   >
     <header class="flex items-center justify-between gap-3 border-b border-border-subtle bg-surface-card px-4 py-3">
       <div class="flex items-center gap-2.5">
@@ -416,7 +416,7 @@
   </div>
 {/if}
 
-<div class="fixed right-4 bottom-4 z-40 sm:right-6 sm:bottom-6">
+<div class="fixed right-4 bottom-24 z-40 sm:right-6 sm:bottom-6">
   <button
     bind:this={launcherEl}
     type="button"

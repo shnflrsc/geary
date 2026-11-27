@@ -154,7 +154,7 @@ Write headings that are:
 * **Active when task-based:** Start procedural headings with a verb (e.g., "Apply for a transfer" rather than "You can apply for a transfer").
 * **Removable:** Body prose must still make sense if the heading is deleted—never open a section with a pronoun referring back to the heading (e.g., "This requires...").
 * **Plain-language:** Do not use technical terms or unexplained abbreviations in headings.
-* **Statements, not questions:** Avoid question headings (outside §10 FAQ)—they are hard to frontload and readers want answers, not questions.
+* **Statements, not questions:** Avoid question headings outside §10 FAQ and the document-guide opening specified in §4.5. They are hard to frontload and readers want answers, not questions.
 * **Readable as an outline:** Reading only the headings from top to bottom should convey the article's full flow.
 
 Avoid excessive nesting, repetitive headings, arbitrary splits, or one-sentence sections that belong elsewhere.
@@ -168,7 +168,7 @@ Organize procedural guides in this logical sequence, adapting or omitting stages
 3. Step-by-step instructions
 4. Follow-up details and edge cases (processing times, scoring, contacts, reminders)
 
-**Do not use generic framework labels as literal section headings.** Name every heading after the actual topic it covers so readers can scan directly to what they need.
+**Do not use generic framework labels as literal section headings**, except for the required headings in document guides (§4.5). Name every other heading after the actual topic it covers so readers can scan directly to what they need.
 
 * Avoid: "Must-Know Information", "Requirements and Prerequisites", "How-To / Step-by-Step Process", "Additional Useful Information"
 * Use instead: "Eligibility and Grade Cutoffs", "Documents to Prepare", "Application Steps", "How Qualifiers Are Selected", "Processing Time and Contacts"
@@ -217,15 +217,20 @@ Do not use this section as a catch-all for critical rules that belong earlier in
 
 ### 4.5 Document Request and Retrieval Articles
 
-For articles covering how to request, retrieve, or acquire official documents (such as `Transcript of Records (TOR)`, `Student ID Replacement`, `Certificate of Good Moral Character`, or `Certificate of Grades`), use this fast-lookup format:
+For articles about requesting, retrieving, or acquiring official documents, name the article after the document itself. For example, use `Transcript of Records (TOR)` rather than `How to Request a Transcript of Records`.
 
-* **Title:** Name the article after the document itself (e.g., `Transcript of Records (TOR)` rather than `How to Request a Transcript of Records`).
-* **No intro:** Skip introductory paragraphs completely and start immediately with the main section.
-* **Primary section (`## How to get`):** Name the section `## How to get` only, and deliver the essential details right away using plain lists without narrative descriptions:
-  * **Location:** The specific office or window where the document is requested and claimed.
-  * **Requirements:** A bulleted list of required items, forms, or fees.
-  * **Step-by-step:** A numbered list of actions to complete the request.
-* **Additional information:** Place any extra details (processing times, fees, special cases, proxy/authorization rules, or contact info) after `## How to get` at the bottom of the article. Do not use a generic `## Additional information` heading—name each section after the specific content it covers, and split into multiple sections when covering distinct topics.
+Use these primary sections in this order:
+
+1. **`## What is a <document>`:** Replace `<document>` with the document's name and use the appropriate article, such as `## What is a Transcript of Records`. Briefly explain what the document is and what it is used for.
+2. **`## Requirements`:** List the items, forms, and other prerequisites students need. Identify conditions and quantities clearly. Omit details readers can reasonably infer: write `1 original valid ID` without a parenthetical list of examples, and `Photocopy of the document being certified` without examples of documents. Use one bullet per required item rather than joining separate items with `and`; use `or` for alternatives. Group optional or conditional items under a `###` subheading that names the condition or states that the items are optional. Preserve necessary restrictions and qualifications.
+3. **`## Location`:** List the offices, windows, or application channels involved and their roles when useful.
+4. **`## Step-by-step`:** Provide a numbered list of actions to request and obtain the document. Name the relevant offices or application channels where the steps require them.
+
+For example, under `### If filing or claiming through a representative`, list the signed authorization letter or Special Power of Attorney, the photocopy of the student's ID, and the photocopy of the representative's ID as three separate bullets. Keep `or` where either document is accepted.
+
+After these sections, include zero or more sections for details such as fees, processing times, special cases, authorization, or contacts. Give each section a specific heading that describes its content. Do not use `## Additional Information` as a catch-all heading.
+
+Document guides remain subject to the other principles in this framework, including source verification, accuracy, clear writing, and placing critical information where readers need it. The four required headings and their order are exceptions to the general heading and procedural flow guidance above.
 
 ## 5. Markdown Formatting Standards
 

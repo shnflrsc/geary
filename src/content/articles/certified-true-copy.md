@@ -7,19 +7,29 @@ sources:
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
 ---
 
-## How to get
+## What is a Certified True Copy?
 
-**Location**
+A Certified True Copy (CTC) is a copy of a document that has been certified as a true copy.
+
+## Requirements
+
+- 1 original valid ID
+- Photocopy of the document being certified
+- Official Receipt for PHP 25 per copy
+
+### If filing or claiming through a representative
+
+- Signed authorization letter or Special Power of Attorney
+- 1 photocopy of your ID
+- 1 photocopy of your representative's ID
+
+## Location
+
 - Office of the University Registrar (Main Campus)
 - Cashier's Office (for payment)
 
-**Requirements**
-- 1 original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID)
-- Photocopy of the document being certified (grades, COR, TOR, or diploma)
-- Official Receipt for PHP 25 per copy
-- Signed authorization letter or Special Power of Attorney and 1 photocopy each of your ID and your representative's ID (if filing or claiming through a representative)
+## Step-by-step
 
-**Step-by-step**
 1. Present your valid ID and the photocopy of the document to be certified at the Registrar's window to get a payment slip.
 2. Pay PHP 25 per copy at the Cashier's Office and keep the Official Receipt.
 3. Submit your Official Receipt and the photocopy at the Registrar's window to receive your claim stub.

@@ -9,20 +9,36 @@ sources:
     url: "https://drive.google.com/file/d/16mFYH2WBi2gbmhCntvnljXbUiRUiwJZr/view"
 ---
 
-## How to get
+## What are Transfer Credentials?
 
-**Location**
+Transfer Credentials, also called Honorable Dismissal, document a student's transfer from BulSU to another school.
+
+## Requirements
+
+- 1 original valid ID
+- Official Receipt for PHP 25
+
+### If you have not graduated
+
+- Accomplished Clearance Form signed by your College Dean's Office, Library, Accounting Office, OSAS, and Registrar
+
+### If you have not submitted your admission credentials
+
+- Original Form 137/SF-10 or prior college Transcript of Records remarked `Copy for: Bulacan State University`
+
+### If filing or claiming through a representative
+
+- Signed authorization letter or Special Power of Attorney
+- 1 photocopy of your ID
+- 1 photocopy of your representative's ID
+
+## Location
+
 - Office of the University Registrar (Main Campus)
 - Cashier's Office (for payment)
 
-**Requirements**
-- 1 original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID)
-- Official Receipt for PHP 25
-- Accomplished Clearance Form signed by your College Dean's Office, Library, Accounting Office, OSAS, and Registrar (if you have not graduated)
-- Original Form 137/SF-10 or prior college Transcript of Records remarked `Copy for: Bulacan State University` (if not yet submitted)
-- Signed authorization letter or Special Power of Attorney and 1 photocopy each of your ID and your representative's ID (if filing or claiming through a representative)
+## Step-by-step
 
-**Step-by-step**
 1. Complete your Clearance Form across the 5 required offices if you have not graduated, and settle any college lab or organization accountabilities first.
 2. Present your valid ID at the Registrar's window to verify your student record and get a payment slip.
 3. Pay PHP 25 at the Cashier's Office and keep the Official Receipt.

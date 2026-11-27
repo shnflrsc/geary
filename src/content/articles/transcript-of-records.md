@@ -11,21 +11,41 @@ sources:
     url: "https://www.facebook.com/BulSUMC/posts/pfbid02yeaYqk5xZLwY92hMWuNts3bTE27HtA2CtxADKjDqCBTgsLs71Tj8po8Yxcig9wKrl"
 ---
 
-## How to get
+## What is a Transcript of Records?
 
-**Location**
+A Transcript of Records (TOR) is an official record of a student's academic results.
+
+## Requirements
+
+- 1 original valid ID
+- 1 documentary stamp
+
+### For a non-graduated TOR
+
+- Accomplished Clearance Form signed by your College Dean's Office, E-Library, Accounting Office, OSAS, and Registrar
+
+### If transferring schools
+
+- Original school request form remarked `Copy for: [Name of New School]`
+
+### If requesting for board exams
+
+- Passport-size photo with name tag on a white background
+
+### If filing or claiming through a representative
+
+- Signed authorization letter or Special Power of Attorney
+- 1 photocopy of your ID
+- 1 photocopy of your representative's ID
+
+## Location
+
 - Office of the University Registrar (Main Campus)
 - Cashier's Office (for payment and documentary stamps)
+- Treasury Office or BIR (for documentary stamps)
 
-**Requirements**
-- 1 original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID)
-- Accomplished Clearance Form signed by your College Dean's Office, E-Library, Accounting Office, OSAS, and Registrar (for non-graduated TORs)
-- 1 documentary stamp (available at the Cashier's Office, Treasury Office, or BIR)
-- Original school request form remarked `Copy for: [Name of New School]` (if transferring schools)
-- Passport-size photo with name tag on a white background (if requesting for board exams)
-- Signed authorization letter or Special Power of Attorney and 1 photocopy each of your ID and your representative's ID (if filing or claiming through a representative)
+## Step-by-step
 
-**Step-by-step**
 1. Have your Clearance Form signed by the 5 required offices first if you are requesting a non-graduated TOR.
 2. Present your valid ID at the Registrar's window to verify your record and receive a payment slip.
 3. Pay PHP 50 per page at the Cashier's Office, keep the Official Receipt, and buy a documentary stamp if available.

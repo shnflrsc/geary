@@ -79,7 +79,9 @@
     ? 'flex h-dvh min-h-0 flex-col overflow-hidden'
     : lockDesktopViewport
       ? 'flex min-h-dvh flex-col md:h-dvh md:min-h-0 md:overflow-hidden'
-      : 'contents'}
+      : isHome || isError
+        ? 'flex min-h-dvh flex-col'
+        : 'contents'}
 >
   <a
     href="#main-content"
@@ -96,7 +98,7 @@
       ? 'min-h-0 flex-1 overflow-hidden'
       : lockDesktopViewport
         ? 'flex-1 md:min-h-0 md:overflow-hidden'
-        : isHome
+        : isHome || isError
           ? 'flex flex-1 flex-col'
           : 'flex-1'}
   >

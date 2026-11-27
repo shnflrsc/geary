@@ -81,7 +81,7 @@
   <div
     role="region"
     aria-label="Suggested articles"
-    class="mt-10 text-left"
+    class="mt-10 sm:mt-12 text-left"
     onmouseenter={() => {
       isHovered = true;
     }}
@@ -102,7 +102,7 @@
         {@const isActive = groupIdx === safeGroupIndex}
         <div
           aria-hidden={!isActive ? 'true' : undefined}
-          class={`col-start-1 row-start-1 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 transition-opacity duration-200 motion-reduce:transition-none ${
+          class={`col-start-1 row-start-1 grid grid-cols-1 gap-3 md:grid-cols-3 transition-opacity duration-200 motion-reduce:transition-none ${
             isActive ? 'opacity-100' : 'pointer-events-none select-none opacity-0'
           }`}
         >
@@ -110,14 +110,14 @@
             <a
               href={`/articles/${item.slug}`}
               tabindex={isActive ? undefined : -1}
-              class="group flex flex-col justify-between rounded-xl border border-border-subtle bg-surface-card p-5 transition-colors duration-150 hover:border-brand-crimson"
+              class="group flex flex-col justify-between rounded-xl border border-border-subtle bg-surface-card/50 p-3.5 transition-colors duration-150 hover:border-brand-crimson"
             >
-              <h2 class="font-heading text-base font-semibold leading-snug text-ink-primary transition-colors duration-150 group-hover:text-brand-crimson">
+              <h2 class="font-heading text-sm font-semibold leading-snug text-ink-primary transition-colors duration-150 group-hover:text-brand-crimson">
                 {item.title}
               </h2>
 
               <div class="mt-1.5 flex items-end justify-between gap-3">
-                <p class="line-clamp-2 flex-1 text-sm leading-relaxed text-ink-secondary">
+                <p class="line-clamp-1 flex-1 text-sm leading-snug text-ink-secondary">
                   {item.preview}
                 </p>
                 <span

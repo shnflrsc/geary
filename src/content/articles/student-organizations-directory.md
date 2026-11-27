@@ -116,7 +116,7 @@ sources:
 - [CIT Band](https://www.facebook.com/band.cit)
 - [College Association of Drafting Students (CADS)](https://www.facebook.com/363451534490509/)
 - [Collegiate Resource Auxiliary of Technological Visionaries (CIT-CREATIV)](https://www.facebook.com/CITCreativ)
-- Federation of Food Technology Students (FFTS)
+- [Federation of Food Technology Students (FFTS)](https://www.facebook.com/bulsucitffts)
 - [Future Fabricators Society (FUFAS)](https://www.facebook.com/FutureFabricatorsSociety)
 - [Society of Mechanical Technology Students (SMTS)](https://www.facebook.com/profile.php?id=61570113532192)
 - [Society of Proficient Innovative Computer Enthusiasts (SPICE)](https://www.facebook.com/104054112409694/)

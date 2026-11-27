@@ -252,12 +252,12 @@ Main success scenario:
 
 Alternative flows:
 - `AF-02A` (Preview quick-link): Student clicks one of the top-3 preview links inside a Home category card to open `/articles/[slug]` directly.
-- `AF-02B` (Hero spotlight): Student selects an article from the 3-card daily rotating strip at the bottom of the Home hero.
+- `AF-02B` (Hero spotlight): Retired from MVP.
 - `AF-02C` (Header / mobile drawer switch): Student switches categories from the desktop navigation bar or mobile drawer.
 
 Exception and off-nominal scenarios:
 - `EF-02A` (Empty category): A category has `0` articles. `/categories/[slug]` renders an empty-state icon and `"No articles here yet."` message instead of a 404.
-- `EF-02B` (No spotlight articles): If no articles are available for the hero spotlight, the Home page omits the strip cleanly.
+- `EF-02B` (No spotlight articles): Retired from MVP.
 
 ### `UC-03`: Read and skim an article
 

@@ -87,7 +87,7 @@ Adding or editing a single `.md` file in `src/content/articles/` automatically p
 1. **Article view (`/articles/[slug]`):** Validates frontmatter with Zod, compiles Markdown prose via `marked` with unique heading `id`s, extracts `h2`/`h3` headings for TOC navigation, builds breadcrumbs, and resolves up to 3 sibling articles in the same category.
 2. **Category directory (`/categories/[slug]`):** Updates article counts and groups article cards under alphabetical `subcategory` headings.
 3. **Articles index (`/articles`):** Updates all 7 category counts and top-3 preview links.
-4. **Home hero (`/`):** Includes the article in the daily randomized 3x3 single-row hero spotlight pool (`ExploreSpotlight.svelte`).
+4. **Home hero (`/`):** Provides search and links to the calendar, map, and contribution page.
 5. **Search & sitemap endpoints (`/search-index.json`, `/sitemap.xml`):** Serializes the article's `slug`, `title`, body `preview`, `category`, `categoryLabel`, `subcategory`, and `headings` array via pure `buildSearchIndex()`, and lists the canonical URL in `/sitemap.xml`.
 6. **Ask corpus (`/ask-index.json`):** Serializes the article's metadata plus `updatedDate`, `url`, and `excerpt`, and splits the Markdown body into retrievable `chunks` for client-side evidence retrieval.
 7. **Document request wizard (`/wizard`):** Optional `wizard` frontmatter (`SW-INT-09`) is flattened by pure `getWizardRequests()` into request checklists rendered by `<ClearanceWizard />`; category pages surface a wizard entry card when their guides declare wizard requests.
@@ -448,8 +448,7 @@ geary/
     └── routes/
         ├── +layout.svelte           # Global shell (Header, main, Footer) + theme/route coordination
         ├── +error.svelte            # Branded HTTP 404 recovery page with SearchBar & categories (`noindex`)
-        ├── +page.server.ts          # Home hero spotlight pool loader + CDN Cache-Control
-        ├── +page.svelte             # Home portal (Hero SearchBar, snow canvas, 3-card daily spotlight)
+        ├── +page.svelte             # Home portal (hero search and quick links)
         ├── articles/
         │   ├── +page.server.ts      # 7-category counts & previews + CDN Cache-Control
         │   ├── +page.svelte         # Articles & categories directory page (7 CategoryCards)

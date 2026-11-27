@@ -399,7 +399,7 @@
     />
   </div>
 
-  <div class="pointer-events-none absolute right-3 bottom-20 z-10 flex flex-col items-center gap-2 lg:right-4 lg:bottom-4">
+  <div class="pointer-events-none absolute right-3 bottom-28 z-10 flex flex-col items-center gap-2 lg:right-4 lg:bottom-4">
     <div
       role="img"
       aria-label="Compass pointing North"

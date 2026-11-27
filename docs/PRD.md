@@ -83,11 +83,11 @@ When a student opens an article, the header immediately shows the breadcrumb tra
 | `REQ-CAT-02` | `P0` | The Home page shall present a Category Directory showing all seven categories with each category's summary description, live article count, and direct preview links to top articles. |
 | `REQ-CAT-03` | `P0` | Each category page shall group its articles visually under `subcategory` headings instead of a chronological blog timeline. |
 | `REQ-CAT-04` | `P1` | Category and article pages shall display clickable breadcrumb navigation (`Home › [Category Name]` and `Home › [Category Name] › [Article Title]`) for spatial orientation. |
-| `REQ-CAT-05` | `P1` | The Home page shall surface daily randomized articles in a single-row 3-card strip at the bottom of the hero, cycling through 3 daily groups (9 articles refreshed each calendar day) with no manual navigation controls. |
+| `REQ-CAT-05` | `P1` | Removed from MVP: the Home hero no longer displays a daily article spotlight. |
 
 #### Product behavior
 
-Geary organizes articles around what a student needs to get done, not when a post was published. At the bottom of the Home hero below the contribute prompt, a single-row 3-card spotlight deterministically randomizes 3 non-overlapping groups of 3 articles seeded by the visitor's local calendar date (`YYYY-MM-DD`). It cycles through the 3 groups automatically without manual navigation controls, and pauses on hover, focus, or when `prefers-reduced-motion` is enabled.
+Geary organizes articles around what a student needs to get done, not when a post was published. The Home hero provides search and links to the academic calendar, campus map, and contribution page.
 
 Opening any category page shows breadcrumbs, a short category summary, and articles grouped under sub-topic headings (such as *Shifting & Transferring*, *Document Requests*, or *Food & Dining*). If a category has zero articles yet, the page renders a clear empty-state message with a link back to Home.
 
@@ -101,8 +101,7 @@ Opening any category page shows breadcrumbs, a short category summary, and artic
   - *Given* a category with articles across multiple subcategories, *When* visiting that category page, *Then* articles appear grouped under their respective subcategory headings.
 - `AC-CAT-04` (`REQ-CAT-04`):
   - *Given* any category or article page, *When* clicking `Home` or `[Category Name]` in the breadcrumb trail, *Then* the browser navigates cleanly to the corresponding parent page.
-- `AC-CAT-05` (`REQ-CAT-05`):
-  - *Given* the Home page, *When* loaded, *Then* the hero bottom strip displays 3 articles in one row on tablet/desktop without navigation controls and cycles through 3 daily randomized non-overlapping groups seeded by local calendar date.
+- `AC-CAT-05` (`REQ-CAT-05`): Retired with the spotlight feature.
 
 ### 3.3 Feature 3: Instant client-side search bar (`F-03`)
 

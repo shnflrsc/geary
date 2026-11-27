@@ -7,19 +7,29 @@ sources:
     url: "https://bulsu.edu.ph/assets/transparency/bulsu-citizens-charter-2026-1st-edition.pdf"
 ---
 
-## How to get
+## What is a Duplicate Diploma?
 
-**Location**
+A Duplicate Diploma is a replacement copy of a diploma that was lost or damaged.
+
+## Requirements
+
+- 1 original valid ID
+- Notarized Affidavit of Loss or damaged original diploma
+- Official Receipt for PHP 300
+
+### If filing or claiming through a representative
+
+- Signed authorization letter or Special Power of Attorney
+- 1 photocopy of your ID
+- 1 photocopy of your representative's ID
+
+## Location
+
 - Office of the University Registrar (Main Campus)
 - Cashier's Office (for payment)
 
-**Requirements**
-- 1 original valid ID (National ID, Passport, Driver's License, UMID, SSS, PhilHealth, TIN, Pag-IBIG, PRC, Company ID, or school ID)
-- Notarized Affidavit of Loss (or the damaged original diploma)
-- Official Receipt for PHP 300
-- Signed authorization letter or Special Power of Attorney and 1 photocopy each of your ID and your representative's ID (if filing or claiming through a representative)
+## Step-by-step
 
-**Step-by-step**
 1. Present your valid ID and notarized Affidavit of Loss (or damaged original diploma) at the Registrar's window to verify your record and receive a payment slip.
 2. Pay PHP 300 at the Cashier's Office and keep the Official Receipt.
 3. Submit your Official Receipt and Affidavit of Loss or damaged diploma at the Registrar's window to receive your claim stub.

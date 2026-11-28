@@ -67,9 +67,9 @@
   let query = $state('');
   let selectedCategories = $state<CalendarCategory[]>(['all', 'undergraduate', 'holiday']);
   let activeMonth = $state(initialMonth);
-  let selectedDate = $state(getDefaultSelectedDate(initialMonth));
+  let selectedDate = $state('');
   let selectedEventId = $state<string | null>(null);
-  let mobileAgendaOpen = $state(false);
+  let mobileAgendaOpen = $state(true);
   let mobileAgendaEl: HTMLElement | undefined = $state();
   let filtersOpen = $state(false);
   let searchResultsOpen = $state(false);
@@ -82,17 +82,12 @@
   let swipeOffset = $state(0);
   let swipeAnimating = false;
   let mobileGridEl: HTMLDivElement | undefined = $state();
-  let mobileGridWidth = $state(0);
 
   const filteredEvents = $derived(
     filterCalendarEvents(ACADEMIC_CALENDAR_EVENTS, query, selectedCategories),
   );
   const monthMatchCounts = $derived(countMatchingEventsByMonth(filteredEvents));
   const gridModel = $derived(buildMonthGrid(activeMonth, filteredEvents));
-  const selectedColumn = $derived(
-    gridModel.weeks.flatMap((week) => week.days).findIndex((cell) => cell.date === selectedDate) % 7,
-  );
-  const pointerX = $derived((selectedColumn + 0.5) * mobileGridWidth / 7 + swipeOffset);
   const searchTerms = $derived(query.trim().split(/\s+/).filter(Boolean));
   const hasActiveFilters = $derived(searchTerms.length > 0 || selectedCategories.length > 0);
   const showSearchResults = $derived(searchResultsOpen && searchTerms.length > 0);
@@ -118,6 +113,7 @@
   const canGoPrev = $derived(prevMatchingMonth !== null);
   const canGoNext = $derived(nextMatchingMonth !== null);
   const selectedDayEvents = $derived.by(() => {
+    if (!selectedDate) return [];
     const events = buildMonthGrid(selectedDate.slice(0, 7), filteredEvents).eventsByDate[selectedDate] ?? [];
     const selected = filteredEvents.find((event) => event.id === selectedEventId);
     return selected && parseEventDateSpans(selected).tba && !events.some((event) => event.id === selected.id)
@@ -187,6 +183,7 @@
       selectDay(startDate, event.id);
     } else {
       selectMonth(event.month);
+      selectedDate = getDefaultSelectedDate(event.month);
       selectedEventId = event.id;
     }
     searchResultsOpen = false;
@@ -232,8 +229,6 @@
   function selectMonth(monthKey: string) {
     if (!isValidCalendarMonth(monthKey)) return;
     activeMonth = monthKey;
-    selectedDate = getDefaultSelectedDate(monthKey);
-    selectedEventId = null;
   }
 
   function stepMonth(delta: number) {
@@ -297,22 +292,13 @@
   function jumpToToday() {
     const targetMonth = getDefaultCalendarMonth();
     activeMonth = targetMonth;
-    selectedDate = getDefaultSelectedDate(targetMonth);
-    selectedEventId = null;
     mobileAgendaOpen = true;
   }
 
-  async function selectDay(date: string, eventId: string | null = null) {
+  function selectDay(date: string, eventId: string | null = null) {
     selectedDate = date;
     selectedEventId = eventId;
     mobileAgendaOpen = true;
-    await tick();
-    if (window.matchMedia('(max-width: 767px)').matches) {
-      mobileAgendaEl?.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-        block: 'nearest',
-      });
-    }
   }
 
   function toggleCategory(category: CalendarCategory) {
@@ -326,13 +312,9 @@
   aria-label="BulSU Academic Calendar events"
   class="flex flex-col md:h-full md:min-h-0 md:overflow-hidden"
 >
-  <div class="flex min-h-0 flex-1 flex-col">
-    <div class="flex shrink-0 items-center justify-between gap-3 border-b border-border-subtle bg-canvas-paper px-4 py-2.5 md:grid md:grid-cols-[13.5rem_minmax(0,1fr)_auto] md:items-center md:gap-4 md:px-6">
-      <h2 class="hidden font-heading text-xl font-bold tracking-tight text-ink-primary md:block md:truncate md:text-2xl">
-        {activeMonthMeta.label}
-      </h2>
-
-      <div class="flex w-full items-center gap-2 md:mx-auto md:max-w-lg">
+  <div class="flex min-h-0 flex-1 flex-col md:grid md:grid-cols-[minmax(0,1fr)_360px] md:grid-rows-[auto_minmax(0,1fr)] md:gap-3 md:p-3 lg:grid-cols-[minmax(0,1fr)_400px]">
+    <div class="flex shrink-0 items-center justify-between gap-3 border-b border-border-subtle bg-canvas-paper px-4 py-2.5 md:col-start-1 md:row-start-1 md:border-0 md:p-0">
+      <div class="flex w-full items-center gap-2">
         <div bind:this={searchContainerEl} class="relative flex min-w-0 flex-1 items-center">
           <svg
             class="pointer-events-none absolute left-3 h-4 w-4 text-ink-muted"
@@ -541,11 +523,24 @@
         </div>
       </div>
 
-      <div class="hidden items-center gap-1.5 md:flex">
+
+    </div>
+
+      <!-- Desktop 7-column calendar + side detail panel filling remaining viewport -->
+      <div class="hidden md:contents">
+        <section
+          aria-label={`${activeMonthMeta.label} calendar`}
+          class="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface-card md:col-start-1 md:row-start-2"
+        >
+          <div class="flex shrink-0 items-center justify-between gap-3 px-4 py-3">
+            <h2 class="truncate font-heading text-xl font-bold tracking-tight text-ink-primary md:text-2xl">
+              {activeMonthMeta.label}
+            </h2>
+      <div class="flex items-center gap-1.5">
         <button
           type="button"
           onclick={jumpToToday}
-          class="inline-flex h-9 cursor-pointer items-center rounded-lg border border-border-subtle bg-surface-card px-3 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
+          class="inline-flex h-9 items-center rounded-lg border border-border-subtle bg-surface-card px-3 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
         >
           Today
         </button>
@@ -554,7 +549,7 @@
           onclick={() => stepMonth(-1)}
           disabled={!canGoPrev}
           aria-label="Previous month"
-          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
@@ -565,21 +560,14 @@
           onclick={() => stepMonth(1)}
           disabled={!canGoNext}
           aria-label="Next month"
-          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
           </svg>
         </button>
       </div>
-    </div>
-
-      <!-- Desktop 7-column calendar + side detail panel filling remaining viewport -->
-      <div class="hidden md:grid md:min-h-0 md:flex-1 md:grid-cols-[minmax(0,1fr)_360px] md:gap-3 md:p-3 lg:grid-cols-[minmax(0,1fr)_400px]">
-        <section
-          aria-label={`${activeMonthMeta.label} calendar`}
-          class="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface-card"
-        >
+          </div>
           <div class="grid shrink-0 grid-cols-7 bg-surface-card">
             {#each WEEKDAYS_UPPER as dayName (dayName)}
               <div
@@ -602,21 +590,15 @@
                     {@const isToday = cell.date === todayIso}
                     {@const isLastRow = weekIdx === gridModel.weeks.length - 1}
                     <div class="relative h-full min-h-0 border-r border-border-subtle/70 last:border-r-0">
-                      <button
-                        type="button"
-                        aria-pressed={isSelected}
-                        aria-label={cell.overflowCount > 0
-                          ? `${formatIsoDateReadable(cell.date)}, ${cell.overflowCount} more`
-                          : formatIsoDateReadable(cell.date)}
-                        onclick={() => selectDay(cell.date)}
+                      <button type="button" aria-label={formatIsoDateReadable(cell.date)} aria-pressed={isSelected} onclick={() => selectDay(cell.date)}
                         class={`flex h-full w-full min-h-0 cursor-pointer flex-col items-center justify-start px-1.5 pt-1 pb-1 text-center transition-colors focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
                           isLastRow && colIdx === 0 ? 'rounded-bl-2xl' : ''
                         } ${isLastRow && colIdx === 6 ? 'rounded-br-2xl' : ''} ${
                           isSelected
                             ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70'
                             : cell.inMonth
-                              ? 'bg-surface-card hover:bg-surface-subtle/40'
-                              : 'bg-surface-card text-ink-muted hover:bg-surface-subtle/40'
+                              ? 'bg-surface-card'
+                              : 'bg-surface-card text-ink-muted'
                         }`}
                       >
                         <span
@@ -652,22 +634,17 @@
                       seg.continuesBefore ||
                       seg.continuesAfter ||
                       seg.event.category === 'holiday'}
-                    <button
-                      type="button"
-                      onclick={(e) => {
-                        e.stopPropagation();
-                        selectDay(seg.anchorDate, seg.event.id);
-                      }}
+                    <div
                       title={seg.event.title}
                       style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
-                      class={`cal-cat-${seg.event.category} pointer-events-auto flex h-[20px] min-w-0 cursor-pointer items-center gap-1.5 overflow-hidden whitespace-nowrap px-1.5 text-left text-[11px] leading-none transition-all focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                      class={`cal-cat-${seg.event.category} flex h-[20px] min-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap px-1.5 text-left text-[11px] leading-none transition-all focus-visible:outline-2 focus-visible:outline-brand-crimson ${
                         seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-1 rounded-l-[5px]'
                       } ${
                         seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-1.5 rounded-r-[5px]'
                       } ${
                         isSolidBar
-                          ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)] font-medium hover:brightness-95'
-                          : 'text-ink-primary font-medium hover:bg-surface-subtle/80'
+                          ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)] font-medium'
+                          : 'text-ink-primary font-medium'
                       } ${
                         isActiveEvent
                           ? isSolidBar
@@ -680,7 +657,7 @@
                         <span aria-hidden="true" class="cal-dot h-2 w-2 shrink-0 rounded-full"></span>
                       {/if}
                       <span class="min-w-0 overflow-hidden whitespace-nowrap">{seg.event.title}</span>
-                    </button>
+                    </div>
                   {/each}
                 </div>
               </div>
@@ -690,17 +667,17 @@
 
         <aside
           aria-label="Selected day details"
-          class="flex h-full min-h-0 flex-col rounded-2xl border border-border-subtle bg-surface-card p-5"
+          class="flex h-full min-h-0 flex-col rounded-2xl border border-border-subtle bg-surface-card p-5 md:col-start-2 md:row-span-2 md:row-start-1"
         >
           <div class="shrink-0 border-b border-border-subtle pb-3">
             <h3 class="font-heading text-base font-bold text-ink-primary">
-              {formatIsoDateReadable(selectedDate)}
+              {selectedDate ? formatIsoDateReadable(selectedDate) : 'Select a date'}
             </h3>
           </div>
 
           {#if selectedDayEvents.length === 0}
             <p class="pt-4 text-sm text-ink-secondary">
-              No events on this date.
+              {selectedDate ? 'No events on this date.' : 'Select a date or search for an event to see its details.'}
             </p>
           {:else}
             <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
@@ -760,10 +737,10 @@
       </div>
 
       <!-- Mobile Google-Calendar-style near-full-height grid + separate agenda card peeking below -->
-      <div class={`md:hidden ${mobileAgendaOpen ? 'space-y-3 pb-4' : ''}`}>
+      <div class="flex flex-col gap-3 px-3 pb-4 pt-3 md:hidden">
         <section
           aria-label={`${activeMonthMeta.label} calendar`}
-          class="flex h-[calc(100svh-7.75rem)] min-h-[380px] flex-col overflow-hidden border-b border-border-subtle bg-surface-card"
+          class="order-1 flex h-[calc(100svh-7.75rem)] min-h-[380px] flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface-card"
         >
           <div class="flex shrink-0 items-center justify-between gap-2 border-b border-border-subtle px-3 py-2">
             <h2 class="font-heading text-base font-bold tracking-tight text-ink-primary">
@@ -774,7 +751,7 @@
               <button
                 type="button"
                 onclick={jumpToToday}
-                class="inline-flex h-8 cursor-pointer items-center rounded-lg border border-border-subtle bg-canvas-paper px-2.5 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
+                class="inline-flex h-8 items-center rounded-lg border border-border-subtle bg-canvas-paper px-2.5 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 Today
               </button>
@@ -783,7 +760,7 @@
                 onclick={() => stepMonth(-1)}
                 disabled={!canGoPrev}
                 aria-label="Previous month"
-                class="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-canvas-paper text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+                class="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border-subtle bg-canvas-paper text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
@@ -794,7 +771,7 @@
                 onclick={() => stepMonth(1)}
                 disabled={!canGoNext}
                 aria-label="Next month"
-                class="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-canvas-paper text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+                class="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border-subtle bg-canvas-paper text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
@@ -818,7 +795,6 @@
           <div
             role="presentation"
             bind:this={mobileGridEl}
-            bind:clientWidth={mobileGridWidth}
             ontouchstart={startCalendarSwipe}
             ontouchmove={moveCalendarSwipe}
             ontouchend={endCalendarSwipe}
@@ -870,14 +846,8 @@
                   {#each week.days as cell (cell.date)}
                     {@const isSelected = mobileAgendaOpen && cell.date === selectedDate}
                     {@const isToday = cell.date === todayIso}
-                    <button
-                      type="button"
-                      aria-pressed={isSelected}
-                      aria-label={cell.overflowCount > 0
-                        ? `${formatIsoDateReadable(cell.date)}, ${cell.overflowCount} more`
-                        : formatIsoDateReadable(cell.date)}
-                      onclick={() => selectDay(cell.date)}
-                      class={`flex h-full min-h-0 cursor-pointer flex-col items-center justify-between border-r border-border-subtle/70 px-0.5 pt-1 pb-0.5 text-center transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                    <button type="button" aria-label={formatIsoDateReadable(cell.date)} aria-pressed={isSelected} onclick={() => selectDay(cell.date)}
+                      class={`flex h-full w-full min-h-0 cursor-pointer flex-col items-center justify-between border-r border-border-subtle/70 px-0.5 pt-1 pb-0.5 text-center transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-brand-crimson ${
                         isSelected
                           ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70'
                           : cell.inMonth
@@ -916,15 +886,10 @@
                       seg.continuesBefore ||
                       seg.continuesAfter ||
                       seg.event.category === 'holiday'}
-                    <button
-                      type="button"
-                      onclick={(e) => {
-                        e.stopPropagation();
-                        selectDay(seg.anchorDate, seg.event.id);
-                      }}
+                    <div
                       title={seg.event.title}
                       style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
-                      class={`cal-cat-${seg.event.category} pointer-events-auto flex h-[15px] min-w-0 cursor-pointer items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${
+                      class={`cal-cat-${seg.event.category} flex h-[15px] min-w-0 items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${
                         seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-0.5 rounded-l-[3px]'
                       } ${
                         seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-0.5 rounded-r-[3px]'
@@ -935,7 +900,7 @@
                       }`}
                     >
                       <span class="min-w-0 overflow-hidden whitespace-nowrap">{seg.event.title}</span>
-                    </button>
+                    </div>
                   {/each}
                 </div>
               </div>
@@ -945,31 +910,21 @@
 
         <!-- Separate selected-day events card below the mobile calendar -->
         {#if mobileAgendaOpen}
-        <div class="relative px-3" bind:this={mobileAgendaEl}>
-          {#if selectedColumn >= 0 && pointerX >= 12 && pointerX <= mobileGridWidth - 12}
-            <span
-              aria-hidden="true"
-              class="pointer-events-none absolute -top-1.5 z-10 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-border-subtle bg-surface-card"
-              style={`left: ${pointerX}px;`}
-            ></span>
-          {/if}
+        <div class="relative order-2" bind:this={mobileAgendaEl}>
           <section
             aria-label="Selected day agenda"
             class="rounded-xl border border-border-subtle bg-surface-card p-4 shadow-xs"
           >
             <div class="flex items-center justify-between gap-3 border-b border-border-subtle pb-2.5">
               <h3 class="font-heading text-sm font-bold text-ink-primary">
-                {formatIsoDateReadable(selectedDate)}
+                {selectedDate ? formatIsoDateReadable(selectedDate) : 'Select a date'}
               </h3>
-              <button type="button" onclick={() => { mobileAgendaOpen = false; selectedEventId = null; }} aria-label="Close selected day agenda" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-ink-secondary hover:bg-canvas-paper hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson">
-                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12" /></svg>
-              </button>
             </div>
 
             <div class="pt-3">
               {#if selectedDayEvents.length === 0}
                 <p class="text-sm text-ink-secondary">
-                  No events on this date.
+                  {selectedDate ? 'No events on this date.' : 'Select a date or search for an event to see its details.'}
                 </p>
               {:else}
                 <ul class="space-y-2.5">

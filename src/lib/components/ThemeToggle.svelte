@@ -5,9 +5,10 @@
 
   interface Props {
     class?: string;
+    alignLeftOnMobile?: boolean;
   }
 
-  const { class: className = '' }: Props = $props();
+  const { class: className = '', alignLeftOnMobile = false }: Props = $props();
 
   const KEY = 'geary-theme';
   const OPTIONS: readonly { value: ThemePreference; label: string }[] = [
@@ -172,7 +173,7 @@
     aria-label="Choose color theme"
     onclick={handleTriggerClick}
     onkeydown={handleTriggerKeyDown}
-    class="inline-flex min-h-[44px] min-w-[44px] md:min-h-[40px] md:min-w-[40px] md:h-10 md:w-10 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors duration-150"
+    class="inline-flex min-h-[44px] min-w-[44px] md:min-h-[40px] md:min-w-[40px] md:h-10 md:w-10 cursor-pointer items-center justify-center rounded-full bg-hero text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors duration-150"
   >
     <svg
       data-theme-trigger-icon="light"
@@ -210,7 +211,7 @@
     aria-label="Color theme"
     tabindex="-1"
     onkeydown={handleMenuKeyDown}
-    class={`absolute right-0 top-full z-50 mt-2 w-48 rounded-xl border border-border-subtle bg-surface-card p-1.5 shadow-lg ${
+    class={`absolute right-0 ${alignLeftOnMobile ? 'max-md:left-0 max-md:right-auto' : ''} top-full z-50 mt-2 w-48 rounded-2xl border border-border-subtle bg-surface-card p-1.5 shadow-geary-2 ${
       isOpen ? '' : 'hidden'
     }`}
   >
@@ -225,7 +226,7 @@
         onclick={() => selectPreference(opt.value)}
         class={`flex min-h-[44px] w-full cursor-pointer items-center justify-between gap-2.5 rounded-lg px-3 py-2 text-left text-sm hover:bg-surface-subtle focus-visible:bg-surface-subtle transition-colors duration-150 ${
           isSelected
-            ? 'bg-brand-crimson-wash font-semibold text-brand-crimson'
+            ? 'bg-brand-crimson-wash font-semibold text-tonal-content'
             : 'font-medium text-ink-primary'
         }`}
       >

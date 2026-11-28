@@ -211,7 +211,7 @@
   aria-live="polite"
   aria-label="Selected building locations"
   style={mobileSheetStyle}
-  class={`pointer-events-auto absolute inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-2xl border-t border-border-subtle bg-surface-card shadow-[0_-8px_24px_rgba(0,0,0,0.12)] lg:static lg:inset-auto lg:h-auto! lg:min-h-0 lg:max-h-full lg:rounded-2xl lg:border lg:shadow-md ${
+  class={`pointer-events-auto absolute inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-[28px] border-t border-border-subtle bg-surface-card shadow-[0_-8px_24px_rgba(0,0,0,0.12)] lg:static lg:inset-auto lg:h-auto! lg:min-h-0 lg:max-h-full lg:rounded-3xl lg:border lg:shadow-geary-2 ${
     dragHeightPx === null ? 'transition-[height] duration-200 ease-out' : 'transition-none'
   }`}
 >
@@ -311,7 +311,7 @@
           {#each groupedOthers.floorGroups as group (`${selectedBuilding.id}:${group.floor}`)}
             {@const key = `${selectedBuilding.id}:${group.floor}`}
             {@const isOpen = Boolean(openFloors[key])}
-            <li class="overflow-hidden rounded-lg border border-border-subtle bg-canvas-paper">
+            <li class="overflow-hidden rounded-xl border border-border-subtle bg-surface-subtle">
               <button
                 type="button"
                 aria-expanded={isOpen}

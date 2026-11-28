@@ -27,8 +27,8 @@
   {ogImageUrl}
 />
 
-<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-  <div class="mb-8 border-b border-border-subtle pb-6 max-w-[65ch]">
+<div class="mx-auto max-w-[82rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-16 lg:py-12">
+  <div class="mb-8 max-w-[65ch]">
     <Breadcrumbs
       items={[
         { label: 'Home', href: '/' },
@@ -36,22 +36,22 @@
       ]}
     />
 
-    <h1 class="mt-8 font-heading text-[1.75rem] sm:text-[2.25rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
+    <h1 class="mt-3 font-heading text-[2rem] md:text-[2.5rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
       Contribute to Geary
     </h1>
   </div>
 
   <div class="max-w-3xl space-y-6">
-    <div class="rounded-xl border border-border-subtle bg-surface-card p-5 sm:p-6">
-      <h2 class="font-heading text-base font-bold text-ink-primary">Before you submit</h2>
-      <ul class="mt-3 space-y-2.5 text-sm leading-relaxed text-ink-secondary">
+    <div class="rounded-2xl bg-brand-gold-wash p-5 sm:p-6">
+      <h2 class="font-heading text-base font-bold text-brand-gold-ink">Before you submit</h2>
+      <ul class="mt-3 space-y-2.5 font-ui text-sm leading-relaxed text-brand-gold-ink">
         {#each CHECKLIST_ITEMS as item (item)}
           <li class="flex items-start gap-2.5">
             <svg
               aria-hidden="true"
               viewBox="0 0 16 16"
               fill="none"
-              class="mt-0.5 h-4 w-4 shrink-0 text-brand-crimson"
+              class="mt-0.5 h-4 w-4 shrink-0 text-brand-gold-ink"
               stroke="currentColor"
               stroke-width="2.2"
             >
@@ -69,14 +69,14 @@
           href={FORM_DIRECT_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 text-sm font-semibold text-brand-crimson hover:text-brand-crimson-hover hover:underline underline-offset-2 transition-colors"
+          class="inline-flex min-h-10 items-center gap-2 rounded-full bg-brand-crimson-wash px-4 font-ui text-sm font-medium text-tonal-content transition-colors hover:brightness-95"
         >
           <span>Open form in a new tab</span>
           <span aria-hidden="true">↗</span>
         </a>
       </div>
 
-      <div class="overflow-hidden rounded-xl border border-border-subtle bg-white">
+      <div class="overflow-hidden rounded-3xl border border-border-subtle bg-surface-card shadow-geary-1">
         <iframe
           src={FORM_EMBED_URL}
           title="Contribute to Geary Google Form"

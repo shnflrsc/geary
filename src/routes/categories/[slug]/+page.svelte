@@ -17,7 +17,7 @@
   jsonLd={data.breadcrumbJsonLd}
 />
 
-<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+<div class="mx-auto max-w-[82rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
   <div class="mb-10 border-b border-border-subtle pb-6 max-w-3xl">
     <Breadcrumbs
       items={[
@@ -27,7 +27,7 @@
       ]}
     />
 
-    <h1 class="font-heading text-[1.75rem] sm:text-[2.25rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
+    <h1 class="font-heading text-[1.75rem] sm:text-[2.5rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
       {data.category.title}
     </h1>
   </div>
@@ -35,7 +35,7 @@
   {#if data.articles.length > 0}
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
       {#each data.articles as article (article.slug)}
-        <ArticleCard {article} />
+        <ArticleCard {article} categoryLabel={data.category.title} />
       {/each}
     </div>
   {:else}

@@ -16,8 +16,8 @@
   {ogImageUrl}
 />
 
-<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-  <div class="mb-8 border-b border-border-subtle pb-6 max-w-[65ch]">
+<div class="mx-auto max-w-[82rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-16 lg:py-12">
+  <div class="mb-8 max-w-[65ch]">
     <Breadcrumbs
       items={[
         { label: 'Home', href: '/' },
@@ -25,13 +25,9 @@
       ]}
     />
 
-    <h1 class="font-heading text-[1.75rem] sm:text-[2.25rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
+    <h1 class="font-heading text-[2rem] md:text-[2.5rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
       Privacy Policy
     </h1>
-
-    <p class="mt-3 text-base sm:text-lg leading-relaxed text-ink-secondary">
-      How Geary handles data: zero accounts, client-side search, and zero personal tracking.
-    </p>
 
     <p class="mt-4 text-xs font-medium text-ink-secondary">
       Effective Date: November 19, 2026

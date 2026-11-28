@@ -1,9 +1,13 @@
-<footer class="mt-auto border-t border-border-subtle bg-canvas-paper py-8">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between gap-3">
+<script lang="ts">
+  let { desktopOnly = false }: { desktopOnly?: boolean } = $props();
+</script>
+
+<footer class={`relative z-10 mt-auto bg-canvas-paper ${desktopOnly ? "hidden md:block" : ""}`}>
+  <div class="mx-auto max-w-[90rem] px-4 sm:px-8 lg:px-16">
+    <div class="flex flex-wrap items-center justify-between gap-3 py-4 sm:py-6">
       <p class="whitespace-nowrap text-xs sm:text-sm text-ink-secondary">&copy; 2026 Geary</p>
 
-      <ul class="flex items-center gap-4 sm:gap-6">
+      <ul class="flex flex-wrap items-center gap-4 sm:gap-6">
         <li>
           <a
             href="/terms"

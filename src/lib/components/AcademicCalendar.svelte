@@ -327,259 +327,259 @@
   class="flex flex-col md:h-full md:min-h-0 md:overflow-hidden"
 >
   <div class="flex min-h-0 flex-1 flex-col">
-    <div class="flex shrink-0 items-center justify-between gap-3 border-b border-border-subtle bg-canvas-paper px-4 py-2.5 md:grid md:grid-cols-[13.5rem_minmax(0,1fr)_auto] md:items-center md:gap-4 md:px-6">
-      <h2 class="hidden font-heading text-xl font-bold tracking-tight text-ink-primary md:block md:truncate md:text-2xl">
-        {activeMonthMeta.label}
-      </h2>
-
-      <div class="flex w-full items-center gap-2 md:mx-auto md:max-w-lg">
-        <div bind:this={searchContainerEl} class="relative flex min-w-0 flex-1 items-center">
-          <svg
-            class="pointer-events-none absolute left-3 h-4 w-4 text-ink-muted"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <input
-            bind:this={searchInputEl}
-            type="search"
-            bind:value={query}
-            onfocus={() => {
-              if (searchTerms.length > 0) searchResultsOpen = true;
-            }}
-            oninput={() => {
-              searchResultsOpen = true;
-              highlightedResultIndex = -1;
-            }}
-            onkeydown={handleSearchKeydown}
-            role="combobox"
-            aria-expanded={showSearchResults}
-            aria-controls="calendar-search-results"
-            aria-activedescendant={highlightedResultIndex >= 0 ? `calendar-search-option-${highlightedResultIndex}` : undefined}
-            aria-label="Search academic calendar events"
-            placeholder="Search Academic Calendar..."
-            class="h-9 w-full rounded-lg border border-border-strong bg-surface-card pr-9 pl-9 text-sm text-ink-primary placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 [&::-webkit-search-cancel-button]:hidden"
-          />
-          {#if query}
-            <button
-              type="button"
-              onclick={() => {
-                query = '';
-                searchResultsOpen = false;
-                highlightedResultIndex = -1;
-              }}
-              aria-label="Clear calendar search"
-              class="absolute right-2 inline-flex h-6 w-6 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="h-3.5 w-3.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            </button>
-          {:else}
-            <kbd
-              aria-hidden="true"
-              class="pointer-events-none absolute right-2.5 hidden sm:inline-flex items-center justify-center rounded border border-border-subtle bg-surface-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-ink-secondary"
-            >
-              /
-            </kbd>
-          {/if}
-
-          {#if showSearchResults}
-            <div
-              class="absolute top-full left-0 right-0 z-50 mt-1.5 max-h-80 overflow-y-auto rounded-xl border border-border-subtle bg-surface-card p-1.5 shadow-xl"
-            >
-              {#if filteredEvents.length === 0}
-                <p role="status" class="px-3 py-2.5 text-xs text-ink-secondary">
-                  No matching events found.
-                </p>
-              {:else}
-                <ul
-                  id="calendar-search-results"
-                  role="listbox"
-                  aria-label="Calendar search results"
-                  class="space-y-0.5"
-                >
-                  {#each filteredEvents as event, i (event.id)}
-                    {@const isHighlighted = i === highlightedResultIndex}
-                    <li role="presentation">
-                      <button
-                        type="button"
-                        role="option"
-                        id={`calendar-search-option-${i}`}
-                        aria-selected={isHighlighted}
-                        onclick={() => selectSearchResult(event)}
-                        class={`flex w-full cursor-pointer items-baseline gap-3 rounded-lg px-2.5 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
-                          isHighlighted
-                            ? 'bg-brand-crimson-wash text-ink-primary'
-                            : 'hover:bg-surface-subtle'
-                        }`}
-                      >
-                        <span class="min-w-0 flex-1 text-xs font-medium leading-snug text-ink-primary sm:text-sm">
-                          {#each splitHighlightedParts(event.title, searchTerms) as part, idx (idx)}
-                            {#if part.match}
-                              <mark class="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson">{part.text}</mark>
-                            {:else}
-                              {part.text}
-                            {/if}
-                          {/each}
-                        </span>
-                        <span class="shrink-0 text-right text-xs font-medium tabular-nums text-ink-secondary">
-                          {formatSearchResultDate(event)}
-                        </span>
-                      </button>
-                    </li>
-                  {/each}
-                </ul>
-              {/if}
-            </div>
-          {/if}
-        </div>
-
-        <div bind:this={filterMenuEl} class="relative shrink-0">
+    <div class="grid shrink-0 grid-cols-2 items-center gap-3 px-4 pt-5 pb-4 md:grid-cols-[minmax(0,1fr)_168px_168px] md:gap-4 md:px-8 lg:grid-cols-[minmax(0,1fr)_188px_188px] lg:px-16">
+      <h1 class="col-span-full font-heading text-2xl font-bold tracking-tight md:sr-only">
+        Academic Calendar
+      </h1>
+      <div bind:this={searchContainerEl} class="relative col-span-full flex min-w-0 items-center md:col-span-1">
+        <svg
+          class="pointer-events-none absolute left-3 h-4 w-4 text-ink-muted"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input
+          bind:this={searchInputEl}
+          type="search"
+          bind:value={query}
+          onfocus={() => {
+            if (searchTerms.length > 0) searchResultsOpen = true;
+          }}
+          oninput={() => {
+            searchResultsOpen = true;
+            highlightedResultIndex = -1;
+          }}
+          onkeydown={handleSearchKeydown}
+          role="combobox"
+          aria-expanded={showSearchResults}
+          aria-controls="calendar-search-results"
+          aria-activedescendant={highlightedResultIndex >= 0 ? `calendar-search-option-${highlightedResultIndex}` : undefined}
+          aria-label="Search academic calendar events"
+          placeholder="Search events"
+          class="h-11 w-full rounded-full border border-border-subtle font-ui md:h-12 bg-surface-card pr-9 pl-9 text-sm text-ink-primary placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 [&::-webkit-search-cancel-button]:hidden"
+        />
+        {#if query}
           <button
             type="button"
             onclick={() => {
-              filtersOpen = !filtersOpen;
+              query = '';
+              searchResultsOpen = false;
+              highlightedResultIndex = -1;
             }}
-            aria-expanded={filtersOpen}
-            aria-haspopup="true"
-            aria-label={selectedCategories.length > 0 ? `Filters ${selectedCategories.length} active` : 'Filters'}
-            class={`inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
-              filtersOpen || selectedCategories.length > 0
-                ? 'border-brand-crimson bg-brand-crimson-wash text-brand-crimson'
-                : 'border-border-strong bg-surface-card text-ink-primary hover:border-brand-crimson hover:text-brand-crimson'
-            }`}
+            aria-label="Clear calendar search"
+            class="absolute right-2 inline-flex h-6 w-6 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-ink-primary focus-visible:outline-2 focus-visible:outline-brand-crimson"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M7 12h10m-7 6h4" />
-            </svg>
-            <span class="hidden sm:inline">Filters</span>
-            {#if selectedCategories.length > 0}
-              <span class="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-crimson px-1 text-[10px] font-bold text-white">
-                {selectedCategories.length}
-              </span>
-            {/if}
-          </button>
-
-          {#if filtersOpen}
-            <div
-              role="dialog"
-              aria-label="Calendar filters"
-              class="absolute right-0 z-40 mt-2 w-64 rounded-xl border border-border-subtle bg-surface-card p-2 shadow-xl"
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="h-3.5 w-3.5"
+              aria-hidden="true"
             >
-              <p class="px-2.5 pt-1 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-ink-secondary">
-                Categories
-              </p>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        {:else}
+          <kbd
+            aria-hidden="true"
+            class="pointer-events-none absolute right-2.5 hidden sm:inline-flex items-center justify-center rounded border border-border-subtle bg-surface-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-ink-secondary"
+          >
+            /
+          </kbd>
+        {/if}
 
-              <div role="group" aria-label="Filter calendar events by category" class="space-y-0.5">
+        {#if showSearchResults}
+          <div
+            class="absolute top-full left-0 right-0 z-50 mt-1.5 max-h-80 overflow-y-auto rounded-xl border border-border-subtle bg-surface-card p-1.5 shadow-xl"
+          >
+            {#if filteredEvents.length === 0}
+              <p role="status" class="px-3 py-2.5 text-xs text-ink-secondary">
+                No matching events found.
+              </p>
+            {:else}
+              <ul
+                id="calendar-search-results"
+                role="listbox"
+                aria-label="Calendar search results"
+                class="space-y-0.5"
+              >
+                {#each filteredEvents as event, i (event.id)}
+                  {@const isHighlighted = i === highlightedResultIndex}
+                  <li role="presentation">
+                    <button
+                      type="button"
+                      role="option"
+                      id={`calendar-search-option-${i}`}
+                      aria-selected={isHighlighted}
+                      onclick={() => selectSearchResult(event)}
+                      class={`flex w-full cursor-pointer items-baseline gap-3 rounded-lg px-2.5 py-2 text-left transition-colors focus-visible:outline-2 focus-visible:outline-brand-crimson ${
+                        isHighlighted
+                          ? 'bg-brand-crimson-wash text-ink-primary'
+                          : 'hover:bg-surface-subtle'
+                      }`}
+                    >
+                      <span class="min-w-0 flex-1 text-xs font-medium leading-snug text-ink-primary sm:text-sm">
+                        {#each splitHighlightedParts(event.title, searchTerms) as part, idx (idx)}
+                          {#if part.match}
+                            <mark class="rounded-xs bg-brand-crimson/15 px-0.5 font-semibold text-brand-crimson">{part.text}</mark>
+                          {:else}
+                            {part.text}
+                          {/if}
+                        {/each}
+                      </span>
+                      <span class="shrink-0 text-right text-xs font-medium tabular-nums text-ink-secondary">
+                        {formatSearchResultDate(event)}
+                      </span>
+                    </button>
+                  </li>
+                {/each}
+              </ul>
+            {/if}
+          </div>
+        {/if}
+      </div>
+
+      <div bind:this={filterMenuEl} class="relative min-w-0">
+        <button
+          type="button"
+          onclick={() => {
+            filtersOpen = !filtersOpen;
+          }}
+          aria-expanded={filtersOpen}
+          aria-haspopup="true"
+          aria-label={selectedCategories.length > 0 ? `Filters ${selectedCategories.length} active` : 'Filters'}
+          class="inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-brand-crimson-wash px-3 font-ui text-sm font-medium text-tonal-content transition-colors hover:brightness-95 md:h-12"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M7 12h10m-7 6h4" />
+          </svg>
+          <span>Filters</span>
+          {#if selectedCategories.length > 0}
+            <span class="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-crimson px-1 text-[10px] font-bold text-primary-content">
+              {selectedCategories.length}
+            </span>
+          {/if}
+        </button>
+
+        {#if filtersOpen}
+          <div
+            role="dialog"
+            aria-label="Calendar filters"
+            class="absolute left-0 z-40 mt-2 w-64 rounded-3xl border border-border-subtle bg-surface-card p-3 shadow-geary-3"
+          >
+            <p class="px-2.5 pt-1 pb-1.5 font-heading text-base font-semibold text-ink-primary">
+              Event categories
+            </p>
+
+            <div role="group" aria-label="Filter calendar events by category" class="space-y-0.5">
+              <button
+                type="button"
+                aria-pressed={selectedCategories.length === 0}
+                onclick={() => {
+                  selectedCategories = [];
+                }}
+                class="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs font-medium text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-2 focus-visible:outline-brand-crimson"
+              >
+                <span
+                  aria-hidden="true"
+                  class={`inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border-2 transition-colors ${
+                    selectedCategories.length === 0
+                      ? 'border-ink-secondary bg-surface-subtle text-ink-secondary'
+                      : 'border-ink-secondary bg-transparent'
+                  }`}
+                >
+                  {#if selectedCategories.length === 0}
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" class="h-3 w-3">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.5 8.5 6.5 11.5 12.5 5" />
+                    </svg>
+                  {/if}
+                </span>
+                <span>All Events</span>
+              </button>
+
+              <div class="my-1 border-t border-border-subtle"></div>
+
+              {#each CALENDAR_CATEGORIES as cat (cat.id)}
+                {@const isSelected = selectedCategories.includes(cat.id)}
                 <button
                   type="button"
-                  aria-pressed={selectedCategories.length === 0}
-                  onclick={() => {
-                    selectedCategories = [];
-                  }}
-                  class="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs font-medium text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-2 focus-visible:outline-brand-crimson"
+                  aria-pressed={isSelected}
+                  onclick={() => toggleCategory(cat.id)}
+                  class={`cal-cat-${cat.id} flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs font-medium text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-2 focus-visible:outline-brand-crimson`}
                 >
                   <span
                     aria-hidden="true"
-                    class={`inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border transition-colors ${
-                      selectedCategories.length === 0
-                        ? 'border-brand-crimson bg-brand-crimson text-white'
-                        : 'border-border-strong bg-transparent'
-                    }`}
+                    style={isSelected
+                      ? 'background-color: var(--cal-bg); border-color: var(--cal-ink); color: var(--cal-ink);'
+                      : 'border-color: var(--cal-ink);'}
+                    class="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border-2 text-white transition-colors"
                   >
-                    {#if selectedCategories.length === 0}
-                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" class="h-3 w-3">
+                    {#if isSelected}
+                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" class="h-3 w-3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.5 8.5 6.5 11.5 12.5 5" />
                       </svg>
                     {/if}
                   </span>
-                  <span>All Events</span>
+                  <span class="truncate">{cat.label}</span>
                 </button>
-
-                <div class="my-1 border-t border-border-subtle"></div>
-
-                {#each CALENDAR_CATEGORIES as cat (cat.id)}
-                  {@const isSelected = selectedCategories.includes(cat.id)}
-                  <button
-                    type="button"
-                    aria-pressed={isSelected}
-                    onclick={() => toggleCategory(cat.id)}
-                    class={`cal-cat-${cat.id} flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs font-medium text-ink-primary transition-colors hover:bg-surface-subtle focus-visible:outline-2 focus-visible:outline-brand-crimson`}
-                  >
-                    <span
-                      aria-hidden="true"
-                      style={isSelected
-                        ? 'background-color: var(--cal-dot); border-color: var(--cal-dot);'
-                        : 'border-color: var(--cal-dot);'}
-                      class="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border-2 text-white transition-colors"
-                    >
-                      {#if isSelected}
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" class="h-3 w-3 dark:text-canvas-paper">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.5 8.5 6.5 11.5 12.5 5" />
-                        </svg>
-                      {/if}
-                    </span>
-                    <span class="truncate">{cat.label}</span>
-                  </button>
-                {/each}
-              </div>
+              {/each}
             </div>
-          {/if}
-        </div>
+          </div>
+        {/if}
       </div>
-
-      <div class="hidden items-center gap-1.5 md:flex">
-        <button
-          type="button"
-          onclick={jumpToToday}
-          class="inline-flex h-9 cursor-pointer items-center rounded-lg border border-border-subtle bg-surface-card px-3 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
-        >
-          Today
-        </button>
-        <button
-          type="button"
-          onclick={() => stepMonth(-1)}
-          disabled={!canGoPrev}
-          aria-label="Previous month"
-          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
-        <button
-          type="button"
-          onclick={() => stepMonth(1)}
-          disabled={!canGoNext}
-          aria-label="Next month"
-          class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
-      </div>
+      <button
+        type="button"
+        onclick={jumpToToday}
+        class="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-brand-crimson-wash px-3 font-ui text-sm font-medium text-tonal-content transition-colors hover:brightness-95 md:h-12"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="size-4">
+          <rect x="4" y="5" width="16" height="15" rx="2" />
+          <path d="M8 3v4m8-4v4M4 10h16" />
+          <circle cx="12" cy="15" r="1" fill="currentColor" />
+        </svg>
+        Today
+      </button>
     </div>
 
       <!-- Desktop 7-column calendar + side detail panel filling remaining viewport -->
-      <div class="hidden md:grid md:min-h-0 md:flex-1 md:grid-cols-[minmax(0,1fr)_360px] md:gap-3 md:p-3 lg:grid-cols-[minmax(0,1fr)_400px]">
+      <div class="hidden md:grid md:min-h-0 md:flex-1 md:grid-cols-[minmax(0,1fr)_352px] md:gap-4 md:px-8 md:pb-6 lg:grid-cols-[minmax(0,1fr)_392px] lg:px-16">
         <section
           aria-label={`${activeMonthMeta.label} calendar`}
-          class="flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface-card"
+          class="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-border-subtle bg-surface-card"
         >
+          <div class="flex items-center justify-between px-5 py-3">
+            <h2 class="font-heading text-xl font-bold">{activeMonthMeta.label}</h2>
+            <div class="flex gap-1">
+              <button
+                type="button"
+                onclick={() => stepMonth(-1)}
+                disabled={!canGoPrev}
+                aria-label="Previous month"
+                class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-surface-subtle text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onclick={() => stepMonth(1)}
+                disabled={!canGoNext}
+                aria-label="Next month"
+                class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-surface-subtle text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-crimson"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
           <div class="grid shrink-0 grid-cols-7 bg-surface-card">
             {#each WEEKDAYS_UPPER as dayName (dayName)}
               <div
@@ -591,8 +591,8 @@
           </div>
 
           <div
-            class="grid min-h-0 flex-1"
-            style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(0, 1fr));`}
+            class="grid min-h-0 flex-1 overflow-y-auto"
+            style={`grid-template-rows: repeat(${gridModel.weeks.length}, minmax(100px, 1fr));`}
           >
             {#each gridModel.weeks as week, weekIdx (weekIdx)}
               <div class="relative min-h-0 border-b border-border-subtle/70 last:border-b-0">
@@ -622,7 +622,7 @@
                         <span
                           class={`inline-flex h-6 min-w-6 items-center justify-center rounded-full px-1.5 text-xs font-medium tabular-nums ${
                             isToday
-                              ? 'bg-brand-crimson text-white font-semibold'
+                              ? 'bg-brand-crimson text-primary-content font-semibold'
                               : isSelected
                                 ? 'bg-brand-crimson-wash text-brand-crimson font-semibold'
                                 : cell.inMonth
@@ -652,13 +652,7 @@
                       seg.continuesBefore ||
                       seg.continuesAfter ||
                       seg.event.category === 'holiday'}
-                    <button
-                      type="button"
-                      onclick={(e) => {
-                        e.stopPropagation();
-                        selectDay(seg.anchorDate, seg.event.id);
-                      }}
-                      title={seg.event.title}
+                    <button type="button" onclick={(e) => { e.stopPropagation(); selectDay(seg.anchorDate, seg.event.id); }} title={seg.event.title}
                       style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
                       class={`cal-cat-${seg.event.category} pointer-events-auto flex h-[20px] min-w-0 cursor-pointer items-center gap-1.5 overflow-hidden whitespace-nowrap px-1.5 text-left text-[11px] leading-none transition-all focus-visible:outline-2 focus-visible:outline-brand-crimson ${
                         seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-1 rounded-l-[5px]'
@@ -666,7 +660,7 @@
                         seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-1.5 rounded-r-[5px]'
                       } ${
                         isSolidBar
-                          ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)] font-medium hover:brightness-95'
+                          ? 'cal-event-bar font-medium hover:brightness-95'
                           : 'text-ink-primary font-medium hover:bg-surface-subtle/80'
                       } ${
                         isActiveEvent
@@ -690,7 +684,7 @@
 
         <aside
           aria-label="Selected day details"
-          class="flex h-full min-h-0 flex-col rounded-2xl border border-border-subtle bg-surface-card p-5"
+          class="flex h-full min-h-0 flex-col rounded-3xl border border-border-subtle bg-surface-card p-5"
         >
           <div class="shrink-0 border-b border-border-subtle pb-3">
             <h3 class="font-heading text-base font-bold text-ink-primary">
@@ -714,7 +708,7 @@
               {#each selectedDayEvents as event (event.id)}
                 {@const isFocused = selectedEventId === event.id}
                 <li
-                  class={`cal-cat-${event.category} rounded-lg border p-3.5 transition-colors ${
+                  class={`cal-agenda-event cal-cat-${event.category} rounded-2xl border p-3.5 transition-colors ${
                     isFocused
                       ? 'border-brand-crimson bg-brand-crimson-wash/30'
                       : 'border-border-subtle bg-canvas-paper/60'
@@ -763,7 +757,7 @@
       <div class={`md:hidden ${mobileAgendaOpen ? 'space-y-3 pb-4' : ''}`}>
         <section
           aria-label={`${activeMonthMeta.label} calendar`}
-          class="flex h-[calc(100svh-7.75rem)] min-h-[380px] flex-col overflow-hidden border-b border-border-subtle bg-surface-card"
+          class="flex mx-4 mb-3 h-[calc(100svh-16rem)] min-h-[380px] flex-col overflow-hidden rounded-3xl border border-border-subtle bg-surface-card"
         >
           <div class="flex shrink-0 items-center justify-between gap-2 border-b border-border-subtle px-3 py-2">
             <h2 class="font-heading text-base font-bold tracking-tight text-ink-primary">
@@ -771,13 +765,6 @@
             </h2>
 
             <div class="flex items-center gap-1">
-              <button
-                type="button"
-                onclick={jumpToToday}
-                class="inline-flex h-8 cursor-pointer items-center rounded-lg border border-border-subtle bg-canvas-paper px-2.5 text-xs font-semibold text-ink-primary transition-colors hover:border-brand-crimson hover:text-brand-crimson focus-visible:outline-2 focus-visible:outline-brand-crimson"
-              >
-                Today
-              </button>
               <button
                 type="button"
                 onclick={() => stepMonth(-1)}
@@ -839,7 +826,7 @@
                       <div class="grid h-full grid-cols-7">
                         {#each week.days as cell}
                           <div class={`flex h-full min-h-0 flex-col items-center justify-between border-r border-border-subtle/70 px-0.5 pt-1 pb-0.5 text-center last:border-r-0 ${mobileAgendaOpen && cell.date === selectedDate ? 'bg-brand-crimson-wash/35 ring-1 ring-inset ring-brand-crimson/70' : ''}`}>
-                            <span class={`inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-medium tabular-nums ${cell.date === todayIso ? 'bg-brand-crimson text-white font-semibold' : mobileAgendaOpen && cell.date === selectedDate ? 'bg-brand-crimson-wash text-brand-crimson font-semibold' : cell.inMonth ? 'text-ink-primary' : 'text-ink-muted'}`}>
+                            <span class={`inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-medium tabular-nums ${cell.date === todayIso ? 'bg-brand-crimson text-primary-content font-semibold' : mobileAgendaOpen && cell.date === selectedDate ? 'bg-brand-crimson-wash text-brand-crimson font-semibold' : cell.inMonth ? 'text-ink-primary' : 'text-ink-muted'}`}>
                               {cell.day}
                             </span>
                             {#if cell.overflowCount > 0}
@@ -853,7 +840,7 @@
                           {@const isSolidBar = seg.endCol > seg.startCol || seg.continuesBefore || seg.continuesAfter || seg.event.category === 'holiday'}
                           <div
                             style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
-                            class={`cal-cat-${seg.event.category} flex h-[15px] min-w-0 items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-0.5 rounded-l-[3px]'} ${seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-0.5 rounded-r-[3px]'} ${isSolidBar ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)]' : 'cal-badge border'}`}
+                            class={`cal-cat-${seg.event.category} flex h-[15px] min-w-0 items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-0.5 rounded-l-[3px]'} ${seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-0.5 rounded-r-[3px]'} ${isSolidBar ? 'cal-event-bar' : 'cal-badge border'}`}
                           >
                             <span class="min-w-0 overflow-hidden whitespace-nowrap">{seg.event.title}</span>
                           </div>
@@ -888,7 +875,7 @@
                       <span
                         class={`inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-medium tabular-nums ${
                           isToday
-                            ? 'bg-brand-crimson text-white font-semibold'
+                            ? 'bg-brand-crimson text-primary-content font-semibold'
                             : isSelected
                               ? 'bg-brand-crimson-wash text-brand-crimson font-semibold'
                               : cell.inMonth
@@ -916,26 +903,20 @@
                       seg.continuesBefore ||
                       seg.continuesAfter ||
                       seg.event.category === 'holiday'}
-                    <button
-                      type="button"
-                      onclick={(e) => {
-                        e.stopPropagation();
-                        selectDay(seg.anchorDate, seg.event.id);
-                      }}
-                      title={seg.event.title}
+                    <div aria-hidden="true"
                       style={`grid-column: ${seg.startCol + 1} / ${seg.endCol + 2}; grid-row: ${seg.lane + 1};`}
-                      class={`cal-cat-${seg.event.category} pointer-events-auto flex h-[15px] min-w-0 cursor-pointer items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${
+                      class={`cal-cat-${seg.event.category} flex h-[15px] min-w-0 items-center overflow-hidden whitespace-nowrap px-1 text-left text-[9.5px] leading-none font-medium ${
                         seg.continuesBefore ? 'ml-0 rounded-l-none' : 'ml-0.5 rounded-l-[3px]'
                       } ${
                         seg.continuesAfter ? 'mr-0 rounded-r-none' : 'mr-0.5 rounded-r-[3px]'
                       } ${
                         isSolidBar
-                          ? 'bg-[var(--cal-dot)] text-white dark:bg-[var(--cal-bg)] dark:text-[var(--cal-ink)]'
+                          ? 'cal-event-bar'
                           : 'cal-badge border'
                       }`}
                     >
                       <span class="min-w-0 overflow-hidden whitespace-nowrap">{seg.event.title}</span>
-                    </button>
+                    </div>
                   {/each}
                 </div>
               </div>
@@ -976,7 +957,7 @@
                   {#each selectedDayEvents as event (event.id)}
                     {@const isFocused = selectedEventId === event.id}
                     <li
-                      class={`cal-cat-${event.category} rounded-lg border p-3 ${
+                      class={`cal-agenda-event cal-cat-${event.category} rounded-2xl border p-3 ${
                         isFocused
                           ? 'border-brand-crimson bg-brand-crimson-wash/30'
                           : 'border-border-subtle bg-canvas-paper/60'

@@ -53,6 +53,7 @@
     'What happens if I fail a subject?',
   ] as const;
 
+  let { inHero = false }: { inHero?: boolean } = $props();
   const uid = $props.id();
   const inputId = `${uid}-ask-input`;
   const panelId = `${uid}-ask-panel`;
@@ -69,6 +70,7 @@
   let inputEl: HTMLInputElement | undefined = $state();
   let scrollEl: HTMLDivElement | undefined = $state();
   let keyboardInset = $state(0);
+  let footerInset = $state(0);
   let visualHeight = $state<number | null>(null);
 
   const busy = $derived(phase === 'loading' || phase === 'asking');
@@ -122,6 +124,22 @@
     return () => {
       window.removeEventListener('geary:open-ask', onOpenEvent);
       document.removeEventListener('keydown', onKeyDown);
+    };
+  });
+
+  $effect(() => {
+    if (inHero) return;
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+    const updateFooterInset = () => {
+      footerInset = Math.max(0, Math.round(window.innerHeight - footer.getBoundingClientRect().top));
+    };
+    updateFooterInset();
+    window.addEventListener('scroll', updateFooterInset, { passive: true });
+    window.addEventListener('resize', updateFooterInset);
+    return () => {
+      window.removeEventListener('scroll', updateFooterInset);
+      window.removeEventListener('resize', updateFooterInset);
     };
   });
 
@@ -224,7 +242,7 @@
     role="dialog"
     aria-label="Ask Geary"
     style={panelStyle}
-    class="fixed right-4 bottom-40 z-50 flex max-h-[min(65dvh,560px)] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-canvas-paper shadow-2xl sm:right-6 sm:bottom-24 sm:max-h-[min(76dvh,560px)]"
+    class={`fixed right-4 bottom-24 z-50 flex max-h-[min(65dvh,560px)] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-3xl border border-border-subtle bg-surface-card shadow-geary-3 sm:right-6 ${inHero ? 'sm:bottom-24' : 'sm:bottom-16'} sm:max-h-[min(76dvh,560px)]`}
   >
     <header class="flex items-center justify-between gap-3 border-b border-border-subtle bg-surface-card px-4 py-3">
       <div class="flex items-center gap-2.5">
@@ -290,7 +308,7 @@
 
       {#if lastQuestion && phase !== 'idle'}
         <div class="flex justify-end">
-          <div class="max-w-[85%] rounded-2xl rounded-tr-sm bg-brand-crimson-solid px-3.5 py-2.5 text-sm leading-relaxed text-white">
+          <div class="max-w-[85%] rounded-2xl rounded-tr-sm bg-brand-crimson-wash px-3.5 py-2.5 text-sm leading-relaxed text-tonal-content">
             {lastQuestion}
           </div>
         </div>
@@ -374,7 +392,7 @@
         bind:value={query}
         onfocus={onInputFocus}
         placeholder="Ask Geary a question..."
-        class="h-10 min-w-0 flex-1 rounded-xl border border-border-strong bg-canvas-paper px-3 text-sm text-ink-primary placeholder:text-ink-muted transition-colors focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
+        class="h-10 min-w-0 flex-1 rounded-full border border-border-strong bg-canvas-paper px-3 text-sm text-ink-primary placeholder:text-ink-muted transition-colors focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20"
       />
       <button
         type="submit"
@@ -405,7 +423,7 @@
   </div>
 {/if}
 
-<div class="fixed right-4 bottom-24 z-40 sm:right-6 sm:bottom-6">
+<div style={!inHero ? `--footer-inset: ${footerInset}px` : undefined} class={inHero ? "absolute right-8 bottom-7 z-40 md:right-[max(3rem,calc((100%-82rem)/2+1.5rem))] lg:right-[max(5.5rem,calc((100%-82rem)/2+2rem))]" : "fixed right-4 bottom-[max(1rem,calc(var(--footer-inset)+1rem))] z-40 sm:right-6 sm:bottom-16"}>
   <button
     bind:this={launcherEl}
     type="button"
@@ -414,19 +432,12 @@
     aria-expanded={open}
     aria-controls={panelId}
     title="Ask Geary"
-    class="inline-flex h-14 w-14 items-center justify-center rounded-full border border-border-strong bg-surface-card shadow-lg transition-all duration-150 hover:scale-105 hover:border-brand-crimson hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2"
+    class="inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-brand-crimson-wash px-4 font-ui text-sm font-medium text-tonal-content shadow-geary-2 transition-all duration-150 hover:scale-105 hover:border-brand-crimson hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson focus-visible:ring-offset-2"
   >
-    <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" class="h-7 w-7 shrink-0">
-      <g fill="var(--color-brand-crimson)">
-        <rect x="13" y="2" width="6" height="28" rx="1.5" />
-        <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(45 16 16)" />
-        <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(90 16 16)" />
-        <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(135 16 16)" />
-        <circle cx="16" cy="16" r="10.5" />
-      </g>
-      <circle cx="16" cy="16" r="6.5" fill="var(--color-brand-gold)" />
-      <circle cx="16" cy="16" r="3.4" fill="var(--color-surface-card)" />
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="size-5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v12H9l-5 4V4Zm4 4h8m-8 4h6" />
     </svg>
+    Ask Geary
   </button>
 
   {#if hasUnread}

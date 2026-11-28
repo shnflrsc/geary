@@ -354,10 +354,10 @@ test.describe('Geary SvelteKit SSR, E2E, Accessibility & Security Smoke Suite', 
       await page.goto(route);
 
       await expect(page.locator('header')).toHaveCount(1);
-      await expect(page.locator('header nav[aria-label="Primary navigation"] a')).toHaveCount(5);
+      await expect(page.locator('header nav[aria-label="Primary navigation"] a')).toHaveCount(4);
       await expect(page.locator('main')).toHaveCount(1);
       await expect(page.locator('footer')).toHaveCount(
-        route === '/map' || route === '/calendar' ? 0 : 1,
+        route === '/map' ? 0 : 1,
       );
       await expect(page.locator('h1')).toHaveCount(1);
 
@@ -605,7 +605,7 @@ Test body.
     await expect(page.locator('html')).toHaveClass(/\bdark\b/);
     await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
     const darkBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    expect(darkBg).toBe('rgb(15, 19, 23)');
+    expect(darkBg).toBe('rgb(27, 17, 21)');
 
     // Desktop placement: theme toggle is to the left of the header search bar
     const trigger = page.locator('#theme-toggle-button');
@@ -635,7 +635,7 @@ Test body.
     await page.reload();
     await expect(page.locator('html')).not.toHaveClass(/\bdark\b/);
     const lightBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    expect(lightBg).toBe('rgb(248, 249, 250)');
+    expect(lightBg).toBe('rgb(255, 248, 249)');
 
     // Switch to Dark and reload while OS is light
     await page.emulateMedia({ colorScheme: 'light' });

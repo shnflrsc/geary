@@ -62,8 +62,8 @@
   });
 </script>
 
-<header class="sticky top-0 z-40 border-b border-border-subtle bg-canvas-paper/95 backdrop-blur-sm">
-  <div class="relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+<header data-home={isHome} class="group sticky top-0 z-40 bg-canvas-paper/95 backdrop-blur-sm">
+  <div class="relative mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-3 px-4 sm:px-6 lg:px-16">
     <div class="flex items-center gap-6 lg:gap-8">
       <a
         href="/"
@@ -72,8 +72,8 @@
           ? 'group absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 inline-flex shrink-0 items-center gap-2.5 rounded-lg py-1 md:pr-1 text-ink-primary hover:text-brand-crimson transition-colors duration-150'
           : 'group inline-flex shrink-0 items-center gap-2.5 rounded-lg py-1 pr-1 text-ink-primary hover:text-brand-crimson transition-colors duration-150'}
       >
-        <span class="relative inline-flex h-7 w-7 shrink-0 items-center justify-center">
-          <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" class="h-7 w-7 shrink-0">
+        <span class="relative inline-flex h-8 w-8 shrink-0 items-center justify-center">
+          <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" class="h-8 w-8 shrink-0">
             <g fill="var(--color-brand-crimson)">
               <rect x="13" y="2" width="6" height="28" rx="1.5" />
               <rect x="13" y="2" width="6" height="28" rx="1.5" transform="rotate(45 16 16)" />
@@ -84,31 +84,25 @@
             <circle cx="16" cy="16" r="6.5" fill="var(--color-brand-gold)" />
             <circle cx="16" cy="16" r="3.4" fill="var(--color-canvas-paper)" />
           </svg>
-          <img
-            src="/santa-hat.png"
-            alt=""
-            aria-hidden="true"
-            class="pointer-events-none absolute -top-[21px] -left-[1px] h-[38px] w-[38px] -rotate-[14deg] max-w-none select-none"
-          />
         </span>
         <span
           class={isHome
-            ? 'font-heading text-lg font-extrabold tracking-tight'
-            : 'sr-only md:not-sr-only font-heading text-lg font-extrabold tracking-tight'}
+            ? 'font-heading text-xl font-extrabold tracking-tight'
+            : 'sr-only md:not-sr-only font-heading text-xl font-extrabold tracking-tight'}
         >
           Geary
         </span>
       </a>
 
       <nav aria-label="Primary navigation" class="hidden md:flex items-center gap-1 lg:gap-2">
-        {#each NAV_LINKS as item (item.key)}
+        {#each NAV_LINKS.slice(1) as item (item.key)}
           {@const isActive = currentSection === item.key}
           <a
             href={item.href}
             aria-current={isActive ? 'page' : undefined}
-            class={`rounded-lg px-2.5 lg:px-3 py-1.5 text-sm whitespace-nowrap transition-colors duration-150 ${
+            class={`rounded-full px-2.5 lg:px-3 py-2.5 text-sm whitespace-nowrap transition-colors duration-150 ${
               isActive
-                ? 'bg-brand-crimson-wash font-semibold text-brand-crimson'
+                ? 'bg-brand-crimson-wash font-semibold text-tonal-content'
                 : 'font-medium text-ink-secondary hover:bg-surface-subtle hover:text-brand-crimson'
             }`}
           >
@@ -119,7 +113,7 @@
     </div>
 
     <div class="flex flex-1 md:flex-initial items-center justify-end gap-2 min-w-0">
-      <ThemeToggle class="order-2 md:order-1" />
+      <ThemeToggle alignLeftOnMobile={isHome} class="order-2 md:order-1 max-md:group-data-[home=true]:absolute max-md:group-data-[home=true]:left-4" />
 
       <div
         class={isHome
@@ -139,7 +133,7 @@
         onclick={() => {
           mobileOpen = !mobileOpen;
         }}
-        class="order-3 inline-flex md:hidden min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-lg border border-border-subtle bg-surface-card text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors duration-150"
+        class="order-3 inline-flex md:hidden min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full bg-surface-subtle text-ink-primary hover:border-brand-crimson hover:text-brand-crimson transition-colors duration-150"
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -165,7 +159,7 @@
             aria-current={isActive ? 'page' : undefined}
             class={`flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 ${
               isActive
-                ? 'bg-brand-crimson-wash font-semibold text-brand-crimson'
+                ? 'bg-brand-crimson-wash font-semibold text-tonal-content'
                 : 'text-ink-primary hover:bg-canvas-paper hover:text-brand-crimson'
             }`}
           >

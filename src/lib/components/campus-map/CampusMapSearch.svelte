@@ -78,7 +78,7 @@
 
 <div
   bind:this={wrapperEl}
-  class="relative overflow-visible lg:overflow-hidden lg:rounded-2xl lg:border lg:border-border-subtle lg:bg-surface-card lg:shadow-md"
+  class="relative overflow-visible lg:overflow-hidden lg:rounded-3xl lg:border lg:border-border-subtle lg:bg-surface-card lg:shadow-geary-2"
 >
   <div class="relative flex items-center">
     <svg
@@ -113,7 +113,7 @@
       }}
       onkeydown={handleKeyDown}
       placeholder="Search Map..."
-      class="w-full rounded-full border border-border-subtle bg-surface-card py-3 pr-11 pl-11 text-sm text-ink-primary shadow-md placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 lg:rounded-none lg:border-0 lg:bg-transparent lg:py-3.5 lg:shadow-none lg:focus:ring-0 [&::-webkit-search-cancel-button]:hidden"
+      class="w-full rounded-full font-ui border border-border-subtle bg-surface-card py-3 pr-11 pl-11 text-sm text-ink-primary shadow-md placeholder:text-ink-muted focus:border-brand-crimson focus:outline-none focus:ring-2 focus:ring-brand-crimson/20 lg:rounded-none lg:border-0 lg:bg-transparent lg:py-3.5 lg:shadow-none lg:focus:ring-0 [&::-webkit-search-cancel-button]:hidden"
     />
     {#if query}
       <button

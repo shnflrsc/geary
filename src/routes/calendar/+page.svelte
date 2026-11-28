@@ -17,5 +17,4 @@
   {ogImageUrl}
 />
 
-<h1 class="sr-only">Academic Calendar</h1>
 <AcademicCalendar />

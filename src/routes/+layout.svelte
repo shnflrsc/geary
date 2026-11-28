@@ -10,6 +10,9 @@
   import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
   import jakarta700Url from '@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-700-normal.woff2?url';
   import jakarta800Url from '@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-800-normal.woff2?url';
+  import '@fontsource/roboto/latin-400.css';
+  import '@fontsource/roboto/latin-500.css';
+  import '@fontsource/jetbrains-mono/latin-400.css';
   import '../styles/global.css';
 
   import type { Snippet } from 'svelte';
@@ -99,14 +102,16 @@
       : lockDesktopViewport
         ? 'flex-1 md:min-h-0 md:overflow-hidden'
         : isHome || isError
-          ? 'flex flex-1 flex-col'
+          ? 'relative flex flex-1 flex-col'
           : 'flex-1'}
   >
     {@render children()}
+    {#if !hideFooter}
+      <AskPanel inHero={isHome} />
+    {/if}
   </main>
 
-  {#if !hideFooter}
-    <Footer />
-    <AskPanel />
+  {#if !hideFooter || lockDesktopViewport}
+    <Footer desktopOnly={lockDesktopViewport} />
   {/if}
 </div>

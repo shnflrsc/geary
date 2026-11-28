@@ -113,7 +113,7 @@
 <section
   bind:this={mapContainerEl}
   aria-label="Interactive BulSU Malolos Main Campus Map"
-  class="relative h-full w-full overflow-hidden bg-surface-subtle select-none"
+  class="relative h-full w-full overflow-hidden bg-map-background select-none"
 >
   <svg
     bind:this={viewport.svgEl}
@@ -132,8 +132,8 @@
   >
     <path
       d={CAMPUS_PERIMETER_PATH}
-      fill="var(--color-canvas-paper)"
-      stroke="var(--color-border-strong)"
+      fill="var(--color-map-boundary)"
+      stroke="var(--color-map-boundary-outline)"
       stroke-width="2.5"
       style="pointer-events: none"
     />
@@ -150,7 +150,7 @@
 
     <g
       fill="none"
-      stroke="var(--color-border-subtle)"
+      stroke="var(--color-map-path-outline)"
       stroke-width="5"
       stroke-linecap="round"
       stroke-linejoin="round"
@@ -168,7 +168,7 @@
 
     <g
       fill="none"
-      stroke="var(--color-surface-card)"
+      stroke="var(--color-map-path)"
       stroke-width="2.5"
       stroke-linecap="round"
       stroke-linejoin="round"
@@ -252,19 +252,19 @@
       {@const isHovered = hoveredBuildingId === building.id}
       {@const isHighlighted = matchingBuildingIds.has(building.id)}
       {@const fill = isSelected
-        ? 'var(--color-brand-crimson-solid)'
+        ? 'var(--color-map-selected)'
         : isHighlighted
           ? 'var(--color-brand-gold-wash)'
           : isHovered
             ? 'var(--color-brand-crimson-wash)'
-            : 'var(--color-surface-card)'}
+            : 'var(--color-map-building)'}
       {@const stroke = isSelected
-        ? 'var(--color-brand-gold)'
+        ? 'var(--color-map-selected-outline)'
         : isHighlighted
           ? 'var(--color-brand-gold)'
           : isHovered
             ? 'var(--color-brand-crimson)'
-            : 'var(--color-border-strong)'}
+            : 'var(--color-map-building-outline)'}
       {@const strokeWidth = isSelected ? 3 : isHighlighted ? 2.6 : isHovered ? 2.2 : 1.6}
 
       <a
@@ -310,7 +310,7 @@
         {@const isSelected = selectedBuildingId === building.id}
         {@const isHovered = hoveredBuildingId === building.id}
         {@const isHighlighted = matchingBuildingIds.has(building.id)}
-        {@const textFill = isSelected ? '#FFFFFF' : 'var(--color-ink-primary)'}
+        {@const textFill = isSelected ? 'var(--color-map-label-selected)' : 'var(--color-ink-primary)'}
         {@const textStroke = isSelected
           ? 'var(--color-brand-crimson-solid)'
           : isHighlighted
@@ -404,7 +404,7 @@
       role="img"
       aria-label="Compass pointing North"
       title="North"
-      class="flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle bg-surface-card/95 shadow-md"
+      class="flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle bg-surface-card/95 shadow-geary-2"
     >
       <svg viewBox="-20 -20 40 40" class="h-8 w-8" aria-hidden="true">
         <polygon points="0,-13 4.5,3 0,-0.5 -4.5,3" fill="var(--color-brand-crimson)" />
@@ -422,7 +422,7 @@
     </div>
 
     <div
-      class="pointer-events-auto flex flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface-card/95 shadow-md divide-y divide-border-subtle"
+      class="pointer-events-auto flex flex-col overflow-hidden rounded-full border border-border-subtle bg-surface-card/95 shadow-geary-2 divide-y divide-border-subtle"
       role="group"
       aria-label="Map zoom controls"
     >

@@ -216,11 +216,11 @@
 
 <div
   bind:this={containerEl}
-  class={isHero ? 'relative w-full max-w-2xl mx-auto' : 'relative w-full'}
+  class={isHero ? 'relative w-full max-w-[38.5rem] mx-auto' : 'relative w-full'}
 >
   <label for={inputId} class="sr-only">Search BulSU articles</label>
 
-  <div class={isHero ? 'hero-search-beam shadow-xs' : undefined}>
+  <div>
     <div class="relative flex items-center">
       <svg
         aria-hidden="true"
@@ -266,10 +266,10 @@
           void ensureIndexLoaded();
         }}
         onkeydown={handleInputKeyDown}
-        class={`w-full bg-surface-card text-ink-primary placeholder:text-ink-muted transition-colors duration-150 focus:outline-none ${
+        class={`w-full font-ui bg-surface-card text-ink-primary placeholder:text-ink-muted transition-colors duration-150 focus:outline-none ${
           isHero
-            ? 'h-[52px] rounded-[calc(0.75rem-1.5px)] border-0 pl-11 pr-14 text-base'
-            : 'h-10 rounded-lg border border-border-strong pl-9 pr-9 sm:pr-12 text-base sm:text-sm focus:border-brand-crimson focus:ring-2 focus:ring-brand-crimson/20'
+            ? 'h-14 rounded-full border-0 pl-11 pr-14 text-base focus-visible:ring-2 focus-visible:ring-brand-crimson'
+            : 'h-10 rounded-full border border-border-subtle pl-9 pr-9 sm:pr-12 text-base sm:text-sm focus:border-brand-crimson focus:ring-2 focus:ring-brand-crimson/20'
         }`}
       />
 
@@ -318,7 +318,7 @@
   {#if showPanel}
     <div
       id={panelId}
-      class={`z-50 mt-2 rounded-xl border border-border-subtle bg-surface-card shadow-lg max-h-[400px] overflow-y-auto ${
+      class={`z-50 mt-2 rounded-3xl border border-border-subtle bg-surface-card shadow-geary-2 max-h-[400px] overflow-y-auto ${
         isHero
           ? 'absolute inset-x-0 top-full'
           : 'fixed inset-x-4 top-[4.25rem] sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:w-[24rem]'

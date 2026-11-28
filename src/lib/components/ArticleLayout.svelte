@@ -192,8 +192,8 @@
   });
 </script>
 
-<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-  <div class="mb-8 border-b border-border-subtle pb-6 max-w-[65ch]">
+<div class="mx-auto max-w-[82rem] px-4 py-6 sm:px-8 lg:px-16 lg:py-10">
+  <div class="mb-8">
     <Breadcrumbs
       items={[
         { label: 'Home', href: '/' },
@@ -203,7 +203,8 @@
       ]}
     />
 
-    <h1 class="mt-8 font-heading text-[1.75rem] sm:text-[2.25rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
+    <a href={`/categories/${categoryMeta.slug}`} class="inline-flex rounded-full bg-brand-crimson-wash px-3 py-1 font-ui text-xs font-medium text-tonal-content">{categoryMeta.title}</a>
+    <h1 class="mt-3 font-heading text-[2rem] md:text-[2.5rem] font-bold leading-[1.2] tracking-[-0.02em] text-ink-primary">
       {title}
     </h1>
 
@@ -215,7 +216,7 @@
       <div
         role="group"
         aria-label="Share this article"
-        class="flex items-center gap-0.5 text-ink-secondary opacity-80 transition-opacity duration-150 hover:opacity-100 focus-within:opacity-100"
+        class="flex items-center gap-1 rounded-full bg-surface-card px-1.5 py-0.5 text-brand-crimson"
       >
         <button
           type="button"
@@ -225,7 +226,7 @@
           onclick={handleNativeShare}
           class={`${
             canNativeShare ? 'inline-flex' : 'hidden'
-          } h-7 w-7 cursor-pointer items-center justify-center rounded-md text-xs font-medium transition-colors duration-150 hover:bg-surface-subtle hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson`}
+          } h-9 w-9 cursor-pointer items-center justify-center rounded-full text-xs font-medium transition-colors duration-150 hover:bg-surface-subtle hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson`}
         >
           <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" class="h-3.5 w-3.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-7-5.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm1.7-1.1 3.6-2.1m-3.6 3.3 3.6 2.1" />
@@ -238,7 +239,7 @@
           rel="noopener noreferrer"
           aria-label="Share on Facebook"
           title="Share on Facebook"
-          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-xs font-medium transition-colors duration-150 hover:bg-surface-subtle hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-full text-xs font-medium transition-colors duration-150 hover:bg-surface-subtle hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson"
         >
           <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-3.5 w-3.5">
             <path d="M11.5 17.5v-6.8h2.3l.35-2.65H11.5V6.35c0-.77.22-1.3 1.32-1.3h1.41V2.68c-.24-.03-1.08-.1-2.06-.1-2.04 0-3.44 1.24-3.44 3.53v1.94H6.4v2.65h2.33v6.8h2.77Z" />
@@ -251,7 +252,7 @@
           aria-label="Copy link"
           title="Copy link"
           onclick={handleCopyLink}
-          class={`inline-flex h-7 min-w-7 cursor-pointer items-center justify-center gap-1 rounded-md px-1.5 text-xs font-medium transition-colors duration-150 hover:bg-surface-subtle hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson ${
+          class={`inline-flex h-9 min-w-9 cursor-pointer items-center justify-center gap-1 rounded-full px-1.5 text-xs font-medium transition-colors duration-150 hover:bg-surface-subtle hover:text-brand-crimson focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-crimson ${
             copied ? 'text-brand-crimson' : ''
           }`}
         >
@@ -266,7 +267,7 @@
 
   <div
     class={hasToc
-      ? 'lg:grid lg:grid-cols-[minmax(0,65ch)_260px] lg:gap-12 lg:items-start'
+      ? 'lg:grid lg:grid-cols-[minmax(0,712px)_244px] lg:justify-between lg:gap-12 lg:items-start'
       : 'max-w-[65ch]'}
   >
     <div class="min-w-0">
@@ -279,7 +280,7 @@
       {#if sources.length > 0}
         <aside
           aria-label="Article source"
-          class="mt-8 rounded-xl border border-border-subtle bg-surface-card p-4 sm:p-5"
+          class="mt-8 rounded-2xl bg-hero p-4 sm:p-5"
         >
           <p class="text-xs font-semibold uppercase tracking-wider text-ink-secondary">
             {sources.length === 1 ? 'Source' : 'Sources'}
